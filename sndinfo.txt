@@ -1,0 +1,7 @@
+//weapons
+weapons/musket       muskfire
+/*weapons/bronto2      dsbrifle
+weapons/brontoload   dsriflod
+weapons/brontoopen   dsrifck2 $pitchset weapons/brontoclose 1.1
+weapons/brontoclose  dsrifclk $pitchset weapons/brontoclose 1.2
+weapons/brontopop    dsgresht $pitchset weapons/brontopop 1.2

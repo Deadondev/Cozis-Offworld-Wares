@@ -1,0 +1,3 @@
+Credits:
+Weapon model - Battlegrounds HL1 mod
+Muzzleflash - Reactor
