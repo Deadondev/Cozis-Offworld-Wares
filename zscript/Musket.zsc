@@ -570,7 +570,7 @@ class HD_Musket:LeadReloadingThingy{
 
 	unload:
 		---- A 1 A_CheckChug(); //DO NOT set this frame to zero
-		goto unloadstart;
+		goto ready;
 
 	altfire:
 	MSKG A 1 A_CockHammer;
