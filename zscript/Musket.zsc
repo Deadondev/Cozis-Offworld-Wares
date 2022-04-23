@@ -79,7 +79,8 @@ class LeadReloadingThingy:HDWeapon{
 	override string,double getpickupsprite(){return "RLDRA0",1.;}
 	override void DrawHUDStuff(HDStatusBar sb,HDWeapon hdw,HDPlayerPawn hpl){
 		vector2 bob=hpl.hudbob*0.3;
-		int brass=hpl.countinv("HDShellAmmo");
+		int 
+		=hpl.countinv("HDShellAmmo");
 		int fourm=hpl.countinv("FourMilAmmo");
 		double lph=(brass&&fourm>=4)?1.:0.6;
 		sb.drawimage("RLDRA0",(0,-64)+bob,
@@ -143,8 +144,7 @@ class LeadReloadingThingy:HDWeapon{
 	spawn:
 		RLDR A -1 nodelay A_JumpIf(
 			invoker.makinground
-			&&invoker.brass>0
-			&&invoker.powders>=3,
+			&&invoker.shells>=3,
 		"chug");
 		stop;
 	}
