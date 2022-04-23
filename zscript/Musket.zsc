@@ -12,7 +12,7 @@ class LeadReloadingThingy:HDWeapon{
 	override void actualpickup(actor other,bool silent){
 		super.actualpickup(other,silent);
 		if(!other)return;
-			shells--;
+			shells;
 		while(shells>0){
 			shells--;
 			if(other.A_JumpIfInventory("HDShellAmmo",0,"null"))
