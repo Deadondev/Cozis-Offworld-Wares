@@ -1,4 +1,4 @@
-# Cozi-s-Offworld-Weapons
+# Cozis-Offworld-Weapons
 Hideous Destructor mod I made, adds a musket, more soonish
 
 TO DO LIST
