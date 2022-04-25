@@ -424,7 +424,8 @@ class HD_Musket:LeadReloadingThingy{
 			setweaponstate("nope");
 			return;
 			}
-				if (invoker.weaponStatus[MUSKT_BARREL] == MUSKT_CORRECTRAMMED) { //check most loaded first
+				switch (invoker.weaponStatus[MUSKT_BARREL]){
+					case MUSKT_CORRECTRAMMED:
 					A_GunFlash();
 					A_StartSound("weapons/musket",CHAN_WEAPON);
 					//A_StartSound("weapons/bronto",CHAN_WEAPON,CHANF_OVERLAP);
@@ -436,15 +437,20 @@ class HD_Musket:LeadReloadingThingy{
 					invoker.weaponstatus[MUSKT_HEAT]+=15;
 					setweaponstate("nope"); //this makes sure you don't get double heat/smoke
 					};
-				/*if (invoker.weaponStatus[MUSKT_BARREL] == MUSKT_POWDERED) {
-    				A_GunFlash();
-					A_StartSound("weapons/bronto",CHAN_WEAPON);
-					A_StartSound("weapons/bronto",CHAN_WEAPON,CHANF_OVERLAP);
-					A_StartSound("weapons/bronto2",CHAN_WEAPON,CHANF_OVERLAP);
+				/////////////////////////////////////////////////////////////////////////////////////
+					case MUSKT_OVERPOWDERED:
+					A_GunFlash();
+					A_StartSound("weapons/musket",CHAN_WEAPON);
+					A_AlertMonsters();
+					A_MuzzleClimb(-frandom(2.,2.7),-frandom(3.4,5.2));
+					A_StartSound("weapons/fgnclk",CHAN_WEAPON,CHANF_OVERLAP);
+					for(int i=0;i<30;i++)A_SpawnItemEx("FourMilChunk",0,0,invoker.owner.height * 0.80, random(4,7),random(-2,2),random(-2,1),0,SXF_NOCHECKPOSITION);
+					let tb=HDBulletActor.FireBullet(self,"HDB_Ball",spread:4.,speedfactor:frandom(0.97,1.03));
 					invoker.weaponstatus[MUSKT_BARREL]=0;
+					invoker.weaponstatus[MUSKT_COCKED]=1;
 					invoker.weaponstatus[MUSKT_HEAT]+=15;
 					setweaponstate("nope"); //this makes sure you don't get double heat/smoke
-					};*/
+					};
 
 		}
 		MSKG B 2;
@@ -530,7 +536,8 @@ class HD_Musket:LeadReloadingThingy{
 		MSKR C 10 offset(4,34);
 		MSKR C 3 offset(4,34) { switch (invoker.weaponStatus[MUSKT_BARREL]){
 		case MUSKT_POWDERED:
-		A_WeaponMessage("\cgYou can't load more powder!",100);
+		A_StartSound("weapons/brontoload",8,CHANF_OVERLAP);
+		invoker.WeaponStatus[MUSKT_BARREL]=MUSKT_OVERPOWDERED;
 		break;//////////////////////////////////////////////////////////////////
 		case MUSKT_BALLLOADED:
 		A_WeaponMessage("\cgThere's already a ball in!",100);
