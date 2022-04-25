@@ -520,7 +520,7 @@ class HD_Musket:LeadReloadingThingy{
 		default:
 		A_TakeInventory("HDBallAmmo",1,TIF_NOTAKEINFINITE);
 		A_StartSound("weapons/brontoload",8,CHANF_OVERLAP);
-		invoker.WeaponStatus[MUSKT_BARREL]=MUSKT_CORRECTLOAD;
+		invoker.WeaponStatus[MUSKT_BARREL]=MUSKT_BALLLOADED;
 		break;
 		}}
 		MSKR FED 5 offset(4,34);
