@@ -444,7 +444,7 @@ class HD_Musket:LeadReloadingThingy{
 					A_AlertMonsters();
 					A_MuzzleClimb(-frandom(2.,2.7),-frandom(3.4,5.2));
 					A_StartSound("weapons/fgnclk",CHAN_WEAPON,CHANF_OVERLAP);
-					for(int i=0;i<30;i++)A_SpawnItemEx("FourMilChunk",0,0,invoker.owner.height * 0.80, random(4,7),random(-2,2),random(-2,1),0,SXF_NOCHECKPOSITION);
+					A_SpawnItemEx("FourMilChunk",0,0,invoker.owner.height * 0.80, random(4,7),random(-2,2),random(-2,1),0,SXF_NOCHECKPOSITION);
 					let tb=HDBulletActor.FireBullet(self,"HDB_Ball",spread:4.,speedfactor:frandom(0.97,1.03));
 					invoker.weaponstatus[MUSKT_BARREL]=0;
 					invoker.weaponstatus[MUSKT_COCKED]=1;
