@@ -209,9 +209,9 @@ class HD_Musket:LeadReloadingThingy{
 		..WEPHELP_ALTRELOAD.."+"..WEPHELP_FIRE.."  Ram rod down barrel\n"
 		..WEPHELP_ALTFIRE.."  Cock hammer\n"
 		..WEPHELP_FIREMODE.."  Bayonet Stab, hold to charge\n"
-		..WEPHELP_UNLOAD.."  Assemble rounds"
+		..WEPHELP_USE.."+"..WEPHELP_UNLOAD.."  Assemble rounds"
+		..WEPHELP_UNLOAD.."  Clear Barrel"
 		;
-		//..WEPHELP_USE.."+"..WEPHELP_UNLOAD.."  Assemble rounds" this may return
 	}
 	override void DrawSightPicture(
 		HDStatusBar sb,HDWeapon hdw,HDPlayerPawn hpl,
@@ -528,8 +528,6 @@ class HD_Musket:LeadReloadingThingy{
 		A_WeaponMessage("\cgYou can't load two balls!",100);
 		break;
 		case MUSKT_POWDERED:
-		//A_WeaponMessage("\cgBall is Loaded Correctly!",100);
-		
 		A_TakeInventory("HDBallAmmo",1,TIF_NOTAKEINFINITE);
 		A_StartSound("weapons/brontoload",8,CHANF_OVERLAP);
 		invoker.WeaponStatus[MUSKT_BARREL]=MUSKT_CORRECTLOAD;
@@ -586,7 +584,6 @@ class HD_Musket:LeadReloadingThingy{
 		A_StartSound("weapons/brontoload",8,CHANF_OVERLAP);
 		switch (invoker.weaponStatus[MUSKT_BARREL]){
 		case MUSKT_CORRECTLOAD:
-		//A_WeaponMessage("\cgCORRECT!",100);
 		invoker.WeaponStatus[MUSKT_BARREL]=MUSKT_CORRECTRAMMED;
 		break;//////////////////////////////////////////////////////////////////
 		}}
@@ -594,7 +591,9 @@ class HD_Musket:LeadReloadingThingy{
 		goto altreloadhold;
 
 	unload:
-		---- A 1 A_CheckChug(); //DO NOT set this frame to zero
+		---- A 1 A_CheckChug(pressinguse()); //DO NOT set this frame to zero
+		---- A 0 {invoker.WeaponStatus[MUSKT_BARREL]=1;}
+		---- A 0 A_WeaponMessage("\cgBarrel Unloaded! This will be a pain later!",100);
 		goto ready;
 
 	altfire:
