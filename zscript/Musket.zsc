@@ -204,10 +204,14 @@ class HD_Musket:LeadReloadingThingy{
 	override string gethelptext(){
 		return
 		WEPHELP_FIRESHOOT
-		..WEPHELP_RELOADRELOAD
-		..WEPHELP_UNLOADUNLOAD
-		..WEPHELP_USE.."+"..WEPHELP_UNLOAD.."  Assemble rounds"
+		..WEPHELP_RELOAD.."+"..WEPHELP_ALTFIRE.."  load powder\n"
+		..WEPHELP_RELOAD.."+"..WEPHELP_FIRE.."  load ball\n"
+		..WEPHELP_ALTRELOAD.."+"..WEPHELP_FIRE.."  Ram rod down barrel\n"
+		..WEPHELP_ALTFIRE.."  Cock hammer\n"
+		..WEPHELP_FIREMODE.."  Bayonet Stab, hold to charge\n"
+		..WEPHELP_UNLOAD.."  Assemble rounds"
 		;
+		//..WEPHELP_USE.."+"..WEPHELP_UNLOAD.."  Assemble rounds" this may return
 	}
 	override void DrawSightPicture(
 		HDStatusBar sb,HDWeapon hdw,HDPlayerPawn hpl,
