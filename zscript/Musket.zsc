@@ -115,8 +115,8 @@ class LeadReloadingThingy:HDWeapon{
 		..WEPHELP_ALTFIRE.."  Cock hammer\n"
 		..WEPHELP_FIREMODE.."  Bayonet Stab, hold to charge\n"
 		..WEPHELP_UNLOAD.."  Assemble rounds"
-		//..WEPHELP_USE.."+"..WEPHELP_UNLOAD.."  Assemble rounds" this may return
 		;
+		//..WEPHELP_USE.."+"..WEPHELP_UNLOAD.."  Assemble rounds" this may return
 	}
 	override bool AddSpareWeapon(actor newowner){return AddSpareWeaponRegular(newowner);}
 	override hdweapon GetSpareWeapon(actor newowner,bool reverse,bool doselect){return GetSpareWeaponRegular(newowner,reverse,doselect);}
