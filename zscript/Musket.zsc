@@ -436,20 +436,28 @@ class HD_Musket:LeadReloadingThingy{
 					invoker.weaponstatus[MUSKT_COCKED]=1;
 					invoker.weaponstatus[MUSKT_HEAT]+=15;
 					setweaponstate("nope"); //this makes sure you don't get double heat/smoke
-					};
+					break;
 				/////////////////////////////////////////////////////////////////////////////////////
 					case MUSKT_OVERPOWDERED:
 					A_GunFlash();
 					A_StartSound("weapons/musket",CHAN_WEAPON);
 					A_AlertMonsters();
-					A_MuzzleClimb(-frandom(2.,2.7),-frandom(3.4,5.2));
+					self.damagemobj(self,self,25,"slashing",DMG_NO_ARMOR);
+					self.damagemobj(self,self,25,"hot",DMG_NO_ARMOR);
+					spawn("HDExplosion",self.pos-(0,0,1),ALLOW_REPLACE);
+					DistantQuaker.Quake(self,4,35,512,10);
+					A_ChangeVelocity(cos(pitch)*-frandom(2,4),0,sin(pitch)*frandom(8,12),CVF_RELATIVE);
+					A_MuzzleClimb(-frandom(4.,5.4),-frandom(3.4,5.2)); //doubled bc its too much lul
 					A_StartSound("weapons/fgnclk",CHAN_WEAPON,CHANF_OVERLAP);
-					A_SpawnItemEx("FourMilChunk",0,0,invoker.owner.height * 0.80, random(4,7),random(-2,2),random(-2,1),0,SXF_NOCHECKPOSITION);
-					let tb=HDBulletActor.FireBullet(self,"HDB_Ball",spread:4.,speedfactor:frandom(0.97,1.03));
-					invoker.weaponstatus[MUSKT_BARREL]=0;
-					invoker.weaponstatus[MUSKT_COCKED]=1;
-					invoker.weaponstatus[MUSKT_HEAT]+=15;
+					A_SpawnItemEx("BigWallChunk",0,0,invoker.owner.height * 0.80, random(4,7),random(-2,2),random(-2,1),0,SXF_NOCHECKPOSITION);
+					player.cmd.buttons|=BT_ZOOM;
+					DropInventory(player.readyweapon);
 					setweaponstate("nope"); //this makes sure you don't get double heat/smoke
+					invoker.destroy();
+					break;
+				/////////////////////////////////////////////////////////////////////////////////////
+					case MUSKT_JUSTBALL:
+					break;
 					};
 
 		}
