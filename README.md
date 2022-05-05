@@ -4,9 +4,7 @@ Hideous Destructor mod I made, adds a musket, more soonish
 TO DO LIST
 
 - Recoil adjustments
-- Weight
 - Make sure smoke is good.
-- Sight work (probably no front sight/ make it only work on zoom? idk)
 - Bayonet System (whole windup and then stab, hold to power up and whamo)<<<<<<<<<
 - Misfires, Jams, Muskets need to be cleaned you know
 - Hammer Cocking Sprites
