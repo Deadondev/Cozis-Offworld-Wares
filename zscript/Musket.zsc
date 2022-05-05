@@ -167,8 +167,8 @@ class HD_Musket:LeadReloadingThingy{
 		weapon.bobrangex 0.21;
 		weapon.bobrangey 0.86;
 		scale 0.6;
-		inventory.pickupmessage "You got the Musket!";
-		obituary "%o was terrorized by %k's Musket.";
+		inventory.pickupmessage "You got the Musket! Isn't this thing a bit... old?";
+		obituary "%o caught %k's ball.";
 		hdweapon.barrelsize 24,1,2;
 		tag "Musket";
 		hdweapon.refid HDLD_MUSKET;
@@ -245,7 +245,7 @@ class HD_Musket:LeadReloadingThingy{
 		owner.A_SetInventory("HDBallAmmo",1);
 	}
 	
-	double strength;
+double strength;
 	action void A_StrengthTics(int mintics,int maxtics=-1){
 		if(invoker.strength==1.)return;
 		if(maxtics<0)maxtics=tics;
@@ -271,7 +271,7 @@ class HD_Musket:LeadReloadingThingy{
 		}
 	}
 
-	action void HDStab(double dmg){
+	action void HDStab(double dmg){ //SWAMPY DID THIS
 		let punchrange=80.;//64 plu 16
 		if(hdplayerpawn(self))punchrange*=hdplayerpawn(self).heightmult;
 
@@ -373,6 +373,12 @@ class HD_Musket:LeadReloadingThingy{
 		{
 			aaa.master = invoker;
 			punchee.damagemobj(aaa,self,int(dmg),"slashing");
+ //bleed code borrowed from PBWeappns knife zscript
+ //bonus points to BenitezClanceIV for suggesting it
+if(!punchee.countinv("HDArmourWorn")){
+	    HDBleedingWound.inflict(punchee,dmg*frandom(0.3,0.8));
+    }
+
 			aaa.destroy();
 		}
 		if(!punchee)invoker.targethealth=0;else{
@@ -401,7 +407,7 @@ class HD_Musket:LeadReloadingThingy{
 				}
 			}
 		}
-	}
+	}///////////////////////////// END OF SWAMPY'S CODE - Cozi
 	
 		action void A_CockHammer(bool yes=true){
 		if(yes)invoker.weaponstatus[MUSKT_COCKED]=2;
@@ -759,15 +765,21 @@ class HDBlackpowderGunSmoke:HDSmoke{
 }
 
 enum musketstatus{
-	MUSKT_POWDERED=1,//this one will be 1 when powdered
-	MUSKT_BALLLOADED=2,//this one will be 2 when loaded
-	MUSKT_RAMMED=3,//this one will be 3 when Rammed
-	MUSKT_JUSTBALL=4,
-	MUSKT_CORRECTLOAD=5,
-	MUSKT_CORRECTRAMMED=6,
-	MUSKT_OVERPOWDERED=7,
-	MUSKT_OVERPOWDEREDBALL=8,
-	MUSKT_OVERPOWDEREDRAMMED=9,
+	MUSKT_POWDERED=1,
+	MUSKT_BALLLOADED=2,
+	MUSKT_RAMMED=3,
+	///////////////////////////////
+	MUSKT_CORRECTLOAD=4,
+	MUSKT_CORRECTRAMMED=5,
+	///////////////////////////////
+	MUSKT_OVERPOWDERED=6,
+	MUSKT_OVERPOWDEREDBALL=7,
+	MUSKT_OVERPOWDEREDRAMMED=8,
+	///////////////////////////////
+	MUSKT_JUSTBALL=9,
+	MUSKT_JUSTBALLRAMMED=10,
+	///////////////////////////////
+	//MUSKT_OVERPOWDEREDRAMMED=11,
 	
 	MUSKT_COCKED=2,
 	
