@@ -17,5 +17,6 @@ TO DO LIST
 - Unique Weapon Sprites (done via model)
 - Sprites show whether the rifle has been cocked
 - TRIGGER PULL
+- bayonet doesnt go through shields probably
 - Blunderbuss & Flintlock Pistols
 - Musket can't be reloaded while rolling, stand up for bonuses, etc. etc.
