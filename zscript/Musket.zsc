@@ -4,6 +4,7 @@
 class LeadReloadingThingy:HDWeapon{
 	int shells;
 	bool makinground;
+	bool roundmade;
 	override void beginplay(){
 		super.beginplay();
 		shells=0;makinground=false;
@@ -19,6 +20,9 @@ class LeadReloadingThingy:HDWeapon{
 				other.A_SpawnItemEx("HDShellAmmo",0,0,owner.height-16,2,0,1);
 			else HDF.Give(other,"HDShellAmmo",1);
 		}
+		if(roundmade=true){
+			HDF.Give(self,"HDBallAmmo",1);
+			}
 	}
 	void A_Chug(){
 		A_StartSound("roundmaker/chug1",8);
@@ -37,7 +41,7 @@ class LeadReloadingThingy:HDWeapon{
 		if(!random(0,63)){
 			A_SpawnItemEx("HDExplosion");
 			A_Explode(32,32);
-		}else A_SpawnItemEx("HDLooseBall",0,0,0,1,0,3,0,SXF_NOCHECKPOSITION);
+		}else {roundmade=true;} //this is bc rounds are a bitch to find, also i dont imagine these ancient fuckers have any concept of springs so
 	}
 	action void A_CheckChug(bool anyotherconditions=true){
 		if(
