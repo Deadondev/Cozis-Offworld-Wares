@@ -7,7 +7,7 @@ class LeadReloadingThingy:HDWeapon{
 	bool roundmade;
 	override void beginplay(){
 		super.beginplay();
-		shells=0;makinground=false;
+		shells=0;makinground=false;roundmade=false;
 	}
 
 	override void actualpickup(actor other,bool silent){
