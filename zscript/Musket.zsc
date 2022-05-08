@@ -164,8 +164,8 @@ class HD_Musket:LeadReloadingThingy{
 		//$Category "Weapons/Hideous Destructor"
 		//$Title "Musket"
 		//$Sprite "MSKTA0"
-		weapon.selectionorder 60;
-		weapon.slotnumber 7;
+		weapon.selectionorder 300;
+		weapon.slotnumber 5;
 		weapon.slotpriority 3;
 		weapon.kickback 100;
 		weapon.bobrangex 0.21;
