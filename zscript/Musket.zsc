@@ -20,7 +20,7 @@ class LeadReloadingThingy:HDWeapon{
 				other.A_SpawnItemEx("HDShellAmmo",0,0,owner.height-16,2,0,1);
 			else HDF.Give(other,"HDShellAmmo",1);
 		}
-		if(roundmade=true){
+		if(roundmade==true){
 			HDF.Give(self,"HDBallAmmo",1);
 			}
 	}
