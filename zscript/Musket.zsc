@@ -21,7 +21,9 @@ class LeadReloadingThingy:HDWeapon{
 			else HDF.Give(other,"HDShellAmmo",1);
 		}
 		if(roundmade==true){
-			HDF.Give(self,"HDBallAmmo",1);
+			//HDF.Give(self,"HDBallAmmo",1);
+			owner.A_GiveInventory("HDBallAmmo",1);
+			roundmade=false;
 			}
 	}
 	void A_Chug(){
