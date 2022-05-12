@@ -1,5 +1,9 @@
 //weapons
-weapons/musket       muskfire
+weapons/musketfire       muskfire
+weapons/musketrodin      muskrodin
+weapons/musketdust      muskdust
+weapons/musketcock      muskcock
+weapons/musketmove      muskmove
 /*weapons/bronto2      dsbrifle
 weapons/brontoload   dsriflod
 weapons/brontoopen   dsrifck2 $pitchset weapons/brontoclose 1.1
