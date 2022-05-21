@@ -7,7 +7,7 @@ TO DO LIST
 - Bayonet System (whole windup and then stab, hold to power up and whamo)<<<<<<<<<
 - Misfires, Jams, Muskets need to be cleaned you know
 - Hammer Cocking Sprites
-- Bayonet should work off velocity
+- Bayonet should work off velocity (I think this is done? Check back later gamers)
 - Weapon Failures & a way to maintain the rifle
 - Unique Weapon Sprites (done via model)
 - Sprites show whether the rifle has been cocked
