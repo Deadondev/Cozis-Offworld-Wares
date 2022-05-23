@@ -1,0 +1,9 @@
+HardwareShader postprocess scene
+{
+	Name "UASAlcohol_Intoxication"
+	Shader "shaders/intox.fp" 330
+
+	Uniform int radius
+	Uniform int res_w
+	Uniform int res_h
+}
