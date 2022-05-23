@@ -1,4 +1,9 @@
 version "4.5"
 
-#include "zscript/BALL.zsc"
-#include "zscript/Musket.zsc"
+#include "zscript/musket/BALL.zsc"
+#include "zscript/musket/Musket.zsc"
+////////////////////////////////////////
+//#include "zscript/flintpistol/flintpistol.zsc"
+////////////////////////////////////////
+#include "zscript/Rum.zs"
+////////////////////////////////////////
