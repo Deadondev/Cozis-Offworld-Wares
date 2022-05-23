@@ -1,0 +1,5 @@
+GameInfo
+{
+	AddEventHandlers = "OleRumEventHandler"
+	AddEventHandlers = "UaS_AlcoholEventHandler"
+}
