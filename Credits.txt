@@ -1,3 +1,9 @@
 Credits:
 Weapon model - Battlegrounds HL1 mod
 Muzzleflash - Reactor
+
+intoxication code, handler, shader, and base idea - cyb3r_c001. thank you!
+
+updated intoxication handler - cali, phantom, fda.
+
+alcohol bottles - xatrix entertainment
