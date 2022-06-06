@@ -2,4 +2,10 @@ GameInfo
 {
 	AddEventHandlers = "OleRumEventHandler"
 	AddEventHandlers = "UaS_AlcoholEventHandler"
+	AddEventHandlers = "COW_MusketReplacer"
+	AddEventHandlers = "Commando355Injector"
+	AddEventHandlers = "SweepInjector"
+	AddEventHandlers = "PipeGunInjector"
+	AddEventHandlers = "SpiderBarrelEventHandler"
+	AddEventHandlers = "TriteHandler"
 }

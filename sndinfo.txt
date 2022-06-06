@@ -1,13 +1,91 @@
-//weapons
+//-------------------------------------------------
+// WEAPONS
+//-------------------------------------------------
+
+// Mac-11 Sound Info
+weapons/MAC11Shot Sounds/MAC11/MACFire1.ogg
+weapons/MACStockOut Sounds/MAC11/MACStk1.wav
+weapons/MACStockIn Sounds/MAC11/MACStk2.wav
+weapons/MACStockClick Sounds/MAC11/MACStk3.wav
+weapons/MACboltback Sounds/MAC11/MACBoltBack.ogg
+weapons/MACboltfwd Sounds/MAC11/MACBoltFwd.ogg
+
+// Colt Carbine Sound Info
+weapons/smg/355 Sounds/Commando/355Fire.ogg
+weapons/smg/355/cock Sounds/Commando/355Cock.ogg
+weapons/smg/355/fwd Sounds/Commando/355Fwd.ogg
+
+// Cobray Street Sweeper and Terminator
+weapons/sweepershot1 Sounds/Cobray/SWPFire1.ogg
+weapons/sweepereject Sounds/Cobray/SWPEject.wav
+weapons/sweepercyl Sounds/Cobray/SWPCyl.ogg
+weapons/sweeperopen Sounds/Cobray/SWPOpen.ogg
+weapons/sweeperload Sounds/Cobray/SWPLoad.ogg
+weapons/sweeperclose Sounds/Cobray/SWPClose.ogg
+
+weapons/terminatoropen Sounds/Cobray/TRMOpen.ogg
+weapons/terminatorfwd Sounds/Cobray/TRMFwd.ogg
+weapons/terminatorfire Sounds/Cobray/TRMFire1.ogg
+
+// Musket
 weapons/musketfire       muskfire
 weapons/musketrodin      muskrodin
 weapons/musketdust      muskdust
 weapons/musketcock      muskcock
 weapons/musketmove      muskmove
 
+//-------------------------------------------------
+// ITEMS
+//-------------------------------------------------
+
+// Rum
 mre/cork		CORKPLL1
-/*weapons/bronto2      dsbrifle
-weapons/brontoload   dsriflod
-weapons/brontoopen   dsrifck2 $pitchset weapons/brontoclose 1.1
-weapons/brontoclose  dsrifclk $pitchset weapons/brontoclose 1.2
-weapons/brontopop    dsgresht $pitchset weapons/brontopop 1.2
+
+//-------------------------------------------------
+// MONSTERS
+//-------------------------------------------------
+
+//Trite
+$Random Trite/Sight { TRITSIG1 TRITSIG2 TRITSIG3 }
+TRITSIG1		TRITSIG1
+TRITSIG2		TRITSIG2
+TRITSIG3		TRITSIG3
+TRITSIG4		TRITSIG4
+$Random Trite/Active { TRITACT1 TRITACT2 TRITACT3 }
+TRITACT1		TRITACT1
+TRITACT2		TRITACT2
+TRITACT3		TRITACT3
+$Random Trite/Attack { TRITATT1 TRITATT2 TRITATT3 }
+TRITATT1		TRITATT1
+TRITATT2		TRITATT2
+TRITATT3		TRITATT3
+$Random Trite/MeleeHit { TRITHIT1 TRITHIT2 }
+TRITHIT1		TRITHIT1
+TRITHIT2		TRITHIT2
+$Random Trite/Step { TRITSTE1 TRITSTE2 TRITSTE3 TRITSTE4 }
+TRITSTE1		TRITSTE1
+TRITSTE2		TRITSTE2
+TRITSTE3		TRITSTE3
+TRITSTE4		TRITSTE4
+Trite/WebStart		TRITWEB1
+Trite/WebEnd		TRITWEB2
+$Random Trite/Pain { TRITPAI1 TRITPAI2 TRITPAI3 }
+TRITPAI1		TRITPAI1
+TRITPAI2		TRITPAI2
+TRITPAI3		TRITPAI3
+$Random Trite/Death { TRITDEA1 TRITDEA2 TRITDEA3 }
+TRITDEA1		TRITDEA1
+TRITDEA2		TRITDEA2
+TRITDEA3		TRITDEA3
+$Random Trite/Splat { TRITSPL1 TRITSPL2 }
+TRITSPL1		TRITSPL1
+TRITSPL2		TRITSPL2
+
+$Volume Trite/Sight 0.5
+$Volume Trite/Active 0.5
+$Volume Trite/Attack 0.5
+$Volume Trite/MeleeHit 0.5
+$Volume Trite/Pain 0.5
+$Volume Trite/Death 0.5
+$Volume Trite/Splat 0.5
+$Volume Trite/Step 0.2

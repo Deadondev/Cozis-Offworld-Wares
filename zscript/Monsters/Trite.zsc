@@ -1,0 +1,482 @@
+// ------------------------------------------------------------
+// "Oh Christ, why bring back the D3 Spiders?!"
+// ------------------------------------------------------------
+class TriteHandler : EventHandler
+{    
+    private int current_trites;
+	private int max_trites;
+	private int maxtospawn;
+
+        void init()
+    {
+        		current_trites            = current_tritescvar;
+				max_trites            = max_tritescvar;
+    }
+
+	override void WorldLoaded(WorldEvent e)
+	{
+		// always calls init.
+		init();
+		super.WorldLoaded(e);
+	}
+
+    override void WorldThingSpawned(WorldEvent e)
+    {
+		if(e.thing && e.thing is "Trite")current_trites++; // this line of code wouldn't propegate properly to all of the spawners. You'd need to give each spawner a maximum number they can spawn. 
+        let sss=SpiderBarrel(e.thing);
+        //if(sss)sss.maxtospawn = current_trites;
+		
+    }
+
+} 
+
+
+class Trite:HDMobBase{
+
+	actor latchtarget;
+	double latchheight;  //as a proportion between 0 and 1
+	double latchangle;  //relative to the latchtarget's angle
+	double lastltangle;  //absolute, for comparison only
+	double latchmass;
+
+	override void postbeginplay(){
+		super.postbeginplay();
+		resize(0.45,0.56); //for reference, babs are 0.9 to 1.1, but this doesnt need to work bc matt added limits and i need to break them
+		voicepitch=1.6-scale.x+frandom(-0.1,0.1);
+		lastpointinmap=pos;
+		bbiped=bplayingid;
+		lastpointinmap=pos;
+		latchmass=1.+mass*1./default.mass;
+		maxstepheight=height*(bplayingid?0.6:0.8);
+	}
+
+		//randomize size
+	double hitboxscale;
+	void resize(double minscl=0.45,double maxscl=0.56,int minhealth=0){
+		double drad=radius;
+		double dheight=height;
+		double minchkscl=max(1.,minscl+0.1);
+		double scl;
+		do{
+			scl=frandom(minscl,maxscl);
+			A_SetSize(drad*scl,dheight*scl);
+			maxscl=scl; //if this has to check again, don't go so high next time
+		}while(
+			//keep it smaller than the geometry
+			scl>minchkscl
+			&&!checkmove(pos.xy,PCM_NOACTORS)
+		);
+		A_SetHealth(int(health*max(scl,1)));
+		scale*=scl;
+		mass=int(scl*mass);
+		speed*=scl;
+		meleerange*=scl;
+
+		//save a few things for future reference
+		hitboxscale=scl;
+		liveheight=default.height*scl;
+		deadheight=deathheight*scl;
+	}
+	override double getdeathheight(){
+		return super.getdeathheight()*hitboxscale;
+	}
+
+	void TryLatch(){
+		if(
+			blockingline
+			&&CheckClimb()
+		){
+			setstatelabel("see");
+			return;
+		}
+
+		double checkrange=!!target?(target.radius*HDCONST_SQRTTWO)+meleerange:0;
+		if(
+			health<1
+			||!target
+			||target==self
+			||!target.height
+			||distance3dsquared(target)>checkrange*checkrange
+			||absangle(angleto(target),angle)>30
+			||!checkmove(0.5*(pos.xy+target.pos.xy),PCM_NOACTORS)
+		){
+			latchtarget=null;
+			return;
+		}else{
+			bnodropoff=false;
+			latchtarget=target;
+
+			latchheight=(pos.z-latchtarget.pos.z)/latchtarget.height;
+			lastltangle=latchtarget.angle;
+			latchangle=deltaangle(lastltangle,latchtarget.angleto(self));
+
+			setstatelabel("latched");
+		}
+	}
+	override bool cancollidewith(actor other,bool passive){
+		return(
+			(
+				other!=latchtarget
+				&&other!=target
+			)||(
+				!latchtarget
+				&&max(
+					abs(other.pos.x-pos.x),
+					abs(other.pos.y-pos.y)
+				)>=other.radius+radius  
+			)
+		);
+	}
+	override void Die(actor source,actor inflictor,int dmgflags){
+		latchtarget=null;
+		super.Die(source,inflictor,dmgflags);
+	}
+	vector3 lastpointinmap;
+	override void Tick(){
+		if(isfrozen())return;
+
+		//brutal force
+		if(
+			health>0
+			&&(
+				!level.ispointinlevel(pos)
+				||!checkmove(pos.xy,PCM_NOACTORS)
+			)
+		){
+			setorigin(lastpointinmap,true);
+			setz(clamp(pos.z,floorz,ceilingz-height));
+		}else lastpointinmap=pos;
+
+
+		if(latchtarget){
+			A_Face(latchtarget,0,0);
+
+
+			vector3 lp=latchtarget.pos;
+			bool teleported=
+				abs(lp.x-pos.x)>100||
+				abs(lp.y-pos.y)>100||
+				abs(lp.z-pos.z)>100
+			;
+			
+
+			double oldz=pos.z;
+			setz(max(floorz,min(
+				latchtarget.pos.z+latchtarget.height*latchheight,
+				latchtarget.pos.z+latchtarget.height-height*0.6
+			)));
+
+			vector2 newxy=latchtarget.pos.xy+
+				+angletovector(
+					latchtarget.angle+latchangle,
+					latchtarget.radius*frandom(0.9,1.)
+				)
+			;
+
+			//abort if blocked
+			if(
+				max(
+//					absangle(lastltangle,latchtarget.angle)*latchheight,
+					abs(newxy.x-pos.x),
+					abs(newxy.y-pos.y)
+				)>frandom(10,100)
+				||!checkmove(newxy,PCM_NOACTORS)
+				||!level.ispointinlevel((newxy,pos.z))
+				||!latchtarget
+				||latchtarget.health<random(-10,1)
+			){
+				setz(oldz);
+				if(latchtarget.health>0){
+					A_Changevelocity(0,0,0,CVF_RELATIVE); //reference: bab (-5,frandom(-2,2),frandom(2,4),CVF_RELATIVE)
+					forcepain(self);
+				}else{
+					target=lastenemy;
+					setstatelabel("idle");
+				}
+				latchtarget=null;
+			}
+
+
+			if(latchtarget){
+				lastltangle=latchtarget.angle;
+
+				setorigin(
+					(newxy,pos.z)+(0,0,0) //frandom(-1,1),frandom(-1,1),frandom(-1,1)
+					,!teleported
+				);
+
+
+				if(!random(0,30))A_Vocalize(painsound);
+
+
+				double latchforce=max(latchheight,-latchheight*5)*latchmass;
+				let hdp=hdplayerpawn(latchtarget);
+
+
+				bool onground=
+					latchtarget.bonmobj
+					||latchtarget.floorz>=latchtarget.pos.z;
+				double latchjump=0.;
+
+				//fuck with the victim's pitch/angle and movement
+				/*if(latchtarget.health>0){
+					if(hdp){
+						vector2 vvv=(0,0); //frandom(-5,5),frandom(-4,6)
+						//hdp.muzzleclimb1+=vvv*latchforce;
+						//hdp.muzzleclimb2+=vvv*latchforce;
+					}else if(
+						latchtarget.bismonster
+						||(
+							latchtarget.player
+							&&latchtarget.player.bot
+						)
+					){
+						latchtarget.pitch=clamp(
+							latchtarget.pitch+frandom(-8,8)*latchforce,-90,90
+						);
+						latchtarget.angle+=frandom(-8,8)*latchforce;
+
+						//make bots and monsters thrash to try to shake it off
+						latchtarget.angle+=frandom(-20,20); //this was 20
+					}
+
+					if(onground){
+						if(latchtarget.pos.x<pos.x)latchtarget.vel.x+=0.1*latchforce;
+						else if(latchtarget.pos.x>pos.x)latchtarget.vel.x-=0.1*latchforce;
+						if(latchtarget.pos.y<pos.y)latchtarget.vel.y+=0.1*latchforce;
+						else if(latchtarget.pos.y>pos.y)latchtarget.vel.y-=0.1*latchforce;
+					}else if(latchtarget.bfloat)latchjump=-0.1*latchforce;
+				}*/
+
+				//inflict damage
+				if(!(level.time&1))switch(random(0,5)){
+				case 0:
+					latchjump=frandom(0,2)*latchforce;
+					double laa=(latchangle%90)*0.2;
+					if(hdp){
+						hdp.muzzleclimb1+=(latchforce*frandom(0,laa),frandom(0,latchforce*5));
+						hdp.muzzleclimb2+=(latchforce*frandom(0,laa),frandom(0,latchforce*5));
+						hdp.muzzleclimb3+=(latchforce*frandom(0,laa),frandom(0,latchforce*5));
+					}else{
+						latchtarget.angle+=latchforce*frandom(0,laa*3);
+						latchtarget.pitch=clamp(
+							latchtarget.pitch+frandom(0,latchforce*15),-90,90
+						);
+					}
+					latchtarget.damagemobj(
+						self,self,1+int(frandom(0,8)*latchforce),"jointlock"
+					);break;
+				case 1:
+					latchjump=frandom(1,3)*latchforce;
+					latchtarget.damagemobj(
+						self,self,int(frandom(0,10)*latchforce),"falling"
+					);break;
+				default:
+					setorigin(pos+(frandom(-1,1),frandom(-1,1),frandom(-1,1))*2,true);
+					latchtarget.damagemobj(
+						self,self,2+int(frandom(0,8*latchforce)),"teeth"
+					);break;
+				}
+
+				if(
+					onground
+					&&latchjump
+				)latchtarget.vel.z+=latchjump;
+
+				latchheight=clamp(latchheight+frandom(-0.01,0.014),-0.2,0.9);
+			}
+
+
+			NextTic();
+		}
+		else super.Tick();
+	}
+
+	default{
+		//$Category "Monsters/Hideous Destructor"
+		//$Title "Trite"
+		//$Sprite "SRG2A1"
+
+		+hdmobbase.chasealert
+		+cannotpush +pushable
+		+hdmobbase.climber
+		+hdmobbase.climbpastdropoff
+		health 25;radius 12; //bab health is 90 so yea...
+		height 32;deathheight 0;
+		scale 0.6;
+		speed 18; //babs are 12
+		mass 70;
+		meleerange 40;
+		bloodcolor "44 99 22";
+		maxtargetrange 420;
+		minmissilechance 220;
+		painchance 90; pushfactor 0.2;
+
+		dropitem "TriteDrops",256,10;
+
+
+		maxstepheight 24;maxdropoffheight 64;
+
+		seesound "Trite/sight";painsound "Trite/pain";
+		deathsound "Trite/death";activesound "Trite/active";
+		obituary "%o was bit by a trite.";
+		damagefactor "Balefire",0.1;
+		tag "Trite";
+	}
+
+	states{
+	spawn:
+		TRIT A 0;
+	idle:
+		#### A 0 A_JumpIf(bambush,"spawnstill");
+	spawnwander:
+		#### ABCD random(2,4){
+			blookallaround=false;
+			hdmobai.wander(self);
+		}
+		#### A 0{
+			if(!random(0,5))setstatelabel("spawnsniff");
+			else if(!random(0,9))A_Vocalize(activesound);
+		}loop;
+	spawnsniff:
+		#### A 0{blookallaround=true;}
+		#### EEEE 2{
+			angle+=frandom(-2,2);
+			A_HDLook();
+		}
+		#### F 2{
+			angle+=frandom(-20,20);
+			if(!random(0,9))A_Vocalize(activesound);
+		}
+		#### FFF 2 A_HDLook();
+		#### A 0{
+			blookallaround=false;
+			if(!random(0,6))setstatelabel("spawnwander");
+		}loop;
+	spawnstill:
+		#### AB 8 A_HDLook();
+		loop;
+	see:
+		#### A 0{
+			//because Trites come into this state from all sorts of weird shit
+			if(
+				!checkmove(pos.xy,true)
+				&&blockingmobj
+			){
+				setorigin((pos.xy+(pos.xy-blockingmobj.pos.xy),pos.z+1),true);
+			}
+
+			blookallaround=false;
+			if(!random(0,127))A_Vocalize(seesound);
+			MustUnstick();
+
+			if(CheckClimb())return;
+
+			bnofear=target&&distance3dsquared(target)<65536.;
+
+			if(
+				(target&&checksight(target))
+				||!random(0,7)
+			)setstatelabel("seechase");
+			else setstatelabel("roam");
+		}
+	seechase:
+		#### ABCD random(2,4) A_HDChase();
+		//---- A 0 setstatelabel("seeend");
+		loop;
+	roam:
+		#### ABCD random(3,6){
+			A_HDChase(flags:CHF_WANDER);
+			A_HDLook();
+		}
+		---- A 0 setstatelabel("seeend");
+	seeend:
+		#### A 0 givebody(random(2,12));
+		#### A 0 A_Jump(256,"see");
+	melee:
+		#### EE 3{
+			A_FaceTarget(0,0);
+			A_Vocalize("Trite/bite");
+			A_Changevelocity(cos(pitch)*2,0,sin(-pitch)*2,CVF_RELATIVE);
+		}
+		#### FF 3 A_Changevelocity(cos(pitch)*3,0,sin(-pitch)*3+2,CVF_RELATIVE);
+		#### FF 1 TryLatch();
+	postmelee:
+		#### F 6 A_CustomMeleeAttack(random(5,15),"","","teeth",true);
+		---- A 0 setstatelabel("see");
+
+	latched:
+		#### EF random(1,2);
+		#### A 0 A_JumpIf(!latchtarget,"pain");
+		loop;
+
+	missile:
+		#### ABCD 2{
+			A_FaceTarget(16,16);
+			bnodropoff=false;
+			A_Changevelocity(1,0,0,CVF_RELATIVE);
+			if(A_JumpIfTargetInLOS("null",20,0,128)){
+				A_Vocalize(seesound);
+				setstatelabel("jump");
+			}
+		}
+		---- A 0 setstatelabel("see");
+	jump:
+		#### A 3 A_FaceTarget(16,16);
+		#### E 3{
+			A_Changevelocity(cos(pitch)*3,0,sin(-pitch)*3,CVF_RELATIVE);
+		}
+		#### E 2 A_FaceTarget(6,6,FAF_TOP);
+		#### F 1 A_ChangeVelocity(cos(pitch)*16,0,sin(-pitch-frandom(-4,1))*16,CVF_RELATIVE);
+		#### FF 1 TryLatch();
+	fly:
+		#### F 1{
+			TryLatch();
+			if(
+				bonmobj
+				||floorz>=pos.z
+				||vel.xy==(0,0)
+			)setstatelabel("land");
+			else if(max(abs(vel.x),abs(vel.y)<3))vel.xy+=(cos(angle),sin(angle))*0.1;
+		}wait;
+	land:
+		#### FDE 3{vel.xy*=0.8;}
+		#### D 4{vel.xy=(0,0);}
+		#### ABCD 3 A_HDChase("melee",null);
+		---- A 0 setstatelabel("see");
+	pain:
+		#### E 2 A_SetSolid();
+		#### E 6 A_Vocalize(painsound);
+		#### ABCD 2 A_HDChase();
+		---- A 0 setstatelabel("see");
+	death:
+		#### G 5{
+			let mmm = SpiderBarrel(master);
+			if(mmm)mmm.spawnedtrites--;
+			A_Vocalize(deathsound);
+			bpushable=false;
+
+		}
+		#### H 5;
+		#### IJK 5;
+		stop;
+	}
+}
+
+class TriteDrops:IdleDummy{
+    states{
+    spawn:
+        TNT1 A 0 nodelay{
+			if(random(0,8)){
+            A_SpawnItemEx("HDRel_RawPlastic",frandom(0,8),frandom(0,8),0,frandom(0,8),frandom(0,8),0,frandom(0,180),SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawBrass",frandom(0,8),frandom(0,8),0,frandom(0,8),frandom(0,8),0,frandom(0,180),SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawLead",frandom(0,1),frandom(0,1),0,frandom(0,1),frandom(0,1),0,frandom(0,180),SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawPowder",frandom(0,1),frandom(0,1),0,frandom(0,1),frandom(0,1),0,frandom(0,180),SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDShellAmmo",frandom(0,1),frandom(0,1),0,frandom(0,1),frandom(0,1),0,frandom(0,180),SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HD45ACPAmmo",frandom(0,1),frandom(0,1),0,frandom(0,1),frandom(0,1),0,frandom(0,180),SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDPistolAmmo",frandom(0,1),frandom(0,1),0,frandom(0,1),frandom(0,1),0,frandom(0,180),SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRevolverAmmo",frandom(0,1),frandom(0,1),0,frandom(0,1),frandom(0,1),0,frandom(0,180),SXF_NOCHECKPOSITION);
+			}
+        }stop;
+    }
+}

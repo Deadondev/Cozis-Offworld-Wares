@@ -1,9 +1,42 @@
 version "4.5"
 
-#include "zscript/musket/BALL.zsc"
-#include "zscript/musket/Musket.zsc"
-////////////////////////////////////////
-//#include "zscript/flintpistol/flintpistol.zsc"
-////////////////////////////////////////
-#include "zscript/Rum.zs"
-////////////////////////////////////////
+//-------------------------------------------------
+// WEAPONS
+//-------------------------------------------------
+
+// Black Powder
+#include "zscript/Weaponry/Musket/BALL.zsc"
+#include "zscript/weaponry/Musket/Musket.zsc"
+// It brokie :(((((
+//#include "zscript/Weaponry/Flintlock Pistol/flintpistol.zsc"
+
+// Potetobloke Fork
+#include "zscript/Weaponry/Potetobloke-Weapons/MAC11.zsc"
+#include "zscript/Weaponry/Potetobloke-Weapons/Colt355.zsc"
+#include "zscript/Weaponry/Potetobloke-Weapons/CobraySweep.zsc"
+#include "zscript/Weaponry/Potetobloke-Weapons/CobrayTermi.zsc"
+
+// Defibrillator
+#include "zscript/weaponry/Defibrillator/Defib.zsc"
+
+//-------------------------------------------------
+// ITEMS
+//-------------------------------------------------
+
+// Rations
+#include "zscript/Items/Rum.zs"
+
+// Universal Reloader Fork
+#include "zscript/Items/unireloader.zs"
+#include "zscript/Items/reloadermats.zs"
+
+// Armor-patch Kit Fork
+#include "zscript/Items/armorpatchkit.zs"
+
+//-------------------------------------------------
+// MONSTERS
+//-------------------------------------------------
+
+//Trites
+#include "zscript/Monsters/Trite.zsc"
+#include "zscript/Monsters/TriteBarrel.zsc"

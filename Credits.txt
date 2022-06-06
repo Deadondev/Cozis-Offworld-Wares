@@ -7,3 +7,37 @@ intoxication code, handler, shader, and base idea - cyb3r_c001. thank you!
 updated intoxication handler - cali, phantom, fda.
 
 alcohol bottles - xatrix entertainment
+
+---Aralite M35A1 HPC---
+Sprites = Sgt. Mark IV
+Sounds = I forgot :(
+
+---Raycob City Killer---
+Sprites = Sgt. Shivers
+Sounds = Interplay
+Code Help = MatthewTheGlutton
+
+---Raycob Exterminator---
+Sprites = Chronoteeth, potetobloke
+Sounds = Interplay
+
+---Universal Reloader---
+Sprites: Mor'ladim.
+Coding: Accensus.
+
+--Offworld Lockbox--
+Sprites: Bonsaiheldin
+Coding: tedthedragon
+
+---Universal Reloader---
+Sounds: La Tailor Girl.
+Coding: Accensus.
+
+AS FAR AS I AM AWARE PB DID NOT CREDIT THE MAC11, So I'm going to assume that is him
+
+--Trite--
+Sprites: Monolith, Id Software
+Sprite Edit: Captain Toenail
+Sounds: Id Software
+Idea Base: Trite from Doom 3
+Coding Help: FDA

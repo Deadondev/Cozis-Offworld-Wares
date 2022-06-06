@@ -1,0 +1,3 @@
+// Trites
+server int  current_tritescvar= 0;
+server int  max_tritescvar    = 30;

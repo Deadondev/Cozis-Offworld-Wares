@@ -1,21 +1,46 @@
-- Recoil adjustments
-- Weight
-- Make sure smoke is good.
-- Sight work (probably no front sight/ make it only work on zoom? idk)
-- Bayonet System (whole windup and then stab, hold to power up and whamo)<<<<<<<<<
-- Misfires, Jams, Muskets need to be cleaned you know
-
 TBD:
--Hammer Cocking Sprites
--Hammer Script working
--Bayonet should work off velocity
--Weapon Failures & a way to maintain the rifle
--Unique Weapon Sounds
--Unique Weapon Sprites (done via model)
--Sprites show whether the rifle has been cocked
--TRIGGER PULL
--Blunderbuss & Flintlock Pistols
--Musket can't be reloaded while rolling, stand up for bonuses, etc. etc.
+- Unloading Mechanic
+- Misfires, Jams, Muskets need to be cleaned you know
+- Flintlock System needs to become Integers instead of Arrays, powder could feed from the URL
+- Blunderbuss & Flintlock Pistols
+- Fix Commando to have jams, unjams by pulling the charging handle
+- Musket can't be reloaded while rolling, stand up for bonuses, etc. etc.
+- Terminator: Tie recoil to Strength factor, Slugs, tweak 'n test
+- Stryker: Add a mechanic to dump empty rounds (most likely a hold unload to just click-click-click through them), Slugs, Full-Auto mode & a Silenced version
+- Add other shells to the striker and pipegun, at least slugs.
+- **PLEASE** make the Radsuit better
+- Gas, WP and Incendiary Grenades would be fun :)
+- Flamethrowah
+- Artillery Radio
+- Helmet Support for the APK
 
-Kobl:
-Rear sight? silver bullets? what about using 4mm?
+Spriting & Overall Quality-work:
+- Hammer Cocking Sprites
+- Unique Weapon Sprites (done via model)
+- Defibrillator
+- Player Skins
+- Trite Lootpools are wonky
+
+BUGS:
+- Either fix loadout code striker missing a shell or make the item one miss one shell also.
+- Fix More trites not spawning after the current ones die
+
+Monsters:
+- Trites spawn in Nukage? idk
+- ZSEC: Striker, Carbine, ZMs, Shotguns
+- Old and NewVile Compat
+
+Helmet:
+-Oxygen Meter
+-Mils System (but I'll take what I can get at this point)
+-Screen Cracking/Damage System (Obviously the helmet repairs automatically)
+-FAK Upgrades (Repair, See HP of friends, etc.)
+-Camera System to see through your DERPs/Friends would be super cool.
+
+Replacement Stuff:
+- Gunpowder barrels for musket and maybe URL.
+- Trite barrels, shoot 'em or get to close and they'll slowly creep out and such and if they explode even more trites come out.
+- Various cans and such to randomly replace barrels. Include gremlin support, mainly for just random items though as decoration and variety.
+
+Stuff for release:
+- Fix balls using Heretic Sprites

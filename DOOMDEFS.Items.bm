@@ -1,0 +1,6 @@
+// Universal Reloader
+
+brightmap sprite URLDA0
+{
+	map Brightmaps/Items/BMURLDA0.png
+}
