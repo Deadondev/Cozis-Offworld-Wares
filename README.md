@@ -1,3 +1,3 @@
 # Cozis-Offworld-Wares
 
-Hideous Destructor mod I made, adds a musket, more soonish
+A Hideous Destructor addon that adds various offworld items, including Muskets, Magical Rum and more! See our wiki for more in-depth documentation.
