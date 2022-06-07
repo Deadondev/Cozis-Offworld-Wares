@@ -430,10 +430,6 @@ if(!punchee.countinv("HDArmourWorn")){
 	
 	fire:
 		MSKG A 1 offset(0,34){
-			if(invoker.weaponstatus[MUSKT_BARREL]==0){
-			setweaponstate("nope");
-			return;
-			}
 				if(invoker.weaponstatus[MUSKT_COCKED]==1){
 			setweaponstate("nope");
 			return;
@@ -442,8 +438,6 @@ if(!punchee.countinv("HDArmourWorn")){
 					case MUSKT_CORRECTRAMMED:
 					A_GunFlash();
 					A_StartSound("weapons/musketfire",CHAN_WEAPON);
-					//A_StartSound("weapons/bronto",CHAN_WEAPON,CHANF_OVERLAP);
-					//A_StartSound("weapons/bronto2",CHAN_WEAPON,CHANF_OVERLAP);
 					A_AlertMonsters();
 					let tb=HDBulletActor.FireBullet(self,"HDB_Ball",spread:4.,speedfactor:frandom(0.97,1.03));
 					invoker.weaponstatus[MUSKT_BARREL]=0;
@@ -456,8 +450,8 @@ if(!punchee.countinv("HDArmourWorn")){
 					A_GunFlash();
 					A_StartSound("weapons/musketfire",CHAN_WEAPON);
 					A_AlertMonsters();
-					self.damagemobj(self,self,25,"slashing",DMG_NO_ARMOR);
-					self.damagemobj(self,self,25,"hot",DMG_NO_ARMOR);
+					self.damagemobj(self,self,75,"slashing",DMG_NO_ARMOR);
+					self.damagemobj(self,self,75,"hot",DMG_NO_ARMOR);
 					spawn("HDExplosion",self.pos-(0,0,1),ALLOW_REPLACE);
 					DistantQuaker.Quake(self,4,35,512,10);
 					A_ChangeVelocity(cos(pitch)*-frandom(2,4),0,sin(pitch)*frandom(8,12),CVF_RELATIVE);
@@ -470,8 +464,26 @@ if(!punchee.countinv("HDArmourWorn")){
 					invoker.destroy();
 					break;
 				/////////////////////////////////////////////////////////////////////////////////////
-					case MUSKT_JUSTBALL:
+					case MUSKT_OVERPOWDERED:
+					case MUSKT_POWDERED:
+					A_GunFlash();
+					A_StartSound("weapons/musketfire",CHAN_WEAPON);
+					A_AlertMonsters();
+					A_MuzzleClimb(-frandom(4.,5.4),-frandom(3.4,5.2)); //doubled bc its too much lul
+					A_StartSound("weapons/fgnclk",CHAN_WEAPON,CHANF_OVERLAP);
+					invoker.weaponstatus[MUSKT_HEAT]+=20;
+					setweaponstate("nope"); //this makes sure you don't get double heat/smoke
 					break;
+				/////////////////////////////////////////////////////////////////////////////////////
+					case MUSKT_JUSTBALLRAMMED:
+					A_StartSound("weapons/muskrodin",8,CHANF_OVERLAP);
+					A_SpawnItemEx("HDBallAmmo",0,0,invoker.owner.height * 0.80, 5,0,0,0,SXF_NOCHECKPOSITION);
+					invoker.weaponstatus[MUSKT_BARREL]=0;
+					invoker.weaponstatus[MUSKT_COCKED]=1;
+					break;
+				/////////////////////////////////////////////////////////////////////////////////////
+				default:
+				break;
 					};
 
 		}
@@ -534,11 +546,9 @@ if(!punchee.countinv("HDArmourWorn")){
 		MSKR H 3 offset(0,34){
 		switch (invoker.weaponStatus[MUSKT_BARREL]){
 		case MUSKT_BALLLOADED:
-		A_WeaponMessage("\cgYou can't load two balls!",100);
-		break;//////////////////////////////////////////////////////////////////
 		case MUSKT_CORRECTLOAD:
 		A_WeaponMessage("\cgYou can't load two balls!",100);
-		break;
+		break;//////////////////////////////////////////////////////////////////
 		case MUSKT_POWDERED:
 		A_TakeInventory("HDBallAmmo",1,TIF_NOTAKEINFINITE);
 		A_StartSound("weapons/muskrodin",8,CHANF_OVERLAP);
@@ -549,7 +559,6 @@ if(!punchee.countinv("HDArmourWorn")){
 		A_StartSound("weapons/muskrodin",8,CHANF_OVERLAP);
 		invoker.WeaponStatus[MUSKT_BARREL]=MUSKT_OVERPOWDEREDBALL;
 		break;//////////////////////////////////////////////////////////////////
-
 		default:
 		A_TakeInventory("HDBallAmmo",1,TIF_NOTAKEINFINITE);
 		A_StartSound("weapons/muskrodin",8,CHANF_OVERLAP);
@@ -563,6 +572,10 @@ if(!punchee.countinv("HDArmourWorn")){
 		MSKR D 10 offset(4,34);
 		MSKR D 3 offset(4,34) { switch (invoker.weaponStatus[MUSKT_BARREL]){
 		case MUSKT_POWDERED:
+		A_StartSound("weapons/musketdust",8,CHANF_OVERLAP);
+		invoker.WeaponStatus[MUSKT_BARREL]=MUSKT_OVERPOWDERED;
+		break;//////////////////////////////////////////////////////////////////
+		case MUSKT_OVERPOWDERED:
 		A_StartSound("weapons/musketdust",8,CHANF_OVERLAP);
 		invoker.WeaponStatus[MUSKT_BARREL]=MUSKT_OVERPOWDERED;
 		break;//////////////////////////////////////////////////////////////////
@@ -608,16 +621,74 @@ if(!punchee.countinv("HDArmourWorn")){
 		case MUSKT_OVERPOWDEREDBALL:
 		invoker.WeaponStatus[MUSKT_BARREL]=MUSKT_OVERPOWDEREDRAMMED;
 		break;//////////////////////////////////////////////////////////////////
+		case MUSKT_BALLLOADED:
+		invoker.WeaponStatus[MUSKT_BARREL]=MUSKT_JUSTBALLRAMMED;
+		break;//////////////////////////////////////////////////////////////////
 		}}
 		MSKR M 3 offset(4,34);
 		goto altreloadhold;
 
 	unload:
-		---- A 1 A_CheckChug(pressinguse()); //DO NOT set this frame to zero
-		---- A 0 {if(!invoker.weaponstatus[MUSKT_BARREL]==0){
-		A_WeaponMessage("\cgBarrel Unloaded! This will be a pain later!",100);
-		HDF.Give(self,"HDBallAmmo",1);
-		invoker.weaponstatus[MUSKT_BARREL]=0;}}
+		---- A 1 A_CheckChug(pressinguse()); //DO NOT set this frame to zero, also this is necessary for the round creation mechanic
+		---- A 0 {A_MuzzleClimb(0,2);
+		A_MuzzleClimb(
+			frandom(-1.,1.),frandom(-1.,1.),
+			frandom(-1.,1.),frandom(-1.,1.),
+			frandom(-1.,1.),frandom(-1.,1.),
+			frandom(-1.,1.),frandom(0.,1.));
+			let failchance=40;
+			let spareindex=-1;
+			//if(spareindex==-1)spareindex=i;
+			failchance=min(10,failchance-5);
+			if(!random(0,failchance)){
+			switch (invoker.weaponStatus[MUSKT_BARREL]){
+				case MUSKT_POWDERED:
+				A_StartSound("weapons/muskrodin",8,CHANF_OVERLAP);
+				//when powder is added it will go here
+				invoker.weaponstatus[MUSKT_BARREL]=0;
+				break;//////////////////////////////////////////////////////////////////
+				case MUSKT_BALLLOADED:
+				case MUSKT_JUSTBALLRAMMED:
+				A_StartSound("weapons/muskrodin",8,CHANF_OVERLAP);
+				A_SpawnItemEx("HDBallAmmo",0,0,invoker.owner.height * 0.80, 5,0,-5,0,SXF_NOCHECKPOSITION);
+				invoker.weaponstatus[MUSKT_BARREL]=0;
+				break;//////////////////////////////////////////////////////////////////
+				case MUSKT_CORRECTLOAD:
+				case MUSKT_CORRECTRAMMED:
+				A_StartSound("weapons/muskrodin",8,CHANF_OVERLAP);
+				A_SpawnItemEx("HDBallAmmo",0,0,invoker.owner.height * 0.80, 5,0,-5,0,SXF_NOCHECKPOSITION);
+				//when powder is added it will go here
+				invoker.weaponstatus[MUSKT_BARREL]=0;
+				break;//////////////////////////////////////////////////////////////////
+				case MUSKT_OVERPOWDERED:
+				A_StartSound("weapons/muskrodin",8,CHANF_OVERLAP);
+				//when powder is added it will go here, will need a counting measure
+				invoker.weaponstatus[MUSKT_BARREL]=0;
+				break;//////////////////////////////////////////////////////////////////
+				case MUSKT_OVERPOWDEREDBALL:
+				case MUSKT_OVERPOWDEREDRAMMED:
+				A_StartSound("weapons/muskrodin",8,CHANF_OVERLAP);
+				A_SpawnItemEx("HDBallAmmo",0,0,invoker.owner.height * 0.80, 5,0,-5,0,SXF_NOCHECKPOSITION);
+				//when powder is added it will go here
+				invoker.weaponstatus[MUSKT_BARREL]=0;
+				break;//////////////////////////////////////////////////////////////////
+				default:
+				break;//////////////////////////////////////////////////////////////////
+			}}}
+		/*
+	MUSKT_POWDERED=1,
+	MUSKT_BALLLOADED=2,
+	///////////////////////////////
+	MUSKT_CORRECTLOAD=4,
+	MUSKT_CORRECTRAMMED=5,
+	///////////////////////////////
+	MUSKT_OVERPOWDERED=6,
+	MUSKT_OVERPOWDEREDBALL=7,
+	MUSKT_OVERPOWDEREDRAMMED=8,
+	///////////////////////////////
+	MUSKT_JUSTBALLRAMMED=9,
+	///////////////////////////////
+		*/
 		goto ready;
 
 	altfire:
@@ -779,19 +850,16 @@ class HDBlackpowderGunSmoke:HDSmoke{
 enum musketstatus{
 	MUSKT_POWDERED=1,
 	MUSKT_BALLLOADED=2,
-	MUSKT_RAMMED=3,
 	///////////////////////////////
-	MUSKT_CORRECTLOAD=4,
-	MUSKT_CORRECTRAMMED=5,
+	MUSKT_CORRECTLOAD=3,
+	MUSKT_CORRECTRAMMED=4,
 	///////////////////////////////
-	MUSKT_OVERPOWDERED=6,
-	MUSKT_OVERPOWDEREDBALL=7,
-	MUSKT_OVERPOWDEREDRAMMED=8,
+	MUSKT_OVERPOWDERED=5,
+	MUSKT_OVERPOWDEREDBALL=6,
+	MUSKT_OVERPOWDEREDRAMMED=7,
 	///////////////////////////////
-	MUSKT_JUSTBALL=9,
-	MUSKT_JUSTBALLRAMMED=10,
+	MUSKT_JUSTBALLRAMMED=8,
 	///////////////////////////////
-	//MUSKT_OVERPOWDEREDRAMMED=11,
 	
 	MUSKT_COCKED=2,
 	
