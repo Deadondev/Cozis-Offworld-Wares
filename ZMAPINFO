@@ -6,6 +6,7 @@ GameInfo
 	AddEventHandlers = "Commando355Injector"
 	AddEventHandlers = "SweepInjector"
 	AddEventHandlers = "PipeGunInjector"
+	AddEventHandlers = "MacInjector"
 	AddEventHandlers = "SpiderBarrelEventHandler"
 	AddEventHandlers = "TriteHandler"
 }

@@ -545,13 +545,57 @@ enum StreetSweeperStats{
 	SSWP_CHOKE=5,
 }
 
-class SweepInjector:EventHandler{
-override void WorldThingSpawned(WorldEvent e) { 
-        let SweepAmmo = HDAmmo(e.Thing);     
-     if (SweepAmmo){             
-  switch (SweepAmmo.GetClassName()){
-  case 'HDShellAmmo': SweepAmmo.ItemsThatUseThis.Push("HDShellAmmo");                     break;                 
-        }
-        }
-         }     
-} 
+class SweepInjector:EventHandler
+{
+	override void CheckReplacement(ReplaceEvent e)
+	{
+		if (!e.Replacement)
+		{
+			return;
+		}
+
+		switch (e.Replacement.GetClassName())
+		{
+			case 'SSGReplaces':
+				if (random[rumrandom]() <= 24)
+				{
+					e.Replacement = "HD_StrikerDropper";
+					e.IsFinal = true;
+				}
+				break;
+			case 'ShotgunReplaces':
+				if (random[rumrandom]() <= 14)
+				{
+					e.Replacement = "HD_StrikerDropper";
+					e.IsFinal = true;
+				}
+				break;
+		}
+	}
+
+	override void WorldThingSpawned(WorldEvent e)
+	{
+		let SweepAmmo = HDAmmo(e.Thing);
+		if (!SweepAmmo)
+		{
+			return;
+		}
+
+		switch (SweepAmmo.GetClassName())
+		{
+			case 'HDShellAmmo':
+				SweepAmmo.ItemsThatUseThis.Push("HDStreetSweeper");
+				break;
+		}
+	}
+}
+
+class HD_StrikerDropper:IdleDummy{
+    states{
+    spawn:
+        TNT1 A 0 nodelay{
+			A_SpawnItemEx("ShellBoxPickup",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDStreetSweeper",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION);
+        }stop;
+    }
+}
