@@ -355,3 +355,34 @@ override void WorldThingSpawned(WorldEvent e) {
         }
          }     
 } 
+
+class HD_PipegunDropper:IdleDummy{
+    states{
+    spawn:
+        TNT1 A 0 nodelay{
+			A_SpawnItemEx("ShellBoxPickup",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDPipeGunSG",SXF_NOCHECKPOSITION);
+        }stop;
+    }
+}
+
+class COW_PipegunReplacer : EventHandler
+{
+	override void CheckReplacement(ReplaceEvent e)
+	{
+		if (!e.Replacement)
+		{
+			return;
+		}
+
+		switch (e.Replacement.GetClassName())
+		{
+			case 'SSGReplaces':
+				if (random[rumrandom]() <= 24)
+				{
+					e.Replacement = "HD_PipegunDropper";
+				}
+				break;
+		}
+	}
+}

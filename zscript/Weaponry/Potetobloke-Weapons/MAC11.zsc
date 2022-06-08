@@ -584,3 +584,37 @@ override void WorldThingSpawned(WorldEvent e) {
         }
          }     
 } 
+
+
+class HD_Mac11Dropper:IdleDummy{
+    states{
+    spawn:
+        TNT1 A 0 nodelay{
+			A_SpawnItemEx("HDMAC10Mag30",3,0,0,0,0,0,0,SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDMAC10Mag30",0,2,0,0,0,0,0,SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDMAC10Mag30",0,0,4,0,0,0,0,SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDMAC11",0,0,1,0,0,0,0,SXF_NOCHECKPOSITION);
+        }stop;
+    }
+}
+
+class COW_Mac11Replacer : EventHandler
+{
+	override void CheckReplacement(ReplaceEvent e)
+	{
+		if (!e.Replacement)
+		{
+			return;
+		}
+
+		switch (e.Replacement.GetClassName())
+		{
+			case 'ChaingunReplaces':
+				if (random[rumrandom]() <= 24)
+				{
+					e.Replacement = "HD_Mac11Dropper";
+				}
+				break;
+		}
+	}
+}

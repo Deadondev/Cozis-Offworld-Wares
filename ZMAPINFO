@@ -8,4 +8,7 @@ GameInfo
 	AddEventHandlers = "PipeGunInjector"
 	AddEventHandlers = "SpiderBarrelEventHandler"
 	AddEventHandlers = "TriteHandler"
+	AddEventHandlers = "COW_StrikerReplacer"
+	AddEventHandlers = "COW_Mac11Replacer"
+	AddEventHandlers = "COW_PipegunReplacer"
 }
