@@ -381,6 +381,7 @@ class COW_PipegunReplacer : EventHandler
 				if (random[rumrandom]() <= 24)
 				{
 					e.Replacement = "HD_PipegunDropper";
+					e.isFinal = true
 				}
 				break;
 		}

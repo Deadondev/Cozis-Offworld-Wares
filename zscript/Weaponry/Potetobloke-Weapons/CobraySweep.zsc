@@ -581,6 +581,7 @@ class COW_StrikerReplacer : EventHandler
 				if (random[rumrandom]() <= 24)
 				{
 					e.Replacement = "HD_StrikerDropper";
+					e.isFinal = true
 				}
 				break;
 		}
