@@ -15,6 +15,7 @@ version "4.5"
 #include "zscript/Weaponry/Potetobloke-Weapons/Colt355.zsc"
 #include "zscript/Weaponry/Potetobloke-Weapons/CobraySweep.zsc"
 #include "zscript/Weaponry/Potetobloke-Weapons/CobrayTermi.zsc"
+#include "zscript/Weaponry/Potetobloke-Weapons/GasGrenade.zsc"
 
 // Defibrillator
 #include "zscript/weaponry/Defibrillator/Defib.zsc"
