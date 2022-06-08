@@ -48,6 +48,3 @@ Replacement Stuff:
 - Gunpowder barrels for musket and maybe URL.
 - Trite barrels, shoot 'em or get to close and they'll slowly creep out and such and if they explode even more trites come out.
 - Various cans and such to randomly replace barrels. Include gremlin support, mainly for just random items though as decoration and variety.
-
-Stuff for release:
-- Fix balls using Heretic Sprites
