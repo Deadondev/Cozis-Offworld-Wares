@@ -19,6 +19,7 @@ TBD:
 - Fix the commando's inventory icon
 - Fix the commando's tags
 - Increase the Mac-11's recoil
+- Tweak trite drops. - Ted.
 
 Spriting & Overall Quality-work:
 - Hammer Cocking Sprites
