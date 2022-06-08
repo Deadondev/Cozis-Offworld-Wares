@@ -345,28 +345,7 @@ enum terminatorstatus{
 	TRMI_CHAMBER=2, //0 empty, 1 spent, 2 loaded
 };
 
-class PipeGunInjector:EventHandler{
-override void WorldThingSpawned(WorldEvent e) { 
-        let PipeAmmo = HDAmmo(e.Thing);     
-     if (PipeAmmo){             
-  switch (PipeAmmo.GetClassName()){
-  case 'HDShellAmmo': PipeAmmo.ItemsThatUseThis.Push("HDShellAmmo");                     break;                 
-        }
-        }
-         }     
-} 
-
-class HD_PipegunDropper:IdleDummy{
-    states{
-    spawn:
-        TNT1 A 0 nodelay{
-			A_SpawnItemEx("ShellBoxPickup",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION);
-			A_SpawnItemEx("HDPipeGunSG",SXF_NOCHECKPOSITION);
-        }stop;
-    }
-}
-
-class COW_PipegunReplacer : EventHandler
+class PipeGunInjector:EventHandler
 {
 	override void CheckReplacement(ReplaceEvent e)
 	{
@@ -377,13 +356,39 @@ class COW_PipegunReplacer : EventHandler
 
 		switch (e.Replacement.GetClassName())
 		{
-			case 'SSGReplaces':
+			case 'ShellBoxRandom':
 				if (random[rumrandom]() <= 24)
 				{
 					e.Replacement = "HD_PipegunDropper";
-					e.isFinal = true
+					e.IsFinal = true;
 				}
 				break;
 		}
 	}
+
+	override void WorldThingSpawned(WorldEvent e)
+	{
+		let PipeAmmo = HDAmmo(e.Thing);
+		if (!PipeAmmo)
+		{
+			return;
+		}
+
+		switch (PipeAmmo.GetClassName())
+		{
+			case 'HDShellAmmo':
+				PipeAmmo.ItemsThatUseThis.Push("HDPipeGunSG");
+				break;
+		}
+	}
+}
+
+class HD_PipegunDropper:IdleDummy{
+    states{
+    spawn:
+        TNT1 A 0 nodelay{
+			A_SpawnItemEx("ShellBoxPickup",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDPipeGunSG",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION);
+        }stop;
+    }
 }

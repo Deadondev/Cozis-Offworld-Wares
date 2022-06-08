@@ -873,12 +873,12 @@ class HD_MusketDropper:IdleDummy{
     states{
     spawn:
         TNT1 A 0 nodelay{
-			A_SpawnItemEx("HDLooseBall",-3,0,0,0,0,0,0,SXF_NOCHECKPOSITION);
-			A_SpawnItemEx("HDLooseBall",2,0,0,0,0,0,0,SXF_NOCHECKPOSITION);
-			A_SpawnItemEx("HDLooseBall",-5,0,0,0,0,0,0,SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDLooseBall",-3,4,0,0,0,0,0,SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDLooseBall",2,0,1,0,0,0,0,SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDLooseBall",0,3,2,0,0,0,0,SXF_NOCHECKPOSITION);
 			A_SpawnItemEx("HDLooseBall",-2,0,0,0,0,0,0,SXF_NOCHECKPOSITION);
-			A_SpawnItemEx("HDLooseBall",-6,0,0,0,0,0,0,SXF_NOCHECKPOSITION);
-			A_SpawnItemEx("HD_Musket",SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDLooseBall",0,3,0,0,0,0,0,SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HD_Musket",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION);
         }stop;
     }
 }
@@ -898,6 +898,7 @@ class COW_MusketReplacer : EventHandler
 				if (random[rumrandom]() <= 24)
 				{
 					e.Replacement = "HD_MusketDropper";
+					e.IsFinal = true;
 				}
 				break;
 		}

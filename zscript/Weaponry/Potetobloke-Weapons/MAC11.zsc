@@ -574,31 +574,7 @@ class HDMAC10Mag30_Empty:IdleDummy{
 	}
 }
 
-class MACInjector:EventHandler{
-override void WorldThingSpawned(WorldEvent e) { 
-        let MACAmmo = HDAmmo(e.Thing);     
-     if (MACAmmo){             
-  switch (MACAmmo.GetClassName()){
-  case 'HDPistolAmmo': MACAmmo.ItemsThatUseThis.Push("HDPistolAmmo");                     break;                 
-        }
-        }
-         }     
-} 
-
-
-class HD_Mac11Dropper:IdleDummy{
-    states{
-    spawn:
-        TNT1 A 0 nodelay{
-			A_SpawnItemEx("HDMAC10Mag30",3,0,0,0,0,0,0,SXF_NOCHECKPOSITION);
-			A_SpawnItemEx("HDMAC10Mag30",0,2,0,0,0,0,0,SXF_NOCHECKPOSITION);
-			A_SpawnItemEx("HDMAC10Mag30",0,0,4,0,0,0,0,SXF_NOCHECKPOSITION);
-			A_SpawnItemEx("HDMAC11",0,0,1,0,0,0,0,SXF_NOCHECKPOSITION);
-        }stop;
-    }
-}
-
-class COW_Mac11Replacer : EventHandler
+class MacInjector:EventHandler
 {
 	override void CheckReplacement(ReplaceEvent e)
 	{
@@ -612,9 +588,38 @@ class COW_Mac11Replacer : EventHandler
 			case 'ChaingunReplaces':
 				if (random[rumrandom]() <= 24)
 				{
-					e.Replacement = "HD_Mac11Dropper";
+					e.Replacement = "HD_MAC11Dropper";
+					e.IsFinal = true;
 				}
 				break;
 		}
 	}
+
+	override void WorldThingSpawned(WorldEvent e)
+	{
+		let MacAmmo = HDAmmo(e.Thing);
+		if (!MacAmmo)
+		{
+			return;
+		}
+
+		switch (MacAmmo.GetClassName())
+		{
+			case 'HD45ACPAmmo':
+				MacAmmo.ItemsThatUseThis.Push("HDMAC11");
+				break;
+		}
+	}
+}
+
+class HD_MAC11Dropper:IdleDummy{
+    states{
+    spawn:
+        TNT1 A 0 nodelay{
+			A_SpawnItemEx("HDMac10Mag30",-3,4,0,0,0,0,0,SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDMac10Mag30",2,0,1,0,0,0,0,SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDMac10Mag30",-2,0,0,0,0,0,0,SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDMAC11",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION);
+        }stop;
+    }
 }
