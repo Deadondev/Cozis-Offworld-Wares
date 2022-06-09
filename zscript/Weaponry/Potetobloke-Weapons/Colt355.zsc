@@ -84,13 +84,13 @@ class HDCommando:ZM66ScopeHaver{
 	override void DrawHUDStuff(HDStatusBar sb,HDWeapon hdw,HDPlayerPawn hpl){
 		if(sb.hudlevel==1){
 			int nextmagloaded=sb.GetNextLoadMag(hdmagammo(hpl.findinventory("HDCommando355Mag25")));
-			if(nextmagloaded>=25){
+			if(nextmagloaded>=30){
 				sb.drawimage("C9MAA0",(-46,-3),sb.DI_SCREEN_CENTER_BOTTOM,scale:(3,3));
 			}else if(nextmagloaded<1){
 				sb.drawimage("C9MAA0",(-46,-3),sb.DI_SCREEN_CENTER_BOTTOM,alpha:nextmagloaded?0.6:1.,scale:(3,3));
 			}else sb.drawbar(
-				"C9MAA0","C9MAB0",
-				nextmagloaded,25,
+				"C9MAA0","CLP3GREY",
+				nextmagloaded,30,
 				(-46,-3),-1,
 				sb.SHADER_VERT,sb.DI_SCREEN_CENTER_BOTTOM
 			);
@@ -99,7 +99,7 @@ class HDCommando:ZM66ScopeHaver{
 		if(weaponstatus[COMMANDO_SWITCHTYPE]!=1)sb.drawwepcounter(hdw.weaponstatus[COMMANDO_AUTO],
 			-22,-10,"RBRSA3A7","STBURAUT","STFULAUT"
 		);
-		sb.drawwepnum(hdw.weaponstatus[COMMANDO_MAG],25);
+		sb.drawwepnum(hdw.weaponstatus[COMMANDO_MAG],30);
 		if(hdw.weaponstatus[COMMANDO_CHAMBER]==2)sb.drawrect(-19,-11,3,1);
 	}
 	override string gethelptext(){
@@ -149,7 +149,7 @@ class HDCommando:ZM66ScopeHaver{
 	select0:
 		C9MG A 0;
 		#### A 0;
-		goto select0small;[]
+		goto select0small;
 	deselect0:
 		C9MG A 0;
 		#### A 0;
@@ -494,59 +494,13 @@ class HDCommando355Mag25_Empty:IdleDummy{
 	}
 }
 
-class Commando355Injector:EventHandler
-{
-	override void CheckReplacement(ReplaceEvent e)
-	{
-		if (!e.Replacement)
-		{
-			return;
-		}
-
-		switch (e.Replacement.GetClassName())
-		{
-			case 'SSGReplaces':
-				if (random[rumrandom]() <= 24)
-				{
-					e.Replacement = "HD_CommandoDropper";
-					e.IsFinal = true;
-				}
-				break;
-			case 'ChaingunReplaces':
-				if (random[rumrandom]() <= 14)
-				{
-					e.Replacement = "HD_CommandoDropper";
-					e.IsFinal = true;
-				}
-				break;
-		}
-	}
-
-	override void WorldThingSpawned(WorldEvent e)
-	{
-		let SweepAmmo = HDAmmo(e.Thing);
-		if (!SweepAmmo)
-		{
-			return;
-		}
-
-		switch (SweepAmmo.GetClassName())
-		{
-			case 'HDRevolverAmmo':
-				SweepAmmo.ItemsThatUseThis.Push("HDCommando");
-				break;
-		}
-	}
-}
-
-class HD_CommandoDropper:IdleDummy{
-    states{
-    spawn:
-        TNT1 A 0 nodelay{
-			A_SpawnItemEx("HDCommando355Mag25",frandom(0,5),frandom(0,5),frandom(0,5),0,0,0,0,SXF_NOCHECKPOSITION);
-			A_SpawnItemEx("HDCommando355Mag25",frandom(0,5),frandom(0,5),frandom(0,5),0,0,0,0,SXF_NOCHECKPOSITION);
-			A_SpawnItemEx("HDCommando355Mag25",frandom(0,5),frandom(0,5),frandom(0,5),0,0,0,0,SXF_NOCHECKPOSITION);
-			A_SpawnItemEx("HDCommando",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION);
-        }stop;
-    }
-}
+class Commando355Injector:EventHandler{
+override void WorldThingSpawned(WorldEvent e) { 
+        let CommandoAmmo = HDAmmo(e.Thing);     
+     if (CommandoAmmo){             
+  switch (CommandoAmmo.GetClassName()){
+  case 'HDRevolverAmmo': CommandoAmmo.ItemsThatUseThis.Push("HDCommando");                     break;                 
+        }
+        }
+         }     
+} 

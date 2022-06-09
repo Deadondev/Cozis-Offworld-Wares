@@ -387,7 +387,7 @@ class HD_PipegunDropper:IdleDummy{
     states{
     spawn:
         TNT1 A 0 nodelay{
-			A_SpawnItemEx("ShellBoxPickup",frandom(0,5),frandom(0,5),frandom(0,5),0,0,0,0,SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("ShellBoxPickup",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION);
 			A_SpawnItemEx("HDPipeGunSG",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION);
         }stop;
     }

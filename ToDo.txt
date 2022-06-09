@@ -27,6 +27,7 @@ Spriting & Overall Quality-work:
 - Defibrillator
 - Player Skins
 - Trite Lootpools are wonky
+- Mags need a greyish version for the HUD :(
 
 BUGS:
 - Either fix loadout code striker missing a shell or make the item one miss one shell also.
