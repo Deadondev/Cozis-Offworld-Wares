@@ -28,7 +28,7 @@ class HDCommando:ZM66ScopeHaver{
 		hdweapon.barrelsize 28,0.5,1;
 		hdweapon.refid HDLD_COMMANDO;
 		tag "Commando .355 Carbine";
-		inventory.icon "C9MPA0";
+		inventory.icon ""; //genuinely, what the fuck does this even do?
 
 		hdweapon.loadoutcodes "
 			\cufiremode - 0-2, semi/burst/auto
@@ -89,7 +89,7 @@ class HDCommando:ZM66ScopeHaver{
 			}else if(nextmagloaded<1){
 				sb.drawimage("C9MAA0",(-46,-3),sb.DI_SCREEN_CENTER_BOTTOM,alpha:nextmagloaded?0.6:1.,scale:(3,3));
 			}else sb.drawbar(
-				"C9MAA0","CLP3GREY",
+				"CLP3NORM","CLP3GREY",  //black box. "C9MAA0","",
 				nextmagloaded,30,
 				(-46,-3),-1,
 				sb.SHADER_VERT,sb.DI_SCREEN_CENTER_BOTTOM
@@ -99,7 +99,7 @@ class HDCommando:ZM66ScopeHaver{
 		if(weaponstatus[COMMANDO_SWITCHTYPE]!=1)sb.drawwepcounter(hdw.weaponstatus[COMMANDO_AUTO],
 			-22,-10,"RBRSA3A7","STBURAUT","STFULAUT"
 		);
-		sb.drawwepnum(hdw.weaponstatus[COMMANDO_MAG],30);
+		sb.drawwepnum(hdw.weaponstatus[COMMANDO_MAG],25);
 		if(hdw.weaponstatus[COMMANDO_CHAMBER]==2)sb.drawrect(-19,-11,3,1);
 	}
 	override string gethelptext(){
