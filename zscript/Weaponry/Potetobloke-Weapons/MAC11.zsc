@@ -48,7 +48,7 @@ class HDMAC11:HDHandgun{
 	override void DropOneAmmo(int amt){
 		if(owner){
 			amt=clamp(amt,1,10);
-			if(owner.countinv("HDPistolAmmo"))owner.A_DropInventory("HDPistolAmmo",amt*30);
+			if(owner.countinv("HD45ACPAmmo"))owner.A_DropInventory("HD45ACPAmmo",amt*30);
 			else owner.A_DropInventory("HDMAC10Mag30",amt);
 		}
 	}
@@ -75,11 +75,13 @@ class HDMAC11:HDHandgun{
 		invoker.weaponstatus[MACG_STOCK]=0;
 	}
 	action void A_MACRecoil(){
-		if(invoker.weaponstatus[MACG_STOCK]>0){
+		switch (invoker.weaponStatus[MACG_STOCK]){
+		case 0:
 			A_MuzzleClimb(-frandom(0.6,0.8),-frandom(0.7,1),-frandom(0.6,0.8),-frandom(0.7,1));
-		}else{
+				break;//////////////////////////////////////////////////////////////////
+		case 1:
 			A_MuzzleClimb(-frandom(0.4,0.6),-frandom(0.5,0.8),-frandom(0.4,0.6),-frandom(0.5,0.8));
-		}
+				break;//////////////////////////////////////////////////////////////////
 	}
 	//A_MuzzleClimb(-frandom(0.6,0.8),-frandom(0.7,1),-frandom(0.6,0.8),-frandom(0.7,1)); without
 	//A_MuzzleClimb(-frandom(0.4,0.6),-frandom(0.5,0.8),-frandom(0.4,0.6),-frandom(0.5,0.8));
@@ -255,8 +257,7 @@ class HDMAC11:HDHandgun{
 		}
 		#### C 2 //1 originally but god it was too much -[Cozi]
 		{
-		//A_MACRecoil();
-		//A_MACRecoil2();
+		A_MACRecoil();
 		A_WeaponOffset(frandom(-3,3),frandom(40,43));//offset(0,40);
 		}
 		//A_WeaponOffset(frandom(-3,3),frandom(40,43));
@@ -289,16 +290,13 @@ class HDMAC11:HDHandgun{
 
 			A_ZoomRecoil(0.995);
 			A_StartSound("weapons/MAC11Shot",CHAN_WEAPON,CHANF_OVERLAP);
-			if(invoker.weaponstatus[MACS_AUTO]==1)
-			{
+			//if(invoker.weaponstatus[MACS_AUTO]==1)
 			A_MACRecoil();
-			//A_MuzzleClimb(-frandom(0.4,1.2),-frandom(0.4,1.6));
-			}
 			invoker.weaponstatus[MACS_CHAMBER]=1;
 		}
 		MC1F AB 0 bright A_Jump(128,"flashpt2");
 		//TNT1 A 0 A_MACRecoil();
-		//goto lightdone;
+		goto lightdone;
 		goto flashpt2;
 		
 		flashpt2:
@@ -306,11 +304,6 @@ class HDMAC11:HDHandgun{
 		MC1F # 1 bright{
 			HDFlashAlpha(32);
 			A_Light1();
-			if(invoker.weaponstatus[MACS_AUTO]==0)
-			{
-			A_MACRecoil();
-			//A_MuzzleClimb(-frandom(0.4,1.2),-frandom(0.4,1.6));
-			}
 		}
 		//TNT1 A 0 A_MACRecoil();
 		goto lightdone;
