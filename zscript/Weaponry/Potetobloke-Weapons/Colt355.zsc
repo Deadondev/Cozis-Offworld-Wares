@@ -494,13 +494,59 @@ class HDCommando355Mag25_Empty:IdleDummy{
 	}
 }
 
-class Commando355Injector:EventHandler{
-override void WorldThingSpawned(WorldEvent e) { 
-        let CommandoAmmo = HDAmmo(e.Thing);     
-     if (CommandoAmmo){             
-  switch (CommandoAmmo.GetClassName()){
-  case 'HDRevolverAmmo': CommandoAmmo.ItemsThatUseThis.Push("HDCommando");                     break;                 
-        }
-        }
-         }     
-} 
+class Commando355Injector:EventHandler
+{
+	override void CheckReplacement(ReplaceEvent e)
+	{
+		if (!e.Replacement)
+		{
+			return;
+		}
+
+		switch (e.Replacement.GetClassName())
+		{
+			case 'SSGReplaces':
+				if (random[rumrandom]() <= 24)
+				{
+					e.Replacement = "HD_CommandoDropper";
+					e.IsFinal = true;
+				}
+				break;
+			case 'ChaingunReplaces':
+				if (random[rumrandom]() <= 14)
+				{
+					e.Replacement = "HD_CommandoDropper";
+					e.IsFinal = true;
+				}
+				break;
+		}
+	}
+
+	override void WorldThingSpawned(WorldEvent e)
+	{
+		let SweepAmmo = HDAmmo(e.Thing);
+		if (!SweepAmmo)
+		{
+			return;
+		}
+
+		switch (SweepAmmo.GetClassName())
+		{
+			case 'HDRevolverAmmo':
+				SweepAmmo.ItemsThatUseThis.Push("HDCommando");
+				break;
+		}
+	}
+}
+
+class HD_CommandoDropper:IdleDummy{
+    states{
+    spawn:
+        TNT1 A 0 nodelay{
+			A_SpawnItemEx("HDCommando355Mag25",frandom(0,5),frandom(0,5),frandom(0,5),0,0,0,0,SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDCommando355Mag25",frandom(0,5),frandom(0,5),frandom(0,5),0,0,0,0,SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDCommando355Mag25",frandom(0,5),frandom(0,5),frandom(0,5),0,0,0,0,SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDCommando",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION);
+        }stop;
+    }
+}
