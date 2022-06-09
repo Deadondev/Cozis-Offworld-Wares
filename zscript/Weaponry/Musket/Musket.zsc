@@ -873,11 +873,11 @@ class HD_MusketDropper:IdleDummy{
     states{
     spawn:
         TNT1 A 0 nodelay{
-			A_SpawnItemEx("HDLooseBall",frandom(0,12),frandom(0,12),frandom(0,12),0,0,0,0,SXF_NOCHECKPOSITION);
-			A_SpawnItemEx("HDLooseBall",frandom(0,12),frandom(0,12),frandom(0,12),0,0,0,0,SXF_NOCHECKPOSITION);
-			A_SpawnItemEx("HDLooseBall",frandom(0,12),frandom(0,12),frandom(0,12),0,0,0,0,SXF_NOCHECKPOSITION);
-			A_SpawnItemEx("HDLooseBall",frandom(0,12),frandom(0,12),frandom(0,12),0,0,0,0,SXF_NOCHECKPOSITION);
-			A_SpawnItemEx("HDLooseBall",frandom(0,12),frandom(0,12),frandom(0,12),0,0,0,0,SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDLooseBall",frandom(-12,12),frandom(-12,12),frandom(-12,12),0,0,0,0,SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDLooseBall",frandom(-12,12),frandom(-12,12),frandom(-12,12),0,0,0,0,SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDLooseBall",frandom(-12,12),frandom(-12,12),frandom(-12,12),0,0,0,0,SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDLooseBall",frandom(-12,12),frandom(-12,12),frandom(-12,12),0,0,0,0,SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDLooseBall",frandom(-12,12),frandom(-12,12),frandom(-12,12),0,0,0,0,SXF_NOCHECKPOSITION);
 			A_SpawnItemEx("HD_Musket",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION);
         }stop;
     }
