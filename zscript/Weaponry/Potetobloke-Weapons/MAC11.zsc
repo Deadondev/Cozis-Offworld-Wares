@@ -611,9 +611,9 @@ class HD_MAC11Dropper:IdleDummy{
     states{
     spawn:
         TNT1 A 0 nodelay{
-			A_SpawnItemEx("HDMac10Mag30",-3,4,0,0,0,0,0,SXF_NOCHECKPOSITION);
-			A_SpawnItemEx("HDMac10Mag30",2,0,1,0,0,0,0,SXF_NOCHECKPOSITION);
-			A_SpawnItemEx("HDMac10Mag30",-2,0,0,0,0,0,0,SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDMac10Mag30",frandom(0,5),frandom(0,5),frandom(0,5),0,0,0,0,SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDMac10Mag30",frandom(0,5),frandom(0,5),frandom(0,5),0,0,0,0,SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDMac10Mag30",frandom(0,5),frandom(0,5),frandom(0,5),0,0,0,0,SXF_NOCHECKPOSITION);
 			A_SpawnItemEx("HDMAC11",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION);
         }stop;
     }
