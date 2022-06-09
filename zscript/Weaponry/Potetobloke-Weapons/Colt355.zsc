@@ -84,13 +84,13 @@ class HDCommando:ZM66ScopeHaver{
 	override void DrawHUDStuff(HDStatusBar sb,HDWeapon hdw,HDPlayerPawn hpl){
 		if(sb.hudlevel==1){
 			int nextmagloaded=sb.GetNextLoadMag(hdmagammo(hpl.findinventory("HDCommando355Mag25")));
-			if(nextmagloaded>=30){
+			if(nextmagloaded>=25){
 				sb.drawimage("C9MAA0",(-46,-3),sb.DI_SCREEN_CENTER_BOTTOM,scale:(3,3));
 			}else if(nextmagloaded<1){
 				sb.drawimage("C9MAA0",(-46,-3),sb.DI_SCREEN_CENTER_BOTTOM,alpha:nextmagloaded?0.6:1.,scale:(3,3));
 			}else sb.drawbar(
 				"CLP3NORM","CLP3GREY",  //black box. "C9MAA0","",
-				nextmagloaded,30,
+				nextmagloaded,25,
 				(-46,-3),-1,
 				sb.SHADER_VERT,sb.DI_SCREEN_CENTER_BOTTOM
 			);
@@ -392,7 +392,7 @@ class HDCommando:ZM66ScopeHaver{
 		stop;
 	}
 	override void initializewepstats(bool idfa){
-		weaponstatus[COMMANDO_MAG]=30;
+		weaponstatus[COMMANDO_MAG]=25;
 		weaponstatus[COMMANDO_CHAMBER]=2;
 		weaponstatus[COMMANDO_ZOOM]=30;
 	}
