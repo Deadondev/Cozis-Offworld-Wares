@@ -451,11 +451,8 @@ class Trite:HDMobBase{
 		---- A 0 setstatelabel("see");
 	death:
 		#### G 5{
-			let mmm = SpiderBarrel(master);
-			if(mmm)mmm.spawnedtrites--;
 			A_Vocalize(deathsound);
 			bpushable=false;
-
 		}
 		#### H 5;
 		#### IJK 5;

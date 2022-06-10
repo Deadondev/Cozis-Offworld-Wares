@@ -29,8 +29,6 @@ Spriting & Overall Quality-work:
 
 BUGS:
 - Either fix loadout code striker missing a shell or make the item one miss one shell also.
-- Fix More trites not spawning after the current ones die
-
 Monsters:
 - Trites spawn in Nukage? idk
 - ZSEC: Striker, Carbine, ZMs, Shotguns
