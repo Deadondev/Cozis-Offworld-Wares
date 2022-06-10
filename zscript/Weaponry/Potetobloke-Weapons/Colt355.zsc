@@ -28,7 +28,7 @@ class HDCommando:ZM66ScopeHaver{
 		hdweapon.barrelsize 28,0.5,1;
 		hdweapon.refid HDLD_COMMANDO;
 		tag "Commando .355 Carbine";
-		inventory.icon ""; //genuinely, what the fuck does this even do?
+		inventory.icon "C9MPA0"; //genuinely, what the fuck does this even do? | i dunno but it fixed an issue i had [ted]
 
 		hdweapon.loadoutcodes "
 			\cufiremode - 0-2, semi/burst/auto

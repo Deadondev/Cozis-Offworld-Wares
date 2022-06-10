@@ -21,7 +21,7 @@ class HDPipeGunSG:HDWeapon{
 		weapon.bobspeed 2.5;
 		weapon.bobstyle "normal";
 		obituary "%o wasn't aware that %k's dysfunctional tube would be able to kill.";
-		inventory.pickupmessage "You got a modified version of potatobloke's pipegun!";
+		inventory.pickupmessage "You got a homemade pipegun!";
 		tag "Pipegun";
 		hdweapon.refid HDLD_PIPEGUN;
 		hdweapon.barrelsize 21,0.3,0.5;

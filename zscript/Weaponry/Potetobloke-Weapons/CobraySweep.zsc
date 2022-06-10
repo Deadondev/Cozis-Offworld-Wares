@@ -42,7 +42,7 @@ class HDStreetSweeper:HDWeapon{
 		weapon.bobrangey 0.86;
 		weapon.bobspeed 2.5;
 		weapon.bobstyle "normal";
-		obituary "%o was peppered by &k.";
+		obituary "%o was peppere2d to death by &k.";
 		inventory.pickupmessage "You got the Subterranean Striker!"; //No longer the Urban Destroyer.
 		tag "Subterranean Striker";
 		hdweapon.refid HDLD_SUBSTRIKER;
