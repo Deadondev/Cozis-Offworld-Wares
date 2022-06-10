@@ -321,6 +321,7 @@ class Trite:HDMobBase{
 		deathsound "Trite/death";activesound "Trite/active";
 		obituary "%o was bit by a trite.";
 		damagefactor "Balefire",0.1;
+		damagefactor "slime",0.1;
 		tag "Trite";
 	}
 

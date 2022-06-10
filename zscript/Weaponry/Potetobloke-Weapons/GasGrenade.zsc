@@ -256,7 +256,7 @@ class HD_PBGasEmit:HDPuff{
 					CVF_RELATIVE
 				);
 		GAS1 CDEEEFFFGGGHHH 1 {
-		A_PoisonAoE(32,30,20,0,"drowning");
+		A_PoisonAoE(32,30,20,0,"hot");
 		A_ChangeVelocity(
 					frandom(-1,1),frandom(-1,1),
 					0.15,
@@ -264,7 +264,7 @@ class HD_PBGasEmit:HDPuff{
 				);}
 	hurtloop2:
 		GAS1 FFFFFFFFGGGGGGGGHHHHHHHHIIIIIIIIJJJJJJJJ 1 
-		{A_PoisonAoE(128,12,10,0,"drowning");
+		{A_PoisonAoE(128,12,10,0,"hot");
 				A_ChangeVelocity(
 					frandom(-1.5,1.5),frandom(-1.5,1.5),
 					frandom(-1.5,1.5),
@@ -286,7 +286,7 @@ class HD_PBGasEmit2:HD_PBGasEmit{
 	}
 	states{
 	spawn:
-		GAS2 AAAAABBBBBCCCCCDDDDDEEEEEFFFFFGGGGGHHHHHIIIIIJJJJJKKKKKLLLLLMMMMMNNNNNOOOOOOPPPPPQQQQQRRRRRSSSSSTTTTT 1 A_PoisonAoE(64,1,2,0,"drowning");
+		GAS2 AAAAABBBBBCCCCCDDDDDEEEEEFFFFFGGGGGHHHHHIIIIIJJJJJKKKKKLLLLLMMMMMNNNNNOOOOOOPPPPPQQQQQRRRRRSSSSSTTTTT 1 A_PoisonAoE(64,1,2,0,"hot");
 	}
 }
 
