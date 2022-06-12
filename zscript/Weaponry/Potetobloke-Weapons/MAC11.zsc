@@ -541,7 +541,7 @@ class HDMAC10Mag20:HD9mmag15{
 		
 		scale 0.65;
 		hdmagammo.roundtype "HD45ACPAmmo";
-		hdmagammo.roundbulk ENC_45ACP_LOADED;
+		hdmagammo.roundbulk 0.55;
 		hdmagammo.maxperunit 20;
 		hdmagammo.magbulk ENC_9MAG30_EMPTY;
 		tag ".45 Magazine";
