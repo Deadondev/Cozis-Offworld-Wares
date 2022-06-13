@@ -1,23 +1,3 @@
-class OleRumEventHandler : EventHandler
-{
-	override void CheckReplacement(ReplaceEvent e)
-	{
-		if (!e.Replacement)
-		{
-			return;
-		}
-
-		switch (e.Replacement.GetClassName())
-		{
-			case 'PortableHealingItem':
-				if (random[rumrandom]() <= 10)
-				{
-					e.Replacement = "UaS_Alcohol_OleRum";
-				}
-				break;
-		}
-	}
-}
 // Generic beverage class - resealable, usually bottled, can range from medium, large, or really big.
 mixin class Uas_AlcoholMixin
 {

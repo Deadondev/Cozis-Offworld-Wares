@@ -250,3 +250,28 @@ class SpiderBarrelEventHandler : EventHandler
 		}
 	}
 }
+
+//-------------------------------------------------
+// ITEMS
+//-------------------------------------------------
+
+class OleRumEventHandler : EventHandler
+{
+	override void CheckReplacement(ReplaceEvent e)
+	{
+		if (!e.Replacement)
+		{
+			return;
+		}
+
+		switch (e.Replacement.GetClassName())
+		{
+			case 'PortableHealingItem':
+				if (random[rumrandom](0, 128) <= 10)
+				{
+					e.Replacement = "UaS_Alcohol_OleRum";
+				}
+				break;
+		}
+	}
+}
