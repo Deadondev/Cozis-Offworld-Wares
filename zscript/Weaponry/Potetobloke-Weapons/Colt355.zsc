@@ -205,7 +205,7 @@ class HDCommando:ZM66ScopeHaver{
 		#### A 1;
 		#### A 0{
 			if(invoker.weaponstatus[COMMANDO_CHAMBER]==1){
-				A_EjectCasing("HDSpent9mm",11,-frandom(79,81),frandom(7,7.5));
+				A_EjectCasing("HDSpent355",11,-frandom(79,81),frandom(7,7.5));
 				invoker.weaponstatus[COMMANDO_CHAMBER]=0;
 			}
 			if(invoker.weaponstatus[COMMANDO_MAG]>0){
@@ -216,7 +216,7 @@ class HDCommando:ZM66ScopeHaver{
 		#### A 0 A_ReFire();
 		goto ready;
 	flash:
-		#### B 0{
+		C9MF A 0{
 			let bbb=HDBulletActor.FireBullet(self,"HDB_355",speedfactor:1.1);
 			A_AlertMonsters(200);
 			//A_ZoomRecoil(1.15);
