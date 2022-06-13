@@ -576,44 +576,6 @@ class HDMAC10Mag20_Empty:IdleDummy{
 	}
 }
 
-class MacInjector:EventHandler
-{
-	override void CheckReplacement(ReplaceEvent e)
-	{
-		if (!e.Replacement)
-		{
-			return;
-		}
-
-		switch (e.Replacement.GetClassName())
-		{
-			case 'ChaingunReplaces':
-				if (random[rumrandom]() <= 24)
-				{
-					e.Replacement = "HD_MAC11Dropper";
-					e.IsFinal = true;
-				}
-				break;
-		}
-	}
-
-	override void WorldThingSpawned(WorldEvent e)
-	{
-		let MacAmmo = HDAmmo(e.Thing);
-		if (!MacAmmo)
-		{
-			return;
-		}
-
-		switch (MacAmmo.GetClassName())
-		{
-			case 'HD45ACPAmmo':
-				MacAmmo.ItemsThatUseThis.Push("HDMAC11");
-				break;
-		}
-	}
-}
-
 class HD_MAC11Dropper:IdleDummy{
     states{
     spawn:

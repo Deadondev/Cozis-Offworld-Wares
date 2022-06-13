@@ -882,25 +882,3 @@ class HD_MusketDropper:IdleDummy{
         }stop;
     }
 }
-
-class COW_MusketReplacer : EventHandler
-{
-	override void CheckReplacement(ReplaceEvent e)
-	{
-		if (!e.Replacement)
-		{
-			return;
-		}
-
-		switch (e.Replacement.GetClassName())
-		{
-			case 'RedSphere':
-				if (random[rumrandom]() <= 24)
-				{
-					e.Replacement = "HD_MusketDropper";
-					e.IsFinal = true;
-				}
-				break;
-		}
-	}
-}

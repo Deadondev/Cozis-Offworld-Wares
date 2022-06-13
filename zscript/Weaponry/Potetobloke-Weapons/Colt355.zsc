@@ -494,51 +494,6 @@ class HDCommando355Mag25_Empty:IdleDummy{
 	}
 }
 
-class Commando355Injector:EventHandler
-{
-	override void CheckReplacement(ReplaceEvent e)
-	{
-		if (!e.Replacement)
-		{
-			return;
-		}
-
-		switch (e.Replacement.GetClassName())
-		{
-			case 'SSGReplaces':
-				if (random[rumrandom]() <= 14)
-				{
-					e.Replacement = "HD_CommandoDropper";
-					e.IsFinal = true;
-				}
-				break;
-			case 'ChaingunReplaces':
-				if (random[rumrandom]() <= 20)
-				{
-					e.Replacement = "HD_CommandoDropper";
-					e.IsFinal = true;
-				}
-				break;
-		}
-	}
-
-	override void WorldThingSpawned(WorldEvent e)
-	{
-		let CommandoAmmo = HDAmmo(e.Thing);
-		if (!CommandoAmmo)
-		{
-			return;
-		}
-
-		switch (CommandoAmmo.GetClassName())
-		{
-			case 'HDRevolverAmmo':
-				CommandoAmmo.ItemsThatUseThis.Push("HDCommando");
-				break;
-		}
-	}
-}
-
 class HD_CommandoDropper:IdleDummy{
     states{
     spawn:

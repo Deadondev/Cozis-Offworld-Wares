@@ -1,36 +1,6 @@
 // ------------------------------------------------------------
 // "Oh Christ, why bring back the D3 Spiders?!"
 // ------------------------------------------------------------
-class TriteHandler : EventHandler
-{    
-    private int current_trites;
-	private int max_trites;
-	private int maxtospawn;
-
-        void init()
-    {
-        		current_trites            = current_tritescvar;
-				max_trites            = max_tritescvar;
-    }
-
-	override void WorldLoaded(WorldEvent e)
-	{
-		// always calls init.
-		init();
-		super.WorldLoaded(e);
-	}
-
-    override void WorldThingSpawned(WorldEvent e)
-    {
-		if(e.thing && e.thing is "Trite")current_trites++; // this line of code wouldn't propegate properly to all of the spawners. You'd need to give each spawner a maximum number they can spawn. 
-        let sss=SpiderBarrel(e.thing);
-        //if(sss)sss.maxtospawn = current_trites;
-		
-    }
-
-} 
-
-
 class Trite:HDMobBase{
 
 	actor latchtarget;

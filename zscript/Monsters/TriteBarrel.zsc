@@ -199,24 +199,3 @@ class SpiderBarrel:HDBarrel{
 		}
 	}
 }
-
-class SpiderBarrelEventHandler : EventHandler
-{
-	override void CheckReplacement(ReplaceEvent e)
-	{
-		if (!e.Replacement)
-		{
-			return;
-		}
-
-		switch (e.Replacement.GetClassName())
-		{
-			case 'HDBarrel':
-				if (random[spiderrandom]() <= 25)
-				{
-					e.Replacement = "SpiderBarrel";
-				}
-				break;
-		}
-	}
-}

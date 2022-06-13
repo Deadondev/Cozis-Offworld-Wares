@@ -41,3 +41,6 @@ version "4.5"
 //Trites
 #include "zscript/Monsters/Trite.zsc"
 #include "zscript/Monsters/TriteBarrel.zsc"
+
+// Event Handlers for spawning.
+#include "zscript/Event-Handlers.zs"
