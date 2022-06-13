@@ -15,7 +15,7 @@ class COW_MusketReplacer : EventHandler
 		switch (e.Replacement.GetClassName())
 		{
 			case 'RedSphere':
-				if (random[rumrandom]() <= 24)
+				if (random[MusketRandom](0, 128) <= 24)
 				{
 					e.Replacement = "HD_MusketDropper";
 					e.IsFinal = true;
@@ -38,7 +38,7 @@ class PipeGunInjector:EventHandler
 		switch (e.Replacement.GetClassName())
 		{
 			case 'ShellBoxRandom':
-				if (random[rumrandom]() <= 24)
+				if (random[PipeRandom](0, 128) <= 24)
 				{
 					e.Replacement = "HD_PipegunDropper";
 					e.IsFinal = true;
@@ -77,14 +77,14 @@ class SweepInjector:EventHandler
 		switch (e.Replacement.GetClassName())
 		{
 			case 'SSGReplaces':
-				if (random[rumrandom]() <= 24)
+				if (random[StrikerRandom]() <= 24)
 				{
 					e.Replacement = "HD_StrikerDropper";
 					e.IsFinal = true;
 				}
 				break;
 			case 'ShotgunReplaces':
-				if (random[rumrandom]() <= 14)
+				if (random[StrikerRandom](0, 128) <= 14)
 				{
 					e.Replacement = "HD_StrikerDropper";
 					e.IsFinal = true;
@@ -123,7 +123,7 @@ class Commando355Injector:EventHandler
 		switch (e.Replacement.GetClassName())
 		{
 			case 'SSGReplaces':
-				if (random[rumrandom]() <= 14)
+				if (random[CommandoRandom](0, 128) <= 14)
 				{
 					e.Replacement = "HD_CommandoDropper";
 					e.IsFinal = true;
@@ -169,7 +169,7 @@ class MacInjector:EventHandler
 		switch (e.Replacement.GetClassName())
 		{
 			case 'ChaingunReplaces':
-				if (random[rumrandom]() <= 24)
+				if (random[MacRandom](0, 128) <= 24)
 				{
 					e.Replacement = "HD_MAC11Dropper";
 					e.IsFinal = true;
