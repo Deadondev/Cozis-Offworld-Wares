@@ -16,7 +16,6 @@ TBD:
 - Fix the Commando and Mac-11's HUD Sprites
 - Fix the commando's charging Sprites
 - Fix the commando's tags
-- Increase the Mac-11's recoil
 - Tweak trite drops. - Ted.
 
 Spriting & Overall Quality-work:
@@ -35,6 +34,7 @@ Monsters:
 - Old and NewVile Compat
 
 Helmet:
+-Port Buddywatch over
 -Oxygen Meter
 -Mils System (but I'll take what I can get at this point)
 -Screen Cracking/Damage System (Obviously the helmet repairs automatically)

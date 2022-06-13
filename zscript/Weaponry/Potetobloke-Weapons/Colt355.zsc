@@ -65,9 +65,9 @@ class HDCommando:ZM66ScopeHaver{
 		case 2:
 			weaponstatus[COMMANDO_AUTO]=1;
 			break;
-		case 3:
-			weaponstatus[COMMANDO_AUTO]=2;
-			break;
+		//case 3:
+			//weaponstatus[COMMANDO_AUTO]=2;
+			//break;
 		default:
 			break;
 		}}
@@ -116,7 +116,7 @@ class HDCommando:ZM66ScopeHaver{
 		HDStatusBar sb,HDWeapon hdw,HDPlayerPawn hpl,
 		bool sightbob,vector2 bob,double fov,bool scopeview,actor hpc
 	){
-		if(weaponstatus[0]&COMMANDO_SCOPE){
+		if(weaponstatus[COMMANDO_SCOPE]==1){
 			int scaledyoffset=47;
 			ShowZMScope(hdw.weaponstatus[COMMANDO_ZOOM],hpc,sb,scaledyoffset,bob);
 		}else{
@@ -138,17 +138,17 @@ class HDCommando:ZM66ScopeHaver{
 		);
 		}
 	}
-	override void SetReflexReticle(int which){weaponstatus[SMGS_DOT]=which;}
+	override void SetReflexReticle(int which){weaponstatus[COMMANDO_SCOPE]=which;}
 	action void A_CheckScope(){
 		if(
-			invoker.weaponstatus[0]&COMMANDO_SCOPE
+			invoker.weaponstatus[COMMANDO_SCOPE]==1
 		)Player.GetPSprite(PSP_WEAPON).sprite=getspriteindex("SMSGA0"); //Later make some sprites for the scoped version, then reinstate this code [Cozi]
 		else Player.GetPSprite(PSP_WEAPON).sprite=getspriteindex("C9MPA0");
 	}
 	states{
 	select0:
 		C9MG A 0;
-		#### A 0;
+		C9MG A 0;
 		goto select0small;
 	deselect0:
 		C9MG A 0;
@@ -175,11 +175,8 @@ class HDCommando:ZM66ScopeHaver{
 			if(
 				invoker.weaponstatus[COMMANDO_CHAMBER]==2  //live round chambered
 				&&(
-					invoker.weaponstatus[COMMANDO_AUTO]==2  //full auto
-					||(
 						invoker.weaponstatus[COMMANDO_AUTO]==1  //burst
 						&&invoker.weaponstatus[COMMANDO_RATCHET]<=2
-					)
 				)
 			)setweaponstate("fire2");
 		}goto nope;
@@ -191,7 +188,7 @@ class HDCommando:ZM66ScopeHaver{
 				invoker.weaponstatus[COMMANDO_AUTO]=0;
 				return;
 			}
-			int maxmode=(canaut>0)?(canaut-1):2;
+			int maxmode=(canaut>0)?(canaut-1):1;
 			int aut=invoker.weaponstatus[COMMANDO_AUTO];
 			if(aut>=maxmode)invoker.weaponstatus[COMMANDO_AUTO]=0;
 			else if(aut<0)invoker.weaponstatus[COMMANDO_AUTO]=0;
@@ -215,7 +212,6 @@ class HDCommando:ZM66ScopeHaver{
 				invoker.weaponstatus[COMMANDO_MAG]--;
 				invoker.weaponstatus[COMMANDO_CHAMBER]=2;
 			}
-			if(invoker.weaponstatus[COMMANDO_AUTO]==2)A_SetTics(1);
 		}
 		#### A 0 A_ReFire();
 		goto ready;
@@ -385,7 +381,7 @@ class HDCommando:ZM66ScopeHaver{
 		C9MP A -1{
 			if(invoker.weaponstatus[COMMANDO_MAG]<0)frame=1;
 			if(
-				invoker.weaponstatus[0]&COMMANDO_SCOPE
+				invoker.weaponstatus[COMMANDO_SCOPE]==1
 			)invoker.sprite=getspriteindex("C9MPA0");
 		}
 		C9MP # -1;
@@ -398,15 +394,15 @@ class HDCommando:ZM66ScopeHaver{
 	}
 	override void loadoutconfigure(string input){
 		int firemode=getloadoutvar(input,"firemode",1);
-		if(firemode>=0)weaponstatus[COMMANDO_AUTO]=clamp(firemode,0,2);
+		if(firemode>=0)weaponstatus[COMMANDO_AUTO]=clamp(firemode,0,1);
 
 		int xhdot=getloadoutvar(input,"dot",3);
 		int scope=getloadoutvar(input,"scope",1);
 		if(
 			!scope
-		)weaponstatus[0]&=~COMMANDO_SCOPE;
+		)weaponstatus[COMMANDO_SCOPE]==1;
 		else{
-			weaponstatus[0]|=COMMANDO_SCOPE;
+			weaponstatus[COMMANDO_SCOPE]=0;
 		}
 
 		int zoom=getloadoutvar(input,"zoom",3);
@@ -419,7 +415,7 @@ class HDCommando:ZM66ScopeHaver{
 }
 enum commandostatus{
 	COMMANDO_JUSTUNLOAD=1,
-	COMMANDO_SCOPE=2,
+	COMMANDO_SCOPE=0,
 
 	COMMANDO_SEMIONLY=1,
 	COMMANDO_BURSTONLY=2,
