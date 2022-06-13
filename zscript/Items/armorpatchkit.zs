@@ -394,3 +394,17 @@ class HDAPK_BattlePatch : HDAPK_ArmorPatch
 			Stop;
 	}
 }
+
+class HDAPKSpawner:IdleDummy{
+    states{
+    spawn:
+        TNT1 A 0 nodelay{
+		A_SpawnItemEx("HDArmorPatchKit",1,1,flags:SXF_NOCHECKPOSITION);
+		if(random(0,2))A_SpawnItemEx("HDAPK_BattlePatch",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+		if(random(0,2)){
+			A_SpawnItemEx("HDAPK_BattlePatch",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDAPK_BattlePatch",2,2,flags:SXF_NOCHECKPOSITION);
+		}else A_SpawnItemEx("HDAPK_BattlePatch",2,2,flags:SXF_NOCHECKPOSITION);
+        }stop;
+    }
+}

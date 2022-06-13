@@ -15,10 +15,10 @@ class COW_MusketReplacer : EventHandler
 		switch (e.Replacement.GetClassName())
 		{
 			case 'RedSphere':
-				if (random[MusketRandom](0, 128) <= 24)
+				if (random[MusketRandom](0, 128) <= 14)
 				{
 					e.Replacement = "HD_MusketDropper";
-					e.IsFinal = true;
+					e.IsFinal = false;
 				}
 				break;
 		}
@@ -255,6 +255,7 @@ class SpiderBarrelEventHandler : EventHandler
 // ITEMS
 //-------------------------------------------------
 
+// Rum
 class OleRumEventHandler : EventHandler
 {
 	override void CheckReplacement(ReplaceEvent e)
@@ -272,6 +273,78 @@ class OleRumEventHandler : EventHandler
 					e.Replacement = "UaS_Alcohol_OleRum";
 				}
 				break;
+		}
+	}
+}
+
+// Armor Patch Kit
+class APKHandler : EventHandler {
+	int alreadyspawned;
+	int failspawn;
+
+	override void WorldThingSpawned(WorldEvent e) {
+		if(level.maptime > 1) { return; }
+		if(!e.Thing) { return; }
+		if(e.Thing is "Inventory" && Inventory(e.Thing).Owner) { return; }
+
+		bool spawnable = (
+			e.Thing.GetClassName() == "Lumberjack" ||
+            e.Thing.GetClassName() == "HDBackpack" ||
+			e.Thing.GetClassName() == "DeadRifleman" ||
+			e.Thing.GetClassName() == "ReallyDeadRifleman");
+
+		int chance = 5 + (5 * failspawn) - (50 * alreadyspawned);
+		chance = clamp(chance, 0, 100);
+
+		if(spawnable) {
+			if (random(0, 100) <= chance) {
+				//console.printf("ammopouch spawn chance %i, success", chance);
+				let SpawnedAPK = Actor.Spawn('HDAPKSpawner', (e.Thing.pos.x, e.Thing.pos.y, e.Thing.pos.z + 5));
+				SpawnedAPK.vel.x += frandom(-2,2);
+				SpawnedAPK.vel.y += frandom[spawnstuff](-2,2);
+				SpawnedAPK.vel.z += frandom[spawnstuff](1,2);
+				alreadyspawned++;
+			}
+			else {
+				//console.printf("ammopouch spawn chance %i, fail", chance);
+				failspawn++;
+			}
+		}
+	}
+}
+
+// Universal Reloader
+class URLHandler : EventHandler {
+	int alreadyspawned;
+	int failspawn;
+
+	override void WorldThingSpawned(WorldEvent e) {
+		if(level.maptime > 1) { return; }
+		if(!e.Thing) { return; }
+		if(e.Thing is "Inventory" && Inventory(e.Thing).Owner) { return; }
+
+		bool spawnable = (
+			e.Thing.GetClassName() == "HDBackpack" ||
+			e.Thing.GetClassName() == "DeadRifleman" ||
+			e.Thing.GetClassName() == "ReallyDeadRifleman");
+
+		int chance = 5 + (5 * failspawn) - (50 * alreadyspawned);
+		chance = clamp(chance, 0, 100);
+
+		if(spawnable) {
+			if (random(0, 100) <= chance) {
+				//console.printf("ammopouch spawn chance %i, success", chance);
+                // Change to HDUrlSpawner when it's not 12 AM - [Ted]
+				let SpawnedURL = Actor.Spawn('HDUniversalReloader', (e.Thing.pos.x, e.Thing.pos.y, e.Thing.pos.z + 5));
+				SpawnedURL.vel.x += frandom(-2,2);
+				SpawnedURL.vel.y += frandom[spawnstuff](-2,2);
+				SpawnedURL.vel.z += frandom[spawnstuff](1,2);
+				alreadyspawned++;
+			}
+			else {
+				//console.printf("ammopouch spawn chance %i, fail", chance);
+				failspawn++;
+			}
 		}
 	}
 }
