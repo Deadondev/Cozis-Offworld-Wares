@@ -319,7 +319,7 @@ class URLHandler : EventHandler {
 	int failspawn;
 
 	override void WorldThingSpawned(WorldEvent e) {
-		if(level.maptime > 1) { return; }
+//		if(level.time > 1) { return; }
 		if(!e.Thing) { return; }
 //		if(e.Thing is "Inventory" && Inventory(e.Thing).Owner) { return; }
 
