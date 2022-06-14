@@ -298,7 +298,7 @@ class APKHandler : EventHandler {
 
 		if(spawnable) {
 			if (random(0, 100) <= chance) {
-				console.printf("ammopouch spawn chance %i, success", chance);
+				//console.printf("ammopouch spawn chance %i, success", chance);
 				let SpawnedAPK = Actor.Spawn('HDAPKSpawner', (e.Thing.pos.x, e.Thing.pos.y, e.Thing.pos.z + 5));
 				SpawnedAPK.vel.x += frandom(-2,2);
 				SpawnedAPK.vel.y += frandom[spawnstuff](-2,2);
@@ -321,7 +321,7 @@ class URLHandler : EventHandler {
 	override void WorldThingSpawned(WorldEvent e) {
 		if(level.maptime > 1) { return; }
 		if(!e.Thing) { return; }
-		if(e.Thing is "Inventory" && Inventory(e.Thing).Owner) { return; }
+//		if(e.Thing is "Inventory" && Inventory(e.Thing).Owner) { return; }
 
 		bool spawnable = (
 			e.Thing.GetClassName() == "HDBackpack" ||
