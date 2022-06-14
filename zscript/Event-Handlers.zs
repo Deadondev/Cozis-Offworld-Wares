@@ -306,7 +306,7 @@ class APKHandler : EventHandler {
 				alreadyspawned++;
 			}
 			else {
-				console.printf("ammopouch spawn chance %i, fail", chance);
+				//console.printf("ammopouch spawn chance %i, fail", chance);
 				failspawn++;
 			}
 		}
@@ -333,7 +333,7 @@ class URLHandler : EventHandler {
 
 		if(spawnable) {
 			if (random(0, 100) <= chance) {
-				console.printf("ammopouch spawn chance %i, success", chance);
+				console.printf("URL spawn chance %i, success", chance);
                 // Change to HDUrlSpawner when it's not 12 AM - [Ted]
 				let SpawnedURL = Actor.Spawn('HDUniversalReloader', (e.Thing.pos.x, e.Thing.pos.y, e.Thing.pos.z + 5));
 				SpawnedURL.vel.x += frandom(-2,2);
@@ -342,7 +342,7 @@ class URLHandler : EventHandler {
 				alreadyspawned++;
 			}
 			else {
-				console.printf("ammopouch spawn chance %i, fail", chance);
+				console.printf("URL spawn chance %i, fail", chance);
 				failspawn++;
 			}
 		}
