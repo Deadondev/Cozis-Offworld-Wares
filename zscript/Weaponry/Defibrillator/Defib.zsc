@@ -2,9 +2,7 @@ const HDLD_DEFIB="dfb";
 
 class HDefib:HDCellWeapon{
 default{
-		+ambush
 		+WEAPON.MELEEWEAPON +WEAPON.NOALERT +WEAPON.NO_AUTO_SWITCH
-		+nointeraction
 		obituary "%o was... somehow killed by %k?";
 		weapon.selectionorder 100;
 		weapon.kickback 120;
@@ -21,7 +19,6 @@ default{
 	override hdweapon GetSpareWeapon(actor newowner,bool reverse,bool doselect){return GetSpareWeaponRegular(newowner,reverse,doselect);}
 	override void tick(){
 		super.tick();
-		//drainheat(TBS_HEAT,12);
 	}
 	override double gunmass(){
 		return 10+(weaponstatus[DEFIB_BATTERY]<0?0:2);
