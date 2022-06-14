@@ -74,8 +74,8 @@ class HD_LogiBag : HDBackpack {
 class LogiBag_ItemStorage : ItemStorage {
 	override int CheckConditions(Inventory item, class<Inventory> cls) {
 		bool valid = (
-			(item && (item is 'HDRel_CraftingMaterial')) ||
-			(cls  && (cls  is 'HDRel_CraftingMaterial'))
+			(item && (item is 'HDRel_CraftingMaterial' || item is 'HDAPK_ArmorPatch' || item is 'HDUniversalReloader' || item is 'AutoReloader' )) ||
+			(cls  && (cls  is 'HDRel_CraftingMaterial' || item is 'HDAPK_ArmorPatch' || item is 'HDUniversalReloader' || item is 'AutoReloader'))
 		);
 
 		if (!valid) { return IType_Invalid; }
@@ -164,7 +164,7 @@ extend class HD_LogiBag {
 	{
 		int BaseOffset = -80;
 
-		sb.DrawString(sb.pSmallFont, "\c[DarkBrown][] \c[Tan]Logistics Bag\c[DarkBrown] []", (0, BaseOffset), sb.DI_SCREEN_CENTER | sb.DI_TEXT_ALIGN_CENTER);
+		sb.DrawString(sb.pSmallFont, "\c[Cyan][] \c[Gray]Logistics Bag\c[Cyan] []", (0, BaseOffset), sb.DI_SCREEN_CENTER | sb.DI_TEXT_ALIGN_CENTER);
 		string BulkString = "Total Bulk: \cf"..int(Storage.TotalBulk).."\c-";
 		if  (weaponstatus[LGB_AMOUNT] > 1) { BulkString = BulkString.." --- Bags: \cf"..weaponstatus[LGB_AMOUNT].."\c-"; }
 		sb.DrawString(sb.pSmallFont, BulkString, (0, BaseOffset + 10), sb.DI_SCREEN_CENTER | sb.DI_TEXT_ALIGN_CENTER);
@@ -207,7 +207,7 @@ extend class HD_LogiBag {
 
 		sb.DrawString(sb.pSmallFont, SelItem.NiceName, (0, BaseOffset + 60), sb.DI_SCREEN_CENTER | sb.DI_TEXT_ALIGN_CENTER, Font.CR_FIRE);
 
-		int AmountInBackpack = SelItem.ItemClass is 'HDRel_CraftingMaterial' ? SelItem.Amounts.Size() : (SelItem.Amounts.Size() > 0 ? SelItem.Amounts[0] : 0);
+		int AmountInBackpack = SelItem.ItemClass is 'HDMagAmmo' ? SelItem.Amounts.Size() : (SelItem.Amounts.Size() > 0 ? SelItem.Amounts[0] : 0);
 		sb.DrawString(sb.pSmallFont, "In pouch:  "..sb.FormatNumber(AmountInBackpack, 1, 6), (0, BaseOffset + 70), sb.DI_SCREEN_CENTER | sb.DI_TEXT_ALIGN_CENTER, AmountInBackpack > 0 ? Font.CR_BROWN : Font.CR_DARKBROWN);
 
 		int AmountOnPerson = GetAmountOnPerson(hpl.FindInventory(SelItem.ItemClass));
