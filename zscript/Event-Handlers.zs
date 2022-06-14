@@ -289,7 +289,7 @@ class APKHandler : EventHandler {
 
 		bool spawnable = (
 			e.Thing.GetClassName() == "Lumberjack" ||
-            e.Thing.GetClassName() == "HDBackpack" ||
+            e.Thing.GetClassName() == "HDArmour" ||
 			e.Thing.GetClassName() == "DeadRifleman" ||
 			e.Thing.GetClassName() == "ReallyDeadRifleman");
 
@@ -324,7 +324,8 @@ class URLHandler : EventHandler {
 		if(e.Thing is "Inventory" && Inventory(e.Thing).Owner) { return; }
 
 		bool spawnable = (
-			e.Thing.GetClassName() == "HDBackpack" ||
+			e.Thing.GetClassName() == "HDAmBox" ||
+			e.Thing.GetClassName() == "HDAmBoxUnarmed" ||
 			e.Thing.GetClassName() == "DeadRifleman" ||
 			e.Thing.GetClassName() == "ReallyDeadRifleman");
 
@@ -333,8 +334,7 @@ class URLHandler : EventHandler {
 
 		if(spawnable) {
 			if (random(0, 100) <= chance) {
-				console.printf("URL spawn chance %i, success", chance);
-                // Change to HDUrlSpawner when it's not 12 AM - [Ted]
+				//console.printf("URL spawn chance %i, success", chance);
 				let SpawnedURL = Actor.Spawn('HDURLSpawner', (e.Thing.pos.x, e.Thing.pos.y, e.Thing.pos.z + 5));
 				SpawnedURL.vel.x += frandom(-2,2);
 				SpawnedURL.vel.y += frandom[spawnstuff](-2,2);
@@ -342,7 +342,7 @@ class URLHandler : EventHandler {
 				alreadyspawned++;
 			}
 			else {
-				console.printf("URL spawn chance %i, fail", chance);
+				//console.printf("URL spawn chance %i, fail", chance);
 				failspawn++;
 			}
 		}
