@@ -413,7 +413,7 @@ class HDAPKSpawner:IdleDummy{
 			A_SpawnItemEx("HDAPK_BattlePatch",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
 			A_SpawnItemEx("HDAPK_BattlePatch",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
 		}
-		else A_SpawnItemEx("HDAPK_GarrisonPatch",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION); // Make this our own gunsmithing pouch. [Ted]
+		else A_SpawnItemEx("HDAPK_GarrisonPatch",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
 	    } 
 		stop;
     }
