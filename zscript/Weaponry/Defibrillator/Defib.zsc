@@ -79,6 +79,12 @@ override void consolidate(){
 		}
 states
 {
+	select0:
+		DEFB A 0;
+		goto select0big;
+	deselect0:
+		DEFB A 0;
+		goto deselect0big;
 ready:
 		DEFB A 1 A_WeaponReady(WRF_ALL&~WRF_ALLOWUSER1);
 	goto readyend;
