@@ -36,14 +36,10 @@ version "4.5"
 
 // Armor-patch Kit Fork
 #include "zscript/Items/armorpatchkit.zs"
-/*
-// Gunsmithing Bag
-#include "zscript/Items/gunsmithingbag.zsc"
-#include "zscript/Items/gunsmithingbag_bulk.zsc"
-#include "zscript/Items/gunsmithingbag_hud.zsc"
-#include "zscript/Items/gunsmithingbag_itemstorage.zsc"
-#include "zscript/Items/gunsmithingbag_spawning.zsc"
-*/
+
+// Logistics Bag
+#include "zscript/Items/LogiBag.zsc"
+
 //-------------------------------------------------
 // MONSTERS
 //-------------------------------------------------
