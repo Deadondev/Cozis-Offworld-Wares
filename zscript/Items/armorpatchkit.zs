@@ -400,11 +400,21 @@ class HDAPKSpawner:IdleDummy{
     spawn:
         TNT1 A 0 nodelay{
 		A_SpawnItemEx("HDArmorPatchKit",1,1,flags:SXF_NOCHECKPOSITION);
-		if(random(0,2))A_SpawnItemEx("HDAPK_GarrisonPatch",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
-		if(random(0,2)){
+		if(random[APKRandom](0,3) == 0)
+		{
 			A_SpawnItemEx("HDAPK_GarrisonPatch",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
-			A_SpawnItemEx("HDAPK_GarrisonPatch",2,2,flags:SXF_NOCHECKPOSITION);
-		}else A_SpawnItemEx("HDAPK_BattlePatch",2,2,flags:SXF_NOCHECKPOSITION);
-        }stop;
+			A_SpawnItemEx("HDAPK_GarrisonPatch",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDAPK_GarrisonPatch",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDAPK_GarrisonPatch",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+		}
+		if(random[APKRandom](0,10) == 1)
+		{
+			A_SpawnItemEx("HDAPK_BattlePatch",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDAPK_BattlePatch",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDAPK_BattlePatch",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+		}
+		else A_SpawnItemEx("HDAPK_GarrisonPatch",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION); // Make this our own gunsmithing pouch. [Ted]
+	    } 
+		stop;
     }
 }
