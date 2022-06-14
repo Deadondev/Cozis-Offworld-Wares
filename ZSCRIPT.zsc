@@ -1,5 +1,8 @@
 version "4.5"
 
+// Event Handlers for spawning.
+#include "zscript/Event-Handlers.zs"
+
 //-------------------------------------------------
 // WEAPONS
 //-------------------------------------------------
@@ -33,7 +36,14 @@ version "4.5"
 
 // Armor-patch Kit Fork
 #include "zscript/Items/armorpatchkit.zs"
-
+/*
+// Gunsmithing Bag
+#include "zscript/Items/gunsmithingbag.zsc"
+#include "zscript/Items/gunsmithingbag_bulk.zsc"
+#include "zscript/Items/gunsmithingbag_hud.zsc"
+#include "zscript/Items/gunsmithingbag_itemstorage.zsc"
+#include "zscript/Items/gunsmithingbag_spawning.zsc"
+*/
 //-------------------------------------------------
 // MONSTERS
 //-------------------------------------------------
@@ -41,6 +51,3 @@ version "4.5"
 //Trites
 #include "zscript/Monsters/Trite.zsc"
 #include "zscript/Monsters/TriteBarrel.zsc"
-
-// Event Handlers for spawning.
-#include "zscript/Event-Handlers.zs"
