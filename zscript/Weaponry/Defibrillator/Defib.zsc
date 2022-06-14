@@ -4,6 +4,7 @@ class HDefib:HDCellWeapon{
 default{
 		+WEAPON.MELEEWEAPON +WEAPON.NOALERT +WEAPON.NO_AUTO_SWITCH
 		obituary "%o was... somehow killed by %k?";
+		inventory.pickupmessage "You got the Defib! Zap-Zap!";
 		weapon.selectionorder 100;
 		weapon.kickback 120;
 		weapon.bobstyle "Alpha";
