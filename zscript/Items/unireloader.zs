@@ -606,3 +606,120 @@ class HDUniversalReloader : HDWeapon
 			Stop;
 	}
 }
+
+class HDURLSpawner:IdleDummy{
+    states{
+    spawn:
+        TNT1 A 0 nodelay{
+		A_SpawnItemEx("HDUniversalReloader",1,1,flags:SXF_NOCHECKPOSITION);
+		if(random[URLRandom](0,10) == 0)
+		{
+			A_SpawnItemEx("HDRel_RawLead",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawLead",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawPlastic",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawPlastic",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawPowder",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+		}
+		if(random[URLRandom](0,10) == 1)
+		{
+			A_SpawnItemEx("HDRel_RawLead",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawPlastic",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawPlastic",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawPowder",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawPowder",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+		}
+		if(random[URLRandom](0,10) == 2)
+		{
+			A_SpawnItemEx("HDRel_RawBrass",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawBrass",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawPowder",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawPowder",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawPowder",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawLead",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawLead",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+		}
+		if(random[URLRandom](0,10) == 3)
+		{
+			A_SpawnItemEx("HDRel_RawPlastic",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawPlastic",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawBrass",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+		}
+		if(random[URLRandom](0,10) == 4)
+		{
+			A_SpawnItemEx("HDRel_RawLead",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawLead",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawLead",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawLead",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawPowder",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HD45ACPAmmo",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+		}
+		if(random[URLRandom](0,10) == 5)
+		{
+			A_SpawnItemEx("HD50AEBoxPickup",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+		}
+		if(random[URLRandom](0,10) == 6)
+		{
+			A_SpawnItemEx("HDSlugAmmo",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDSlugAmmo",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDSlugAmmo",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDSlugAmmo",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDSlugAmmo",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawLead",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawLead",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawLead",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawLead",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+		}
+		if(random[URLRandom](0,10) == 7)
+		{
+			A_SpawnItemEx("HDRel_RawPlastic",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawPlastic",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawPlastic",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawPlastic",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawPlastic",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawPlastic",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawPlastic",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawPlastic",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+		}
+		if(random[URLRandom](0,10) == 8)
+		{
+			A_SpawnItemEx("HDRel_RawBrass",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawBrass",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawBrass",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawBrass",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawBrass",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawBrass",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawBrass",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawBrass",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+		}
+		if(random[URLRandom](0,10) == 9)
+		{
+			A_SpawnItemEx("HDRel_RawPowder",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawPowder",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawPowder",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawPowder",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawPowder",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawPowder",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawPowder",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawPowder",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawPowder",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawPowder",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawPowder",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawPowder",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawPowder",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawPowder",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawPowder",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawPowder",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawPowder",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawPowder",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawPowder",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawPowder",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawPowder",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawPowder",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawPowder",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDRel_RawPowder",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+		}
+		else A_SpawnItemEx("HDRel_RawLead",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION); // Make this our own gunsmithing pouch. [Ted]
+	    } 
+		stop;
+    }
+}

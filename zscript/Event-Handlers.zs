@@ -319,9 +319,9 @@ class URLHandler : EventHandler {
 	int failspawn;
 
 	override void WorldThingSpawned(WorldEvent e) {
-//		if(level.time > 1) { return; }
+		if(level.time > 1) { return; }
 		if(!e.Thing) { return; }
-//		if(e.Thing is "Inventory" && Inventory(e.Thing).Owner) { return; }
+		if(e.Thing is "Inventory" && Inventory(e.Thing).Owner) { return; }
 
 		bool spawnable = (
 			e.Thing.GetClassName() == "HDBackpack" ||
@@ -335,7 +335,7 @@ class URLHandler : EventHandler {
 			if (random(0, 100) <= chance) {
 				console.printf("URL spawn chance %i, success", chance);
                 // Change to HDUrlSpawner when it's not 12 AM - [Ted]
-				let SpawnedURL = Actor.Spawn('HDUniversalReloader', (e.Thing.pos.x, e.Thing.pos.y, e.Thing.pos.z + 5));
+				let SpawnedURL = Actor.Spawn('HDURLSpawner', (e.Thing.pos.x, e.Thing.pos.y, e.Thing.pos.z + 5));
 				SpawnedURL.vel.x += frandom(-2,2);
 				SpawnedURL.vel.y += frandom[spawnstuff](-2,2);
 				SpawnedURL.vel.z += frandom[spawnstuff](1,2);
