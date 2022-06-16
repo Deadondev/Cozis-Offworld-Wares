@@ -134,10 +134,10 @@ class HDCommando:ZM66ScopeHaver{
 		HDStatusBar sb,HDWeapon hdw,HDPlayerPawn hpl,
 		bool sightbob,vector2 bob,double fov,bool scopeview,actor hpc
 	){
-		if(weaponstatus[COMMANDO_SCOPE]==1){
+		/*if(weaponstatus[COMMANDO_SCOPE]==1){
 			int scaledyoffset=47;
 			ShowZMScope(hdw.weaponstatus[COMMANDO_ZOOM],hpc,sb,scaledyoffset,bob);
-		}else{
+		}else*/{
 		int cx,cy,cw,ch;
 		[cx,cy,cw,ch]=screen.GetClipRect();
 		sb.SetClipRect(
@@ -422,9 +422,6 @@ class HDCommando:ZM66ScopeHaver{
 		else{
 			weaponstatus[COMMANDO_SCOPE]=0;
 		}
-
-		int zoom=getloadoutvar(input,"zoom",3);
-		if(zoom>=0)weaponstatus[COMMANDO_ZOOM]=clamp(zoom,16,70);
 
 		int fireswitch=getloadoutvar(input,"fireswitch",1);
 		if(fireswitch>3)weaponstatus[COMMANDO_SWITCHTYPE]=0;
