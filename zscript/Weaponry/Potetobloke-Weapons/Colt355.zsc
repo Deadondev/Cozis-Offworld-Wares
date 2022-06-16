@@ -77,11 +77,27 @@ class HDCommando:ZM66ScopeHaver{
 		ForceOneBasicAmmo("HDCommando355Mag25");
 	}
 
-	override string,double getpickupsprite(bool usespare){
+		override string,double getpickupsprite(bool usespare){
+		string spr;
+
+		int wep0=GetSpareWeaponValue(0,usespare);
+
+		if(wep0&COMMANDO_SCOPE)
+				spr="C9MP";
+			else spr="C9MP";
+
+		//set to no-mag frame
+		if(GetSpareWeaponValue(ZM66S_MAG,usespare)<0)spr=spr.."B";
+		else spr=spr.."A";
+
+		return spr.."0",1.;
+	}
+
+	/*override string,double getpickupsprite(bool usespare){
 		int wep0=GetSpareWeaponValue(0,usespare);
 		return ((wep0&COMMANDO_SCOPE)?"C9MG":"C9MG")
 			..((GetSpareWeaponValue(COMMANDO_MAG,usespare)<0)?"B":"A").."0",1.;
-	}
+	}*/
 	
 	override void DrawHUDStuff(HDStatusBar sb,HDWeapon hdw,HDPlayerPawn hpl){
 		if(sb.hudlevel==1){
