@@ -8,11 +8,11 @@ const HDLD_COMMANDO="c35";
 const HDLD_COMMANDO_MAG="35m";
 
 
-class HDCommando:ZM66ScopeHaver{
+class HDCommando:HDWeapon{
 	default{
 		//$Category "Weapons/Hideous Destructor"
 		//$Title "Commando"
-		//$Sprite "C9MPA0"
+		//$Sprite "C9MAA0"
 
 		-hdweapon.fitsinbackpack //Nah, this is .355 BITCH!
 		obituary "%o was peppered by %k's murder stream.";
@@ -28,7 +28,7 @@ class HDCommando:ZM66ScopeHaver{
 		hdweapon.barrelsize 28,0.5,1;
 		hdweapon.refid HDLD_COMMANDO;
 		tag "Commando .355 Carbine";
-		inventory.icon "C9MPA0"; //genuinely, what the fuck does this even do? | i dunno but it fixed an issue i had [ted]
+		//inventory.icon "C9MA"; //genuinely, what the fuck does this even do? | i dunno but it fixed an issue i had [ted]
 
 		hdweapon.loadoutcodes "
 			\cufiremode - 0-2, semi/burst/auto
@@ -76,11 +76,13 @@ class HDCommando:ZM66ScopeHaver{
 		owner.A_TakeInventory("HDRevolverAmmo");
 		ForceOneBasicAmmo("HDCommando355Mag25");
 	}
+
 	override string,double getpickupsprite(bool usespare){
-		int wep0=GetSpareWeaponValue(0,usespare);
-		return ((wep0&COMMANDO_SCOPE)?"C9MG":"C9MG")
+		//int wep0=GetSpareWeaponValue(0,usespare);
+		//return ((wep0&COMMANDO_SCOPE)?"C9MG":"C9MG")
 			..((GetSpareWeaponValue(COMMANDO_MAG,usespare)<0)?"B":"A").."0",1.;
 	}
+	
 	override void DrawHUDStuff(HDStatusBar sb,HDWeapon hdw,HDPlayerPawn hpl){
 		if(sb.hudlevel==1){
 			int nextmagloaded=sb.GetNextLoadMag(hdmagammo(hpl.findinventory("HDCommando355Mag25")));
