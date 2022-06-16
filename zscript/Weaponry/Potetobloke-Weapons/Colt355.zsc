@@ -109,7 +109,7 @@ class HDCommando:ZM66ScopeHaver{
 		WEPHELP_FIRESHOOT
 		..WEPHELP_RELOAD.."  Reload mag\n"
 		..WEPHELP_USE.."+"..WEPHELP_RELOAD.."  Reload chamber\n"
-		..WEPHELP_FIREMODE.."  Semi/Burst/Auto\n"
+		..WEPHELP_FIREMODE.."  Semi/Burst\n"
 		..WEPHELP_MAGMANAGER
 		..WEPHELP_UNLOADUNLOAD
 		;
