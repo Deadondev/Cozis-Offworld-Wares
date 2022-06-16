@@ -1,4 +1,4 @@
 GameInfo
 {
-	AddEventHandlers = "OleRumEventHandler", "UaS_AlcoholEventHandler", "COW_MusketReplacer", "Commando355Injector", "SweepInjector", "PipegunInjector", "MacInjector", "SpiderBarrelEventHandler", "TriteHandler", "APKHandler", "URLHandler", "HD_LogiBagSpawner"
+	AddEventHandlers = "OleRumEventHandler", "UaS_AlcoholEventHandler", "COW_MusketReplacer", "Commando355Injector", "SweepInjector", "PipegunInjector", "MacInjector", "SpiderBarrelEventHandler", "TriteHandler", "APKHandler", "URLHandler", "HD_LogiBagSpawner", "HD_DefibSpawner"
 }
