@@ -235,3 +235,28 @@ class COW_Rat_SaltedCod : UaS_Consumable
 		AddOpenText("You gag a bit as you look at the cod.");
 	}
 }
+
+class HD_RadsuitPack : UaS_Consumable
+{
+	default
+	{	
+		Inventory.PickupMessage "Picked up a radsuit package.";
+		tag "Radsuit Package";
+		Uas_Consumable.Description "A 6-pack of radsuits for industrial usage.";
+		
+		Inventory.Icon "COWCA0";
+		
+		scale 1.65;
+	}
+	override void Contents()
+	{
+		AddItem("PortableRadsuit", 6);
+	}
+	
+	states
+	{
+		Spawn:
+			COWC A -1;
+			Stop;
+	}
+}
