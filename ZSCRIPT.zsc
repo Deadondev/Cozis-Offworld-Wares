@@ -40,9 +40,6 @@ version "4.5"
 // Logistics Bag
 #include "zscript/Items/LogiBag.zsc"
 
-// RadSuit Rework
-#include "zscript/Items/radsuit.zsc"
-
 //-------------------------------------------------
 // MONSTERS
 //-------------------------------------------------
