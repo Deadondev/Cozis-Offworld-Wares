@@ -8,7 +8,7 @@ const HDLD_COMMANDO="c35";
 const HDLD_COMMANDO_MAG="35m";
 
 
-class HDCommando:HDWeapon{
+class HDCommando:ZM66ScopeHaver{
 	default{
 		//$Category "Weapons/Hideous Destructor"
 		//$Title "Commando"
@@ -78,8 +78,8 @@ class HDCommando:HDWeapon{
 	}
 
 	override string,double getpickupsprite(bool usespare){
-		//int wep0=GetSpareWeaponValue(0,usespare);
-		//return ((wep0&COMMANDO_SCOPE)?"C9MG":"C9MG")
+		int wep0=GetSpareWeaponValue(0,usespare);
+		return ((wep0&COMMANDO_SCOPE)?"C9MG":"C9MG")
 			..((GetSpareWeaponValue(COMMANDO_MAG,usespare)<0)?"B":"A").."0",1.;
 	}
 	
