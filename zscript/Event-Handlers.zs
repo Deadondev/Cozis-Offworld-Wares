@@ -324,7 +324,7 @@ class RadReplacementHandler : EventHandler
 
 		switch (e.Replacement.GetClassName())
 		{
-			case 'PortableRadsuit':
+			case 'Radsuit':
 				if (random[RadRandom](0, 1) == 1)
 				{
 					e.Replacement = "HD_RadsuitPack";
