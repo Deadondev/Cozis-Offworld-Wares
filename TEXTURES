@@ -571,4 +571,12 @@ Texture "COWCA0", 24, 24
 	Patch "TREASURE", -164, -324
 }
 
+Sprite "ARSPA0", 54, 22
+{
+	XScale 1.000
+	YScale 1.000
+	Offset 27, 22
+	Patch "patches/UaS_ArmamentsBox.png", 0, 0
+}
+
 // End of texture definitions

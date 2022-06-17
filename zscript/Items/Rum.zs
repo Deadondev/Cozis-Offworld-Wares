@@ -244,9 +244,9 @@ class HD_RadsuitPack : UaS_Consumable
 		tag "Radsuit Package";
 		Uas_Consumable.Description "A 6-pack of radsuits for industrial usage.";
 		
-		Inventory.Icon "COWCA0";
+		Inventory.Icon "ARSPA0";
 		
-		scale 1.65;
+		scale 0.65;
 	}
 	override void Contents()
 	{
@@ -256,7 +256,7 @@ class HD_RadsuitPack : UaS_Consumable
 	states
 	{
 		Spawn:
-			COWC A -1;
+			ARSP A -1;
 			Stop;
 	}
 }
