@@ -313,6 +313,27 @@ class APKHandler : EventHandler {
 	}
 }
 
+class RadReplacementHandler : EventHandler
+{
+	override void CheckReplacement(ReplaceEvent e)
+	{
+		if (!e.Replacement)
+		{
+			return;
+		}
+
+		switch (e.Replacement.GetClassName())
+		{
+			case 'PortableRadsuit':
+				if (random[RadRandom](0, 1) == 1)
+				{
+					e.Replacement = "HD_RadsuitPack";
+				}
+				break;
+		}
+	}
+}
+
 // Universal Reloader
 class URLHandler : EventHandler {
 	int alreadyspawned;
