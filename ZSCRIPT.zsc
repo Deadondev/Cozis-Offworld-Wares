@@ -28,7 +28,7 @@ version "4.5"
 //-------------------------------------------------
 
 // Rations
-#include "zscript/Items/Rum.zs"
+#include "zscript/Items/UaS_Rations.zs"
 
 // Universal Reloader Fork
 #include "zscript/Items/unireloader.zs"
