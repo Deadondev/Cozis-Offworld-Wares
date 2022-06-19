@@ -718,7 +718,7 @@ class HDURLSpawner:IdleDummy{
 			A_SpawnItemEx("HDRel_RawPowder",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
 			A_SpawnItemEx("HDRel_RawPowder",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
 		}
-		else A_SpawnItemEx("HD_LogiBag",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
+		else A_SpawnItemEx("HD_WildLogiBag",frandom(-3,3),frandom(-3,3),flags:SXF_NOCHECKPOSITION);
 	    } 
 		stop;
     }
