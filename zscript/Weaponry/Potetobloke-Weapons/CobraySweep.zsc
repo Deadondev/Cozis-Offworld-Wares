@@ -52,7 +52,7 @@ class HDStreetSweeper:HDWeapon{
 	
 		double shotpower;
 	static clearscope double getshotpower(){return frandom(0.9,1.05);}
-	
+
 			//returns the power of the load just fired
 	static double Fire(actor caller,int choke=1){
 		double spread=6.;
@@ -104,6 +104,21 @@ class HDStreetSweeper:HDWeapon{
 		return "SWPPA0";
 	}
 
+		override void postbeginplay(){
+		super.postbeginplay();
+		if(vel==(0,0,0))A_ChangeVelocity(0.0001,0,-0.1,CVF_RELATIVE);
+	if(weaponstatus[SSWP_AUTO]>0){
+		switch(weaponstatus[SSWP_SWITCHTYPE]){
+		case 1:
+			weaponstatus[SSWP_AUTO]=0;
+			break;
+		case 2:
+			weaponstatus[SSWP_AUTO]=1;
+			break;
+		default:
+			break;
+		}}}
+
 	override void DrawHUDStuff(HDStatusBar sb,HDWeapon hdw,HDPlayerPawn hpl){
 if(hd_debug)sb.drawwepnum(hpl.player.getpsprite(PSP_WEAPON).frame,int.MAX,-26,-40,true);
 		if(sb.hudlevel == 1){
@@ -113,6 +128,9 @@ if(hd_debug)sb.drawwepnum(hpl.player.getpsprite(PSP_WEAPON).frame,int.MAX,-26,-4
 				basestatusbar.DI_SCREEN_CENTER_BOTTOM
 			);
 		}
+		if(weaponstatus[SSWP_SWITCHTYPE]!=1)sb.drawwepcounter(hdw.weaponstatus[SSWP_AUTO],
+			-55,-10,"RBRSA3A7","STFULAUT" //-22,-10
+		);
 		int plf=hpl.player.getpsprite(PSP_WEAPON).frame;
 		for(int i=SSWP_CYL1;i<=SSWP_CYL12;i++){ //"DRKGRNPX"
 			string which=(hdw.weaponstatus[i]>0)?"YELOPXL":"DRKGRNPX";
@@ -367,32 +385,25 @@ if(hd_debug)sb.drawwepnum(hpl.player.getpsprite(PSP_WEAPON).frame,int.MAX,-26,-4
 		SWPG A 0 A_JumpIf(invoker.loadinggateopen,"readyopen");
 		SWPG A 1 A_WeaponReady(WRF_ALLOWRELOAD|WRF_ALLOWUSER1|WRF_ALLOWUSER2|WRF_ALLOWUSER3|WRF_ALLOWUSER4);
 		goto readyend;
+	firemode:
+		---- A 1{
+			int canaut=invoker.weaponstatus[SSWP_SWITCHTYPE];
+			if(canaut==1){
+				invoker.weaponstatus[SSWP_AUTO]=0;
+				return;
+			}
+			int maxmode=(canaut>0)?(canaut-1):1;
+			int aut=invoker.weaponstatus[SSWP_AUTO];
+			if(aut>=maxmode)invoker.weaponstatus[SSWP_AUTO]=0;
+			else if(aut<0)invoker.weaponstatus[SSWP_AUTO]=0;
+			else if(canaut>0)invoker.weaponstatus[SSWP_AUTO]=maxmode;
+			else invoker.weaponstatus[SSWP_AUTO]++;
+		}goto nope;
 	fire:
-		//SWPG A 2 {
-		//if(invoker.weaponstatus[SSWP_AUTO]==1){
-		//		setweaponstate("fire_ae");
-		//		return;
-		//	}
-		//}
 		SWPG B 1 A_RotateCylinder();
-		goto hammertime;
-	hammertime:
 		SWPG A 1 A_FireSweeper();
-		SWPG F 2;
-		//{
-		//A_Refire();
-		//A_ClearRefire();
-		//}
+		SWPG F 2 {if(invoker.weaponstatus[SSWP_AUTO]>0&&pressingfire()){setweaponstate("fire"); A_SetTics(6);};}
 		goto nope;
-	
-	fire_ae:
-		SWPG B 2;
-	hammertime_ae:
-		SWPG A 1 A_FireSweeper();
-		SWPG F 2 
-		{
-		A_ClearRefire();
-		}
 	autoeject:
 		SWPG A 3 A_RotateCylinder(true);
 		SWPG A 2 A_HitExtractor();
@@ -481,10 +492,13 @@ enum StreetSweeperStats{
 	SSWP_CYL12=11,
 
 	//odd means spent
-	SSWP_NINEMILSPENT=1,
-	SSWP_NINEMIL=2,
-	SSWP_SHELLSPENT=3,
-	SSWP_SHELL=4,
+	SSWP_NINEMILSPENT=12,
+	SSWP_NINEMIL=13,
+	SSWP_SHELLSPENT=14,
+	SSWP_SHELL=15,
+
+	SSWP_SWITCHTYPE=16,
+	SSWP_AUTO=17
 }
 
 class HD_StrikerDropper:IdleDummy{
