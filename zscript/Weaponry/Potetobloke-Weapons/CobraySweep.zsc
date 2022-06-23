@@ -55,7 +55,7 @@ class HDStreetSweeper:HDWeapon{
 
 			//returns the power of the load just fired
 	static double Fire(actor caller,int choke=1){
-		double spread=6.;
+		double spread=5.; //was 6, lets try 5?
 		double speedfactor=1.;
 		double shotpower=getshotpower();
 		spread*=shotpower;
