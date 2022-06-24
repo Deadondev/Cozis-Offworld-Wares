@@ -252,7 +252,7 @@ class Trite:HDMobBase{
 		minmissilechance 220;
 		painchance 90; pushfactor 0.2;
 
-		dropitem "TriteDrops",256,frandom(0,10);
+		dropitem "TriteDrops",256,10;
 
 
 		maxstepheight 24;maxdropoffheight 64;
