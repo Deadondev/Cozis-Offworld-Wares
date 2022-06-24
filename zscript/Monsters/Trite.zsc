@@ -188,42 +188,12 @@ class Trite:HDMobBase{
 					||latchtarget.floorz>=latchtarget.pos.z;
 				double latchjump=0.;
 
-				//fuck with the victim's pitch/angle and movement
-				/*if(latchtarget.health>0){
-					if(hdp){
-						vector2 vvv=(0,0); //frandom(-5,5),frandom(-4,6)
-						//hdp.muzzleclimb1+=vvv*latchforce;
-						//hdp.muzzleclimb2+=vvv*latchforce;
-					}else if(
-						latchtarget.bismonster
-						||(
-							latchtarget.player
-							&&latchtarget.player.bot
-						)
-					){
-						latchtarget.pitch=clamp(
-							latchtarget.pitch+frandom(-8,8)*latchforce,-90,90
-						);
-						latchtarget.angle+=frandom(-8,8)*latchforce;
-
-						//make bots and monsters thrash to try to shake it off
-						latchtarget.angle+=frandom(-20,20); //this was 20
-					}
-
-					if(onground){
-						if(latchtarget.pos.x<pos.x)latchtarget.vel.x+=0.1*latchforce;
-						else if(latchtarget.pos.x>pos.x)latchtarget.vel.x-=0.1*latchforce;
-						if(latchtarget.pos.y<pos.y)latchtarget.vel.y+=0.1*latchforce;
-						else if(latchtarget.pos.y>pos.y)latchtarget.vel.y-=0.1*latchforce;
-					}else if(latchtarget.bfloat)latchjump=-0.1*latchforce;
-				}*/
-
 				//inflict damage
 				if(!(level.time&1))switch(random(0,5)){
 				case 0:
 					latchjump=frandom(0,2)*latchforce;
 					double laa=(latchangle%90)*0.2;
-					if(hdp){
+					/*if(hdp){
 						hdp.muzzleclimb1+=(latchforce*frandom(0,laa),frandom(0,latchforce*5));
 						hdp.muzzleclimb2+=(latchforce*frandom(0,laa),frandom(0,latchforce*5));
 						hdp.muzzleclimb3+=(latchforce*frandom(0,laa),frandom(0,latchforce*5));
@@ -232,26 +202,26 @@ class Trite:HDMobBase{
 						latchtarget.pitch=clamp(
 							latchtarget.pitch+frandom(0,latchforce*15),-90,90
 						);
-					}
+					}*/
 					latchtarget.damagemobj(
-						self,self,1+int(frandom(0,8)*latchforce),"jointlock"
+						self,self,1+int(frandom(0,2)*latchforce),"jointlock"
 					);break;
 				case 1:
 					latchjump=frandom(1,3)*latchforce;
 					latchtarget.damagemobj(
-						self,self,int(frandom(0,10)*latchforce),"falling"
+						self,self,int(frandom(0,2)*latchforce),"falling"
 					);break;
 				default:
 					setorigin(pos+(frandom(-1,1),frandom(-1,1),frandom(-1,1))*2,true);
 					latchtarget.damagemobj(
-						self,self,2+int(frandom(0,8*latchforce)),"teeth"
+						self,self,2+int(frandom(0,2*latchforce)),"teeth"
 					);break;
 				}
 
 				if(
 					onground
 					&&latchjump
-				)latchtarget.vel.z+=latchjump;
+				)//latchtarget.vel.z+=latchjump;
 
 				latchheight=clamp(latchheight+frandom(-0.01,0.014),-0.2,0.9);
 			}
@@ -282,7 +252,7 @@ class Trite:HDMobBase{
 		minmissilechance 220;
 		painchance 90; pushfactor 0.2;
 
-		dropitem "TriteDrops",256,10;
+		dropitem "TriteDrops",256,frandom(0,10);
 
 
 		maxstepheight 24;maxdropoffheight 64;
