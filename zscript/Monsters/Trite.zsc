@@ -193,7 +193,7 @@ class Trite:HDMobBase{
 				case 0:
 					latchjump=frandom(0,2)*latchforce;
 					double laa=(latchangle%90)*0.2;
-					/*if(hdp){
+					if(hdp){
 						hdp.muzzleclimb1+=(latchforce*frandom(0,laa),frandom(0,latchforce*5));
 						hdp.muzzleclimb2+=(latchforce*frandom(0,laa),frandom(0,latchforce*5));
 						hdp.muzzleclimb3+=(latchforce*frandom(0,laa),frandom(0,latchforce*5));
@@ -202,19 +202,19 @@ class Trite:HDMobBase{
 						latchtarget.pitch=clamp(
 							latchtarget.pitch+frandom(0,latchforce*15),-90,90
 						);
-					}*/
+					}
 					latchtarget.damagemobj(
-						self,self,1+int(frandom(0,2)*latchforce),"jointlock"
+						self,self,1+int(frandom(0,8)*latchforce),"jointlock"
 					);break;
 				case 1:
 					latchjump=frandom(1,3)*latchforce;
 					latchtarget.damagemobj(
-						self,self,int(frandom(0,2)*latchforce),"falling"
+						self,self,int(frandom(0,8)*latchforce),"falling"
 					);break;
 				default:
 					setorigin(pos+(frandom(-1,1),frandom(-1,1),frandom(-1,1))*2,true);
 					latchtarget.damagemobj(
-						self,self,2+int(frandom(0,2*latchforce)),"teeth"
+						self,self,2+int(frandom(0,8*latchforce)),"teeth"
 					);break;
 				}
 
