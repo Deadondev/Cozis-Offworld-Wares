@@ -74,6 +74,7 @@ override void consolidate(){
 				}
 
 				PCorpse.corpsegiver.respawndelay = 0;
+				PCorpse.A_SpawnItemEx("DefibRing",-32,SXF_NOCHECKPOSITION);
 				invoker.weaponstatus[DEFIB_BATTERY]--;
 			}
 		}}
@@ -212,3 +213,155 @@ enum defibstatus{
 DEFIB_JUSTUNLOAD=2,
 DEFIB_BATTERY=1,
 };
+
+//Funny Effects! Haha!
+class DefibOrb:IdleDummy{
+ default
+ {+Missile
+ +NoGravity
+ +NoBlockmap
+ +NoInteraction
+ -Solid
+ Radius 0;
+ Height 0;
+ //RenderStyle Add;
+ renderstyle "add";
+ Alpha 0.01;
+ YScale 0.1;
+ XScale 0.1;
+}
+ States
+ {
+  Spawn:
+   LRFX AAAAA 1 Bright A_FadeIn(0.2);
+   LRFX AAAAAAAAAAAAAAAA 1 Bright A_FadeOut(0.07);
+   Stop;
+ }
+}
+
+class DefibRing:IdleDummy{
+	default{+NoBlockMap +NoGravity +NoSector +NoInteraction +NoClip -Solid +CLIENTSIDEONLY}
+        states
+        {
+        Spawn:
+           //Active:
+        	TNT1 A 0;
+        	TNT1 A 0 A_SpawnItemEx ("DefibOrb", 32, 0, 0, 0, 0, 4, 0, SXF_TRANSFERTRANSLATION | SXF_CLIENTSIDE, 0); 
+        	TNT1 A 0 A_SpawnItemEx ("DefibOrb", 32, 0, 0, 0, 0, 4, 10, SXF_TRANSFERTRANSLATION | SXF_CLIENTSIDE, 0); 
+        	TNT1 A 0 A_SpawnItemEx ("DefibOrb", 32, 0, 0, 0, 0, 4, 20, SXF_TRANSFERTRANSLATION | SXF_CLIENTSIDE, 0); 
+        	TNT1 A 0 A_SpawnItemEx ("DefibOrb", 32, 0, 0, 0, 0, 4, 30, SXF_TRANSFERTRANSLATION | SXF_CLIENTSIDE, 0); 
+        	TNT1 A 0 A_SpawnItemEx ("DefibOrb", 32, 0, 0, 0, 0, 4, 40, SXF_TRANSFERTRANSLATION | SXF_CLIENTSIDE, 0);                                 
+        	TNT1 A 0 A_SpawnItemEx ("DefibOrb", 32, 0, 0, 0, 0, 4, 50, SXF_TRANSFERTRANSLATION | SXF_CLIENTSIDE, 0);         
+            TNT1 A 0 A_SpawnItemEx ("DefibOrb", 32, 0, 0, 0, 0, 4, 60, SXF_TRANSFERTRANSLATION | SXF_CLIENTSIDE, 0); 
+          	TNT1 A 0 A_SpawnItemEx ("DefibOrb", 32, 0, 0, 0, 0, 4, 70, SXF_TRANSFERTRANSLATION | SXF_CLIENTSIDE, 0); 
+          	TNT1 A 0 A_SpawnItemEx ("DefibOrb", 32, 0, 0, 0, 0, 4, 80, SXF_TRANSFERTRANSLATION | SXF_CLIENTSIDE, 0); 
+          	TNT1 A 0 A_SpawnItemEx ("DefibOrb", 32, 0, 0, 0, 0, 4, 90, SXF_TRANSFERTRANSLATION | SXF_CLIENTSIDE, 0); 
+          	TNT1 A 0 A_SpawnItemEx ("DefibOrb", 32, 0, 0, 0, 0, 4,100, SXF_TRANSFERTRANSLATION | SXF_CLIENTSIDE, 0); 
+        	TNT1 A 0 A_SpawnItemEx ("DefibOrb", 32, 0, 0, 0, 0, 4,110, SXF_TRANSFERTRANSLATION | SXF_CLIENTSIDE, 0); 
+        	TNT1 A 0 A_SpawnItemEx ("DefibOrb", 32, 0, 0, 0, 0, 4,120, SXF_TRANSFERTRANSLATION | SXF_CLIENTSIDE, 0); 
+        	TNT1 A 0 A_SpawnItemEx ("DefibOrb", 32, 0, 0, 0, 0, 4,130, SXF_TRANSFERTRANSLATION | SXF_CLIENTSIDE, 0); 
+        	TNT1 A 0 A_SpawnItemEx ("DefibOrb", 32, 0, 0, 0, 0, 4,140, SXF_TRANSFERTRANSLATION | SXF_CLIENTSIDE, 0);                                 
+        	TNT1 A 0 A_SpawnItemEx ("DefibOrb", 32, 0, 0, 0, 0, 4,150, SXF_TRANSFERTRANSLATION | SXF_CLIENTSIDE, 0);         
+            TNT1 A 0 A_SpawnItemEx ("DefibOrb", 32, 0, 0, 0, 0, 4,160, SXF_TRANSFERTRANSLATION | SXF_CLIENTSIDE, 0); 
+          	TNT1 A 0 A_SpawnItemEx ("DefibOrb", 32, 0, 0, 0, 0, 4,170, SXF_TRANSFERTRANSLATION | SXF_CLIENTSIDE, 0); 
+          	TNT1 A 0 A_SpawnItemEx ("DefibOrb", 32, 0, 0, 0, 0, 4,180, SXF_TRANSFERTRANSLATION | SXF_CLIENTSIDE, 0); 
+          	TNT1 A 0 A_SpawnItemEx ("DefibOrb", 32, 0, 0, 0, 0, 4,190, SXF_TRANSFERTRANSLATION | SXF_CLIENTSIDE, 0);                                         
+			TNT1 A 0 A_SpawnItemEx ("DefibOrb", 32, 0, 0, 0, 0, 4,200, SXF_TRANSFERTRANSLATION | SXF_CLIENTSIDE, 0);           
+			TNT1 A 0 A_SpawnItemEx ("DefibOrb", 32, 0, 0, 0, 0, 4,210, SXF_TRANSFERTRANSLATION | SXF_CLIENTSIDE, 0);                     
+            TNT1 A 0 A_SpawnItemEx ("DefibOrb", 32, 0, 0, 0, 0, 4,220, SXF_TRANSFERTRANSLATION | SXF_CLIENTSIDE, 0);                     
+            TNT1 A 0 A_SpawnItemEx ("DefibOrb", 32, 0, 0, 0, 0, 4,230, SXF_TRANSFERTRANSLATION | SXF_CLIENTSIDE, 0);
+            TNT1 A 0 A_SpawnItemEx ("DefibOrb", 32, 0, 0, 0, 0, 4,240, SXF_TRANSFERTRANSLATION | SXF_CLIENTSIDE, 0);
+            TNT1 A 0 A_SpawnItemEx ("DefibOrb", 32, 0, 0, 0, 0, 4,250, SXF_TRANSFERTRANSLATION | SXF_CLIENTSIDE, 0);                              
+            TNT1 A 0 A_SpawnItemEx ("DefibOrb", 32, 0, 0, 0, 0, 4,260, SXF_TRANSFERTRANSLATION | SXF_CLIENTSIDE, 0);
+            TNT1 A 0 A_SpawnItemEx ("DefibOrb", 32, 0, 0, 0, 0, 4,270, SXF_TRANSFERTRANSLATION | SXF_CLIENTSIDE, 0);
+            TNT1 A 0 A_SpawnItemEx ("DefibOrb", 32, 0, 0, 0, 0, 4,280, SXF_TRANSFERTRANSLATION | SXF_CLIENTSIDE, 0);
+            TNT1 A 0 A_SpawnItemEx ("DefibOrb", 32, 0, 0, 0, 0, 4,290, SXF_TRANSFERTRANSLATION | SXF_CLIENTSIDE, 0);
+            TNT1 A 0 A_SpawnItemEx ("DefibOrb", 32, 0, 0, 0, 0, 4,300, SXF_TRANSFERTRANSLATION | SXF_CLIENTSIDE, 0);                
+            TNT1 A 0 A_SpawnItemEx ("DefibOrb", 32, 0, 0, 0, 0, 4,310, SXF_TRANSFERTRANSLATION | SXF_CLIENTSIDE, 0);
+            TNT1 A 0 A_SpawnItemEx ("DefibOrb", 32, 0, 0, 0, 0, 4,320, SXF_TRANSFERTRANSLATION | SXF_CLIENTSIDE, 0);
+            TNT1 A 0 A_SpawnItemEx ("DefibOrb", 32, 0, 0, 0, 0, 4,330, SXF_TRANSFERTRANSLATION | SXF_CLIENTSIDE, 0);
+            TNT1 A 0 A_SpawnItemEx ("DefibOrb", 32, 0, 0, 0, 0, 4,340, SXF_TRANSFERTRANSLATION | SXF_CLIENTSIDE, 0);               
+            TNT1 A 4 A_SpawnItemEx ("DefibOrb", 32, 0, 0, 0, 0, 4,350, SXF_TRANSFERTRANSLATION | SXF_CLIENTSIDE, 0);               
+        	Stop;
+        }     
+        
+}
+
+class LingeringDefibThunder:IdleDummy{
+	int startingstamina;
+	default{
+		stamina 16;
+	}
+	override void postbeginplay(){
+		super.postbeginplay();
+		startingstamina=stamina;
+	}
+	void A_Zap(){
+		if(stamina<1){destroy();return;}
+		stamina-=5;
+		blockthingsiterator zit=blockthingsiterator.create(self,96+(stamina>>2));
+		int icount=0;
+		bool haszapped=false;
+		while(zit.next()){
+			actor zt=zit.thing;
+			if(
+				!zt
+				||(!zt.bshootable&&!zt.bsolid)
+				||abs(zt.pos.z-pos.z)>96
+				||zt.floorz+(stamina>>2)<zt.pos.z
+				||random(0,3)
+				||!checksight(zt)
+			)continue;
+			haszapped=true;
+			int zappower=Zap(zt,self,target,stamina);
+			stamina-=max(2,zappower>>3);
+		}
+		if(!haszapped){
+			double oldrad=radius;
+			a_setsize(stamina,height);
+			Zap(self,self,target,stamina,true);
+			a_setsize(oldrad,height);
+		}
+		A_SetTics(max(1,min(random(4,24),int(sqrt(startingstamina-stamina)))));
+	}
+	static int Zap(actor victim,actor inflictor,actor source,int baseamount,bool nodmg=false){
+		//create arc
+		double ztr=victim.radius;
+		vector3 nodes[4];
+		int len=min(35,baseamount);
+		nodes[0]=victim.pos+(frandom(-ztr,ztr),frandom(-ztr,ztr),frandom(0,victim.height));
+		nodes[1]=nodes[0]+(frandom(-len,len),frandom(-len,len),frandom(-len,len));
+		nodes[2]=nodes[1]+(frandom(-len,len),frandom(-len,len),frandom(-(len>>1),len));
+		nodes[3]=nodes[2]+(frandom(-len,len),frandom(-len,len),frandom(-len*2/3,(len>>1)));
+		for(int i=1;i<4;i++){
+			vector3 pastnode=nodes[i-1];
+			vector3 particlepos=nodes[i]-pastnode;
+			int iterations=int(particlepos.length());
+			vector3 particlemove=particlepos/iterations;
+			particlepos=pastnode-victim.pos;
+			for(int i=0;i<iterations;i++){
+				victim.A_SpawnParticle("white",
+					SPF_RELATIVE|SPF_FULLBRIGHT,(len>>1),frandom(1,7),0,
+					particlepos.x,particlepos.y,particlepos.z,
+					frandom(-0.1,0.1),frandom(-0.1,0.1),frandom(0.1,0.2),
+					frandom(-0.1,0.1),frandom(-0.1,0.1),-0.05
+				);
+				particlepos+=particlemove+(frandom(-1,1),frandom(-1,1),frandom(-1,1));
+			}
+		}
+
+		int zappower=random(baseamount>>2,baseamount);
+		victim.A_StartSound("weapons/plasidle",CHAN_AUTO,volume:frandom(0.2,0.6));
+		victim.A_StartSound("misc/arccrackle",CHAN_AUTO);
+		victim.A_StartSound("weapons/plascrack",CHAN_AUTO,volume:frandom(0.2,0.6));
+		actor bsfl=spawn("BeamSpotFlashLight",victim.pos,ALLOW_REPLACE);
+		bsfl.target=victim;
+
+		return zappower;
+	}
+	states{
+	spawn:
+		TNT1 A 1 A_Zap();
+		wait;
+	}
+}
