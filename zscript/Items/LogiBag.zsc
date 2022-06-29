@@ -6,7 +6,7 @@ const UAS_HDLD_LOGIBAG = "LGB";
 class HD_LogiBag : HDBackpack {
 	default {
 		tag "Logistics Bag";
-		HDBackpack.MaxCapacity 200;
+		HDBackpack.MaxCapacity 350;
 		Inventory.Icon "UGSPA0";
 		Inventory.PickupMessage "Picked up a logistics bag!";
 		scale 0.6;
@@ -74,8 +74,8 @@ class HD_LogiBag : HDBackpack {
 class LogiBag_ItemStorage : ItemStorage {
 	override int CheckConditions(Inventory item, class<Inventory> cls) {
 		bool valid = (
-			(item && (item is 'HDRel_CraftingMaterial' || item is 'HDAPK_ArmorPatch' || item is 'HDUniversalReloader' || item is 'AutoReloader' )) ||
-			(cls  && (cls  is 'HDRel_CraftingMaterial' || item is 'HDAPK_ArmorPatch' || item is 'HDUniversalReloader' || item is 'AutoReloader'))
+			(item && (item is 'HDRel_CraftingMaterial' || item is 'HDAPK_ArmorPatch' || item is 'HDUniversalReloader' || item is 'AutoReloader' || item is 'HDArmorPatchKit')) ||
+			(cls  && (cls  is 'HDRel_CraftingMaterial' || item is 'HDAPK_ArmorPatch' || item is 'HDUniversalReloader' || item is 'AutoReloader' || item is 'HDArmorPatchKit'))
 		);
 
 		if (!valid) { return IType_Invalid; }
