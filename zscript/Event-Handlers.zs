@@ -406,6 +406,43 @@ class HD_LogiBagSpawner : EventHandler {
 	}
 }
 
+// Medical Bags
+class HD_MediBagSpawner : EventHandler {
+	int alreadyspawned;
+	int failspawn;
+
+	override void WorldThingSpawned(WorldEvent e) {
+		if(level.maptime > 1) { return; }
+		if(!e.Thing) { return; }
+		if(e.Thing is "Inventory" && Inventory(e.Thing).Owner) { return; }
+
+		bool spawnable = (
+			e.Thing.GetClassName() == "PortableHealingItem" ||
+			e.Thing.GetClassName() == "DeadRifleman" ||
+			e.Thing.GetClassName() == "ReallyDeadRifleman");
+
+		int chance = 5 + (5 * failspawn) - (50 * alreadyspawned);
+		chance = clamp(chance, 0, 100);
+
+		if(spawnable) {
+			if (random(0, 100) <= chance) {
+				//console.printf("logi bag spawn chance %i, success", chance);
+				let SpawnedPouch = Actor.Spawn('HD_WildMediBag', (e.Thing.pos.x, e.Thing.pos.y, e.Thing.pos.z + 5));
+				SpawnedPouch.vel.x += frandom(-2,2);
+				SpawnedPouch.vel.y += frandom[spawnstuff](-2,2);
+				SpawnedPouch.vel.z += frandom[spawnstuff](1,2);
+				alreadyspawned++;
+				if (e.Thing.GetClassName() == "PortableHealingItem") { e.Thing.destroy(); }
+			}
+			else {
+				//console.printf("logi bag spawn chance %i, fail", chance);
+				failspawn++;
+			}
+		}
+	}
+}
+
+// Defib
 class HD_DefibSpawner : EventHandler {
 	int alreadyspawned;
 	int failspawn;
@@ -431,7 +468,7 @@ class HD_DefibSpawner : EventHandler {
 				SpawnedPouch.vel.y += frandom[spawnstuff](-2,2);
 				SpawnedPouch.vel.z += frandom[spawnstuff](1,2);
 				alreadyspawned++;
-				if (e.Thing.GetClassName() == "HDAmBox") { e.Thing.destroy(); }
+				if (e.Thing.GetClassName() == "PortableHealingItem") { e.Thing.destroy(); }
 			}
 			else {
 				//console.printf("defib spawn chance %i, fail", chance);

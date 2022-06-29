@@ -1,0 +1,217 @@
+const UAS_HDLD_MEDIBAG = "MDB";
+
+//==================================================
+// Base Definition
+//==================================================
+class HD_MediBag : HDBackpack {
+	default {
+		tag "Medical Bag";
+		HDBackpack.MaxCapacity 350;
+		Inventory.Icon "MBPKA0";
+		Inventory.PickupMessage "Picked up a Medical Bag!";
+		scale 0.6;
+		hdweapon.wornlayer 0;
+		hdweapon.refid UAS_HDLD_MEDIBAG;
+	}
+
+	override string, double GetPickupSprite() { return "MBPKA0", 1.0; }
+
+	override void BeginPlay() {
+		super.BeginPlay();
+		Storage = new('MediBag_ItemStorage');
+		weaponstatus[MDB_AMOUNT] = max(weaponstatus[MDB_AMOUNT], 1);
+		UpdateCapacity();
+	}
+
+	override void PostBeginPlay() {
+		super.PostBeginPlay();
+		weaponstatus[MDB_AMOUNT] = max(weaponstatus[MDB_AMOUNT], 1);
+		UpdateCapacity();
+	}
+
+	// Thanks Accensus for figuring out multiple pouches in loadout codes!
+	override void LoadoutConfigure(string input) {
+		int amt = input.ToInt();
+		if (amt > 0)
+		{
+			weaponstatus[MDB_AMOUNT] = amt;
+			UpdateCapacity();
+		}
+		super.LoadoutConfigure(input);
+	}
+
+	override bool IsBeingWorn() { return false; }
+
+	States {
+		Spawn:
+			UGSP ABC -1 NoDelay
+			{
+				if (invoker.Storage.TotalBulk ~== 0)
+				{
+					frame = 1;
+				}
+				else if (target)
+				{
+					translation = target.translation;
+					frame = 2;
+				}
+				invoker.bNO_AUTO_SWITCH = false;
+			}
+			Stop;
+		User3:
+			#### # 0 A_MagManager("");
+			goto Ready;
+	}
+
+	enum MediBagSlots {
+		MDB_AMOUNT
+	}
+}
+
+//==================================================
+// Logi Bag Item Storage
+//==================================================
+class MediBag_ItemStorage : ItemStorage {
+	override int CheckConditions(Inventory item, class<Inventory> cls) {
+		bool valid = (
+			(item && (item is 'UaS_2FCartridge' || item is 'PortableStimpack' || item is 'PortableBerserkPack' || item is 'BluePotion' || item is 'SecondBlood'|| item is 'HDMedikitter'|| item is 'PortableMedikit'|| item is 'HDefib')) ||
+			(cls  && (cls  is 'UaS_2FCartridge' || item is 'PortableStimpack' || item is 'PortableBerserkPack' || item is 'BluePotion' || item is 'SecondBlood'|| item is 'HDMedikitter'|| item is 'PortableMedikit'|| item is 'HDefib'))
+		);
+
+		if (!valid) { return IType_Invalid; }
+		return super.CheckConditions(item,cls);
+	}
+
+	override int GetOperationSpeed(class<Inventory> item, int operation) {
+		switch (clamp(operation, 0, 2)) {
+			case 0: return 3; break;	//extract
+			case 1: return 1; break;	//pocket
+			case 2: return 1; break;	//insert
+		}
+		return 10;
+	}
+}
+
+class HD_WildMediBag : IdleDummy {
+	override void postbeginplay() {
+		super.postbeginplay();
+		let SpawnedPouch=HD_MediBag(spawn("HD_MediBag",pos,ALLOW_REPLACE));
+		SpawnedPouch.vel = vel;
+		SpawnedPouch.RandomContents();
+		self.destroy();
+	}
+}
+
+//==================================================
+// Bulk and Multiple Pouches
+//==================================================
+extend class HD_MediBag {
+	override double WeaponBulk() {
+		int calcamount = min(max(weaponstatus[MDB_AMOUNT], 1), 5);
+		double reductionfactor = 0.45 + min(0.05 * calcamount, 0.5);
+		double basebulk = 20 * max(weaponstatus[MDB_AMOUNT], 1);
+		return max((Storage ? Storage.TotalBulk * reductionfactor : 0), basebulk);
+	}
+
+	override void UpdateCapacity() {
+		MaxCapacity = default.MaxCapacity / max(hd_encumbrance, 0.01);
+		Storage.MaxBulk = MaxCapacity * max(weaponstatus[MDB_AMOUNT], 1);
+	}
+
+	override void actualpickup(actor other,bool silent) {
+		HD_MediBag HeldPouch=HD_MediBag(other.findinventory("HD_MediBag"));
+		if (HeldPouch) {
+			HeldPouch.weaponstatus[MDB_AMOUNT]++;
+			HeldPouch.UpdateCapacity();
+			for (int i = 0; i < Storage.Items.Size(); i++) {
+				StorageItem MoveItem = Storage.Items[i];
+				int AmountToMove = MoveItem.Amounts.Size() > 0 ? MoveItem.Amounts[0] : 0;
+				HeldPouch.Storage.AddAmount(MoveItem.ItemClass, AmountToMove);
+			}
+			self.destroy();
+			return;
+		}
+		super.actualpickup(other, silent);
+	}
+
+	override inventory CreateTossable(int amt) {
+		bool DoSplit = (weaponstatus[MDB_AMOUNT] > 1);
+		amount = weaponstatus[MDB_AMOUNT]; // Hack to satisfy CreateTossable expectations
+		HD_MediBag DroppedPouch = HD_MediBag(super.CreateTossable(amt));
+		DroppedPouch.weaponstatus[MDB_AMOUNT] = 1;
+		DroppedPouch.UpdateCapacity();
+		if (DoSplit) {
+			weaponstatus[MDB_AMOUNT]--;
+			StorageItem SelItem = Storage.GetSelectedItem();
+			if (!SelItem || Storage.Items.Size() <= 0) { return DroppedPouch;}
+			int AmountInPouch = SelItem.Amounts.Size() > 0 ? SelItem.Amounts[0] : 0;
+			double UnitBulk = HDPickup(getdefaultbytype(SelItem.ItemClass)).bulk * hdmath.getencumbrancemult();
+			UnitBulk = max(UnitBulk, 0.01);
+			int AmountToMove = int((DroppedPouch.Storage.MaxBulk - DroppedPouch.Storage.TotalBulk) / UnitBulk);
+			AmountToMove = min(AmountToMove, AmountInPouch);
+			DroppedPouch.Storage.AddAmount(SelItem.ItemClass, AmountToMove);
+			Storage.RemoveItem(SelItem, null, null, AmountToMove);
+		}
+		return DroppedPouch;
+	}
+}
+
+//============================================
+// HUD stuff, mostly copypasta from HDBackpack
+//============================================
+extend class HD_MediBag {
+	override void DrawHUDStuff(HDStatusBar sb, HDWeapon hdw, HDPlayerPawn hpl)
+	{
+		int BaseOffset = -80;
+
+		sb.DrawString(sb.pSmallFont, "\c[Red][] \c[Green]Medical Bag\c[Red] []", (0, BaseOffset), sb.DI_SCREEN_CENTER | sb.DI_TEXT_ALIGN_CENTER);
+		string BulkString = "Total Bulk: \cf"..int(Storage.TotalBulk).."\c-";
+		if  (weaponstatus[MDB_AMOUNT] > 1) { BulkString = BulkString.." --- Bags: \cf"..weaponstatus[MDB_AMOUNT].."\c-"; }
+		sb.DrawString(sb.pSmallFont, BulkString, (0, BaseOffset + 10), sb.DI_SCREEN_CENTER | sb.DI_TEXT_ALIGN_CENTER);
+
+		int ItemCount = Storage.Items.Size();
+
+		if (ItemCount == 0)
+		{
+			sb.DrawString(sb.pSmallFont, "No items found.", (0, BaseOffset + 30), sb.DI_SCREEN_CENTER | sb.DI_TEXT_ALIGN_CENTER, Font.CR_DARKGRAY);
+			return;
+		}
+
+		StorageItem SelItem = Storage.GetSelectedItem();
+		if (!SelItem)
+		{
+			return;
+		}
+
+		for (int i = 0; i < (ItemCount > 1 ? 5 : 1); ++i)
+		{
+			int RealIndex = (Storage.SelItemIndex + (i - 2)) % ItemCount;
+			if (RealIndex < 0)
+			{
+				RealIndex = ItemCount - abs(RealIndex);
+			}
+
+			vector2 Offset = ItemCount > 1 ? (-100, 8) : (0, 0);
+			switch (i)
+			{
+				case 1: Offset = (-50, 4);  break;
+				case 2: Offset = (0, 0); break;
+				case 3: Offset = (50, 4); break;
+				case 4: Offset = (100, 8); break;
+			}
+
+			StorageItem CurItem = Storage.Items[RealIndex];
+			bool CenterItem = Offset ~== (0, 0);
+			sb.DrawImage(CurItem.Icons[0], (Offset.x, BaseOffset + 40 + Offset.y), sb.DI_SCREEN_CENTER | sb.DI_ITEM_CENTER, CenterItem && !CurItem.HaveNone() ? 1.0 : 0.6, CenterItem ? (50, 30) : (30, 20), CenterItem ? (4.0, 4.0) : (3.0, 3.0));
+		}
+
+		sb.DrawString(sb.pSmallFont, SelItem.NiceName, (0, BaseOffset + 60), sb.DI_SCREEN_CENTER | sb.DI_TEXT_ALIGN_CENTER, Font.CR_FIRE);
+
+		int AmountInBackpack = SelItem.ItemClass is 'HDMagAmmo' ? SelItem.Amounts.Size() : (SelItem.Amounts.Size() > 0 ? SelItem.Amounts[0] : 0);
+		sb.DrawString(sb.pSmallFont, "In pouch:  "..sb.FormatNumber(AmountInBackpack, 1, 6), (0, BaseOffset + 70), sb.DI_SCREEN_CENTER | sb.DI_TEXT_ALIGN_CENTER, AmountInBackpack > 0 ? Font.CR_BROWN : Font.CR_DARKBROWN);
+
+		int AmountOnPerson = GetAmountOnPerson(hpl.FindInventory(SelItem.ItemClass));
+		sb.DrawString(sb.pSmallFont, "On person:  "..sb.FormatNumber(AmountOnPerson, 1, 6), (0, BaseOffset + 78), sb.DI_SCREEN_CENTER | sb.DI_TEXT_ALIGN_CENTER, AmountOnPerson > 0 ?  Font.CR_WHITE : Font.CR_DARKGRAY);
+
+	}
+}
