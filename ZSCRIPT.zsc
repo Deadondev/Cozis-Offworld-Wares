@@ -40,6 +40,9 @@ version "4.5"
 // Logistics Bag
 #include "zscript/Items/LogiBag.zsc"
 
+// Medical Bag
+#include "zscript/Items/MediBag.zsc"
+
 //-------------------------------------------------
 // MONSTERS
 //-------------------------------------------------
