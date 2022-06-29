@@ -1,3 +1,9 @@
+// Loadout Codes.
+const HD_URLBRASS="brs";
+const HD_URLPOWDER="pdr";
+const HD_URLPLASTIC="pst";
+const HD_URLLEAD="led";
+
 class HDRel_CraftingMaterial : HDAmmo abstract
 {
 	enum PType
@@ -82,6 +88,7 @@ class HDRel_RawBrass : HDRel_CasingMaterial
 	Default
 	{
 		Tag "Brass";
+		hdpickup.refid HD_URLBRASS;
 		Inventory.Icon "BRMTA0";
 		Inventory.PickupMessage "Picked up some brass materials.";
 		HDRel_CraftingMaterial.PileMessage "Picked up a ball of brass.";
@@ -102,6 +109,7 @@ class HDRel_RawPlastic : HDRel_CasingMaterial
 	Default
 	{
 		Tag "Plastic";
+		hdpickup.refid HD_URLPLASTIC;
 		Inventory.Icon "PLTCA0";
 		Inventory.PickupMessage "Picked up some plastic materials.";
 		HDRel_CraftingMaterial.PileMessage "Picked up a pile of plastic.";
@@ -123,6 +131,7 @@ class HDRel_RawLead : HDRel_ProjectileMaterial
 	Default
 	{
 		Tag "Lead";
+		hdpickup.refid HD_URLLEAD;
 		Inventory.Icon "LEADA0";
 		Inventory.PickupMessage "Picked up some lead materials.";
 		HDRel_CraftingMaterial.PileMessage "Picked up a ball of lead.";
@@ -144,6 +153,7 @@ class HDRel_RawPowder : HDRel_PowderMaterial
 	Default
 	{
 		Tag "Powder";
+		hdpickup.refid HD_URLPOWDER;
 		Inventory.Icon "PWDRA0";
 		Inventory.PickupMessage "Picked up some powder.";
 		HDRel_CraftingMaterial.PileMessage "Picked up a pile of powder.";
