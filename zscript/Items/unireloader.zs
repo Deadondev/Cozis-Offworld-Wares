@@ -723,3 +723,77 @@ class HDURLSpawner:IdleDummy{
 		stop;
     }
 }
+
+// Loadout Codes.
+const HD_URLBRASS="brs";
+const HD_URLPOWDER="pdr";
+const HD_URLPLASTIC="pst";
+const HD_URLLEAD="led";
+
+// Raw Brass
+class HD_UrlBrassGiver:HDPickup{
+	default{
+		-hdpickup.fitsinbackpack
+		hdpickup.refid HD_URLBRASS;
+		tag "Loose Brass";
+	}
+	states{
+		spawn:
+			TNT1 A 0; stop;
+		pickup:
+			TNT1 A 0{
+				A_GiveInventory("HDRel_RawBrass", invoker.amount);
+			}fail;
+	}
+}
+
+// Raw Powder
+class HD_UrlPowderGiver:HDPickup{
+	default{
+		-hdpickup.fitsinbackpack
+		hdpickup.refid HD_URLPOWDER;
+		tag "Loose Powder";
+	}
+	states{
+		spawn:
+			TNT1 A 0; stop;
+		pickup:
+			TNT1 A 0{
+				A_GiveInventory("HDRel_RawPowder", invoker.amount);
+			}fail;
+	}
+}
+
+// Raw Plastic
+class HD_UrlPlasticGiver:HDPickup{
+	default{
+		-hdpickup.fitsinbackpack
+		hdpickup.refid HD_URLPLASTIC;
+		tag "Loose Plastic";
+	}
+	states{
+		spawn:
+			TNT1 A 0; stop;
+		pickup:
+			TNT1 A 0{
+				A_GiveInventory("HDRel_RawPlastic", invoker.amount);
+			}fail;
+	}
+}
+
+// Raw Lead
+class HD_UrlLeadGiver:HDPickup{
+	default{
+		-hdpickup.fitsinbackpack
+		hdpickup.refid HD_URLLEAD;
+		tag "Loose Lead";
+	}
+	states{
+		spawn:
+			TNT1 A 0; stop;
+		pickup:
+			TNT1 A 0{
+				A_GiveInventory("HDRel_RawLead", invoker.amount);
+			}fail;
+	}
+}
