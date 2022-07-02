@@ -44,7 +44,7 @@ class HD_MediBag : HDBackpack {
 
 	States {
 		Spawn:
-			UGSP ABC -1 NoDelay
+			MBPK ABC -1 NoDelay
 			{
 				if (invoker.Storage.TotalBulk ~== 0)
 				{
