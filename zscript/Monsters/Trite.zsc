@@ -243,7 +243,7 @@ class Trite:HDMobBase{
 		+hdmobbase.climbpastdropoff
 		health 25;radius 12; //bab health is 90 so yea...
 		height 32;deathheight 0;
-		scale 0.6;
+		scale 0.8; //was 0.6 but we need to buff so
 		speed 18; //babs are 12
 		mass 70;
 		meleerange 40;
@@ -353,6 +353,7 @@ class Trite:HDMobBase{
 
 	missile:
 		#### ABCD 2{
+			//A_JumpIf(frandom(1,2) >= 1, "melee")
 			A_FaceTarget(16,16);
 			bnodropoff=false;
 			A_Changevelocity(1,0,0,CVF_RELATIVE);

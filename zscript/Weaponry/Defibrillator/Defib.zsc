@@ -69,7 +69,7 @@ override void consolidate(){
 			{
 				if (!HasPlayedSound)
 				{
-					//PlayCastSound(self, "Arcanum/Restoration/Resurrect");
+					A_StartSound("weapons/defibuse",CHAN_WEAPON);
 					HasPlayedSound = true;
 				}
 
