@@ -611,4 +611,212 @@ Sprite "LOGIC0", 22, 27
 	Patch "STASQGR", 15, 3
 }
 
+Sprite "LVG0A0", 100, 84
+{
+	Offset -89, -94
+	Patch "G11H_000", -12, 19
+	Patch "G11H_001", 81, 15
+	Patch "LVRG_WP1", 42, 2
+}
+
+Sprite "LVG0B0", 100, 84
+{
+	Offset -89, -94
+	Patch "G11H_000", -12, 19
+	Patch "G11H_001", 81, 15
+	Patch "LVRG_WP2", 42, 2
+}
+
+Sprite "LVG0C0", 100, 84
+{
+	XScale 0.975
+	YScale 0.975
+	Offset -85, -93
+	Patch "G11H_000", -12, 19
+	Patch "G11H_001", 81, 15
+	Patch "LVRG_WP2", 42, 2
+}
+
+Sprite "LVG0D0", 100, 84
+{
+	XScale 0.925
+	YScale 0.925
+	Offset -77, -93
+	Patch "G11H_000", -12, 19
+	Patch "G11H_001", 81, 15
+	Patch "LVRG_WP2", 42, 2
+}
+
+Sprite "LVG0E0", 135, 84
+{
+	XScale 0.977
+	YScale 0.997
+	Offset -84, -96
+	Patch "G11H_000", -12, 19
+	Patch "G11H_001", 81, 15
+	Patch "G11H_009", 57, 54
+	{
+		FlipX
+	}
+	Patch "LVRG_WP3", 42, 2
+}
+
+Sprite "LVG0F0", 130, 84
+{
+	XScale 0.965
+	YScale 1.005
+	Offset -81, -101
+	Patch "G11H_000", -12, 19
+	Patch "G11H_001", 81, 15
+	Patch "G11H_008", 57, 42
+	{
+		FlipX
+	}
+	Patch "LVRG_WP5", 42, 2
+}
+
+Sprite "LVG0G0", 130, 84
+{
+	XScale 0.960
+	Offset -80, -102
+	Patch "G11H_000", -12, 19
+	Patch "G11H_001", 81, 15
+	Patch "G11H_008", 57, 42
+	{
+		FlipX
+	}
+	Patch "LVRG_WP5", 42, 2
+}
+
+Sprite "LVGFA0", 113, 125
+{
+	Offset -89, -69
+	Patch "FALF_000", 42, 14
+	{
+		Style Add
+	}
+	Patch "LVRG_WP2", 42, 27
+	{
+		Style Modulate
+	}
+}
+
+Sprite "LVG1A0", 100, 112
+{
+	Offset -89, -81
+	Patch "G11H_000", -12, 42
+	Patch "G11H_001", 81, 38
+	Patch "LVRG_WP1", 42, 25
+	Patch "LVRG_SC1", 47, 2
+	{
+		Style Overlay
+	}
+}
+
+Sprite "LVG1B0", 100, 112
+{
+	Offset -89, -81
+	Patch "G11H_000", -12, 42
+	Patch "G11H_001", 81, 38
+	Patch "LVRG_WP2", 42, 25
+	Patch "LVRG_SC1", 47, 2
+	{
+		Style Overlay
+	}
+}
+
+Sprite "LVG1C0", 100, 112
+{
+	XScale 0.975
+	YScale 0.975
+	Offset -85, -80
+	Patch "G11H_000", -12, 42
+	Patch "G11H_001", 81, 38
+	Patch "LVRG_WP2", 42, 25
+	Patch "LVRG_SC1", 47, 2
+	{
+		Style Overlay
+	}
+}
+
+Sprite "LVG1D0", 100, 112
+{
+	XScale 0.925
+	YScale 0.925
+	Offset -77, -80
+	Patch "G11H_000", -12, 42
+	Patch "G11H_001", 81, 38
+	Patch "LVRG_WP2", 42, 25
+	Patch "LVRG_SC1", 47, 2
+	{
+		Style Overlay
+	}
+}
+
+Sprite "LVG1E0", 135, 115
+{
+	XScale 0.977
+	YScale 0.997
+	Offset -85, -86
+	Patch "G11H_000", -12, 40
+	Patch "G11H_001", 81, 36
+	Patch "G11H_009", 57, 75
+	{
+		FlipX
+	}
+	Patch "LVRG_WP3", 42, 23
+	Patch "LVRG_SC1", 47, 0
+	{
+		Style Overlay
+	}
+}
+
+Sprite "LVG1F0", 130, 115
+{
+	XScale 0.965
+	YScale 1.005
+	Offset -81, -91
+	Patch "G11H_000", -12, 40
+	Patch "G11H_001", 81, 36
+	Patch "G11H_008", 57, 63
+	{
+		FlipX
+	}
+	Patch "LVRG_WP5", 42, 23
+	Patch "LVRG_SC1", 47, 0
+	{
+		Style Overlay
+	}
+}
+
+Sprite "LVG1G0", 130, 115
+{
+	XScale 0.960
+	Offset -80, -91
+	Patch "G11H_000", -12, 40
+	Patch "G11H_001", 81, 36
+	Patch "G11H_008", 57, 63
+	{
+		FlipX
+	}
+	Patch "LVRG_WP5", 42, 23
+	Patch "LVRG_SC1", 47, 0
+	{
+		Style Overlay
+	}
+}
+
+Sprite "LVGFB0", 113, 125
+{
+	Offset -89, -65
+	Patch "FALF_000", 42, 14
+	{
+		Style Add
+	}
+	Patch "LVG1A0", 0, 16
+	{
+		Style Modulate
+	}
+}
+
 // End of texture definitions

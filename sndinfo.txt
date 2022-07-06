@@ -34,6 +34,11 @@ weapons/musketdust      muskdust
 weapons/musketcock      muskcock
 weapons/musketmove      muskmove
 
+// Lever Action
+weapons/levergun/fire1 Sounds/LeverGun/LVGShot1.ogg
+weapons/levergun/cock1 Sounds/LeverGun/LVGCock1.ogg
+weapons/levergun/cock2 Sounds/LeverGun/LVGCock2.ogg
+
 // Defibrillator
 weapons/defibuse      Sounds/Defibrillator/defibrillator_use.wav
 
