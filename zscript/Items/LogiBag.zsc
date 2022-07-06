@@ -7,14 +7,14 @@ class HD_LogiBag : HDBackpack {
 	default {
 		tag "Logistics Bag";
 		HDBackpack.MaxCapacity 350;
-		Inventory.Icon "UGSPA0";
+		Inventory.Icon "LOGIA0";
 		Inventory.PickupMessage "Picked up a logistics bag!";
 		scale 0.6;
 		hdweapon.wornlayer 0;
 		hdweapon.refid UAS_HDLD_LOGIBAG;
 	}
 
-	override string, double GetPickupSprite() { return "UGSPA0", 1.0; }
+	override string, double GetPickupSprite() { return "LOGIA0", 1.0; }
 
 	override void BeginPlay() {
 		super.BeginPlay();
@@ -44,7 +44,7 @@ class HD_LogiBag : HDBackpack {
 
 	States {
 		Spawn:
-			UGSP ABC -1 NoDelay
+			LOGI ABC -1 NoDelay
 			{
 				if (invoker.Storage.TotalBulk ~== 0)
 				{
