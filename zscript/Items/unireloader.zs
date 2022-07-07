@@ -32,6 +32,7 @@ class HDUniversalReloader : HDWeapon
 		if (r = HDRel_Recipe.TryCreate("FourMilAmmo",         "HDRel_RawLead", 0, 1.00,   null,               0, 0.00,   "HDRel_RawPowder", 0, 1.00,    5.00)) Recipes.Push(r); // Vanilla HD
 		if (r = HDRel_Recipe.TryCreate("SevenMilAmmo",        "HDRel_RawLead", 2, 1.50,   "HDRel_RawBrass",   2, 1.75,   "HDRel_RawPowder", 4, 2.50,    1.00)) Recipes.Push(r); // Vanilla HD
 		if (r = HDRel_Recipe.TryCreate("SevenMilBrass",       null,            0, 0.00,   "HDRel_RawBrass",   0, 1.75,   null,              0, 0.00,    1.00)) Recipes.Push(r); // Vanilla HD
+		if (r = HDRel_Recipe.TryCreate("SevenMilAmmoRecast",  "HDRel_RawLead", 1.75, 0.75, "HDRel_RawBrass",  1.5, 0.35, "HDRel_RawPowder", 3.75, 2.75, 1.00)) Recipes.Push(r); // Vanilla HD
 		if (r = HDRel_Recipe.TryCreate("HD50AEAmmo",          "HDRel_RawLead", 3, 2.25,   "HDRel_RawBrass",   2, 1.25,   "HDRel_RawPowder", 2, 1.25,    0.75)) Recipes.Push(r); // BulletLib
 		if (r = HDRel_Recipe.TryCreate("HD45ACPAmmo",         "HDRel_RawLead", 3, 1.50,   "HDRel_RawBrass",   1, 1.00,   "HDRel_RawPowder", 3, 1.00,    0.75)) Recipes.Push(r); // BulletLib
 		if (r = HDRel_Recipe.TryCreate("HD500SWLightAmmo",    "HDRel_RawLead", 3, 2.25,   "HDRel_RawBrass",   2, 1.25,   "HDRel_RawPowder", 2, 1.00,    0.75)) Recipes.Push(r); // BulletLib
@@ -42,6 +43,7 @@ class HDUniversalReloader : HDWeapon
 		if (r = HDRel_Recipe.TryCreate("HD50AM_Ammo",         "HDRel_RawLead", 3, 2.25,   "HDRel_RawBrass",   2, 1.25,   "HDRel_RawPowder", 2, 1.00,    0.75)) Recipes.Push(r); // PB's weapon pack
 		if (r = HDRel_Recipe.TryCreate("ThirtyAughtSixAmmo",  "HDRel_RawLead", 3, 2.25,   "HDRel_RawBrass",   2, 1.75,   "HDRel_RawPowder", 4, 2.50,    0.90)) Recipes.Push(r); // .30-06, HexaDoken's Garand
 		if (r = HDRel_Recipe.TryCreate("ThirtyAughtSixBrass", null,            0, 0.00,   "HDRel_RawBrass",   0, 1.75,   null,              0, 0.00,    0.90)) Recipes.Push(r); // .30-06, HexaDoken's Garand
+		if (r = HDRel_Recipe.TryCreate("HDBallAmmo",          "HDRel_RawLead", 12, 9.85,  "HDRel_RawPlastic", 0, 0,      "HDRel_RawPowder", 0, 0.0,     1.00)) Recipes.Push(r); // .56 Caliber Musket Balls, Offworld Wares
 	}
 
 	override string, double GetPickupSprite() { return "URLDA0", 1.0; }
