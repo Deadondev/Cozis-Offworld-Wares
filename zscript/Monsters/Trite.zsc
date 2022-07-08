@@ -171,7 +171,7 @@ class Trite:HDMobBase{
 				lastltangle=latchtarget.angle;
 
 				setorigin(
-					(newxy,pos.z)+(0,0,0) //frandom(-1,1),frandom(-1,1),frandom(-1,1)
+					(newxy,pos.z)+(frandom(-1,1),frandom(-1,1),frandom(-1,1)) //frandom(-1,1),frandom(-1,1),frandom(-1,1) (0,0,0)
 					,!teleported
 				);
 
@@ -241,7 +241,7 @@ class Trite:HDMobBase{
 		+cannotpush +pushable
 		+hdmobbase.climber
 		+hdmobbase.climbpastdropoff
-		health 25;radius 12; //bab health is 90 so yea...
+		health 15;radius 12; //bab health is 90 so yea...
 		height 32;deathheight 0;
 		scale 0.8; //was 0.6 but we need to buff so
 		speed 18; //babs are 12
@@ -353,7 +353,7 @@ class Trite:HDMobBase{
 
 	missile:
 		#### ABCD 2{
-			//A_JumpIf(frandom(1,2) >= 1, "melee")
+			A_JumpIf(frandom(1,2) >= 1, "melee"); //randomly dont jump, fuck with as advised
 			A_FaceTarget(16,16);
 			bnodropoff=false;
 			A_Changevelocity(1,0,0,CVF_RELATIVE);
