@@ -44,7 +44,7 @@ class BlueRum_Alcohol : UaS_Consumable
 		int bulk = prevbulk - weaponbulk();
 		if(bulk > 0){
 			hdp.GiveInventory("UaSAlcohol_IntoxToken", intox_per_bulk * bulk);
-			hdp.GiveInventory("HDBlues", 8);
+			hdp.GiveInventory("HealingMagic", 8);
 		}
 		prevbulk = weaponbulk();
 	}

@@ -223,7 +223,11 @@ class HDCommando:ZM66ScopeHaver{
 		#### A 1;
 		#### A 0{
 			if(invoker.weaponstatus[COMMANDO_CHAMBER]==1){
-				A_EjectCasing("HDSpent355",11,-frandom(79,81),frandom(7,7.5));
+				A_EjectCasing("HDSpent355",
+					frandom(-1,2),
+					(frandom(0.2,0.3),-frandom(7,7.5),frandom(0,0.2)),
+					(0,0,-2)
+				);
 				invoker.weaponstatus[COMMANDO_CHAMBER]=0;
 			}
 			if(invoker.weaponstatus[COMMANDO_MAG]>0){
