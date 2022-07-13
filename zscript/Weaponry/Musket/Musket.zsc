@@ -442,7 +442,7 @@ if(!punchee.countinv("HDArmourWorn")){
 					let tb=HDBulletActor.FireBullet(self,"HDB_Ball",spread:4.,speedfactor:frandom(0.97,1.03));
 					invoker.weaponstatus[MUSKT_BARREL]=0;
 					invoker.weaponstatus[MUSKT_COCKED]=1;
-					invoker.weaponstatus[MUSKT_HEAT]+=20; //was 15
+					invoker.weaponstatus[MUSKT_HEAT]+=20;
 					setweaponstate("nope"); //this makes sure you don't get double heat/smoke
 					break;
 				/////////////////////////////////////////////////////////////////////////////////////
@@ -471,6 +471,8 @@ if(!punchee.countinv("HDArmourWorn")){
 					A_AlertMonsters();
 					A_MuzzleClimb(-frandom(4.,5.4),-frandom(3.4,5.2)); //doubled bc its too much lul
 					A_StartSound("weapons/fgnclk",CHAN_WEAPON,CHANF_OVERLAP);
+					invoker.weaponstatus[MUSKT_BARREL]=0;
+					invoker.weaponstatus[MUSKT_COCKED]=1;
 					invoker.weaponstatus[MUSKT_HEAT]+=20;
 					setweaponstate("nope"); //this makes sure you don't get double heat/smoke
 					break;
@@ -484,6 +486,7 @@ if(!punchee.countinv("HDArmourWorn")){
 				/////////////////////////////////////////////////////////////////////////////////////
 				default:
 				break;
+				invoker.weaponstatus[MUSKT_BARREL]=0;
 					};
 
 		}
