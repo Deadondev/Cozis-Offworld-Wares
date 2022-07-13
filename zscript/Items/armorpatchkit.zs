@@ -65,7 +65,7 @@ class HDArmorPatchKit : HDWeapon
 		sb.DrawRect(-32, -17, 8, 3); // Horizontal.
 		sb.DrawWepNum(hdw.WeaponStatus[KProp_Durability], KitDurability);
 
-		vector2 bob = hpl.hudbob * 0.3;
+		vector2 bob = hpl.wepbob * 0.3;
 		int Offset = WeaponStatus[KProp_UseOffset];
 		bob.y += Offset;
 		int BaseYOffset = -70;
