@@ -1,0 +1,3 @@
+alias sbrl_reset_cvars "resetcvar sbrl_regulars_spawn_bias; resetcvar sbrl_persistent_spawning;"
+
+alias hdre_reset_cvars "sbrl_reset_cvars;"

@@ -208,8 +208,8 @@ class TriteHandler : EventHandler
 
         void init()
     {
-        		current_trites            = current_tritescvar;
-				max_trites            = max_tritescvar;
+        	current_trites = current_tritescvar;
+			max_trites = max_tritescvar;
     }
 
 	override void WorldLoaded(WorldEvent e)
@@ -232,22 +232,93 @@ class TriteHandler : EventHandler
 // Trite Barrels
 class SpiderBarrelEventHandler : EventHandler
 {
-	override void CheckReplacement(ReplaceEvent e)
-	{
-		if (!e.Replacement)
-		{
-			return;
-		}
 
-		switch (e.Replacement.GetClassName())
+
+	private bool cvarsAvailable;
+
+	private int spawnBiasActual;
+	private bool isPersistent;
+	
+	// Shoves cvar values into their non-cvar shaped holes.
+	// I have no idea why names for cvars become reserved here.
+	// But, this works. So no complaints. 
+	void init()
+	{
+		cvarsAvailable = true;
+		spawnBiasActual            = sbrl_regulars_spawn_bias;
+		isPersistent               = sbrl_persistent_spawning;
+	}
+
+	// 'Initalizes' the event handler,
+	// In my testing, this is called after events are fired. 
+	override void WorldLoaded(WorldEvent e)
+	{
+		// always calls init.
+		init();
+		super.WorldLoaded(e);
+	}
+
+	bool giverandom(int chance)
+	{
+		bool result = false;
+		
+		// temp storage for the random value. 
+		int iii = random(0, chance);
+		
+		// force negative values to be 0. 
+		if(iii < 0)
+			iii = 0;
+			
+		
+		if (iii == 0)
+		{
+			if(chance > -1)
+				result = true;
+		}
+		
+		return result;
+	}
+
+	void trycreatebarrel(worldevent e, int chance)
+	{
+		if(giverandom(chance))
+		{
+			let sss = SpiderBarrel(e.thing.Spawn("SpiderBarrel", e.thing.pos, SXF_TRANSFERSPECIAL | SXF_NOCHECKPOSITION));
+			if(sss)
+			{
+				
+				e.thing.destroy();
+			}
+			
+
+
+		}
+	}
+
+
+override void worldthingspawned(worldevent e)
+  {
+	// Makes sure the values are always loaded before
+	// taking in events.
+	if(!cvarsAvailable)
+		init();
+		
+ 	// in case it's not real. 
+	if(!e.Thing)
+	{
+		return;
+	}
+	
+	// Don't spawn anything if the level has been loaded more than a tic. 
+	if (!(level.maptime > 1) || isPersistent)
+	{
+		switch(e.Thing.GetClassName())
 		{
 			case 'HDBarrel':
-				if (random[spiderrandom]() <= 25)
-				{
-					e.Replacement = "SpiderBarrel";
-				}
+				trycreatebarrel(e, spawnBiasActual);
 				break;
 		}
+	}
 	}
 }
 

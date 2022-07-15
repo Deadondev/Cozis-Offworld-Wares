@@ -1,0 +1,55 @@
+OptionMenu CozisOffworldWares
+{
+    Title "Cozi's Offworld Wares Options"
+    StaticText "Monster Options", "cyan"
+}
+
+AddOptionMenu "OptionsMenu"
+{
+    Submenu "Cozi's Offworld Wares Options", "CozisOffworldWares"
+}
+
+OptionMenu Trites
+{
+    Title "Trite Options"
+   	StaticText "Notice:", 1
+    StaticText  "Setting 'spawn rate' to Replace All will supress", "white"
+    StaticText  "barrel spawns of that given type.", "white"
+    StaticText ""
+	StaticText "Spawn Options", 1
+    StaticText  "Control the spawn rate of Trite Barrels", "white"
+	Option " Trite Barrel Spawn Rate: ", "sbrl_regulars_spawn_bias", "SpawnBias"
+	SafeCommand "Reset trite barrel options", "resetcvar sbrl_regulars_spawn_bias"
+ 	StaticText ""
+    StaticText  "Control whether replacements happen after a mapload.", "white"
+	Option "Persistent Spawns: ", "sbrl_persistent_spawning", "OnOff"
+	SafeCommand "Reset persistence  options", "resetcvar sbrl_persistent_spawning"
+ 	StaticText ""
+   	StaticText ""
+	StaticText "Reset Options", "cyan"
+	SafeCommand "Reset all options", "sbrl_reset_cvars"
+}
+
+OptionValue "SpawnBias"
+{
+	-1,    "Disabled"
+	 0,    "Replace All"
+	 2,    "1 in 3"
+	 4,    "1 in 5"
+	 9,    "1 in 10"
+	 14,   "1 in 15"
+	 19,   "1 in 20"
+	 24,   "1 in 25"
+	 49,   "1 in 50"
+	 99,   "1 in 100"
+	 149,  "1 in 150"
+	 199,  "1 in 200"
+}
+
+AddOptionMenu "CozisOffworldWares"
+{
+	StaticText ""
+	Submenu "Trites", "Trites"
+	StaticText ""
+	SafeCommand "Reset all options", "hdre_reset_cvars"
+}

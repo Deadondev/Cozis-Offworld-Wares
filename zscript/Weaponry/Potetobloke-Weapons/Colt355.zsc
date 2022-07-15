@@ -57,6 +57,7 @@ class HDCommando:ZM66ScopeHaver{
 	}
 	override void postbeginplay(){
 		super.postbeginplay();
+		weaponspecial=1337; // UaS Sling Compatibility - [Ted]
 		if(weaponstatus[COMMANDO_AUTO]>0){
 		switch(weaponstatus[COMMANDO_SWITCHTYPE]){
 		case 1:
@@ -79,7 +80,7 @@ class HDCommando:ZM66ScopeHaver{
 
 		override string,double getpickupsprite(bool usespare){
 		string spr;
-
+		
 		int wep0=GetSpareWeaponValue(0,usespare);
 
 		if(wep0&COMMANDO_SCOPE)
@@ -92,12 +93,6 @@ class HDCommando:ZM66ScopeHaver{
 
 		return spr.."0",1.;
 	}
-
-	/*override string,double getpickupsprite(bool usespare){
-		int wep0=GetSpareWeaponValue(0,usespare);
-		return ((wep0&COMMANDO_SCOPE)?"C9MG":"C9MG")
-			..((GetSpareWeaponValue(COMMANDO_MAG,usespare)<0)?"B":"A").."0",1.;
-	}*/
 	
 	override void DrawHUDStuff(HDStatusBar sb,HDWeapon hdw,HDPlayerPawn hpl){
 		if(sb.hudlevel==1){
@@ -134,10 +129,10 @@ class HDCommando:ZM66ScopeHaver{
 		HDStatusBar sb,HDWeapon hdw,HDPlayerPawn hpl,
 		bool sightbob,vector2 bob,double fov,bool scopeview,actor hpc
 	){
-		/*if(weaponstatus[COMMANDO_SCOPE]==1){
+		if(weaponstatus[COMMANDO_SCOPE]==1){
 			int scaledyoffset=47;
 			ShowZMScope(hdw.weaponstatus[COMMANDO_ZOOM],hpc,sb,scaledyoffset,bob);
-		}else*/{
+		}else{
 		int cx,cy,cw,ch;
 		[cx,cy,cw,ch]=screen.GetClipRect();
 		sb.SetClipRect(
@@ -158,10 +153,8 @@ class HDCommando:ZM66ScopeHaver{
 	}
 	override void SetReflexReticle(int which){weaponstatus[COMMANDO_SCOPE]=which;}
 	action void A_CheckScope(){
-		if(
-			invoker.weaponstatus[COMMANDO_SCOPE]==1
-		)Player.GetPSprite(PSP_WEAPON).sprite=getspriteindex("SMSGA0"); //Later make some sprites for the scoped version, then reinstate this code [Cozi]
-		else Player.GetPSprite(PSP_WEAPON).sprite=getspriteindex("C9MPA0");
+		if(invoker.weaponstatus[COMMANDO_SCOPE]==1)
+		Player.GetPSprite(PSP_WEAPON).sprite=getspriteindex("C9MPE0"); //Sprites for scoped version.
 	}
 	states{
 	select0:
@@ -449,22 +442,6 @@ enum commandostatus{
 	//COMMANDO_DOT=6,
 	COMMANDO_ZOOM=10,
 };
-/*
-class HDSMGRandom:IdleDummy{
-	states{
-	spawn:
-		TNT1 A 0 nodelay{
-			let lll=HDSMG(spawn("HDSMG",pos,ALLOW_REPLACE));
-			if(!lll)return;
-			lll.special=special;
-			lll.vel=vel;
-			for(int i=0;i<5;i++)lll.args[i]=args[i];
-			if(!random(0,2))lll.weaponstatus[0]|=COMMANDO_SCOPE;
-			if(!random(0,2))lll.weaponstatus[COMMANDO_SWITCHTYPE]=random(0,3);
-		}stop;
-	}
-}
-*/
 
 class HDCommando355Mag25:HD9mmag15{
 	default{
@@ -478,7 +455,7 @@ class HDCommando355Mag25:HD9mmag15{
 		hdmagammo.maxperunit 25;
 		hdmagammo.magbulk ENC_9MAG30_EMPTY;
 		tag ".355 Magazine";
-		inventory.pickupmessage "Picked up an .355 magazine.";
+		inventory.pickupmessage "Picked up a Commando .355 magazine.";
 		hdpickup.refid HDLD_COMMANDO_MAG;
 	}
 	override string,string,name,double getmagsprite(int thismagamt){
@@ -503,9 +480,23 @@ class HDCommando355Mag25:HD9mmag15{
 class HDCommando355Mag25_Empty:IdleDummy{
 	override void postbeginplay(){
 		super.postbeginplay();
-		weaponspecial = 1337; // UaS sling compatibility.
 		HDMagAmmo.SpawnMag(self,"HDCommando355Mag25",0);
 		destroy();
+	}
+}
+
+class HDCommandoRandom:IdleDummy{
+	states{
+	spawn:
+		TNT1 A 0 nodelay{
+			let lll=HDCommando(spawn("HDCommando",pos,ALLOW_REPLACE));
+			if(!lll)return;
+			lll.special=special;
+			lll.vel=vel;
+			for(int i=0;i<5;i++)lll.args[i]=args[i];
+			if(!random(0,2))lll.weaponstatus[0]|=COMMANDO_SCOPE;
+			if(!random(0,2))lll.weaponstatus[COMMANDO_SWITCHTYPE]=random(0,1);
+		}stop;
 	}
 }
 
@@ -516,7 +507,7 @@ class HD_CommandoDropper:IdleDummy{
 			A_SpawnItemEx("HDCommando355Mag25",frandom(-12,12),frandom(-12,12),frandom(-12,12),0,0,0,0,SXF_NOCHECKPOSITION);
 			A_SpawnItemEx("HDCommando355Mag25",frandom(-12,12),frandom(-12,12),frandom(-12,12),0,0,0,0,SXF_NOCHECKPOSITION);
 			A_SpawnItemEx("HDCommando355Mag25",frandom(-12,12),frandom(-12,12),frandom(-12,12),0,0,0,0,SXF_NOCHECKPOSITION);
-			A_SpawnItemEx("HDCommando",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HDCommandoRandom",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION);
         }stop;
     }
 }

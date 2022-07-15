@@ -1,3 +1,5 @@
 // Trites
 server int  current_tritescvar= 0;
 server int  max_tritescvar    = 30;
+server int  sbrl_regulars_spawn_bias = 49;
+server bool  sbrl_persistent_spawning = false;
