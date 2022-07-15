@@ -30,6 +30,27 @@ OptionMenu Trites
 	SafeCommand "Reset all options", "sbrl_reset_cvars"
 }
 
+OptionMenu Mac10
+{
+    Title "Trite Options"
+   	StaticText "Notice:", 1
+    StaticText  "Setting 'spawn rate' to Replace All will supress", "white"
+    StaticText  "chaingun spawns of that given type.", "white"
+    StaticText ""
+	StaticText "Spawn Options", 1
+    StaticText  "Control the spawn rate of the RAC-13/45", "white"
+	Option " RAC-13/45 Spawn Rate: ", "mac10_regulars_spawn_bias", "SpawnBias"
+	SafeCommand "Reset trite barrel options", "resetcvar mac10_regulars_spawn_bias"
+ 	StaticText ""
+    StaticText  "Control whether replacements happen after a mapload.", "white"
+	Option "Persistent Spawns: ", "mac10_persistent_spawning", "OnOff"
+	SafeCommand "Reset persistence  options", "resetcvar mac10_persistent_spawning"
+ 	StaticText ""
+   	StaticText ""
+	StaticText "Reset Options", "cyan"
+	SafeCommand "Reset all options", "mac10_reset_cvars"
+}
+
 OptionValue "SpawnBias"
 {
 	-1,    "Disabled"
@@ -52,4 +73,8 @@ AddOptionMenu "CozisOffworldWares"
 	Submenu "Trites", "Trites"
 	StaticText ""
 	SafeCommand "Reset all options", "hdre_reset_cvars"
+	StaticText ""
+	StaticText "Weapon Options", "cyan"
+	StaticText ""
+	Submenu "RAC-13/45", "Mac10"
 }

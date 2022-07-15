@@ -157,44 +157,83 @@ class Commando355Injector:EventHandler
 }
 
 // MAC-10
-class MacInjector:EventHandler
+class MacInjector : EventHandler
 {
-	override void CheckReplacement(ReplaceEvent e)
+	private bool cvarsAvailable;
+	private int spawnBiasActual;
+	private bool isPersistent;
+	void init()
 	{
-		if (!e.Replacement)
-		{
-			return;
-		}
+		cvarsAvailable = true;
+		spawnBiasActual            = mac10_regulars_spawn_bias;
+		isPersistent               = mac10_persistent_spawning;
+	}
 
-		switch (e.Replacement.GetClassName())
+	override void WorldLoaded(WorldEvent e)
+	{
+		init();
+		super.WorldLoaded(e);
+	}
+
+	bool giverandom(int chance)
+	{
+		bool result = false;
+		int iii = random(0, chance);
+		if(iii < 0)
+			iii = 0;
+		if (iii == 0)
+		{
+			if(chance > -1)
+				result = true;
+		}
+		
+		return result;
+	}
+
+	void trycreatemac10(worldevent e, int chance)
+	{
+		if(giverandom(chance))
+		{
+			let sss = HD_MAC11Dropper(e.thing.Spawn("HD_MAC11Dropper", e.thing.pos, SXF_TRANSFERSPECIAL | SXF_NOCHECKPOSITION));
+			if(sss)
+			{
+				
+				e.thing.destroy();
+			}
+
+		}
+	}
+override void worldthingspawned(worldevent e)
+  {
+	if(!cvarsAvailable)
+		init();
+	if(!e.Thing)
+	{
+		return;
+	}
+	
+	let MacAmmo = HDAmmo(e.Thing);
+	if (!MacAmmo)
+	{
+		return;
+	}
+	switch (MacAmmo.GetClassName())
+	{
+		case 'HD45ACPAmmo':
+			MacAmmo.ItemsThatUseThis.Push("HDMAC11");
+			break;
+	}
+	if (!(level.maptime > 1) || isPersistent)
+	{
+		switch(e.Thing.GetClassName())
 		{
 			case 'ChaingunReplaces':
-				if (random[MacRandom](0, 128) <= 24)
-				{
-					e.Replacement = "HD_MAC11Dropper";
-					e.IsFinal = true;
-				}
+				trycreatemac10(e, spawnBiasActual);
 				break;
 		}
 	}
-
-	override void WorldThingSpawned(WorldEvent e)
-	{
-		let MacAmmo = HDAmmo(e.Thing);
-		if (!MacAmmo)
-		{
-			return;
-		}
-
-		switch (MacAmmo.GetClassName())
-		{
-			case 'HD45ACPAmmo':
-				MacAmmo.ItemsThatUseThis.Push("HDMAC11");
-				break;
-		}
 	}
 }
-
 //-------------------------------------------------
 // MONSTERS
 //-------------------------------------------------

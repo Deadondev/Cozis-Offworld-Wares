@@ -7,7 +7,7 @@ class HDMAC11:HDHandgun{
 	//bool MACstockout;
 	default{
 		//$Category "Weapons/Hideous Destructor"
-		//$Title "Raycob RAC-13/9 Machine Pistol"
+		//$Title "Raycob RAC-13/45 Machine Pistol"
 		//$Sprite "MC1PA0"
 
 		obituary "%o met %k's lead spitting brick.";
@@ -21,10 +21,10 @@ class HDMAC11:HDHandgun{
 		weapon.bobrangey 0.6;
 		weapon.bobspeed 2.5;
 		scale 0.50;
-		inventory.pickupmessage "You got the Raycob RAC-13/9!";
+		inventory.pickupmessage "You got the Raycob RAC-13/45!";
 		hdweapon.barrelsize 10,0.65,0.5;
 		hdweapon.refid HDLD_MAC11;
-		tag "Raycob RAC-13/9 Machine Pistol";
+		tag "Raycob RAC-13/45 Machine Pistol";
 	}
 	
 	override bool AddSpareWeapon(actor newowner){return AddSpareWeaponRegular(newowner);}

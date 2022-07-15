@@ -1,3 +1,4 @@
 alias sbrl_reset_cvars "resetcvar sbrl_regulars_spawn_bias; resetcvar sbrl_persistent_spawning;"
+alias mac10_reset_cvars "resetcvar mac10_regulars_spawn_bias; resetcvar mac10_persistent_spawning;"
 
-alias hdre_reset_cvars "sbrl_reset_cvars;"
+alias hdre_reset_cvars "sbrl_reset_cvars; mac10reset_cvars;"
