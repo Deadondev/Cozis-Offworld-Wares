@@ -1,7 +1,29 @@
 // Trites
 server int  current_tritescvar= 0;
 server int  max_tritescvar    = 30;
+
+// Trite Barrels
 server int  sbrl_regulars_spawn_bias = 49;
 server bool  sbrl_persistent_spawning = false;
-server int mac10_regulars_spawn_bias = 20;
+
+// RAC-13/45
+server int mac10_regulars_spawn_bias = 19;
 server bool mac10_persistent_spawning = false;
+
+// Commando .355 Carbine
+server int c355_ssg_spawn_bias = 14;
+server int c355_chaingun_spawn_bias = 24;
+server bool c355_persistent_spawning = false;
+
+// Striker
+server int stryk_shotgun_spawn_bias = 24;
+server int stryk_ssg_spawn_bias = 24;
+server bool stryk_persistent_spawning = false;
+
+// Pipegun
+server int pipegun_shell_spawn_bias = 14;
+server bool pipegun_persistent_spawning = false;
+
+// Musket
+server int musket_blur_spawn_bias = 14;
+server bool musket_persistent_spawning = false;

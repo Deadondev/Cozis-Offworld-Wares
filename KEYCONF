@@ -1,4 +1,8 @@
 alias sbrl_reset_cvars "resetcvar sbrl_regulars_spawn_bias; resetcvar sbrl_persistent_spawning;"
 alias mac10_reset_cvars "resetcvar mac10_regulars_spawn_bias; resetcvar mac10_persistent_spawning;"
+alias c355_reset_cvars "resetcvar c355_ssg_spawn_bias; resetcvar c355_chaingun_spawn_bias; resetcvar c355_persistent_spawning;"
+alias stryk_reset_cvars "resetcvar stryk_shotgun_spawn_bias; resetcvar stryk_ssg_spawn_bias; resetcvar stryk_persistent_spawning;"
+alias pipegun_reset_cvars "resetcvar pipegun_shell_spawn_bias; resetcvar pipegun_persistent_spawning;"
+alias musket_reset_cvars "resetcvar musket_blur_spawn_bias; resetcvar musket_persistent_spawning;"
 
-alias hdre_reset_cvars "sbrl_reset_cvars; mac10reset_cvars;"
+alias wares_reset_cvars "sbrl_reset_cvars; mac10reset_cvars; c355_reset_cvars; stryk_reset_cvars; pipegun_reset_cvars; musket_reset_cvars;"

@@ -5,158 +5,330 @@
 // Musket
 class COW_MusketReplacer : EventHandler
 {
-	override void CheckReplacement(ReplaceEvent e)
+	private bool cvarsAvailable;
+	private int spawnBiasActual;
+	private bool isPersistent;
+	void init()
 	{
-		if (!e.Replacement)
-		{
-			return;
-		}
+		cvarsAvailable = true;
+		spawnBiasActual = musket_blur_spawn_bias;
+		isPersistent = musket_persistent_spawning;
+	}
 
-		switch (e.Replacement.GetClassName())
+	override void WorldLoaded(WorldEvent e)
+	{
+		init();
+		super.WorldLoaded(e);
+	}
+
+	bool giverandom(int chance)
+	{
+		bool result = false;
+		int iii = random(0, chance);
+		if(iii < 0)
+			iii = 0;
+		if (iii == 0)
 		{
-			case 'RedSphere':
-				if (random[MusketRandom](0, 128) <= 14)
-				{
-					e.Replacement = "HD_MusketDropper";
-					e.IsFinal = false;
-				}
+			if(chance > -1)
+				result = true;
+		}
+		
+		return result;
+	}
+
+	void trycreatemusket(worldevent e, int chance)
+	{
+		if(giverandom(chance))
+		{
+			let sss = HD_MusketDropper(e.thing.Spawn("HD_MusketDropper", e.thing.pos, SXF_TRANSFERSPECIAL | SXF_NOCHECKPOSITION));
+			if(sss)
+			{
+				
+				e.thing.destroy();
+			}
+
+		}
+	}
+override void worldthingspawned(worldevent e)
+  {
+	if(!cvarsAvailable)
+		init();
+	if(!e.Thing)
+	{
+		return;
+	}
+	
+	let MuskAmmo = HDAmmo(e.Thing);
+	if (!MuskAmmo)
+	{
+		return;
+	}
+	switch (MuskAmmo.GetClassName())
+	{
+		case 'HDShellAmmo':
+			MuskAmmo.ItemsThatUseThis.Push("HD_Musket");
+			break;
+	}
+	if (!(level.maptime > 1) || isPersistent)
+	{
+		switch(e.Thing.GetClassName())
+		{
+			case 'BlurSphereReplacer':
+				trycreatemusket(e, spawnBiasActual);
 				break;
 		}
+	}
 	}
 }
 
 // Pipegun
-class PipeGunInjector:EventHandler
+class PipeGunInjector : EventHandler
 {
-	override void CheckReplacement(ReplaceEvent e)
+	private bool cvarsAvailable;
+	private int spawnBiasActual;
+	private bool isPersistent;
+	void init()
 	{
-		if (!e.Replacement)
-		{
-			return;
-		}
+		cvarsAvailable = true;
+		spawnBiasActual = pipegun_shell_spawn_bias;
+		isPersistent = pipegun_persistent_spawning;
+	}
 
-		switch (e.Replacement.GetClassName())
+	override void WorldLoaded(WorldEvent e)
+	{
+		init();
+		super.WorldLoaded(e);
+	}
+
+	bool giverandom(int chance)
+	{
+		bool result = false;
+		int iii = random(0, chance);
+		if(iii < 0)
+			iii = 0;
+		if (iii == 0)
+		{
+			if(chance > -1)
+				result = true;
+		}
+		
+		return result;
+	}
+
+	void trycreatepipegun(worldevent e, int chance)
+	{
+		if(giverandom(chance))
+		{
+			let sss = HD_PipegunDropper(e.thing.Spawn("HD_PipegunDropper", e.thing.pos, SXF_TRANSFERSPECIAL | SXF_NOCHECKPOSITION));
+			if(sss)
+			{
+				
+				e.thing.destroy();
+			}
+
+		}
+	}
+override void worldthingspawned(worldevent e)
+  {
+	if(!cvarsAvailable)
+		init();
+	if(!e.Thing)
+	{
+		return;
+	}
+	
+	let PipeAmmo = HDAmmo(e.Thing);
+	if (!PipeAmmo)
+	{
+		return;
+	}
+	switch (PipeAmmo.GetClassName())
+	{
+		case 'HDShellAmmo':
+			PipeAmmo.ItemsThatUseThis.Push("HDPipegunSG");
+			break;
+	}
+	if (!(level.maptime > 1) || isPersistent)
+	{
+		switch(e.Thing.GetClassName())
 		{
 			case 'ShellBoxRandom':
-				if (random[PipeRandom](0, 128) <= 24)
-				{
-					e.Replacement = "HD_PipegunDropper";
-					e.IsFinal = true;
-				}
+				trycreatepipegun(e, spawnBiasActual);
 				break;
 		}
 	}
-
-	override void WorldThingSpawned(WorldEvent e)
-	{
-		let PipeAmmo = HDAmmo(e.Thing);
-		if (!PipeAmmo)
-		{
-			return;
-		}
-
-		switch (PipeAmmo.GetClassName())
-		{
-			case 'HDShellAmmo':
-				PipeAmmo.ItemsThatUseThis.Push("HDPipeGunSG");
-				break;
-		}
 	}
 }
 
 // Striker/Stryker/Whatever the fuck we call it
-class SweepInjector:EventHandler
+class SweepInjector : EventHandler
 {
-	override void CheckReplacement(ReplaceEvent e)
+	private bool cvarsAvailable;
+	private int spawnBiasActualsg;
+	private int spawnBiasActualssg;
+	private bool isPersistent;
+	void init()
 	{
-		if (!e.Replacement)
-		{
-			return;
-		}
+		cvarsAvailable = true;
+		spawnBiasActualsg = stryk_shotgun_spawn_bias;
+		spawnBiasActualSSG = stryk_ssg_spawn_bias;
+		isPersistent = stryk_persistent_spawning;
+	}
 
-		switch (e.Replacement.GetClassName())
+	override void WorldLoaded(WorldEvent e)
+	{
+		init();
+		super.WorldLoaded(e);
+	}
+
+	bool giverandom(int chance)
+	{
+		bool result = false;
+		int iii = random(0, chance);
+		if(iii < 0)
+			iii = 0;
+		if (iii == 0)
 		{
-			case 'SSGReplaces':
-				if (random[StrikerRandom]() <= 24)
-				{
-					e.Replacement = "HD_StrikerDropper";
-					e.IsFinal = true;
-				}
+			if(chance > -1)
+				result = true;
+		}
+		
+		return result;
+	}
+
+	void trycreatestryk(worldevent e, int chance)
+	{
+		if(giverandom(chance))
+		{
+			let sss = HD_StrikerDropper(e.thing.Spawn("HD_StrikerDropper", e.thing.pos, SXF_TRANSFERSPECIAL | SXF_NOCHECKPOSITION));
+			if(sss)
+			{
+				
+				e.thing.destroy();
+			}
+
+		}
+	}
+override void worldthingspawned(worldevent e)
+  {
+	if(!cvarsAvailable)
+		init();
+	if(!e.Thing)
+	{
+		return;
+	}
+	
+	let strykAmmo = HDAmmo(e.Thing);
+	if (!strykAmmo)
+	{
+		return;
+	}
+	switch (strykAmmo.GetClassName())
+	{
+		case 'HDShellAmmo':
+			strykAmmo.ItemsThatUseThis.Push("HDStreetSweeper");
+			break;
+	}
+	if (!(level.maptime > 1) || isPersistent)
+	{
+		switch(e.Thing.GetClassName())
+		{
+			case 'ChaingunReplaces':
+				trycreatestryk(e, spawnBiasActualsg);
 				break;
-			case 'ShotgunReplaces':
-				if (random[StrikerRandom](0, 128) <= 14)
-				{
-					e.Replacement = "HD_StrikerDropper";
-					e.IsFinal = true;
-				}
+			case 'SSGReplaces':
+				trycreatestryk(e, spawnBiasActualssg);
 				break;
 		}
 	}
-
-	override void WorldThingSpawned(WorldEvent e)
-	{
-		let SweepAmmo = HDAmmo(e.Thing);
-		if (!SweepAmmo)
-		{
-			return;
-		}
-
-		switch (SweepAmmo.GetClassName())
-		{
-			case 'HDShellAmmo':
-				SweepAmmo.ItemsThatUseThis.Push("HDStreetSweeper");
-				break;
-		}
 	}
 }
 
 // Commando .355 Carbine
-class Commando355Injector:EventHandler
+class Commando355Injector : EventHandler
 {
-	override void CheckReplacement(ReplaceEvent e)
+	private bool cvarsAvailable;
+	private int spawnBiasActualCG;
+	private int spawnBiasActualssg;
+	private bool isPersistent;
+	void init()
 	{
-		if (!e.Replacement)
-		{
-			return;
-		}
+		cvarsAvailable = true;
+		spawnBiasActualCG = c355_chaingun_spawn_bias;
+		spawnBiasActualSSG = c355_ssg_spawn_bias;
+		isPersistent = c355_persistent_spawning;
+	}
 
-		switch (e.Replacement.GetClassName())
+	override void WorldLoaded(WorldEvent e)
+	{
+		init();
+		super.WorldLoaded(e);
+	}
+
+	bool giverandom(int chance)
+	{
+		bool result = false;
+		int iii = random(0, chance);
+		if(iii < 0)
+			iii = 0;
+		if (iii == 0)
 		{
-			case 'SSGReplaces':
-				if (random[CommandoRandom](0, 128) <= 14)
-				{
-					e.Replacement = "HD_CommandoDropper";
-					e.IsFinal = true;
-				}
-				break;
+			if(chance > -1)
+				result = true;
+		}
+		
+		return result;
+	}
+
+	void trycreatec355(worldevent e, int chance)
+	{
+		if(giverandom(chance))
+		{
+			let sss = HD_CommandoDropper(e.thing.Spawn("HD_CommandoDropper", e.thing.pos, SXF_TRANSFERSPECIAL | SXF_NOCHECKPOSITION));
+			if(sss)
+			{
+				
+				e.thing.destroy();
+			}
+
+		}
+	}
+override void worldthingspawned(worldevent e)
+  {
+	if(!cvarsAvailable)
+		init();
+	if(!e.Thing)
+	{
+		return;
+	}
+	
+	let c355Ammo = HDAmmo(e.Thing);
+	if (!c355Ammo)
+	{
+		return;
+	}
+	switch (c355Ammo.GetClassName())
+	{
+		case 'HDRevolverAmmo':
+			c355Ammo.ItemsThatUseThis.Push("HDCommando");
+			break;
+	}
+	if (!(level.maptime > 1) || isPersistent)
+	{
+		switch(e.Thing.GetClassName())
+		{
 			case 'ChaingunReplaces':
-				if (random[CommandoRandom]() <= 20)
-				{
-					e.Replacement = "HD_CommandoDropper";
-					e.IsFinal = true;
-				}
+				trycreatec355(e, spawnBiasActualCG);
+				break;
+			case 'SSGReplaces':
+				trycreatec355(e, spawnBiasActualSSG);
 				break;
 		}
 	}
-
-	override void WorldThingSpawned(WorldEvent e)
-	{
-		let CommandoAmmo = HDAmmo(e.Thing);
-		if (!CommandoAmmo)
-		{
-			return;
-		}
-
-		switch (CommandoAmmo.GetClassName())
-		{
-			case 'HDRevolverAmmo':
-				CommandoAmmo.ItemsThatUseThis.Push("HDCommando");
-				break;
-		}
 	}
 }
 
-// MAC-10
+// RAC-13/45 (it's a mac-10 but RAC-13 is kewler)
 class MacInjector : EventHandler
 {
 	private bool cvarsAvailable;
@@ -165,8 +337,8 @@ class MacInjector : EventHandler
 	void init()
 	{
 		cvarsAvailable = true;
-		spawnBiasActual            = mac10_regulars_spawn_bias;
-		isPersistent               = mac10_persistent_spawning;
+		spawnBiasActual = mac10_regulars_spawn_bias;
+		isPersistent = mac10_persistent_spawning;
 	}
 
 	override void WorldLoaded(WorldEvent e)
