@@ -32,7 +32,7 @@ OptionMenu Trites
 
 OptionMenu Mac10
 {
-    Title "Trite Options"
+    Title "RAC13/45 Options"
    	StaticText "Notice:", 1
     StaticText  "Setting 'spawn rate' to Replace All will supress", "white"
     StaticText  "chaingun spawns of that given type.", "white"
