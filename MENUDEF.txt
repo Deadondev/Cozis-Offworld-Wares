@@ -131,7 +131,7 @@ OptionMenu levergat
     StaticText  "chaingun spawns of that given type.", "white"
     StaticText ""
 	StaticText "Spawn Options", 1
-    StaticText  "Control the spawn rate of the Pipegun on Shells", "white"
+    StaticText  "Control the spawn rate of the Hunting Carbine on Chainguns", "white"
 	Option " Pipegun Spawn Rate: ", "levergat_chaingun_spawn_bias", "SpawnBias"
 	SafeCommand "Reset Pipegun options", "resetcvar levergat_chaingun_spawn_bias"
  	StaticText ""
