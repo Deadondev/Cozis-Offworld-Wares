@@ -117,7 +117,7 @@ class COW_OffworldLockbox : UaS_Consumable
 		
 		Inventory.Icon "COWCA0";
 		
-		scale 1.65;
+		scale 1.25;
 	}
 	override void Contents()
 	{
