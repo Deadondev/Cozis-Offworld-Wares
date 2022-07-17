@@ -1,3 +1,7 @@
+//-------------------------------------------------
+// Monsters
+//-------------------------------------------------
+
 // Trites
 server int  current_tritescvar= 0;
 server int  max_tritescvar    = 30;
@@ -5,6 +9,10 @@ server int  max_tritescvar    = 30;
 // Trite Barrels
 server int  sbrl_regulars_spawn_bias = 49;
 server bool  sbrl_persistent_spawning = false;
+
+//-------------------------------------------------
+// Weapons
+//-------------------------------------------------
 
 // RAC-13/45
 server int mac10_regulars_spawn_bias = 19;
@@ -24,6 +32,40 @@ server bool stryk_persistent_spawning = false;
 server int pipegun_shell_spawn_bias = 14;
 server bool pipegun_persistent_spawning = false;
 
+// Lever-Action
+server int levergat_chaingun_spawn_bias = 24;
+server bool levergat_persistent_spawning = false;
+
 // Musket
 server int musket_blur_spawn_bias = 14;
 server bool musket_persistent_spawning = false;
+
+//-------------------------------------------------
+// Items
+//-------------------------------------------------
+
+// Rum
+server int rum_pmi_spawn_bias = 9;
+server bool rum_persistent_spawning = false;
+
+// Radsuit Packages
+server int suit_replacement_spawn_bias = 2;
+
+// Armor Patch Kit
+server int apk_replacement_spawn_bias = 19;
+server bool apk_persistent_spawning = false;
+
+// Universal Reloader
+server int url_replacement_spawn_bias = 19;
+server bool url_persistent_spawning = false;
+
+// Logistics Bag
+server int lgb_replacement_spawn_bias = 19;
+server bool lgb_persistent_spawning = false;
+
+// Medic Bag
+server int mdb_replacement_spawn_bias = 19;
+
+// Defib
+server int dfb_replacement_spawn_bias = 19;
+server bool dfb_persistent_spawning = false;

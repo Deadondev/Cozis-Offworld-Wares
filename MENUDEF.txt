@@ -1,17 +1,20 @@
 OptionMenu CozisOffworldWares
 {
-    Title "Cozi's Offworld Wares Options"
-    StaticText "Monster Options", "cyan"
+    Title "------ Cozi's Offworld Wares Options ------"
 }
 
 AddOptionMenu "OptionsMenu"
 {
-    Submenu "Cozi's Offworld Wares Options", "CozisOffworldWares"
+    Submenu "Offworld Wares Options", "CozisOffworldWares"
+}
+
+AddOptionMenu "HDOptionsMenu" after "HDControlsMenu" {
+	Submenu "Offworld Wares Settings", "CozisOffworldWares"
 }
 
 OptionMenu Trites
 {
-    Title "Trite Options"
+    Title "------ Trite Options ------"
    	StaticText "Notice:", 1
     StaticText  "Setting 'spawn rate' to Replace All will supress", "white"
     StaticText  "barrel spawns of that given type.", "white"
@@ -26,13 +29,13 @@ OptionMenu Trites
 	SafeCommand "Reset persistence  options", "resetcvar sbrl_persistent_spawning"
  	StaticText ""
    	StaticText ""
-	StaticText "Reset Options", "cyan"
+	StaticText "Reset Options", "Green"
 	SafeCommand "Reset all options", "sbrl_reset_cvars"
 }
 
 OptionMenu Mac10
 {
-    Title "Raycob RAC-13/45 Options"
+    Title "------ Raycob RAC-13/45 Options ------"
    	StaticText "Notice:", 1
     StaticText  "Setting 'spawn rate' to Replace All will supress", "white"
     StaticText  "chaingun spawns of that given type.", "white"
@@ -47,16 +50,16 @@ OptionMenu Mac10
 	SafeCommand "Reset persistence  options", "resetcvar mac10_persistent_spawning"
  	StaticText ""
    	StaticText ""
-	StaticText "Reset Options", "cyan"
+	StaticText "Reset Options", "Green"
 	SafeCommand "Reset all options", "mac10_reset_cvars"
 }
 
 OptionMenu c355
 {
-    Title "Commando .355 Carbine Options"
+    Title "------ Commando .355 Carbine Options ------"
    	StaticText "Notice:", 1
     StaticText  "Setting 'spawn rate' to Replace All will supress", "white"
-    StaticText  "chaingun spawns of that given type.", "white"
+    StaticText  "chaingun or ssg spawns of that given type.", "white"
     StaticText ""
 	StaticText "Spawn Options", 1
     StaticText  "Control the spawn rate of the Commando .355 Carbine on Chainguns", "white"
@@ -71,16 +74,16 @@ OptionMenu c355
 	SafeCommand "Reset persistence  options", "resetcvar c355_persistent_spawning"
  	StaticText ""
    	StaticText ""
-	StaticText "Reset Options", "cyan"
+	StaticText "Reset Options", "Green"
 	SafeCommand "Reset all options", "c355_reset_cvars"
 }
 
 OptionMenu stryk
 {
-    Title "Raycob Subterranean Striker Options"
+    Title "------ Raycob Subterranean Striker Options ------"
    	StaticText "Notice:", 1
     StaticText  "Setting 'spawn rate' to Replace All will supress", "white"
-    StaticText  "chaingun spawns of that given type.", "white"
+    StaticText  "shotgun or ssg spawns of that given type.", "white"
     StaticText ""
 	StaticText "Spawn Options", 1
     StaticText  "Control the spawn rate of the Striker on Shotguns", "white"
@@ -95,16 +98,16 @@ OptionMenu stryk
 	SafeCommand "Reset persistence options", "resetcvar stryk_persistent_spawning"
  	StaticText ""
    	StaticText ""
-	StaticText "Reset Options", "cyan"
+	StaticText "Reset Options", "Green"
 	SafeCommand "Reset all options", "stryk_reset_cvars"
 }
 
 OptionMenu pipeg
 {
-    Title "Pipegun Options"
+    Title "------ Pipegun Options ------"
    	StaticText "Notice:", 1
     StaticText  "Setting 'spawn rate' to Replace All will supress", "white"
-    StaticText  "chaingun spawns of that given type.", "white"
+    StaticText  "shell spawns of that given type.", "white"
     StaticText ""
 	StaticText "Spawn Options", 1
     StaticText  "Control the spawn rate of the Pipegun on Shells", "white"
@@ -116,14 +119,34 @@ OptionMenu pipeg
 	SafeCommand "Reset persistence  options", "resetcvar pipegun_persistent_spawning"
  	StaticText ""
    	StaticText ""
-	StaticText "Reset Options", "cyan"
+	StaticText "Reset Options", "Green"
 	SafeCommand "Reset all options", "pipegun_reset_cvars"
 }
 
+OptionMenu levergat
+{
+    Title "------ Sawyer Hunting Carbine Options ------"
+   	StaticText "Notice:", 1
+    StaticText  "Setting 'spawn rate' to Replace All will supress", "white"
+    StaticText  "chaingun spawns of that given type.", "white"
+    StaticText ""
+	StaticText "Spawn Options", 1
+    StaticText  "Control the spawn rate of the Pipegun on Shells", "white"
+	Option " Pipegun Spawn Rate: ", "levergat_chaingun_spawn_bias", "SpawnBias"
+	SafeCommand "Reset Pipegun options", "resetcvar levergat_chaingun_spawn_bias"
+ 	StaticText ""
+    StaticText  "Control whether replacements happen after a mapload.", "white"
+	Option "Persistent Spawns: ", "levergat_persistent_spawning", "OnOff"
+	SafeCommand "Reset persistence  options", "resetcvar levergat_persistent_spawning"
+ 	StaticText ""
+   	StaticText ""
+	StaticText "Reset Options", "Green"
+	SafeCommand "Reset all options", "levergat_reset_cvars"
+}
 
 OptionMenu musket
 {
-    Title ".56 Cal Musket Options"
+    Title "------ Musket Options ------"
    	StaticText "Notice:", 1
     StaticText  "Setting 'spawn rate' to Replace All will supress", "white"
     StaticText  "chaingun spawns of that given type.", "white"
@@ -138,8 +161,108 @@ OptionMenu musket
 	SafeCommand "Reset persistence  options", "resetcvar musket_persistent_spawning"
  	StaticText ""
    	StaticText ""
-	StaticText "Reset Options", "cyan"
+	StaticText "Reset Options", "Green"
 	SafeCommand "Reset all options", "musket_reset_cvars"
+}
+
+OptionMenu rum
+{
+    Title "------ Ration Options ------"
+   	StaticText "Notice:", 1
+    StaticText  "Setting 'spawn rate' to Replace All will supress", "white"
+    StaticText  "medikit spawns of that given type.", "white"
+    StaticText ""
+	StaticText "Spawn Options", 1
+    StaticText  "Control the spawn rate of Rum on Medikits", "white"
+	Option " Medikit Spawn Rate: ", "rum_pmi_spawn_Bias", "SpawnBias"
+	SafeCommand "Reset Rum options", "resetcvar rum_pmi_spawn_bias"
+	StaticText ""
+    StaticText  "Control the spawn rate of Radsuit Packages on Radsuits", "white"
+	Option " Medikit Spawn Rate: ", "rum_pmi_spawn_Bias", "SpawnBias"
+	SafeCommand "Reset Rum options", "resetcvar rum_pmi_spawn_bias"
+ 	StaticText ""
+    StaticText  "Control whether replacements happen after a mapload.", "white"
+	Option "Persistent Spawns: ", "rum_persistent_spawning", "OnOff"
+	SafeCommand "Reset persistence  options", "resetcvar rum_persistent_spawning"
+ 	StaticText ""
+   	StaticText ""
+	StaticText "Reset Options", "Green"
+	SafeCommand "Reset all options", "rum_reset_cvars"
+}
+
+OptionMenu warebags
+{
+    Title "------ Backpack Options ------"
+	StaticText "Spawn Options", 1
+    StaticText  "Control the spawn rate of the Logistics Bag.", "white"
+	Option " Logistics Bag Spawn Rate: ", "lgb_replacement_spawn_bias", "SpawnBiasNoReplace"
+	SafeCommand "Reset Logistics Bag options", "resetcvar lgb_replacement_spawn_bias"
+ 	StaticText ""
+    StaticText  "Control the spawn rate of Medical Backpacks", "white"
+	Option " Medical Bag Spawn Rate: ", "mdb_replacement_spawn_bias", "SpawnBiasNoReplace"
+	SafeCommand "Reset Medical Bag options", "resetcvar mdb_replacement_spawn_bias"
+ 	StaticText ""
+    StaticText  "Control whether replacements happen after a mapload.", "white"
+	Option "Persistent Spawns: ", "lgb_persistent_spawning", "OnOff"
+	SafeCommand "Reset persistence  options", "resetcvar lgb_persistent_spawning"
+ 	StaticText ""
+   	StaticText ""
+	StaticText "Reset Options", "Green"
+	SafeCommand "Reset all options", "bag_reset_cvars"
+}
+
+OptionMenu url
+{
+    Title "------ Universal Reloader Options ------"
+    StaticText ""
+	StaticText "Spawn Options", 1
+    StaticText  "Control the spawn rate of the Universal Reloader", "white"
+	Option " Universal Reloader Spawn Rate: ", "url_replacement_spawn_bias", "SpawnBiasNoReplace"
+	SafeCommand "Reset Universal Reloader options", "resetcvar url_replacement_spawn_bias"
+ 	StaticText ""
+    StaticText  "Control whether replacements happen after a mapload.", "white"
+	Option "Persistent Spawns: ", "url_persistent_spawning", "OnOff"
+	SafeCommand "Reset persistence  options", "resetcvar url_persistent_spawning"
+ 	StaticText ""
+   	StaticText ""
+	StaticText "Reset Options", "Green"
+	SafeCommand "Reset all options", "url_reset_cvars"
+}
+
+OptionMenu apk
+{
+    Title "------ Armor Patch Kit Options ------"
+    StaticText ""
+	StaticText "Spawn Options", 1
+    StaticText  "Control the spawn rate of the Armor Patch Kit", "white"
+	Option " Armor Patch Kit Spawn Rate: ", "apk_replacement_spawn_bias", "SpawnBiasNoReplace"
+	SafeCommand "Reset Armor Patch Kit options", "resetcvar apk_replacement_spawn_bias"
+ 	StaticText ""
+    StaticText  "Control whether replacements happen after a mapload.", "white"
+	Option "Persistent Spawns: ", "apk_persistent_spawning", "OnOff"
+	SafeCommand "Reset persistence  options", "resetcvar apk_persistent_spawning"
+ 	StaticText ""
+   	StaticText ""
+	StaticText "Reset Options", "Green"
+	SafeCommand "Reset all options", "apk_reset_cvars"
+}
+
+OptionMenu dfb
+{
+    Title "------ Defibrillator Options ------"
+    StaticText ""
+	StaticText "Spawn Options", 1
+    StaticText  "Control the spawn rate of the Defibrillator", "white"
+	Option " Defibrillator Spawn Rate: ", "dfb_replacement_spawn_bias", "SpawnBiasNoReplace"
+	SafeCommand "Reset Defibrillator options", "resetcvar dfb_replacement_spawn_bias"
+ 	StaticText ""
+    StaticText  "Control whether replacements happen after a mapload.", "white"
+	Option "Persistent Spawns: ", "dfb_persistent_spawning", "OnOff"
+	SafeCommand "Reset persistence  options", "resetcvar dfb_persistent_spawning"
+ 	StaticText ""
+ 	StaticText ""
+	StaticText "Reset Options", "Green"
+	SafeCommand "Reset all options", "dfb_reset_cvars"
 }
 
 OptionValue "SpawnBias"
@@ -158,10 +281,26 @@ OptionValue "SpawnBias"
 	 199,  "1 in 200"
 }
 
+OptionValue "SpawnBiasNoReplace"
+{
+	-1,    "Disabled"
+	 0,    "Add to All"
+	 2,    "1 in 3"
+	 4,    "1 in 5"
+	 9,    "1 in 10"
+	 14,   "1 in 15"
+	 19,   "1 in 20"
+	 24,   "1 in 25"
+	 49,   "1 in 50"
+	 99,   "1 in 100"
+	 149,  "1 in 150"
+	 199,  "1 in 200"
+}
+
 OptionMenu "pbweps"
 {
-    Title "Potetobloke Weapons"
-    StaticText "Main Options", "cyan"
+    Title "------ Potetobloke's Weapons ------"
+    StaticText "Main Options", "Green"
 	Submenu "Raycob RAC-13/45", "Mac10"
 	StaticText ""
 	Submenu "Commando .355 Carbine", "c355"
@@ -169,20 +308,53 @@ OptionMenu "pbweps"
 	SubMenu "Raycob Subterranean Striker", "stryk"
 	StaticText ""
 	SubMenu "Pipegun", "pipeg"
+	StaticText ""
+	SubMenu "Sawyer Hunting Carbine", "levergat"
+}
+
+OptionMenu "witems"
+{
+	Title "------ Offworld Items ------"
+	StaticText "Only the original items in Wares!", "gold"
+	StaticText ""
+	Submenu "Ration Options", "rum"
+	StaticText ""
+	Submenu "Backpacks", "warebags"
+	StaticText ""
+	Submenu "Defibrillator", "dfb"
+}
+
+OptionMenu "aceitems"
+{
+	Title "------ AceCorp Forks ------"
+	StaticText "All of our AceCorp item forks!", "gold"
+	StaticText ""
+	Submenu "Universal Reloader", "url"
+	StaticText ""
+	Submenu "Armor Patch Kit", "apk"
 }
 
 AddOptionMenu "CozisOffworldWares"
 {
+	StaticText "-------------------", "gold"
+    StaticText "Monster Options", "Green"
 	StaticText ""
 	Submenu "Trites", "Trites"
 	StaticText ""
-	StaticText "Weapon Options", "cyan"
+	StaticText "Weapon Options", "Green"
 	StaticText ""
-	Submenu ".56 Cal Musket", "musket"
+	// Make this another sub-menu for the musket, Gullveig, Velbyssa etc later. - [Ted]
+	Submenu "Offworld Weapons", "musket"
 	StaticText ""
 	Submenu "PB Weapons", "pbweps"
 	StaticText ""
-	StaticText "Below will reset every settings for Cozi's Offworld Wares! Be warned.", "red"
+	StaticText "Item Options", "Green"
 	StaticText ""
+	Submenu "Offworld Items", "witems"
+	StaticText ""
+	Submenu "AceCorp Items", "aceitems"
+	StaticText "-------------------", "gold"
+	StaticText "Below will reset every options for Offworld Wares!", "red"
+	StaticText " Be warned.", "red"
 	SafeCommand "Reset all options", "wares_reset_cvars"
 }
