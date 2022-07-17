@@ -5,7 +5,7 @@ class HDLeverGun:HDWeapon{
 		+hdweapon.fitsinbackpack
 		scale 0.60;
 		weapon.selectionorder 50;
-		weapon.slotnumber 4;
+		weapon.slotnumber 6;
 		weapon.kickback 30;
 		weapon.bobrangex 0.21;
 		weapon.bobrangey 0.86;
