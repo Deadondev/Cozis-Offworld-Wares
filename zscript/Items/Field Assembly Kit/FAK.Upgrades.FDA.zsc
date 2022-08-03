@@ -1,0 +1,8 @@
+class FAK_OUS_MaxChoke : FAK_Upgrade
+{
+	override string GetItem() { return "HDAltis"; }
+	override string GetDisplayName() { return "Max Choke"; }
+	override void DoUpgrade(HDWeapon wpn, HDPickup pkp) { wpn.WeaponStatus[OUSS_CHOKE1] = 7; wpn.WeaponStatus[OUSS_CHOKE2] = 7; }
+	override int HasUpgrade(HDWeapon wpn, HDPickup pkp) { return wpn.WeaponStatus[OUSS_CHOKE1] == 7 && wpn.WeaponStatus[OUSS_CHOKE2] == 7; }
+	override void DoDowngrade(HDWeapon wpn, HDPickup pkp) { wpn.WeaponStatus[OUSS_CHOKE1] = 0; wpn.WeaponStatus[OUSS_CHOKE2] = 0; GiveCore(wpn.owner, 0.03); }
+}

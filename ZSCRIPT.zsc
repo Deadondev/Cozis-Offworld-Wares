@@ -52,6 +52,7 @@ version "4.5"
 #include "zscript/Items/Field Assembly Kit/FAK.Upgrades.HexaDoken.zsc"
 #include "zscript/Items/Field Assembly Kit/FAK.Upgrades.Potetobloke.zsc"
 #include "zscript/Items/Field Assembly Kit/FAK.Upgrades.Mohl.zsc"
+#include "zscript/Items/Field Assembly Kit/FAK.Upgrades.FDA.zsc"
 
 // Logistics Bag
 #include "zscript/Items/LogiBag.zsc"

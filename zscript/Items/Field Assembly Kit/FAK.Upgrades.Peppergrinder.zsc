@@ -132,7 +132,7 @@ class FAK_BoxCannon_Broomhandle : FAK_Upgrade
 class FAK_BoxCannon_LongerBarrel : FAK_Upgrade
 {
 	override string GetItem() { return "HDBoxCannon"; }
-	override string GetDisplayName() { return "Longer Barrel"; }
+	override string GetDisplayName() { return "Carbine Barrel with Foregrip"; }
 	override void DoUpgrade(HDWeapon wpn, HDPickup pkp) { wpn.WeaponStatus[6] = 1; }
 	override int HasUpgrade(HDWeapon wpn, HDPickup pkp) { return wpn.WeaponStatus[6] == 1 ? HUResult_Installed : HUResult_Unique; }
 	override void DoDowngrade(HDWeapon wpn, HDPickup pkp) { wpn.WeaponStatus[6] = 0; GiveCore(wpn.owner, 0.25); }
@@ -141,7 +141,7 @@ class FAK_BoxCannon_LongerBarrel : FAK_Upgrade
 class FAK_BoxCannon_Suppressor : FAK_Upgrade
 {
 	override string GetItem() { return "HDBoxCannon"; }
-	override string GetDisplayName() { return "Suppressor"; }
+	override string GetDisplayName() { return "Mini-Tuschi Silencer"; }
 	override void DoUpgrade(HDWeapon wpn, HDPickup pkp) { wpn.WeaponStatus[6] = 2; }
 	override int HasUpgrade(HDWeapon wpn, HDPickup pkp) { return wpn.WeaponStatus[6] == 2 ? HUResult_Installed : HUResult_Unique; }
 	override void DoDowngrade(HDWeapon wpn, HDPickup pkp) { wpn.WeaponStatus[6] = 0; GiveCore(wpn.owner, 0.25); }
@@ -150,25 +150,25 @@ class FAK_BoxCannon_Suppressor : FAK_Upgrade
 class FAK_Lotus_Scope : FAK_Upgrade
 {
 	override string GetItem() { return "HDLotus"; }
-	override string GetDisplayName() { return "Scope"; }
-	override void DoUpgrade(HDWeapon wpn, HDPickup pkp) { wpn.WeaponStatus[0] |= 4; }
-	override int HasUpgrade(HDWeapon wpn, HDPickup pkp) { return wpn.WeaponStatus[0] & 4 > 0; }
+	override string GetDisplayName() { return "Boss-Replica Midrange Scope"; }
+	override void DoUpgrade(HDWeapon wpn, HDPickup pkp) { wpn.WeaponStatus[LOTF_SCOPE] |= 4; }
+	override int HasUpgrade(HDWeapon wpn, HDPickup pkp) { return wpn.WeaponStatus[LOTF_SCOPE] & 4 > 0; }
 	override void DoDowngrade(HDWeapon wpn, HDPickup pkp) { wpn.WeaponStatus[0] &= ~4; GiveCore(wpn.owner, 0.25); }
 }
 
-class FAK_Lotus_GasSeal : FAK_Upgrade
+class FAK_Lotus_SA : FAK_Upgrade
 {
 	override string GetItem() { return "HDLotus"; }
-	override string GetDisplayName() { return "Improved Gas Seal"; }
+	override string GetDisplayName() { return "Single-Action Trigger"; }
 	override void DoUpgrade(HDWeapon wpn, HDPickup pkp) { wpn.WeaponStatus[0] |= 2; }
 	override int HasUpgrade(HDWeapon wpn, HDPickup pkp) { return wpn.WeaponStatus[0] & 2 > 0; }
-	override void DoDowngrade(HDWeapon wpn, HDPickup pkp) { wpn.WeaponStatus[0] &= ~2; GiveCore(wpn.owner, 0.35); }
+	override void DoDowngrade(HDWeapon wpn, HDPickup pkp) { wpn.WeaponStatus[LOTF_SA] &= ~2; GiveCore(wpn.owner, 0.35); }
 }
 
 class FAK_Lotus_ExtendedBarrel : FAK_Upgrade
 {
 	override string GetItem() { return "HDLotus"; }
-	override string GetDisplayName() { return "Extended Barrel"; }
+	override string GetDisplayName() { return "Full-Length Rifle Barrel"; }
 	override void DoUpgrade(HDWeapon wpn, HDPickup pkp) { wpn.WeaponStatus[7] = 1; }
 	override int HasUpgrade(HDWeapon wpn, HDPickup pkp) { return wpn.WeaponStatus[7] == 1 ? HUResult_Installed : HUResult_Unique; }
 	override void DoDowngrade(HDWeapon wpn, HDPickup pkp) { wpn.WeaponStatus[7] = 0; GiveCore(wpn.owner, 0.35); }
@@ -177,8 +177,26 @@ class FAK_Lotus_ExtendedBarrel : FAK_Upgrade
 class FAK_Lotus_Suppressor : FAK_Upgrade
 {
 	override string GetItem() { return "HDLotus"; }
-	override string GetDisplayName() { return "Suppressor"; }
+	override string GetDisplayName() { return "Tsuchinoko Dual-Purpose Suppressor"; }
 	override void DoUpgrade(HDWeapon wpn, HDPickup pkp) { wpn.WeaponStatus[7] = 2; }
 	override int HasUpgrade(HDWeapon wpn, HDPickup pkp) { return wpn.WeaponStatus[7] == 2 ? HUResult_Installed : HUResult_Unique; }
 	override void DoDowngrade(HDWeapon wpn, HDPickup pkp) { wpn.WeaponStatus[7] = 0; GiveCore(wpn.owner, 0.35); }
+}
+
+class FAK_BPX_Reflex : FAK_Upgrade
+{
+	override string GetItem() { return "HDBPX"; }
+	override string GetDisplayName() { return "LIG Mauer Roomba Reflex Sight"; }
+	override void DoUpgrade(HDWeapon wpn, HDPickup pkp) { wpn.WeaponStatus[BPXF_SIGHTINGSYSTEM] = 1; }
+	override int HasUpgrade(HDWeapon wpn, HDPickup pkp) { return wpn.WeaponStatus[BPXF_SIGHTINGSYSTEM] == 1; }
+	override void DoDowngrade(HDWeapon wpn, HDPickup pkp) { wpn.WeaponStatus[BPXF_SIGHTINGSYSTEM] = 0; GiveCore(wpn.owner, 0.03); }
+}
+
+class FAK_BPX_Scope : FAK_Upgrade
+{
+	override string GetItem() { return "HDBPX"; }
+	override string GetDisplayName() { return "LIG Mauer Dragon-7 Scope"; }
+	override void DoUpgrade(HDWeapon wpn, HDPickup pkp) { wpn.WeaponStatus[BPXF_SIGHTINGSYSTEM] = 1; }
+	override int HasUpgrade(HDWeapon wpn, HDPickup pkp) { return wpn.WeaponStatus[BPXF_SIGHTINGSYSTEM] == 1; }
+	override void DoDowngrade(HDWeapon wpn, HDPickup pkp) { wpn.WeaponStatus[BPXF_SIGHTINGSYSTEM] = 0; GiveCore(wpn.owner, 0.03); }
 }
