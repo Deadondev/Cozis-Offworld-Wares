@@ -1,2 +1,3 @@
 HDUniversalReloader
 HDArmorPatchKit
+HDFieldAssemblyKit

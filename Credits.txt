@@ -41,3 +41,8 @@ Sprite Edit: Captain Toenail
 Sounds: Id Software
 Idea Base: Trite from Doom 3
 Coding Help: FDA
+
+--Field Assembly Kit--
+Original Code: Accensus
+Sprites: Mor'ladim for the assembly cores. Took them from Bullet-Eye.
+Brightmaps: Icarus

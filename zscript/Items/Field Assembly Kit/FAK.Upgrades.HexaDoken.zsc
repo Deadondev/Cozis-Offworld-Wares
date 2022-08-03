@@ -1,0 +1,32 @@
+class FAK_Bossmerg_ExtendedMag : FAK_Upgrade
+{
+	override string GetItem() { return "Bossmerg"; }
+	override string GetDisplayName() { return "Extended Magazine"; }
+	override void DoUpgrade(HDWeapon wpn, HDPickup pkp) { wpn.WeaponStatus[0] |= 32; }
+	override int HasUpgrade(HDWeapon wpn, HDPickup pkp) { return wpn.WeaponStatus[0] & 32 > 0; }
+	override void DoDowngrade(HDWeapon wpn, HDPickup pkp) { wpn.WeaponStatus[0] &= ~32; GiveCore(wpn.owner, 0.2); }
+}
+
+class FAK_SpeedHunter_FullAuto : FAK_Hunter_FullAuto
+{
+	override string GetItem() { return "HunterSpeed"; }
+}
+
+class FAK_SpeedHunter_MaxChoke : FAK_Hunter_MaxChoke
+{
+	override string GetItem() { return "HunterSpeed"; }
+}
+
+class FAK_SpeedHunter_Feeder : FAK_Hunter_Feeder
+{
+	override string GetItem() { return "HunterSpeed"; }
+}
+
+class FAK_SpeedHunter_SideSaddles : FAK_Upgrade
+{
+	override string GetItem() { return "HunterSpeed"; }
+	override string GetDisplayName() { return "Side Saddles"; }
+	override void DoUpgrade(HDWeapon wpn, HDPickup pkp) { wpn.WeaponStatus[0] &= ~128; }
+	override int HasUpgrade(HDWeapon wpn, HDPickup pkp) { return !(wpn.WeaponStatus[0] & 128 > 0); }
+	override void DoDowngrade(HDWeapon wpn, HDPickup pkp) { wpn.WeaponStatus[0] &= ~128; GiveCore(wpn.owner, 0.2); }
+}

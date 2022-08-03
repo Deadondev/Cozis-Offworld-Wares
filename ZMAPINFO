@@ -3,7 +3,7 @@ GameInfo
 	// Weapons
 	AddEventHandlers = "COW_MusketReplacer", "Commando355Injector", "SweepInjector", "PipegunInjector", "MacInjector", "LevergatInjector"
 	// Items
-	AddEventHandlers = "OleRumEventHandler", "UaS_AlcoholEventHandler", "APKHandler", "URLHandler", "HD_LogiBagSpawner", "HD_DefibSpawner", "RadReplacementHandler", "HD_MediBagSpawner"
+	AddEventHandlers = "OleRumEventHandler", "UaS_AlcoholEventHandler", "APKHandler", "URLHandler", "HD_LogiBagSpawner", "HD_DefibSpawner", "RadReplacementHandler", "HD_MediBagSpawner", "FAK_Handler"
 	// Monsters
 	AddEventHandlers = "SpiderBarrelEventHandler", "TriteHandler"
 }

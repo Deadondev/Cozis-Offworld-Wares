@@ -31,12 +31,15 @@ version "4.5"
 // Rations
 #include "zscript/Items/UaS_Rations.zs"
 
-// Universal Reloader Fork
+// Universal Reloader
 #include "zscript/Items/unireloader.zs"
 #include "zscript/Items/reloadermats.zs"
 
-// Armor-patch Kit Fork
+// Armor-patch Kit
 #include "zscript/Items/armorpatchkit.zs"
+
+// Field Asembly Kit
+#include "zscript/Items/Field Assembly Kit/FieldAssemblyKit.zsc"
 
 // Logistics Bag
 #include "zscript/Items/LogiBag.zsc"
