@@ -72,16 +72,6 @@ class FAK_Boss_NoScopeBoss : FAK_Upgrade
 	}
 }
 
-class FAK_NSB_FrontReticle : FAK_Upgrade
-{
-	override string GetItem() { return "NoScopeBoss"; }
-	override string GetDisplayName() { return "Front Reticle"; }
-	override int GetCost() { return 0; }
-	override void DoUpgrade(HDWeapon wpn, HDPickup pkp) { wpn.WeaponStatus[0] |= BOSSF_FRONTRETICLE; }
-	override void DoDowngrade(HDWeapon wpn, HDPickup pkp) { wpn.WeaponStatus[0] &= ~BOSSF_FRONTRETICLE; }
-	override int HasUpgrade(HDWeapon wpn, HDPickup pkp) { return wpn.WeaponStatus[0] & BOSSF_FRONTRETICLE > 0; }
-}
-
 class FAK_NSB_CustomChamber : FAK_Upgrade
 {
 	override string GetItem() { return "NoScopeBoss"; }
