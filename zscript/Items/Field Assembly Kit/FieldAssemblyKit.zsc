@@ -1,15 +1,3 @@
-// Include upgrade stuff.
-#include "FAK.Upgrades.Handler.zsc"
-#include "FAK.Upgrades.Thinkers.zsc"
-#include "FAK.Upgrades.Vanilla.zsc"
-#include "FAK.Upgrades.AceCorp.zsc"
-#include "FAK.Upgrades.Icarus.zsc"
-#include "FAK.Upgrades.Peppergrinder.zsc"
-#include "FAK.Upgrades.Hoagietech.zsc"
-#include "FAK.Upgrades.HexaDoken.zsc"
-#include "FAK.Upgrades.Potetobloke.zsc"
-#include "FAK.Upgrades.Mohl.zsc"
-
 class FAK_Handler : EventHandler
 {
 	private bool GaveCore;

@@ -41,6 +41,18 @@ version "4.5"
 // Field Asembly Kit
 #include "zscript/Items/Field Assembly Kit/FieldAssemblyKit.zsc"
 
+// Field Assembly Kit upgrades.
+#include "zscript/Items/Field Assembly Kit/FAK.Upgrades.Handler.zsc"
+#include "zscript/Items/Field Assembly Kit/FAK.Upgrades.Thinkers.zsc"
+#include "zscript/Items/Field Assembly Kit/FAK.Upgrades.Vanilla.zsc"
+#include "zscript/Items/Field Assembly Kit/FAK.Upgrades.AceCorp.zsc"
+#include "zscript/Items/Field Assembly Kit/FAK.Upgrades.Icarus.zsc"
+#include "zscript/Items/Field Assembly Kit/FAK.Upgrades.Peppergrinder.zsc"
+#include "zscript/Items/Field Assembly Kit/FAK.Upgrades.Hoagietech.zsc"
+#include "zscript/Items/Field Assembly Kit/FAK.Upgrades.HexaDoken.zsc"
+#include "zscript/Items/Field Assembly Kit/FAK.Upgrades.Potetobloke.zsc"
+#include "zscript/Items/Field Assembly Kit/FAK.Upgrades.Mohl.zsc"
+
 // Logistics Bag
 #include "zscript/Items/LogiBag.zsc"
 
