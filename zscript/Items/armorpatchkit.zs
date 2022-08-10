@@ -232,7 +232,7 @@ class HDArmorPatchKit : HDWeapon
 		A_MuzzleClimb(frandom(-1.0, 1.0), frandom(-1.0, 1.0), frandom(-1.0, 1.0), frandom(-1.0, 1.0), frandom(-1.0, 1.0), frandom(-1.0, 1.0), frandom(-1.0, 1.0), frandom(0.0, 1.0));
 	}
 
-	const KitDurability = 30;
+	const KitDurability = 60;
 	bool StopDisassembly;
 
 	Default
