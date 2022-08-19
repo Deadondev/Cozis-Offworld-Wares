@@ -371,18 +371,6 @@ class FAK_Boss_CustomChamber : FAK_Upgrade
 	override void DoDowngrade(HDWeapon wpn, HDPickup pkp) { wpn.WeaponStatus[0] &= ~BOSSF_CUSTOMCHAMBER; GiveCore(wpn.owner, 0.7); }
 }
 
-class FAK_Armor_Repair : FAK_Upgrade
-{
-	override string GetItem() { return "HDArmour"; }
-	override string GetDisplayName() { return "Full Repair"; }
-	override void DoUpgrade(HDWeapon wpn, HDPickup pkp)
-	{
-		let arm = HDArmour(pkp);
-		arm.Mags[arm.Mags.Size() - 1] = arm.mega ? 1070 : 144;
-	}
-	override int HasUpgrade(HDWeapon wpn, HDPickup pkp) { return HUResult_Repeatable; }
-}
-
 class FAK_MagManager_Speedloader : FAK_Upgrade
 {
 	override string GetItem() { return "MagManager"; }
