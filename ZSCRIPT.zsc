@@ -11,7 +11,7 @@ version "4.5"
 #include "zscript/Weaponry/Musket/BALL.zsc"
 #include "zscript/weaponry/Musket/Musket.zsc"
 // It brokie :(((((
-//#include "zscript/Weaponry/Flintlock Pistol/flintpistol.zsc"
+#include "zscript/Weaponry/Flintlock Pistol/flintpistol.zsc"
 
 // Potetobloke Fork
 #include "zscript/Weaponry/Potetobloke-Weapons/MAC11.zsc"

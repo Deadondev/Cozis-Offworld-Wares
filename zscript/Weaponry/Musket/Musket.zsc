@@ -678,20 +678,6 @@ if(!punchee.countinv("HDArmourWorn")){
 				default:
 				break;//////////////////////////////////////////////////////////////////
 			}}}
-		/*
-	MUSKT_POWDERED=1,
-	MUSKT_BALLLOADED=2,
-	///////////////////////////////
-	MUSKT_CORRECTLOAD=4,
-	MUSKT_CORRECTRAMMED=5,
-	///////////////////////////////
-	MUSKT_OVERPOWDERED=6,
-	MUSKT_OVERPOWDEREDBALL=7,
-	MUSKT_OVERPOWDEREDRAMMED=8,
-	///////////////////////////////
-	MUSKT_JUSTBALLRAMMED=9,
-	///////////////////////////////
-		*/
 		goto ready;
 
 	altfire:

@@ -9,7 +9,7 @@ class HD_FlintlockPistol:HDHandgun{
 		//$Title "Flintlock Pistol"
 		//$Sprite "FLNRA0"
 		weapon.selectionorder 300;
-		weapon.slotnumber 5;
+		weapon.slotnumber 2;
 		weapon.slotpriority 3;
 		weapon.kickback 100;
 		weapon.bobrangex 0.21;
@@ -169,20 +169,18 @@ class HD_FlintlockPistol:HDHandgun{
 	// ---- THIS IS WHERE THE MUSKET CODE IS ----
 	fire:
 		MSKG A 1 offset(0,34){
-			if(invoker.weaponstatus[FLINT_BARREL]==0){
+			/*if(invoker.weaponstatus[FLINT_BARREL]==0){
 			setweaponstate("nope");
 			return;
-			}
+			}*/
 				if(invoker.weaponstatus[FLINT_COCKED]==1){
 			setweaponstate("nope");
 			return;
 			}
 				switch (invoker.weaponStatus[FLINT_BARREL]){
-					case FLINT_CORRECTRAMMED:
+					case FLINT_CORRECTLOAD:
 					A_GunFlash();
 					A_StartSound("weapons/musketfire",CHAN_WEAPON);
-					//A_StartSound("weapons/bronto",CHAN_WEAPON,CHANF_OVERLAP);
-					//A_StartSound("weapons/bronto2",CHAN_WEAPON,CHANF_OVERLAP);
 					A_AlertMonsters();
 					let tb=HDBulletActor.FireBullet(self,"HDB_Ball",spread:4.,speedfactor:frandom(0.97,1.03));
 					invoker.weaponstatus[FLINT_BARREL]=0;
@@ -191,7 +189,7 @@ class HD_FlintlockPistol:HDHandgun{
 					setweaponstate("nope"); //this makes sure you don't get double heat/smoke
 					break;
 				/////////////////////////////////////////////////////////////////////////////////////
-					case FLINT_OVERPOWDEREDRAMMED:
+					case FLINT_OVERPOWDERED:
 					A_GunFlash();
 					A_StartSound("weapons/musketfire",CHAN_WEAPON);
 					A_AlertMonsters();
@@ -209,8 +207,6 @@ class HD_FlintlockPistol:HDHandgun{
 					invoker.destroy();
 					break;
 				/////////////////////////////////////////////////////////////////////////////////////
-					case FLINT_JUSTBALL:
-					break;
 					};
 
 		}
@@ -248,7 +244,7 @@ class HD_FlintlockPistol:HDHandgun{
 			);
 		}
 		stop;
-	reload: //Reload+Fire should put the ball in, Reload+Alt.Fire will pour powder in
+	reload: //This later should track what hand its in, thus reloading accordingly. BUT WE DONT HAVE SPRITES YET HAHHAHAHAHAAAAAAAAAAAAAAAAAAAAAAAAA -[Cozi]
 		#### A 4 A_MuzzleClimb(
 			-frandom(0.5,0.6),frandom(0.5,0.6),
 			-frandom(0.5,0.6),frandom(0.5,0.6)
@@ -514,23 +510,20 @@ class HD_FlintlockPistol:HDHandgun{
 	}
 }
 
-enum flintpistolstatus{
+enum flintpistolstatus{ // There aren't any RAMMED ones bc alt. reload flips the guns dumbass - [Cozi]
 	FLINT_POWDERED=1,
 	FLINT_BALLLOADED=2,
-	FLINT_RAMMED=3,
 	///////////////////////////////
-	FLINT_CORRECTLOAD=4,
+	FLINT_CORRECTLOAD=3,
 	///////////////////////////////
-	FLINT_OVERPOWDERED=5,
-	FLINT_OVERPOWDEREDBALL=6,
+	FLINT_OVERPOWDERED=4,
+	FLINT_OVERPOWDEREDBALL=5,
 	///////////////////////////////
-	FLINT_JUSTBALL=7,
-	///////////////////////////////
-	FLINT_COCKED=2,
+	FLINT_COCKED=7,
 	
-	FLINT_BARREL=1,//this is the barrel
-	FLINT_JUSTUNLOAD=32,//this one will be 7
+	FLINT_BARREL=6,//this is the barrel
+	FLINT_JUSTUNLOAD=32,
 	
 	FLINT_HEAT=0,
-	FLINT_RIGHTHANDED=1,
+	FLINT_RIGHTHANDED=1, //give this mf 11 and 12 or some shit idk
 };
