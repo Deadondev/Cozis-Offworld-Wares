@@ -2,42 +2,12 @@
 // WEAPONS
 //-------------------------------------------------
 
-// Mac-11 Sound Info
-weapons/MAC11Shot Sounds/MAC11/MACFire1.ogg
-weapons/MACStockOut Sounds/MAC11/MACStk1.wav
-weapons/MACStockIn Sounds/MAC11/MACStk2.wav
-weapons/MACStockClick Sounds/MAC11/MACStk3.wav
-weapons/MACboltback Sounds/MAC11/MACBoltBack.ogg
-weapons/MACboltfwd Sounds/MAC11/MACBoltFwd.ogg
-
-// Colt Carbine Sound Info
-weapons/smg/355 Sounds/Commando/355Fire.ogg
-weapons/smg/355/cock Sounds/Commando/355Cock.ogg
-weapons/smg/355/fwd Sounds/Commando/355Fwd.ogg
-
-// Cobray Street Sweeper and Terminator
-weapons/sweepershot1 Sounds/Cobray/SWPFire1.ogg
-weapons/sweepereject Sounds/Cobray/SWPEject.wav
-weapons/sweepercyl Sounds/Cobray/SWPCyl.ogg
-weapons/sweeperopen Sounds/Cobray/SWPOpen.ogg
-weapons/sweeperload Sounds/Cobray/SWPLoad.ogg
-weapons/sweeperclose Sounds/Cobray/SWPClose.ogg
-
-weapons/terminatoropen Sounds/Cobray/TRMOpen.ogg
-weapons/terminatorfwd Sounds/Cobray/TRMFwd.ogg
-weapons/terminatorfire Sounds/Cobray/TRMFire1.ogg
-
 // Musket
 weapons/musketfire       muskfire
 weapons/musketrodin      muskrodin
 weapons/musketdust      muskdust
 weapons/musketcock      muskcock
 weapons/musketmove      muskmove
-
-// Lever Action
-weapons/levergun/fire1 Sounds/LeverGun/LVGShot1.ogg
-weapons/levergun/cock1 Sounds/LeverGun/LVGCock1.ogg
-weapons/levergun/cock2 Sounds/LeverGun/LVGCock2.ogg
 
 // Defibrillator
 weapons/defibuse      Sounds/Defibrillator/defibrillator_use.wav

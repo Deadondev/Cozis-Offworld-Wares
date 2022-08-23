@@ -33,117 +33,6 @@ OptionMenu Trites
 	SafeCommand "Reset all options", "sbrl_reset_cvars"
 }
 
-OptionMenu Mac10
-{
-    Title "------ Raycob RAC-13/45 Options ------"
-   	StaticText "Notice:", 1
-    StaticText  "Setting 'spawn rate' to Replace All will supress", "white"
-    StaticText  "chaingun spawns of that given type.", "white"
-    StaticText ""
-	StaticText "Spawn Options", 1
-    StaticText  "Control the spawn rate of the RAC-13/45", "white"
-	Option " RAC-13/45 Spawn Rate: ", "mac10_regulars_spawn_bias", "SpawnBias"
-	SafeCommand "Reset RAC-13/45 options", "resetcvar mac10_regulars_spawn_bias"
- 	StaticText ""
-    StaticText  "Control whether replacements happen after a mapload.", "white"
-	Option "Persistent Spawns: ", "mac10_persistent_spawning", "OnOff"
-	SafeCommand "Reset persistence  options", "resetcvar mac10_persistent_spawning"
- 	StaticText ""
-   	StaticText ""
-	StaticText "Reset Options", "Green"
-	SafeCommand "Reset all options", "mac10_reset_cvars"
-}
-
-OptionMenu c355
-{
-    Title "------ Commando .355 Carbine Options ------"
-   	StaticText "Notice:", 1
-    StaticText  "Setting 'spawn rate' to Replace All will supress", "white"
-    StaticText  "chaingun or ssg spawns of that given type.", "white"
-    StaticText ""
-	StaticText "Spawn Options", 1
-    StaticText  "Control the spawn rate of the Commando .355 Carbine on Chainguns", "white"
-	Option " Commando .355 Carbine Spawn Rate: ", "c355_chaingun_spawn_bias", "SpawnBias"
-	SafeCommand "Reset Commando SSG options", "resetcvar c355_chaingun_spawn_bias"
-    StaticText  "Control the spawn rate of the Commando .355 Carbine on SSGs", "white"
-	Option " Commando .355 Carbine Spawn Rate: ", "c355_ssg_spawn_bias", "SpawnBias"
-	SafeCommand "Reset Commando Chaingun options", "resetcvar c355_ssg_spawn_bias"
- 	StaticText ""
-    StaticText  "Control whether replacements happen after a mapload.", "white"
-	Option "Persistent Spawns: ", "c355_persistent_spawning", "OnOff"
-	SafeCommand "Reset persistence  options", "resetcvar c355_persistent_spawning"
- 	StaticText ""
-   	StaticText ""
-	StaticText "Reset Options", "Green"
-	SafeCommand "Reset all options", "c355_reset_cvars"
-}
-
-OptionMenu stryk
-{
-    Title "------ Raycob Subterranean Striker Options ------"
-   	StaticText "Notice:", 1
-    StaticText  "Setting 'spawn rate' to Replace All will supress", "white"
-    StaticText  "shotgun or ssg spawns of that given type.", "white"
-    StaticText ""
-	StaticText "Spawn Options", 1
-    StaticText  "Control the spawn rate of the Striker on Shotguns", "white"
-	Option " Subterranean Striker Spawn Rate: ", "stryk_shotgun_spawn_bias", "SpawnBias"
-	SafeCommand "Reset Striker Shotgun options", "resetcvar stryk_shotgun_spawn_bias"
-    StaticText  "Control the spawn rate of the Striker on SSGs", "white"
-	Option " Subterranean Striker Spawn Rate: ", "stryk_ssg_spawn_bias", "SpawnBias"
-	SafeCommand "Reset Striker SSG options", "resetcvar stryk_ssg_spawn_bias"
- 	StaticText ""
-    StaticText  "Control whether replacements happen after a mapload.", "white"
-	Option "Persistent Spawns: ", "stryk_persistent_spawning", "OnOff"
-	SafeCommand "Reset persistence options", "resetcvar stryk_persistent_spawning"
- 	StaticText ""
-   	StaticText ""
-	StaticText "Reset Options", "Green"
-	SafeCommand "Reset all options", "stryk_reset_cvars"
-}
-
-OptionMenu pipeg
-{
-    Title "------ Pipegun Options ------"
-   	StaticText "Notice:", 1
-    StaticText  "Setting 'spawn rate' to Replace All will supress", "white"
-    StaticText  "shell spawns of that given type.", "white"
-    StaticText ""
-	StaticText "Spawn Options", 1
-    StaticText  "Control the spawn rate of the Pipegun on Shells", "white"
-	Option " Pipegun Spawn Rate: ", "pipegun_shell_spawn_bias", "SpawnBias"
-	SafeCommand "Reset Pipegun options", "resetcvar pipegun_shell_spawn_bias"
- 	StaticText ""
-    StaticText  "Control whether replacements happen after a mapload.", "white"
-	Option "Persistent Spawns: ", "pipegun_persistent_spawning", "OnOff"
-	SafeCommand "Reset persistence  options", "resetcvar pipegun_persistent_spawning"
- 	StaticText ""
-   	StaticText ""
-	StaticText "Reset Options", "Green"
-	SafeCommand "Reset all options", "pipegun_reset_cvars"
-}
-
-OptionMenu levergat
-{
-    Title "------ Sawyer Hunting Carbine Options ------"
-   	StaticText "Notice:", 1
-    StaticText  "Setting 'spawn rate' to Replace All will supress", "white"
-    StaticText  "chaingun spawns of that given type.", "white"
-    StaticText ""
-	StaticText "Spawn Options", 1
-    StaticText  "Control the spawn rate of the Hunting Carbine on Chainguns", "white"
-	Option " Pipegun Spawn Rate: ", "levergat_chaingun_spawn_bias", "SpawnBias"
-	SafeCommand "Reset Pipegun options", "resetcvar levergat_chaingun_spawn_bias"
- 	StaticText ""
-    StaticText  "Control whether replacements happen after a mapload.", "white"
-	Option "Persistent Spawns: ", "levergat_persistent_spawning", "OnOff"
-	SafeCommand "Reset persistence  options", "resetcvar levergat_persistent_spawning"
- 	StaticText ""
-   	StaticText ""
-	StaticText "Reset Options", "Green"
-	SafeCommand "Reset all options", "levergat_reset_cvars"
-}
-
 OptionMenu musket
 {
     Title "------ Musket Options ------"
@@ -297,21 +186,6 @@ OptionValue "SpawnBiasNoReplace"
 	 199,  "1 in 200"
 }
 
-OptionMenu "pbweps"
-{
-    Title "------ Potetobloke's Weapons ------"
-    StaticText "Main Options", "Green"
-	Submenu "Raycob RAC-13/45", "Mac10"
-	StaticText ""
-	Submenu "Commando .355 Carbine", "c355"
-	StaticText ""
-	SubMenu "Raycob Subterranean Striker", "stryk"
-	StaticText ""
-	SubMenu "Pipegun", "pipeg"
-	StaticText ""
-	SubMenu "Sawyer Hunting Carbine", "levergat"
-}
-
 OptionMenu "witems"
 {
 	Title "------ Offworld Items ------"
@@ -345,8 +219,6 @@ AddOptionMenu "CozisOffworldWares"
 	StaticText ""
 	// Make this another sub-menu for the musket, Gullveig, Velbyssa etc later. - [Ted]
 	Submenu "Offworld Weapons", "musket"
-	StaticText ""
-	Submenu "PB Weapons", "pbweps"
 	StaticText ""
 	StaticText "Item Options", "Green"
 	StaticText ""
