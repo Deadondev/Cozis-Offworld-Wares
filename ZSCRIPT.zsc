@@ -13,14 +13,6 @@ version "4.5"
 // It brokie :(((((
 #include "zscript/Weaponry/Flintlock Pistol/flintpistol.zsc"
 
-// Potetobloke Fork
-#include "zscript/Weaponry/Potetobloke-Weapons/MAC11.zsc"
-#include "zscript/Weaponry/Potetobloke-Weapons/Colt355.zsc"
-#include "zscript/Weaponry/Potetobloke-Weapons/CobraySweep.zsc"
-#include "zscript/Weaponry/Potetobloke-Weapons/CobrayTermi.zsc"
-#include "zscript/Weaponry/Potetobloke-Weapons/GasGrenade.zsc"
-#include "zscript/Weaponry/Potetobloke-Weapons/Levergat.zsc"
-
 // Defibrillator
 #include "zscript/weaponry/Defibrillator/Defib.zsc"
 
