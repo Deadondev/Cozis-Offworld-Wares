@@ -2,21 +2,30 @@
 // WEAPONS
 //-------------------------------------------------
 
-// Musket
-class COW_MusketReplacer : EventHandler
+// Handler for the Musket, controls spawning.
+class MusketHandler : eventhandler
 {
+
 	private bool cvarsAvailable;
 	private int spawnBiasActual;
 	private bool isPersistent;
+	
+	
+	// Shoves cvar values into their non-cvar shaped holes.
+	// I have no idea why names for cvars become reserved here.
+	// But, this works. So no complaints. 
 	void init()
 	{
 		cvarsAvailable = true;
 		spawnBiasActual = musket_blur_spawn_bias;
 		isPersistent = musket_persistent_spawning;
 	}
-
+	
+	// 'Initalizes' the event handler,
+	// In my testing, this is called after events are fired. 
 	override void WorldLoaded(WorldEvent e)
 	{
+		// always calls init.
 		init();
 		super.WorldLoaded(e);
 	}
@@ -24,9 +33,15 @@ class COW_MusketReplacer : EventHandler
 	bool giverandom(int chance)
 	{
 		bool result = false;
+		
+		// temp storage for the random value. 
 		int iii = random(0, chance);
+		
+		// force negative values to be 0. 
 		if(iii < 0)
 			iii = 0;
+			
+		
 		if (iii == 0)
 		{
 			if(chance > -1)
@@ -36,45 +51,41 @@ class COW_MusketReplacer : EventHandler
 		return result;
 	}
 
-	void trycreatemusket(worldevent e, int chance)
+	void trycreatemsk(worldevent e, int chance)
 	{
 		if(giverandom(chance))
 		{
-			let sss = HD_MusketDropper(e.thing.Spawn("HD_MusketDropper", e.thing.pos, SXF_TRANSFERSPECIAL | SXF_NOCHECKPOSITION));
-			if(sss)
+			let msk = HD_MusketDropper(e.thing.Spawn("HD_MusketDropper", e.thing.pos, SXF_TRANSFERSPECIAL | SXF_NOCHECKPOSITION));
+			
+			if(msk)
 			{
-				
+				// Remove the original item. 
 				e.thing.destroy();
-			}
-
+		}
 		}
 	}
+
+
 override void worldthingspawned(worldevent e)
   {
+	// Makes sure the values are always loaded before
+	// taking in events.
 	if(!cvarsAvailable)
 		init();
+		
+ 	// in case it's not real. 
 	if(!e.Thing)
 	{
 		return;
 	}
-	
-	let MuskAmmo = HDAmmo(e.Thing);
-	if (!MuskAmmo)
-	{
-		return;
-	}
-	switch (MuskAmmo.GetClassName())
-	{
-		case 'HDShellAmmo':
-			MuskAmmo.ItemsThatUseThis.Push("HD_Musket");
-			break;
-	}
+
+	// Don't spawn anything if the level has been loaded more than a tic. 
 	if (!(level.maptime > 1) || isPersistent)
 	{
 		switch(e.Thing.GetClassName())
 		{
 			case 'BlurSphereReplacer':
-				trycreatemusket(e, spawnBiasActual);
+				trycreatemsk(e, spawnBiasActual);
 				break;
 		}
 	}
@@ -698,5 +709,27 @@ override void worldthingspawned(worldevent e)
 				break;
 		}
 	}
+	}
+}
+
+//-------------------------------------------------
+// ITEMS
+//-------------------------------------------------
+
+class AmmoHandler : EventHandler
+{
+	override void worldthingspawned(worldevent e)
+	{
+	let OffworldAmmo = HDAmmo(e.Thing);
+	if (!OffworldAmmo)
+	{
+		return;
+	}
+		switch (OffworldAmmo.GetClassName())
+		{
+			case 'HDShellAmmo':
+				OffworldAmmo.ItemsThatUseThis.Push("HDMusket");
+				break;
+		}
 	}
 }

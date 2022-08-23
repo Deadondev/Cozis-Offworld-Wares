@@ -1,9 +1,11 @@
 GameInfo
 {
 	// Weapons
-	AddEventHandlers = "COW_MusketReplacer"
+	AddEventHandlers = "MusketHandler"
 	// Items
 	AddEventHandlers = "OleRumEventHandler", "UaS_AlcoholEventHandler", "APKHandler", "URLHandler", "HD_LogiBagSpawner", "HD_DefibSpawner", "RadReplacementHandler", "HD_MediBagSpawner", "FAK_Handler"
 	// Monsters
 	AddEventHandlers = "SpiderBarrelEventHandler", "TriteHandler"
+	// Misc
+	AddEventHandlers = "AmmoHandler"
 }

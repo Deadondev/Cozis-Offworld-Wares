@@ -122,7 +122,6 @@ class COW_OffworldLockbox : UaS_Consumable
 	override void Contents()
 	{
 		AddItem("HD_Musket", 1);
-		AddItem("HDCommando");
 		AddItem("HDUniversalReloader", 1);
 		AddItem("UaS_Alcohol_OleRum", 2);
 	}
