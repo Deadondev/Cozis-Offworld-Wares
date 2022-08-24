@@ -25,7 +25,7 @@ class HDArmorPatchKit : HDWeapon
 	}
 	override string, double GetPickupSprite(){ return "APKTA0", 1.0; }
 	override double GunMass() { return 0; }
-	override double WeaponBulk() { return 40 * Amount; }
+	override double WeaponBulk() { return 20 * Amount; }
 	override bool AddSpareWeapon(actor newowner) { return AddSpareWeaponRegular(newowner); }
 	override HDWeapon GetSpareWeapon(actor newowner, bool reverse, bool doselect) { return GetSpareWeaponRegular(newowner, reverse, doselect); }
 	override void InitializeWepStats(bool idfa) { WeaponStatus[KProp_Durability] = KitDurability; }
