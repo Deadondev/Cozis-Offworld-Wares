@@ -1,0 +1,9 @@
+gzdoom-crash.log
+acs.err
+acscompile.sh
+gdb-respfile-*
+dumpjit.txt
+*.bak
+*~
+*.pk7
+*.7z
