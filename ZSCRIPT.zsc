@@ -10,7 +10,6 @@ version "4.5"
 // Black Powder
 #include "zscript/Weaponry/Musket/BALL.zsc"
 #include "zscript/weaponry/Musket/Musket.zsc"
-// It brokie :(((((
 #include "zscript/Weaponry/Flintlock Pistol/flintpistol.zsc"
 
 // Defibrillator

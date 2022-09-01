@@ -2,93 +2,222 @@
 // WEAPONS
 //-------------------------------------------------
 
-// Handler for the Musket, controls spawning.
-class MusketHandler : eventhandler
+// Struct for itemspawn information. 
+class WaresSpawnItem play
 {
+	string    		           spawnname;            // ID by string for spawner
+	Array<WaresSpawnItemEntry>    spawnreplaces;        // ID by string for spawnees
+	int 	                   spawnreplacessize;    // Cached size of the above array
+	bool                       isPersistent;         // Whether or not to persistently spawn.
+}
 
-	private bool cvarsAvailable;
-	private int spawnBiasActual;
-	private bool isPersistent;
+class WaresSpawnItemEntry play
+{
+	string name;
+	int    chance;
+}
+
+// Struct for passing useinformation to ammunition. 
+class WaresSpawnAmmo play
+{
+	string		  ammoname;		   // ID by string for the header ammo.
+	Array<string> weaponnames;     // ID by string for weapons using that ammo.
+	int           weaponnamessize; // Cached size of the above array
+}
+
+
+
+// One handler to rule them all. 
+class OffworldWaresHandler : EventHandler
+{
+	// List of weapon-ammo associations.
+	// Used for ammo-use association on ammo spawn (happens very often). 
+	array<WaresSpawnAmmo> ammospawnlist;
+	int ammospawnlistsize;
+	
+	// List of item-spawn associations.
+	// used for item-replacement on mapload. 
+	array<WaresSpawnItem> itemspawnlist;
+	int itemspawnlistsize;
 	
 	
-	// Shoves cvar values into their non-cvar shaped holes.
-	// I have no idea why names for cvars become reserved here.
-	// But, this works. So no complaints. 
+	// appends an entry to itemspawnlist;
+	void additem(string name, Array<WaresSpawnItemEntry> replacees, bool persists)
+	{
+		// Creates a new struct;
+		WaresSpawnItem spawnee = WaresSpawnItem(new('WaresSpawnItem'));
+		
+		// Populates the struct with relevant information,
+		spawnee.spawnname = name;
+		spawnee.isPersistent = persists;
+		for(int i = 0; i < replacees.size(); i++)
+		{
+			spawnee.spawnreplaces.push(replacees[i]);
+			spawnee.spawnreplacessize++;
+		}
+		
+		// Pushes the finished struct to the array. 
+		itemspawnlist.push(spawnee);
+		itemspawnlistsize++;
+	}
+
+
+	WaresSpawnItemEntry additementry(string name, int chance)
+	{
+		// Creates a new struct;
+		WaresSpawnItemEntry spawnee = WaresSpawnItemEntry(new('WaresSpawnItemEntry'));
+		spawnee.name = name;
+		spawnee.chance = chance;
+		return spawnee;
+		
+	}
+
+
+	// appends an entry to ammospawnlist;
+	void addammo(string name, Array<string> weapons)
+	{
+	
+		// Creates a new struct;
+		WaresSpawnAmmo spawnee = WaresSpawnAmmo(new('WaresSpawnAmmo'));
+		spawnee.ammoname = name;
+		
+		// Populates the struct with relevant information,
+		for(int i = 0; i < weapons.size(); i++)
+		{
+			spawnee.weaponnames.push(weapons[i]);
+			spawnee.weaponnamessize++;
+		}
+		
+		// Pushes the finished struct to the array. 
+		ammospawnlist.push(spawnee);
+		ammospawnlistsize++;
+	}
+	
+	
+	bool cvarsAvailable;
+	
+	// Populates the replacement and association arrays. 
 	void init()
 	{
 		cvarsAvailable = true;
-		spawnBiasActual = musket_blur_spawn_bias;
-		isPersistent = musket_persistent_spawning;
+
+// Musket
+    Array<WaresSpawnItemEntry> spawns_musket;
+		spawns_musket.push(additementry('SquadSummoner', musket_blur_spawn_bias));
+		
+		Array<string> wep_musket;
+		wep_musket.push("HD_Musket");
+
+		additem('HD_MusketDropper', spawns_musket, musket_persistent_spawning); // Weapon Replacer
+		addammo('HDShellAmmo', wep_musket);  //adds to ammo whitelist
+
+// Rum
+    Array<WaresSpawnItemEntry> spawns_rum;
+		spawns_rum.push(additementry('PortableStimpack', rum_pmi_spawn_bias));
+		additem('UaS_Alcohol_OleRum', spawns_rum, rum_persistent_spawning); // Weapon Replacer
 	}
 	
-	// 'Initalizes' the event handler,
-	// In my testing, this is called after events are fired. 
-	override void WorldLoaded(WorldEvent e)
-	{
-		// always calls init.
-		init();
-		super.WorldLoaded(e);
-	}
-
+	//fill above with entries for each weapon
+	// Random stuff, stores it and forces negative values just to be 0.
 	bool giverandom(int chance)
 	{
 		bool result = false;
-		
-		// temp storage for the random value. 
 		int iii = random(0, chance);
-		
-		// force negative values to be 0. 
 		if(iii < 0)
 			iii = 0;
-			
-		
 		if (iii == 0)
 		{
 			if(chance > -1)
 				result = true;
 		}
-		
 		return result;
 	}
 
-	void trycreatemsk(worldevent e, int chance)
+	// Tries to create the item via random spawning.
+	bool trycreateitem(worldevent e, WaresSpawnItem f, int g)
 	{
-		if(giverandom(chance))
+		bool result = false;
+		if(giverandom(f.spawnreplaces[g].chance))
 		{
-			let msk = HD_MusketDropper(e.thing.Spawn("HD_MusketDropper", e.thing.pos, SXF_TRANSFERSPECIAL | SXF_NOCHECKPOSITION));
-			
-			if(msk)
+			vector3 spawnpos = e.thing.pos;
+			let spawnitem = Actor.Spawn(f.spawnname, (spawnpos.x, spawnpos.y, spawnpos.z));
+			if(spawnitem)
 			{
-				// Remove the original item. 
 				e.thing.destroy();
+				result = true;
+			}
 		}
-		}
+		return result;
 	}
-
-
-override void worldthingspawned(worldevent e)
-  {
-	// Makes sure the values are always loaded before
-	// taking in events.
-	if(!cvarsAvailable)
-		init();
+	
+	override void worldthingspawned(worldevent e)
+	 {
+		string candidatename;
 		
- 	// in case it's not real. 
-	if(!e.Thing)
-	{
-		return;
-	}
-
-	// Don't spawn anything if the level has been loaded more than a tic. 
-	if (!(level.maptime > 1) || isPersistent)
-	{
-		switch(e.Thing.GetClassName())
+		// loop controls.
+		int i, j;
+		bool isAmmo = false;
+		
+		// Populates the main arrays if they haven't been already. 
+		if(!cvarsAvailable)
+			init();
+		
+		// Checks for null events. 
+		if(!e.Thing)
 		{
-			case 'BlurSphereReplacer':
-				trycreatemsk(e, spawnBiasActual);
-				break;
+			return;
 		}
-	}
+
+		candidatename  = e.Thing.GetClassName();
+		let ammo_ptr   = HDAmmo(e.Thing);
+		
+		if(ammo_ptr)
+		{
+			for(i = 0; i < ammospawnlistsize; i++)
+			{
+				if(candidatename == ammospawnlist[i].ammoname)
+				{
+					for(j = 0; j < ammospawnlist[i].weaponnamessize; j++)
+					{
+						ammo_ptr.ItemsThatUseThis.Push(ammospawnlist[i].weaponnames[j]);
+					}
+				}
+			}
+		}
+		
+		// Iterates through the list of item candidates for e.thing.
+		for(i = 0; i < itemspawnlistsize; i++)
+		{
+			// Checks if the item in question is owned. 
+			let thing_inv_ptr = Inventory(e.thing);
+			bool owned    = thing_inv_ptr && (thing_inv_ptr.owner);
+
+			// Checks if the level has been loaded more than 1 tic.
+			bool prespawn = !(level.maptime > 1);
+			
+			// Checks if persistent spawning is on.
+			bool persist  = (itemspawnlist[i].isPersistent);
+			
+			bool validammo = prespawn && ammo_ptr;
+			
+			// if an item is owned or is an ammo (doesn't retain owner ptr), 
+			// do not replace it. 
+			if ((prespawn || persist) && (!owned || validammo))
+			{
+				int original_i = i;
+				for(j = 0; j < itemspawnlist[original_i].spawnreplacessize; j++)
+				{
+					if(itemspawnlist[i].spawnreplaces[j].name == candidatename)
+					{
+						if(trycreateitem(e, itemspawnlist[i], j))
+						{
+							j = itemspawnlist[i].spawnreplacessize;
+							i = itemspawnlistsize;
+						}
+					}
+				}
+			}
+		}
 	}
 }
 
@@ -186,9 +315,6 @@ class SpiderBarrelEventHandler : EventHandler
 				
 				e.thing.destroy();
 			}
-			
-
-
 		}
 	}
 
@@ -223,72 +349,6 @@ override void worldthingspawned(worldevent e)
 // ITEMS
 //-------------------------------------------------
 
-// Rum
-class OleRumEventHandler : EventHandler
-{
-	private bool cvarsAvailable;
-	private int spawnBiasActual;
-	private bool isPersistent;
-	void init()
-	{
-		cvarsAvailable = true;
-		spawnBiasActual = rum_pmi_spawn_bias;
-		isPersistent = rum_persistent_spawning;
-	}
-
-	override void WorldLoaded(WorldEvent e)
-	{
-		init();
-		super.WorldLoaded(e);
-	}
-
-	bool giverandom(int chance)
-	{
-		bool result = false;
-		int iii = random(0, chance);
-		if(iii < 0)
-			iii = 0;
-		if (iii == 0)
-		{
-			if(chance > -1)
-				result = true;
-		}
-		
-		return result;
-	}
-
-	void trycreaterum(worldevent e, int chance)
-	{
-		if(giverandom(chance))
-		{
-			let sss = UaS_Alcohol_OleRum(e.thing.Spawn("UaS_Alcohol_OleRum", e.thing.pos, SXF_TRANSFERSPECIAL | SXF_NOCHECKPOSITION));
-			if(sss)
-			{
-				
-				e.thing.destroy();
-			}
-
-		}
-	}
-override void worldthingspawned(worldevent e)
-  {
-	if(!cvarsAvailable)
-		init();
-	if(!e.Thing)
-	{
-		return;
-	}
-	if (!(level.maptime > 1) || isPersistent)
-	{
-		switch(e.Thing.GetClassName())
-		{
-			case 'PortableHealingItem':
-				trycreaterum(e, spawnBiasActual);
-				break;
-		}
-	}
-	}
-}
 
 // Radsuit Packages
 class RadReplacementHandler : EventHandler
@@ -709,27 +769,5 @@ override void worldthingspawned(worldevent e)
 				break;
 		}
 	}
-	}
-}
-
-//-------------------------------------------------
-// ITEMS
-//-------------------------------------------------
-
-class AmmoHandler : EventHandler
-{
-	override void worldthingspawned(worldevent e)
-	{
-	let OffworldAmmo = HDAmmo(e.Thing);
-	if (!OffworldAmmo)
-	{
-		return;
-	}
-		switch (OffworldAmmo.GetClassName())
-		{
-			case 'HDShellAmmo':
-				OffworldAmmo.ItemsThatUseThis.Push("HDMusket");
-				break;
-		}
 	}
 }

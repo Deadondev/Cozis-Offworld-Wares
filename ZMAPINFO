@@ -1,11 +1,9 @@
 GameInfo
 {
 	// Weapons
-	AddEventHandlers = "MusketHandler"
+	AddEventHandlers = "OffworldWaresHandler"
 	// Items
-	AddEventHandlers = "OleRumEventHandler", "UaS_AlcoholEventHandler", "APKHandler", "URLHandler", "HD_LogiBagSpawner", "HD_DefibSpawner", "RadReplacementHandler", "HD_MediBagSpawner", "FAK_Handler"
+	AddEventHandlers = "UaS_AlcoholEventHandler", "APKHandler", "URLHandler", "HD_LogiBagSpawner", "HD_DefibSpawner", "RadReplacementHandler", "HD_MediBagSpawner", "FAK_Handler"
 	// Monsters
 	AddEventHandlers = "SpiderBarrelEventHandler", "TriteHandler"
-	// Misc
-	AddEventHandlers = "AmmoHandler"
 }
