@@ -48,7 +48,7 @@ class HDUniversalReloader : HDWeapon
 		if (r = HDRel_Recipe.TryCreate("HD10mAmmo",           "HDRel_RawLead", 3, 1.75,   "HDRel_RawBrass",   1, 0.75,   "HDRel_RawPowder", 2, 1.0,     1.00)) Recipes.Push(r); // Rad-Tech Weapon Pack
 		if (r = HDRel_Recipe.TryCreate("TenMilBrass",         null,            0, 0.00,   "HDRel_RawBrass",   0, 1.75,   null,              0, 0.00,    0.90)) Recipes.Push(r); // Rad-Tech Weapon Pack
 		if (r = HDRel_Recipe.TryCreate("HDFlareAmmo",         null,            0, 0.00,   "HDRel_RawPlastic", 0, 2.00,   "HDRel_RawPowder", 0, 0.50,    0.90)) Recipes.Push(r); // Rad-Tech Weapon Pack
-		if (r = HDRel_Recipe.TryCreate("HDB_45lc",            "HDRel_RawLead", 3.25, 1.75,"HDRel_RawBrass",   1.15, 1.00,"HDRel_RawPowder", 3, 1.25,    0.75)) Recipes.Push(r); // Rad-Tech Weapon Pack
+		if (r = HDRel_Recipe.TryCreate("HD45LCAmmo",          "HDRel_RawLead", 3.25, 1.75,"HDRel_RawBrass",   1.15, 1.00,"HDRel_RawPowder", 3, 1.25,    0.75)) Recipes.Push(r); // Rad-Tech Weapon Pack
 		if (r = HDRel_Recipe.TryCreate("HDExplosiveShellAmmo","HDRel_RawLead", 1.25, 0.75,"HDRel_RawPlastic", 1.15, 1.00,"HDRel_RawPowder", 3.5, 1.5,   0.75)) Recipes.Push(r); // Rad-Tech Weapon Pack
 	}
 
