@@ -41,6 +41,7 @@ class HDUniversalReloader : HDWeapon
 		if (r = HDRel_Recipe.TryCreate("HDSlugAmmo",          "HDRel_RawLead", 5, 3.00,   "HDRel_RawPlastic", 1, 0.75,   "HDRel_RawPowder", 2, 1.00,    1.00)) Recipes.Push(r); // Greely, BulletLib
 		if (r = HDRel_Recipe.TryCreate("HD50OMGAmmo",         "HDRel_RawLead", 5, 3.80,   "HDRel_RawBrass",   4, 3.00,   "HDRel_RawPowder", 6, 4.00,    0.50)) Recipes.Push(r); // BulletLib
 		if (r = HDRel_Recipe.TryCreate("HD50AM_Ammo",         "HDRel_RawLead", 3, 2.25,   "HDRel_RawBrass",   2, 1.25,   "HDRel_RawPowder", 2, 1.00,    0.75)) Recipes.Push(r); // PB's weapon pack
+		if (r = HDRel_Recipe.TryCreate("HD5mm_Ammo",          "HDRel_RawLead", 0.75, 0.25,"HDRel_RawBrass",   0.5, 0.25, "HDRel_RawPowder", 1, 0.5,     0.75)) Recipes.Push(r); // PB's weapon pack
 		if (r = HDRel_Recipe.TryCreate("ThirtyAughtSixAmmo",  "HDRel_RawLead", 3, 2.25,   "HDRel_RawBrass",   2, 1.75,   "HDRel_RawPowder", 4, 2.50,    0.90)) Recipes.Push(r); // .30-06, HexaDoken's Garand
 		if (r = HDRel_Recipe.TryCreate("ThirtyAughtSixBrass", null,            0, 0.00,   "HDRel_RawBrass",   0, 1.75,   null,              0, 0.00,    0.90)) Recipes.Push(r); // .30-06, HexaDoken's Garand
 		if (r = HDRel_Recipe.TryCreate("HDBallAmmo",          "HDRel_RawLead", 12, 9.85,  "HDRel_RawPlastic", 0, 0,      "HDRel_RawPowder", 0, 0.0,     1.00)) Recipes.Push(r); // .56 Caliber Musket Balls, Offworld Wares
