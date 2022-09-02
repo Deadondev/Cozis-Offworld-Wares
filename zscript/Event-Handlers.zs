@@ -30,6 +30,25 @@ class WaresSpawnAmmo play
 // One handler to rule them all. 
 class OffworldWaresHandler : EventHandler
 {
+	// List of persistent classes to completely ignore. 
+	// This -should- mean this mod has no performance impact. 
+	static const class<actor> blacklist[] =
+	{
+		"HDSmoke",
+		"BloodTrail",
+		"CheckPuff",
+		"WallChunk",
+		"HDBulletPuff",
+		"HDFireballTail",
+		"ReverseImpBallTail",
+		"HDSmokeChunk",
+		"ShieldSpark",
+		"HDFlameRed",
+		"HDMasterBlood",
+		"PlantBit",
+		"HDBulletActor"
+	};
+
 	// List of weapon-ammo associations.
 	// Used for ammo-use association on ammo spawn (happens very often). 
 	array<WaresSpawnAmmo> ammospawnlist;
@@ -240,8 +259,9 @@ class OffworldWaresHandler : EventHandler
 		// Iterates through the list of item candidates for e.thing.
 		for(i = 0; i < itemspawnlistsize; i++)
 		{
-			// Checks if the item in question is owned. 
+			// Tries to cast the item as an inventory.
 			let thing_inv_ptr = Inventory(e.thing);
+			// Checks if the item in question is owned.
 			bool owned    = thing_inv_ptr && (thing_inv_ptr.owner);
 
 			// Checks if the level has been loaded more than 1 tic.
@@ -254,7 +274,7 @@ class OffworldWaresHandler : EventHandler
 			
 			// if an item is owned or is an ammo (doesn't retain owner ptr), 
 			// do not replace it. 
-			if ((prespawn || persist) && (!owned || validammo))
+			if ((prespawn || persist) && (!owned && (!ammo_ptr || prespawn)))
 			{
 				int original_i = i;
 				for(j = 0; j < itemspawnlist[original_i].spawnreplacessize; j++)
@@ -378,6 +398,11 @@ override void worldthingspawned(worldevent e)
 	if(!cvarsAvailable)
 		init();
 		
+	for(i = 0; i < blacklist.size(); i++)
+	{
+		if (e.thing is blacklist[i])
+			return;
+	}
  	// in case it's not real. 
 	if(!e.Thing)
 	{
