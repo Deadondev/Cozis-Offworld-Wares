@@ -18,6 +18,11 @@ server bool  sbrl_persistent_spawning = false;
 server int musket_blur_spawn_bias = 14;
 server bool musket_persistent_spawning = false;
 
+// Flintlock
+server int flint_saw_spawn_bias = 14;
+server int flint_shotguns_spawn_bias = 14;
+server bool flint_persistent_spawning = false;
+
 //-------------------------------------------------
 // Items
 //-------------------------------------------------

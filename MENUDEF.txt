@@ -38,7 +38,7 @@ OptionMenu musket
     Title "------ Musket Options ------"
    	StaticText "Notice:", 1
     StaticText  "Setting 'spawn rate' to Replace All will supress", "white"
-    StaticText  "chaingun spawns of that given type.", "white"
+    StaticText  "spawns of that given type.", "white"
     StaticText ""
 	StaticText "Spawn Options", 1
     StaticText  "Control the spawn rate of the Musket on Blurspheres", "white"
@@ -54,6 +54,31 @@ OptionMenu musket
 	SafeCommand "Reset all options", "musket_reset_cvars"
 }
 
+OptionMenu Flintlock
+{
+    Title "------ Flintlock Options ------"
+   	StaticText "Notice:", 1
+    StaticText  "Setting 'spawn rate' to Replace All will supress", "white"
+    StaticText  "spawns of that given type.", "white"
+    StaticText ""
+	StaticText "Spawn Options", 1
+    StaticText  "Control the spawn rate of the Flintlock on Chainsaws", "white"
+	Option " Flintlock Spawn Rate: ", "flint_saw_spawn_bias", "SpawnBias"
+	SafeCommand "Reset Flintlock options", "resetcvar flint_saw_spawn_bias"
+ 	StaticText ""
+    StaticText  "Control the spawn rate of the Flintlock on Hunters and Slayers", "white"
+	Option " Flintlock Spawn Rate: ", "flint_shotguns_spawn_bias", "SpawnBias"
+	SafeCommand "Reset Flintlock options", "resetcvar flint_shotguns_spawn_bias"
+ 	StaticText ""
+    StaticText  "Control whether replacements happen after a mapload.", "white"
+	Option "Persistent Spawns: ", "flint_persistent_spawning", "OnOff"
+	SafeCommand "Reset persistence  options", "resetcvar flint_persistent_spawning"
+ 	StaticText ""
+   	StaticText ""
+	StaticText "Reset Options", "Green"
+	SafeCommand "Reset all options", "flint_reset_cvars"
+}
+
 OptionMenu rum
 {
     Title "------ Ration Options ------"
@@ -67,8 +92,8 @@ OptionMenu rum
 	SafeCommand "Reset Rum options", "resetcvar rum_pmi_spawn_bias"
 	StaticText ""
     StaticText  "Control the spawn rate of Radsuit Packages on Radsuits", "white"
-	Option " Medikit Spawn Rate: ", "rum_pmi_spawn_Bias", "SpawnBias"
-	SafeCommand "Reset Rum options", "resetcvar rum_pmi_spawn_bias"
+	Option " Radsuit Spawn Rate: ", "suit_replacement_spawn_bias", "SpawnBias"
+	SafeCommand "Reset Radsuit options", "resetcvar suit_replacement_spawn_bias"
  	StaticText ""
     StaticText  "Control whether replacements happen after a mapload.", "white"
 	Option "Persistent Spawns: ", "rum_persistent_spawning", "OnOff"
@@ -218,7 +243,9 @@ AddOptionMenu "CozisOffworldWares"
 	StaticText "Weapon Options", "Green"
 	StaticText ""
 	// Make this another sub-menu for the musket, Gullveig, Velbyssa etc later. - [Ted]
-	Submenu "Offworld Weapons", "musket"
+	Submenu ".56 Caliber Musket", "musket"
+	StaticText ""
+	Submenu "Flintlock Pistol", "Flintlock"
 	StaticText ""
 	StaticText "Item Options", "Green"
 	StaticText ""
