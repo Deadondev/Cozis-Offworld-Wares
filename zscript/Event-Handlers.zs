@@ -166,7 +166,7 @@ class OffworldWaresHandler : EventHandler
 		spawns_defib.push(additementry('PortableMedikit', dfb_replacement_spawn_bias));
 		spawns_defib.push(additementry('DeadRifleman', dfb_replacement_spawn_bias));
 		spawns_defib.push(additementry('ReallyDeadRifleman', dfb_replacement_spawn_bias));
-		additem('HD_WildMediBag', spawns_defib, dfb_persistent_spawning); // Weapon Replacer
+		additem('HDefib', spawns_defib, dfb_persistent_spawning); // Weapon Replacer
 	}
 	
 	// Fill above with entries for each weapon
