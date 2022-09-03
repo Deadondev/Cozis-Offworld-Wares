@@ -201,8 +201,11 @@ class OffworldWaresHandler : EventHandler
 			if(chance > -1)
 				result = true;
 		}
+		
 		return result;
 	}
+
+
 
 	// Tries to create the item via random spawning.
 	bool trycreateitem(worldevent e, WaresSpawnItem f, int g)
@@ -217,9 +220,11 @@ class OffworldWaresHandler : EventHandler
 				e.thing.destroy();
 				result = true;
 			}
+
 		}
 		return result;
 	}
+	
 	
 	override void worldthingspawned(worldevent e)
 	 {
@@ -232,6 +237,13 @@ class OffworldWaresHandler : EventHandler
 		// Populates the main arrays if they haven't been already. 
 		if(!cvarsAvailable)
 			init();
+		
+		
+		for(i = 0; i < blacklist.size(); i++)
+		{
+			if (e.thing is blacklist[i])
+				return;
+		}
 		
 		// Checks for null events. 
 		if(!e.Thing)
@@ -256,11 +268,15 @@ class OffworldWaresHandler : EventHandler
 			}
 		}
 		
+		
+
+				
 		// Iterates through the list of item candidates for e.thing.
 		for(i = 0; i < itemspawnlistsize; i++)
 		{
-			// Tries to cast the item as an inventory.
+			// Tries to cast the item as an inventory. 
 			let thing_inv_ptr = Inventory(e.thing);
+		
 			// Checks if the item in question is owned.
 			bool owned    = thing_inv_ptr && (thing_inv_ptr.owner);
 
@@ -270,7 +286,7 @@ class OffworldWaresHandler : EventHandler
 			// Checks if persistent spawning is on.
 			bool persist  = (itemspawnlist[i].isPersistent);
 			
-			bool validammo = prespawn && ammo_ptr;
+			
 			
 			// if an item is owned or is an ammo (doesn't retain owner ptr), 
 			// do not replace it. 
@@ -292,7 +308,6 @@ class OffworldWaresHandler : EventHandler
 		}
 	}
 }
-
 //-------------------------------------------------
 // MONSTERS
 //-------------------------------------------------
@@ -398,11 +413,6 @@ override void worldthingspawned(worldevent e)
 	if(!cvarsAvailable)
 		init();
 		
-	for(i = 0; i < blacklist.size(); i++)
-	{
-		if (e.thing is blacklist[i])
-			return;
-	}
  	// in case it's not real. 
 	if(!e.Thing)
 	{
