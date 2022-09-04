@@ -74,8 +74,8 @@ class HD_LogiBag : HDBackpack {
 class LogiBag_ItemStorage : ItemStorage {
 	override int CheckConditions(Inventory item, class<Inventory> cls) {
 		bool valid = (
-			(item && (item is 'HDRel_CraftingMaterial' || item is 'HDAPK_ArmorPatch' || item is 'HDUniversalReloader' || item is 'AutoReloader' || item is 'HDArmorPatchKit')) ||
-			(cls  && (cls  is 'HDRel_CraftingMaterial' || item is 'HDAPK_ArmorPatch' || item is 'HDUniversalReloader' || item is 'AutoReloader' || item is 'HDArmorPatchKit'))
+			(item && (item is 'HDRel_CraftingMaterial' || item is 'HDAPK_ArmorPatch' || item is 'AssemblyCore' || item is 'HDFragGrenadeAmmo' || item is 'UaS_Respirator' || item is 'UaS_LaserLightModule' || item is 'UaS_WeaponSling' || item is 'UaS_GyroStabilizer' )) ||
+			(cls  && (cls  is 'HDRel_CraftingMaterial' || item is 'HDAPK_ArmorPatch' || item is 'AssemblyCore' || item is 'HDFragGrenadeAmmo' || item is 'UaS_Respirator' || item is 'UaS_LaserLightModule' || item is 'UaS_WeaponSling' || item is 'UaS_GyroStabilizer' ))
 		);
 
 		if (!valid) { return IType_Invalid; }
