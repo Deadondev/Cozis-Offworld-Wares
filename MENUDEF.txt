@@ -15,11 +15,11 @@ AddOptionMenu "HDOptionsMenu" after "HDControlsMenu" {
 OptionMenu Trites
 {
     Title "------ Trite Options ------"
-   	StaticText "Notice:", 1
+   	StaticText "Notice:", "Green"
     StaticText  "Setting 'spawn rate' to Replace All will supress", "white"
     StaticText  "barrel spawns of that given type.", "white"
     StaticText ""
-	StaticText "Spawn Options", 1
+	StaticText "Spawn Options", "Green"
     StaticText  "Control the spawn rate of Trite Barrels", "white"
 	Option " Trite Barrel Spawn Rate: ", "sbrl_regulars_spawn_bias", "SpawnBias"
 	SafeCommand "Reset trite barrel options", "resetcvar sbrl_regulars_spawn_bias"
@@ -36,11 +36,11 @@ OptionMenu Trites
 OptionMenu musket
 {
     Title "------ Musket Options ------"
-   	StaticText "Notice:", 1
+   	StaticText "Notice:", "Red"
     StaticText  "Setting 'spawn rate' to Replace All will supress", "white"
     StaticText  "spawns of that given type.", "white"
     StaticText ""
-	StaticText "Spawn Options", 1
+	StaticText "Spawn Options", "Red"
     StaticText  "Control the spawn rate of the Musket on Blurspheres", "white"
 	Option " Musket Spawn Rate: ", "musket_blur_spawn_bias", "SpawnBias"
 	SafeCommand "Reset Musket options", "resetcvar musket_blur_spawn_bias"
@@ -50,18 +50,20 @@ OptionMenu musket
 	SafeCommand "Reset persistence  options", "resetcvar musket_persistent_spawning"
  	StaticText ""
    	StaticText ""
-	StaticText "Reset Options", "Green"
-	SafeCommand "Reset all options", "musket_reset_cvars"
+	StaticText "Reset Options", "Red"
+	SafeCommand "Reset all options", "msk_reset_cvars"
 }
 
-OptionMenu Flintlock
+// We'll call the fact that the Flintlock doesn't properly replace an... "Unintended Feature" :)
+// Aka I'll fix it later idk what happened to cause this.
+/*OptionMenu Flintlock
 {
     Title "------ Flintlock Options ------"
-   	StaticText "Notice:", 1
+   	StaticText "Notice:", "Red"
     StaticText  "Setting 'spawn rate' to Replace All will supress", "white"
     StaticText  "spawns of that given type.", "white"
     StaticText ""
-	StaticText "Spawn Options", 1
+	StaticText "Spawn Options", "Red"
     StaticText  "Control the spawn rate of the Flintlock on Chainsaws", "white"
 	Option " Flintlock Spawn Rate: ", "flint_saw_spawn_bias", "SpawnBias"
 	SafeCommand "Reset Flintlock options", "resetcvar flint_saw_spawn_bias"
@@ -75,18 +77,39 @@ OptionMenu Flintlock
 	SafeCommand "Reset persistence  options", "resetcvar flint_persistent_spawning"
  	StaticText ""
    	StaticText ""
-	StaticText "Reset Options", "Green"
+	StaticText "Reset Options", "Red"
+	SafeCommand "Reset all options", "flint_reset_cvars"
+}*/
+
+OptionMenu Flintlock
+{
+    Title "------ Flintlock Options ------"
+   	StaticText "Notice:", "Red"
+    StaticText  "Setting 'spawn rate' to Replace All will supress", "white"
+    StaticText  "spawns of that given type.", "white"
+    StaticText ""
+	StaticText "Spawn Options", "Red"
+    StaticText  "Control the spawn rate of the Flintlock on Backpacks", "white"
+	Option " Flintlock Spawn Rate: ", "flint_saw_spawn_bias", "SpawnBias"
+	SafeCommand "Reset Flintlock options", "resetcvar flint_saw_spawn_bias"
+ 	StaticText ""
+    StaticText  "Control whether replacements happen after a mapload.", "white"
+	Option "Persistent Spawns: ", "flint_persistent_spawning", "OnOff"
+	SafeCommand "Reset persistence  options", "resetcvar flint_persistent_spawning"
+ 	StaticText ""
+   	StaticText ""
+	StaticText "Reset Options", "Red"
 	SafeCommand "Reset all options", "flint_reset_cvars"
 }
 
 OptionMenu rum
 {
     Title "------ Ration Options ------"
-   	StaticText "Notice:", 1
+   	StaticText "Notice:", "Orange"
     StaticText  "Setting 'spawn rate' to Replace All will supress", "white"
     StaticText  "medikit spawns of that given type.", "white"
     StaticText ""
-	StaticText "Spawn Options", 1
+	StaticText "Spawn Options", "Orange"
     StaticText  "Control the spawn rate of Rum on Medikits", "white"
 	Option " Medikit Spawn Rate: ", "rum_pmi_spawn_Bias", "SpawnBias"
 	SafeCommand "Reset Rum options", "resetcvar rum_pmi_spawn_bias"
@@ -100,14 +123,14 @@ OptionMenu rum
 	SafeCommand "Reset persistence  options", "resetcvar rum_persistent_spawning"
  	StaticText ""
    	StaticText ""
-	StaticText "Reset Options", "Green"
+	StaticText "Reset Options", "Orange"
 	SafeCommand "Reset all options", "rum_reset_cvars"
 }
 
 OptionMenu warebags
 {
     Title "------ Backpack Options ------"
-	StaticText "Spawn Options", 1
+	StaticText "Spawn Options", "Orange"
     StaticText  "Control the spawn rate of the Logistics Bag.", "white"
 	Option " Logistics Bag Spawn Rate: ", "lgb_replacement_spawn_bias", "SpawnBiasNoReplace"
 	SafeCommand "Reset Logistics Bag options", "resetcvar lgb_replacement_spawn_bias"
@@ -121,7 +144,7 @@ OptionMenu warebags
 	SafeCommand "Reset persistence  options", "resetcvar lgb_persistent_spawning"
  	StaticText ""
    	StaticText ""
-	StaticText "Reset Options", "Green"
+	StaticText "Reset Options", "Orange"
 	SafeCommand "Reset all options", "bag_reset_cvars"
 }
 
@@ -129,7 +152,7 @@ OptionMenu url
 {
     Title "------ Universal Reloader Options ------"
     StaticText ""
-	StaticText "Spawn Options", 1
+	StaticText "Spawn Options", "Orange"
     StaticText  "Control the spawn rate of the Universal Reloader", "white"
 	Option " Universal Reloader Spawn Rate: ", "url_replacement_spawn_bias", "SpawnBiasNoReplace"
 	SafeCommand "Reset Universal Reloader options", "resetcvar url_replacement_spawn_bias"
@@ -139,7 +162,7 @@ OptionMenu url
 	SafeCommand "Reset persistence  options", "resetcvar url_persistent_spawning"
  	StaticText ""
    	StaticText ""
-	StaticText "Reset Options", "Green"
+	StaticText "Reset Options", "Orange"
 	SafeCommand "Reset all options", "url_reset_cvars"
 }
 
@@ -147,7 +170,7 @@ OptionMenu apk
 {
     Title "------ Armor Patch Kit Options ------"
     StaticText ""
-	StaticText "Spawn Options", 1
+	StaticText "Spawn Options", "Orange"
     StaticText  "Control the spawn rate of the Armor Patch Kit", "white"
 	Option " Armor Patch Kit Spawn Rate: ", "apk_replacement_spawn_bias", "SpawnBiasNoReplace"
 	SafeCommand "Reset Armor Patch Kit options", "resetcvar apk_replacement_spawn_bias"
@@ -157,7 +180,7 @@ OptionMenu apk
 	SafeCommand "Reset persistence  options", "resetcvar apk_persistent_spawning"
  	StaticText ""
    	StaticText ""
-	StaticText "Reset Options", "Green"
+	StaticText "Reset Options", "Orange"
 	SafeCommand "Reset all options", "apk_reset_cvars"
 }
 
@@ -175,7 +198,7 @@ OptionMenu dfb
 	SafeCommand "Reset persistence  options", "resetcvar dfb_persistent_spawning"
  	StaticText ""
  	StaticText ""
-	StaticText "Reset Options", "Green"
+	StaticText "Reset Options", "Orange"
 	SafeCommand "Reset all options", "dfb_reset_cvars"
 }
 
@@ -240,18 +263,18 @@ AddOptionMenu "CozisOffworldWares"
 	StaticText ""
 	Submenu "Trites", "Trites"
 	StaticText ""
-	StaticText "Weapon Options", "Green"
+	StaticText "Weapon Options", "Red"
 	StaticText ""
-	// Make this another sub-menu for the musket, Gullveig, Velbyssa etc later. - [Ted]
 	Submenu ".56 Caliber Musket", "musket"
 	StaticText ""
 	Submenu "Flintlock Pistol", "Flintlock"
 	StaticText ""
-	StaticText "Item Options", "Green"
+	StaticText "Item Options", "Orange"
 	StaticText ""
 	Submenu "Offworld Items", "witems"
 	StaticText ""
 	Submenu "AceCorp Items", "aceitems"
+	StaticText ""
 	StaticText "-------------------", "gold"
 	StaticText "Below will reset every options for Offworld Wares!", "red"
 	StaticText " Be warned.", "red"

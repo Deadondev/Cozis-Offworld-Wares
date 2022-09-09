@@ -9,6 +9,7 @@ class WaresSpawnItem play
 	Array<WaresSpawnItemEntry>    spawnreplaces;        // ID by string for spawnees
 	int 	                   spawnreplacessize;    // Cached size of the above array
 	bool                       isPersistent;         // Whether or not to persistently spawn.
+	bool                       replaceoriginalitem;             // Whether or not to replace the original item.
 }
 
 class WaresSpawnItemEntry play
@@ -58,10 +59,11 @@ class OffworldWaresHandler : EventHandler
 	// used for item-replacement on mapload. 
 	array<WaresSpawnItem> itemspawnlist;
 	int itemspawnlistsize;
+	bool replaceoriginalitem;
 	
 	
 	// appends an entry to itemspawnlist;
-	void additem(string name, Array<WaresSpawnItemEntry> replacees, bool persists)
+	void additem(string name, Array<WaresSpawnItemEntry> replacees, bool persists, bool replaceoriginalitem)
 	{
 		// Creates a new struct;
 		WaresSpawnItem spawnee = WaresSpawnItem(new('WaresSpawnItem'));
@@ -69,6 +71,7 @@ class OffworldWaresHandler : EventHandler
 		// Populates the struct with relevant information,
 		spawnee.spawnname = name;
 		spawnee.isPersistent = persists;
+		spawnee.replaceoriginalitem = replaceoriginalitem;
 		for(int i = 0; i < replacees.size(); i++)
 		{
 			spawnee.spawnreplaces.push(replacees[i]);
@@ -127,29 +130,29 @@ class OffworldWaresHandler : EventHandler
 		Array<string> wep_musket;
 		wep_musket.push("HD_Musket");
 
-		additem('HD_MusketDropper', spawns_musket, musket_persistent_spawning); // Weapon Replacer
+		additem('HD_MusketDropper', spawns_musket, musket_persistent_spawning, true); // Weapon Replacer
 		addammo('HDShellAmmo', wep_musket);  //adds to ammo whitelist
 
 	// Flintlock
     Array<WaresSpawnItemEntry> spawns_flint;
-		spawns_flint.push(additementry('Lumberjack', flint_saw_spawn_bias));
-		spawns_flint.push(additementry('HunterRandom', flint_shotguns_spawn_bias));
-		spawns_flint.push(additementry('SlayerRandom', flint_shotguns_spawn_bias));
-		
+		spawns_flint.push(additementry('Backpack', flint_saw_spawn_bias));
 		Array<string> wep_flint;
 		wep_flint.push("HD_FlintlockPistol");
-
-		additem('HD_FlintlockPistol', spawns_flint, flint_persistent_spawning); // Weapon Replacer
+		// This is true yet it acts like false.
+		// I don't know why.
+		// I'll fix it some other time, I've been staring at this for literal hours.
+		// If you're reading this and know a fix, please let me know. - [Ted]
+		additem('HD_FlintlockPistol', spawns_flint, flint_persistent_spawning, true); // Weapon Replacer
 
 	// Rum
     Array<WaresSpawnItemEntry> spawns_rum;
 		spawns_rum.push(additementry('PortableStimpack', rum_pmi_spawn_bias));
-		additem('UaS_Alcohol_OleRum', spawns_rum, rum_persistent_spawning); // Weapon Replacer
+		additem('UaS_Alcohol_OleRum', spawns_rum, rum_persistent_spawning, false); // Weapon Replacer
 
 	// Radsuit Packages
     Array<WaresSpawnItemEntry> spawns_radpack;
 		spawns_radpack.push(additementry('Radsuit', suit_replacement_spawn_bias));
-		additem('HD_RadsuitPack', spawns_radpack, rum_persistent_spawning); // Weapon Replacer
+		additem('HD_RadsuitPack', spawns_radpack, rum_persistent_spawning, false); // Weapon Replacer
 
 	// Armor Patch Kit
     Array<WaresSpawnItemEntry> spawns_apk;
@@ -157,35 +160,37 @@ class OffworldWaresHandler : EventHandler
 		spawns_apk.push(additementry('DeadRifleman', apk_replacement_spawn_bias));
 		spawns_apk.push(additementry('ReallyDeadRifleman', apk_replacement_spawn_bias));
 		spawns_apk.push(additementry('Lumberjack', apk_replacement_spawn_bias));
-		additem('HDAPKSpawner', spawns_apk, apk_persistent_spawning); // Weapon Replacer
+		additem('HDAPKSpawner', spawns_apk, apk_persistent_spawning, false); // Weapon Replacer
 	
 	// Universal Reloader
 	Array<WaresSpawnItemEntry> spawns_url;
 		spawns_url.push(additementry('HDAmBox', url_replacement_spawn_bias));
+		spawns_url.push(additementry('HDAmBoxUnarmed', url_replacement_spawn_bias));
 		spawns_url.push(additementry('DeadRifleman', url_replacement_spawn_bias));
 		spawns_url.push(additementry('ReallyDeadRifleman', url_replacement_spawn_bias));
-		additem('HDURLSpawner', spawns_url, url_persistent_spawning); // Weapon Replacer
+		additem('HDUniversalReloader', spawns_url, url_persistent_spawning, false); // Weapon Replacer
 	
 	// Logistics Bag
 	Array<WaresSpawnItemEntry> spawns_logibag;
 		spawns_logibag.push(additementry('HDAmBox', lgb_replacement_spawn_bias));
+		spawns_logibag.push(additementry('HDAmBoxUnarmed', lgb_replacement_spawn_bias));
 		spawns_logibag.push(additementry('DeadRifleman', lgb_replacement_spawn_bias));
 		spawns_logibag.push(additementry('ReallyDeadRifleman', lgb_replacement_spawn_bias));
-		additem('HD_WildLogiBag', spawns_logibag, lgb_persistent_spawning); // Weapon Replacer
+		additem('HD_WildLogiBag', spawns_logibag, lgb_persistent_spawning, false); // Weapon Replacer
 
 	// Medical Backpack
 	Array<WaresSpawnItemEntry> spawns_medibag;
 		spawns_medibag.push(additementry('PortableMedikit', mdb_replacement_spawn_bias));
 		spawns_medibag.push(additementry('DeadRifleman', mdb_replacement_spawn_bias));
 		spawns_medibag.push(additementry('ReallyDeadRifleman', mdb_replacement_spawn_bias));
-		additem('HD_WildMediBag', spawns_medibag, lgb_persistent_spawning); // Weapon Replacer
+		additem('HD_WildMediBag', spawns_medibag, lgb_persistent_spawning, false); // Weapon Replacer
 
 	// Defib
 	Array<WaresSpawnItemEntry> spawns_defib;
 		spawns_defib.push(additementry('PortableMedikit', dfb_replacement_spawn_bias));
 		spawns_defib.push(additementry('DeadRifleman', dfb_replacement_spawn_bias));
 		spawns_defib.push(additementry('ReallyDeadRifleman', dfb_replacement_spawn_bias));
-		additem('HDefib', spawns_defib, dfb_persistent_spawning); // Weapon Replacer
+		additem('HDefib', spawns_defib, dfb_persistent_spawning, false); // Weapon Replacer
 	}
 	
 	// Fill above with entries for each weapon
@@ -205,8 +210,6 @@ class OffworldWaresHandler : EventHandler
 		return result;
 	}
 
-
-
 	// Tries to create the item via random spawning.
 	bool trycreateitem(worldevent e, WaresSpawnItem f, int g)
 	{
@@ -216,11 +219,9 @@ class OffworldWaresHandler : EventHandler
 			vector3 spawnpos = e.thing.pos;
 			let spawnitem = Actor.Spawn(f.spawnname, (spawnpos.x, spawnpos.y, spawnpos.z));
 			if(spawnitem)
-			{
-				e.thing.destroy();
+			{	
 				result = true;
 			}
-
 		}
 		return result;
 	}
@@ -267,10 +268,7 @@ class OffworldWaresHandler : EventHandler
 				}
 			}
 		}
-		
-		
 
-				
 		// Iterates through the list of item candidates for e.thing.
 		for(i = 0; i < itemspawnlistsize; i++)
 		{
@@ -285,8 +283,9 @@ class OffworldWaresHandler : EventHandler
 			
 			// Checks if persistent spawning is on.
 			bool persist  = (itemspawnlist[i].isPersistent);
-			
-			
+
+			// Checks if it should replace or not.
+			bool replaceoriginalitem = (itemspawnlist[i].replaceoriginalitem);
 			
 			// if an item is owned or is an ammo (doesn't retain owner ptr), 
 			// do not replace it. 
@@ -299,6 +298,14 @@ class OffworldWaresHandler : EventHandler
 					{
 						if(trycreateitem(e, itemspawnlist[i], j))
 						{
+							if (replaceoriginalitem = false)
+							{
+								continue;
+							}
+							else
+							{
+								e.thing.destroy();
+							}
 							j = itemspawnlist[i].spawnreplacessize;
 							i = itemspawnlistsize;
 						}
@@ -308,6 +315,7 @@ class OffworldWaresHandler : EventHandler
 		}
 	}
 }
+
 //-------------------------------------------------
 // MONSTERS
 //-------------------------------------------------
