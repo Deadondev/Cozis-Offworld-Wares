@@ -38,10 +38,13 @@ class HDUniversalReloader : HDWeapon
 		if (r = HDRel_Recipe.TryCreate("HD500SWLightAmmo",    "HDRel_RawLead", 3, 2.25,   "HDRel_RawBrass",   2, 1.25,   "HDRel_RawPowder", 2, 1.00,    0.75)) Recipes.Push(r); // BulletLib
 		if (r = HDRel_Recipe.TryCreate("HD500SWHeavyAmmo",    "HDRel_RawLead", 4, 3.00,   "HDRel_RawBrass",   2, 1.25,   "HDRel_RawPowder", 2, 1.00,    0.75)) Recipes.Push(r); // BulletLib
 		if (r = HDRel_Recipe.TryCreate("HDNDMLoose",          "HDRel_RawLead", 4, 2.75,   "HDRel_RawPlastic", 1, 0.75,   "HDRel_RawPowder", 2, 1.00,    1.00)) Recipes.Push(r); // Peppergrinder
-		if (r = HDRel_Recipe.TryCreate("HDSlugAmmo",          "HDRel_RawLead", 5, 3.00,   "HDRel_RawPlastic", 1, 0.75,   "HDRel_RawPowder", 2, 1.00,    1.00)) Recipes.Push(r); // Greely, BulletLib
+		if (r = HDRel_Recipe.TryCreate("HDAurochsAmmo",       "HDRel_RawLead", 2, 1.75,   "HDRel_RawBrass",   2, 1.25,   "HDRel_RawPowder", 2, 1.00,    1.00)) Recipes.Push(r); // Peppergrinder
+		if (r = HDRel_Recipe.TryCreate("HD069BoreAmmo",       "HDRel_RawLead", 4, 2.75,   "HDRel_RawPlastic", 2, 1.5,    "HDRel_RawPowder", 1, 0.50,    1.00)) Recipes.Push(r); // Peppergrinder
+		if (r = HDRel_Recipe.TryCreate("HDSlugAmmo",          "HDRel_RawLead", 5, 3.00,   "HDRel_RawPlastic", 1, 0.75,   "HDRel_RawPowder", 2, 1.00,    1.00)) Recipes.Push(r); // BulletLib
 		if (r = HDRel_Recipe.TryCreate("HD50OMGAmmo",         "HDRel_RawLead", 5, 3.80,   "HDRel_RawBrass",   4, 3.00,   "HDRel_RawPowder", 6, 4.00,    0.50)) Recipes.Push(r); // BulletLib
 		if (r = HDRel_Recipe.TryCreate("HD50AM_Ammo",         "HDRel_RawLead", 3, 2.25,   "HDRel_RawBrass",   2, 1.25,   "HDRel_RawPowder", 2, 1.00,    0.75)) Recipes.Push(r); // PB's weapon pack
-		if (r = HDRel_Recipe.TryCreate("HD5mm_Ammo",          "HDRel_RawLead", 1, 0.25,   "HDRel_RawBrass",   1, 0.25,   "HDRel_RawPowder", 1, 0.5,     0.75)) Recipes.Push(r); // PB's weapon pack
+		if (r = HDRel_Recipe.TryCreate("HD5mm_Ammo",          "HDRel_RawLead", 1, 0.25,   "HDRel_RawPlastic", 1, 0.25,   "HDRel_RawPowder", 1, 0.5,     0.75)) Recipes.Push(r); // PB's weapon pack
+		if (r = HDRel_Recipe.TryCreate("HD6mmFlechetteAmmo",  "HDRel_RawLead", 3, 0.75,   "HDRel_RawPlastic", 1, 1.00,   "HDRel_RawPowder", 1, 0.75,    0.75)) Recipes.Push(r); // PB's weapon pack
 		if (r = HDRel_Recipe.TryCreate("ThirtyAughtSixAmmo",  "HDRel_RawLead", 3, 2.25,   "HDRel_RawBrass",   2, 1.75,   "HDRel_RawPowder", 4, 2.50,    0.90)) Recipes.Push(r); // .30-06, HexaDoken's Garand
 		if (r = HDRel_Recipe.TryCreate("ThirtyAughtSixBrass", null,            0, 0.00,   "HDRel_RawBrass",   0, 1.75,   null,              0, 0.00,    0.90)) Recipes.Push(r); // .30-06, HexaDoken's Garand
 		if (r = HDRel_Recipe.TryCreate("HDBallAmmo",          "HDRel_RawLead", 12, 9.85,  "HDRel_RawPlastic", 0, 0,      "HDRel_RawPowder", 0, 0.0,     1.00)) Recipes.Push(r); // .56 Caliber Musket Balls, Offworld Wares
@@ -50,6 +53,7 @@ class HDUniversalReloader : HDWeapon
 		if (r = HDRel_Recipe.TryCreate("HDFlareAmmo",         null,            0, 0.00,   "HDRel_RawPlastic", 0, 2.00,   "HDRel_RawPowder", 0, 0.50,    0.90)) Recipes.Push(r); // Rad-Tech Weapon Pack
 		if (r = HDRel_Recipe.TryCreate("HD45LCAmmo",          "HDRel_RawLead", 3, 1.75,   "HDRel_RawBrass",   1, 1.00,   "HDRel_RawPowder", 3, 1.25,    0.75)) Recipes.Push(r); // Rad-Tech Weapon Pack
 		if (r = HDRel_Recipe.TryCreate("HDExplosiveShellAmmo","HDRel_RawLead", 1, 0.75,   "HDRel_RawPlastic", 1, 1.00,   "HDRel_RawPowder", 3, 1.5,     0.75)) Recipes.Push(r); // Rad-Tech Weapon Pack
+		if (r = HDRel_Recipe.TryCreate("HD4GSAmmo",           "HDRel_RawLead", 4, 3.50,   "HDRel_RawPlastic", 3, 1.50,   "HDRel_RawPowder", 4, 2.5,     0.75)) Recipes.Push(r); // Khan's 4-Gauge Pack
 	}
 
 	override string, double GetPickupSprite() { return "URLDA0", 1.0; }
@@ -60,7 +64,7 @@ class HDUniversalReloader : HDWeapon
 		..WEPHELP_UNLOAD.."  Drop in disassemble mode";
 	}
 	override double GunMass() { return 0; }
-	override double WeaponBulk() { return 50 * Amount; }
+	override double WeaponBulk() { return 65 * Amount; }
 	override bool AddSpareWeapon(actor newowner) { return AddSpareWeaponRegular(newowner); }
 	override HDWeapon GetSpareWeapon(actor newowner, bool reverse, bool doselect) { return GetSpareWeaponRegular(newowner, reverse, doselect); }
 
