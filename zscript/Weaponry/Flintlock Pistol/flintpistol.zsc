@@ -168,7 +168,7 @@ class HD_FlintlockPistol:HDHandgun{
 		goto readyend;
 	// ---- THIS IS WHERE THE MUSKET CODE IS ----
 	fire:
-		MSKG A 1 offset(0,34){
+		FLNR A 1 offset(0,34){
 			/*if(invoker.weaponstatus[FLINT_BARREL]==0){
 			setweaponstate("nope");
 			return;
@@ -210,7 +210,7 @@ class HD_FlintlockPistol:HDHandgun{
 					};
 
 		}
-		MSKG B 2;
+		FLNR B 2;
 		goto nope;
 		
 	flash:
