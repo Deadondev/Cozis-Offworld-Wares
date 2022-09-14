@@ -343,7 +343,7 @@ class TriteHandler : EventHandler
     override void WorldThingSpawned(WorldEvent e)
     {
 		if(e.thing && e.thing is "Trite")current_trites++; // this line of code wouldn't propegate properly to all of the spawners. You'd need to give each spawner a maximum number they can spawn. 
-        let sss=SpiderBarrel(e.thing);
+        let sss=TriteBarrel(e.thing);
         //if(sss)sss.maxtospawn = current_trites;
 		
     }
@@ -404,7 +404,7 @@ class SpiderBarrelEventHandler : EventHandler
 	{
 		if(giverandom(chance))
 		{
-			let sss = SpiderBarrel(e.thing.Spawn("SpiderBarrel", e.thing.pos, SXF_TRANSFERSPECIAL | SXF_NOCHECKPOSITION));
+			let sss = TriteBarrel(e.thing.Spawn("TriteBarrel", e.thing.pos, SXF_TRANSFERSPECIAL | SXF_NOCHECKPOSITION));
 			if(sss)
 			{
 				
