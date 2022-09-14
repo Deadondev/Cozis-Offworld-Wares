@@ -51,19 +51,22 @@ class TriteBarrel:HDBarrel{
 		}
 	}
 	void A_BarrelMove(){
+		if(spawnedtrites<5){
 		if(floorz!=pos.z)return;
 		A_FaceTarget();
 		angle+=random(-135,135);
 		//A_StartSound("barrel/walk",CHAN_BODY);
 		vel.xy+=(cos(angle),sin(angle))*0.1;
 		setstatelabel("inertjiggle");
+		}
 	}
 
 ///////////////////////////////////////////////////////////////////////////////
 	override void A_BarrelAttack(){
+		if(spawnedtrites<5){
 		A_FaceTarget(0,0);
 			//A_StartSound(attacksound,CHAN_WEAPON);
-			if(spawnedtrites<5){A_SpawnItemEx("Trite",frandom(0,8),frandom(0,8),frandom(0,8),frandom(0,8),frandom(0,8),frandom(0,8),frandom(0,180),SXF_NOCHECKPOSITION);spawnedtrites++;//}
+			A_SpawnItemEx("Trite",frandom(0,8),frandom(0,8),frandom(0,8),frandom(0,8),frandom(0,8),frandom(0,8),frandom(0,180),SXF_NOCHECKPOSITION);spawnedtrites++;
 		setstatelabel("spawn");
 		}
 		else{setstatelabel("spawn");}
@@ -168,8 +171,8 @@ void A_TritePeek(){ //This is how the trites will look for players to jump on
 			}
 			actor a=spawn("HDExplosion",self.pos+(random(-2,2),random(-2,2),random(12,32)),ALLOW_REPLACE);
 			a.vel=self.vel+(random(-1,1),random(-1,1),random(-1,2));
-			A_SpawnItemEx("Trite",frandom(0,8),frandom(0,8),0,frandom(0,8),frandom(0,8),0,frandom(0,180),SXF_NOCHECKPOSITION);
-			A_SpawnItemEx("Trite",frandom(0,8),frandom(0,8),0,frandom(0,8),frandom(0,8),0,frandom(0,180),SXF_NOCHECKPOSITION);
+			while(spawnedtrites<5){A_SpawnItemEx("Trite",frandom(0,8),frandom(0,8),0,frandom(0,8),frandom(0,8),0,frandom(0,180),SXF_NOCHECKPOSITION);spawnedtrites++;}
+			
 		}
 		BEXP C 0 A_BarrelBlast();
 		BEXP D 2 bright{
