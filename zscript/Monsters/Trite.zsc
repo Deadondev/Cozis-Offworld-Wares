@@ -244,7 +244,7 @@ class Trite:HDMobBase{
 		health 15;radius 12; //bab health is 90 so yea...
 		height 32;deathheight 0;
 		scale 0.8; //was 0.6 but we need to buff so
-		speed 18; //babs are 12
+		speed 8; //babs are 12
 		mass 70;
 		meleerange 40;
 		bloodcolor "44 99 22";
