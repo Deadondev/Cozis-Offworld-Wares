@@ -4,7 +4,7 @@
 
 // Trites
 server int  current_tritescvar= 0;
-server int  max_tritescvar    = 30;
+server int  max_tritescvar = 30;
 
 // Trite Barrels
 server int  sbrl_regulars_spawn_bias = 49;

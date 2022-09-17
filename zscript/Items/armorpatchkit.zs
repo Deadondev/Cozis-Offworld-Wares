@@ -19,8 +19,8 @@ class HDArmorPatchKit : HDWeapon
 
 	override string GetHelpText()
 	{
-		return WEPHELP_FIRE.." (Hold)".."+"..WEPHELP_RELOAD.."  Repair armor\n"
-		..WEPHELP_ALTFIRE.." (Hold)".."+"..WEPHELP_RELOAD.."  Disassemble armor\n"
+		return WEPHELP_FIRE.." (Hold)".."+"..WEPHELP_RELOAD.." (Hold)  Repair armor\n"
+		..WEPHELP_ALTFIRE.." (Hold)".."+"..WEPHELP_RELOAD.." (Hold)  Disassemble armor\n"
 		..WEPHELP_FIREMODE.."+"..WEPHELP_FIRE.."/"..WEPHELP_ALTFIRE.."  Cycle armors\n";
 	}
 	override string, double GetPickupSprite(){ return "APKTA0", 1.0; }
@@ -312,7 +312,7 @@ class HDArmorPatchKit : HDWeapon
 				{
 					SetWeaponState("Nope");
 				}
-				else if (JustPressed(BT_RELOAD))
+				else if (PressingReload())
 				{
 					if (PressingFire())
 					{
@@ -326,10 +326,10 @@ class HDArmorPatchKit : HDWeapon
 			}
 			Wait;
 		RepairBash:
-			TNT1 A 5 A_TryKitAction(KAction_Repair);
+			TNT1 A 10 A_TryKitAction(KAction_Repair);
 			Goto ReadyToBash;
 		StripBash:
-			TNT1 A 5 A_TryKitAction(KAction_Strip);
+			TNT1 A 10 A_TryKitAction(KAction_Strip);
 			Goto ReadyToBash;
 
 		User3:

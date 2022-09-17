@@ -327,10 +327,10 @@ class TriteHandler : EventHandler
 	private int max_trites;
 	private int maxtospawn;
 
-        void init()
+    void init()
     {
-        	current_trites = current_tritescvar;
-			max_trites = max_tritescvar;
+        current_trites = current_tritescvar;
+		max_trites = max_tritescvar;
     }
 
 	override void WorldLoaded(WorldEvent e)
@@ -345,9 +345,7 @@ class TriteHandler : EventHandler
 		if(e.thing && e.thing is "Trite")current_trites++; // this line of code wouldn't propegate properly to all of the spawners. You'd need to give each spawner a maximum number they can spawn. 
         let sss=TriteBarrel(e.thing);
         //if(sss)sss.maxtospawn = current_trites;
-		
     }
-
 } 
 
 // Trite Barrels

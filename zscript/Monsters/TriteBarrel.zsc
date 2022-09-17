@@ -61,20 +61,18 @@ class TriteBarrel:HDBarrel{
 		}
 	}
 
-///////////////////////////////////////////////////////////////////////////////
 	override void A_BarrelAttack(){
 		if(spawnedtrites<5){
 		A_FaceTarget(0,0);
 			//A_StartSound(attacksound,CHAN_WEAPON);
 			A_SpawnItemEx("Trite",frandom(0,8),frandom(0,8),frandom(0,8),frandom(0,8),frandom(0,8),frandom(0,8),frandom(0,180),SXF_NOCHECKPOSITION);spawnedtrites++;
-		setstatelabel("spawn");
+		setstatelabel("inertjiggle");
 		}
-		else{setstatelabel("spawn");}
+		else{setstatelabel("inertjiggle");}
 	}
-///////////////////////////////////////////////////////////////////////////////
-bool hasmoved;
-void A_TritePeek(){ //This is how the trites will look for players to jump on
 
+	bool hasmoved;
+	void A_TritePeek(){ //This is how the trites will look for players to jump on
 		if(
 			!target
 			||target.health<1
