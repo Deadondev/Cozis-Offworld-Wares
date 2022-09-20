@@ -555,7 +555,7 @@ class HDUniversalReloader : HDWeapon
 			#### A 3;
 			Loop;
 		Blargh:
-			#### A 10
+			#### A 2 //I think this is the delay, was 10 now 2
 			{
 				A_StartSound("roundmaker/pop", 10);
 				HDRel_Recipe selRecipe = invoker.GetSelectedRecipe();
