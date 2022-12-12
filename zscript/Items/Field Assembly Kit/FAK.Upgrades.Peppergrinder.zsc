@@ -164,3 +164,49 @@ class FAK_BPX_Scope : FAK_Upgrade
 	override int HasUpgrade(HDWeapon wpn, HDPickup pkp) { return wpn.WeaponStatus[0] == 1; }
 	override void DoDowngrade(HDWeapon wpn, HDPickup pkp) { wpn.WeaponStatus[0] = 0; GiveCore(wpn.owner, 0.03); }
 }
+
+class FAK_Lotus_SingleAction : FAK_Upgrade
+{
+	override string GetItem() { return "HDLotus"; }
+	override string GetDisplayName() { return "Single-Action Trigger"; }
+	override int GetCost() { return 0; }
+	override void DoUpgrade(HDWeapon wpn, HDPickup pkp) { wpn.WeaponStatus[0] |= LOTF_SA; }
+	override int HasUpgrade(HDWeapon wpn, HDPickup pkp) { return wpn.WeaponStatus[0] & LOTF_SA > 0; }
+	override void DoDowngrade(HDWeapon wpn, HDPickup pkp) { wpn.WeaponStatus[0] &= ~LOTF_SA; }
+}
+
+class FAK_Lotus_BossScope : FAK_Upgrade
+{
+	override string GetItem() { return "HDLotus"; }
+	override string GetDisplayName() { return "BhE Huntmaster Scope"; }
+	override void DoUpgrade(HDWeapon wpn, HDPickup pkp) { wpn.WeaponStatus[0] |= LOTF_SCOPE; }
+	override int HasUpgrade(HDWeapon wpn, HDPickup pkp) { return wpn.WeaponStatus[0] & LOTF_SCOPE > 0; }
+	override void DoDowngrade(HDWeapon wpn, HDPickup pkp) { wpn.WeaponStatus[0] &= ~LOTF_SCOPE; GiveCore(wpn.owner, 0.8); }
+}
+
+class FAK_Lotus_LongerBarrel : FAK_Upgrade
+{
+	override string GetItem() { return "HDLotus"; }
+	override string GetDisplayName() { return "Extended Barrel w/ Foregrip"; }
+	override void DoUpgrade(HDWeapon wpn, HDPickup pkp)
+	{
+		if (wpn.WeaponStatus[LOTS_BARREL] == 2) { GiveCore(wpn.owner, 1); }	
+		wpn.WeaponStatus[LOTS_BARREL] = 1;
+	}
+	override int HasUpgrade(HDWeapon wpn, HDPickup pkp) { return wpn.WeaponStatus[LOTS_BARREL] & 1 > 0; }
+	override void DoDowngrade(HDWeapon wpn, HDPickup pkp) { wpn.WeaponStatus[LOTS_BARREL] &= ~1; GiveCore(wpn.owner, 0.8); }
+}
+
+class FAK_Lotus_Suppressor : FAK_Upgrade
+{
+	override string GetItem() { return "HDLotus"; }
+	override string GetDisplayName() { return "Tsuchinoko Dual-Purpose Silencer"; }
+	override void DoUpgrade(HDWeapon wpn, HDPickup pkp)
+	{
+		if (wpn.WeaponStatus[LOTS_BARREL] == 1) { GiveCore(wpn.owner, 1); }	
+		wpn.WeaponStatus[LOTS_BARREL] = 2;
+
+	}
+	override int HasUpgrade(HDWeapon wpn, HDPickup pkp) { return wpn.WeaponStatus[LOTS_BARREL] & 2 > 0; }
+	override void DoDowngrade(HDWeapon wpn, HDPickup pkp) { wpn.WeaponStatus[LOTS_BARREL] &= ~2; GiveCore(wpn.owner, 0.8); }
+}
