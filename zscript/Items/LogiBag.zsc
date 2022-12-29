@@ -74,8 +74,8 @@ class HD_LogiBag : HDBackpack {
 class LogiBag_ItemStorage : ItemStorage {
 	override int CheckConditions(Inventory item, class<Inventory> cls) {
 		bool valid = (
-			(item && (item is 'HDRel_CraftingMaterial' || item is 'HDAPK_ArmorPatch' || item is 'AssemblyCore' || item is 'HDFragGrenadeAmmo' || item is 'UaS_Respirator' || item is 'UaS_LaserLightModule' || item is 'UaS_WeaponSling' || item is 'UaS_GyroStabilizer' )) ||
-			(cls  && (cls  is 'HDRel_CraftingMaterial' || item is 'HDAPK_ArmorPatch' || item is 'AssemblyCore' || item is 'HDFragGrenadeAmmo' || item is 'UaS_Respirator' || item is 'UaS_LaserLightModule' || item is 'UaS_WeaponSling' || item is 'UaS_GyroStabilizer' ))
+			(item && (item is 'HDRel_CraftingMaterial' || item is 'HDAPK_ArmorPatch' || item is 'AssemblyCore' || item is 'HDFragGrenadeAmmo' || item is 'UaS_Respirator' || item is 'UaS_LaserLightModule' || item is 'UaS_WeaponSling' || item is 'UaS_GyroStabilizer' || item is "HDUniversalReloader" )) ||
+			(cls  && (cls  is 'HDRel_CraftingMaterial' || item is 'HDAPK_ArmorPatch' || item is 'AssemblyCore' || item is 'HDFragGrenadeAmmo' || item is 'UaS_Respirator' || item is 'UaS_LaserLightModule' || item is 'UaS_WeaponSling' || item is 'UaS_GyroStabilizer' || item is "HDUniversalReloader" ))
 		);
 
 		if (!valid) { return IType_Invalid; }
@@ -143,11 +143,13 @@ extend class HD_LogiBag {
 		if (DoSplit) {
 			weaponstatus[LGB_AMOUNT]--;
 			StorageItem SelItem = Storage.GetSelectedItem();
-			if (!SelItem || Storage.Items.Size() <= 0) { return DroppedPouch;}
+			if (!SelItem || Storage.Items.Size() <= 0 || !SelItem.ItemClass) { return DroppedPouch;}
 			int AmountInPouch = SelItem.Amounts.Size() > 0 ? SelItem.Amounts[0] : 0;
-			double UnitBulk = HDPickup(getdefaultbytype(SelItem.ItemClass)).bulk * hdmath.getencumbrancemult();
-			UnitBulk = max(UnitBulk, 0.01);
-			int AmountToMove = int((DroppedPouch.Storage.MaxBulk - DroppedPouch.Storage.TotalBulk) / UnitBulk);
+			
+			let cls = SelItem.ItemClass;
+			let bulk = cls is "HDWeapon" ? HDWeapon(getdefaultbytype(SelItem.ItemClass)).weaponbulk() : HDPickup(getdefaultbytype(SelItem.ItemClass)).bulk;
+			
+			int AmountToMove = int((DroppedPouch.Storage.MaxBulk - DroppedPouch.Storage.TotalBulk) / max(bulk * hdmath.getencumbrancemult(), 0.01));
 			AmountToMove = min(AmountToMove, AmountInPouch);
 			DroppedPouch.Storage.AddAmount(SelItem.ItemClass, AmountToMove);
 			Storage.RemoveItem(SelItem, null, null, AmountToMove);

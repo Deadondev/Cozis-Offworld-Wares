@@ -298,16 +298,12 @@ class OffworldWaresHandler : EventHandler
 					{
 						if(trycreateitem(e, itemspawnlist[i], j))
 						{
-							if (replaceoriginalitem = false)
-							{
-								continue;
-							}
-							else
+							if (replaceoriginalitem)
 							{
 								e.thing.destroy();
+                                j = itemspawnlist[i].spawnreplacessize;
+                                i = itemspawnlistsize;
 							}
-							j = itemspawnlist[i].spawnreplacessize;
-							i = itemspawnlistsize;
 						}
 					}
 				}
@@ -351,8 +347,6 @@ class TriteHandler : EventHandler
 // Trite Barrels
 class SpiderBarrelEventHandler : EventHandler
 {
-
-
 	private bool cvarsAvailable;
 
 	private int spawnBiasActual;
@@ -405,7 +399,6 @@ class SpiderBarrelEventHandler : EventHandler
 			let sss = TriteBarrel(e.thing.Spawn("TriteBarrel", e.thing.pos, SXF_TRANSFERSPECIAL | SXF_NOCHECKPOSITION));
 			if(sss)
 			{
-				
 				e.thing.destroy();
 			}
 		}
