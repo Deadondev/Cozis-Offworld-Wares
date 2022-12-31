@@ -74,8 +74,8 @@ class HD_MediBag : HDBackpack {
 class MediBag_ItemStorage : ItemStorage {
 	override int CheckConditions(Inventory item, class<Inventory> cls) {
 		bool valid = (
-			(item && (item is 'UaS_2FCartridge' || item is 'PortableStimpack' || item is 'PortableBerserkPack' || item is 'HDHealingPotion' || item is 'SecondBlood'|| item is 'HDMedikitter'|| item is 'PortableMedikit'|| item is 'HDefib' || item is 'HDFirstAidSpray' || item is 'HDFieldMedicKit')) ||
-			(cls  && (cls  is 'UaS_2FCartridge' || item is 'PortableStimpack' || item is 'PortableBerserkPack' || item is 'HDHealingPotion' || item is 'SecondBlood'|| item is 'HDMedikitter'|| item is 'PortableMedikit'|| item is 'HDefib' || item is 'HDFirstAidSpray' || item is 'HDFieldMedicKit'))
+			(item && (item is 'UaS_2FCartridge' || item is 'PortableStimpack' || item is 'PortableBerserkPack' || item is 'HDHealingPotion' || item is 'SecondBlood'|| item is 'HDMedikitter'|| item is 'PortableMedikit'|| item is 'HDefib')) ||
+			(cls  && (cls  is 'UaS_2FCartridge' || item is 'PortableStimpack' || item is 'PortableBerserkPack' || item is 'HDHealingPotion' || item is 'SecondBlood'|| item is 'HDMedikitter'|| item is 'PortableMedikit'|| item is 'HDefib'))
 		);
 
 		if (!valid) { return IType_Invalid; }
