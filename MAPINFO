@@ -1,4 +1,4 @@
 GameInfo
 {
-	AddEventHandlers = "OffworldWaresHandler", "UaS_AlcoholEventHandler", "FAK_Handler", "SpiderBarrelEventHandler", "TriteHandler"
+	AddEventHandlers = "OffworldWaresHandler", "UaS_AlcoholEventHandler", "SpiderBarrelEventHandler", "TriteHandler"
 }

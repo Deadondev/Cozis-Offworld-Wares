@@ -19,9 +19,6 @@ weapons/defibuse      Sounds/Defibrillator/defibrillator_use.wav
 // Rum
 mre/cork		CORKPLL1
 
-// Field Assembly Kit
-FAKit/Use FAKUSE
-
 //-------------------------------------------------
 // MONSTERS
 //-------------------------------------------------
