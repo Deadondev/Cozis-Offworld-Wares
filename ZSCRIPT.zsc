@@ -13,7 +13,7 @@ version "4.5"
 
 // Defibrillator
 #include "zscript/weaponry/Defibrillator/Defib.zsc"
-
+/*
 //-------------------------------------------------
 // ITEMS
 //-------------------------------------------------
@@ -26,7 +26,7 @@ version "4.5"
 
 // Medical Bag
 #include "zscript/Items/MediBag.zsc"
-
+*/
 //-------------------------------------------------
 // MONSTERS
 //-------------------------------------------------
