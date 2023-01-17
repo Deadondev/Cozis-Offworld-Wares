@@ -13,7 +13,7 @@ version "4.5"
 
 // Defibrillator
 #include "zscript/weaponry/Defibrillator/Defib.zsc"
-
+/*
 //-------------------------------------------------
 // ITEMS
 //-------------------------------------------------
@@ -21,35 +21,12 @@ version "4.5"
 // Rations
 #include "zscript/Items/UaS_Rations.zs"
 
-// Universal Reloader
-#include "zscript/Items/unireloader.zs"
-#include "zscript/Items/reloadermats.zs"
-
-// Armor-patch Kit
-#include "zscript/Items/armorpatchkit.zs"
-
-// Field Asembly Kit
-#include "zscript/Items/Field Assembly Kit/FieldAssemblyKit.zsc"
-
-// Field Assembly Kit upgrades.
-#include "zscript/Items/Field Assembly Kit/FAK.Upgrades.Handler.zsc"
-#include "zscript/Items/Field Assembly Kit/FAK.Upgrades.Thinkers.zsc"
-#include "zscript/Items/Field Assembly Kit/FAK.Upgrades.Vanilla.zsc"
-#include "zscript/Items/Field Assembly Kit/FAK.Upgrades.AceCorp.zsc"
-#include "zscript/Items/Field Assembly Kit/FAK.Upgrades.Icarus.zsc"
-#include "zscript/Items/Field Assembly Kit/FAK.Upgrades.Peppergrinder.zsc"
-#include "zscript/Items/Field Assembly Kit/FAK.Upgrades.Hoagietech.zsc"
-#include "zscript/Items/Field Assembly Kit/FAK.Upgrades.HexaDoken.zsc"
-#include "zscript/Items/Field Assembly Kit/FAK.Upgrades.Potetobloke.zsc"
-#include "zscript/Items/Field Assembly Kit/FAK.Upgrades.Mohl.zsc"
-#include "zscript/Items/Field Assembly Kit/FAK.Upgrades.FDA.zsc"
-
 // Logistics Bag
 #include "zscript/Items/LogiBag.zsc"
 
 // Medical Bag
 #include "zscript/Items/MediBag.zsc"
-
+*/
 //-------------------------------------------------
 // MONSTERS
 //-------------------------------------------------

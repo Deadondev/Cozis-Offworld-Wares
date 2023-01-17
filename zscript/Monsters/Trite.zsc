@@ -407,10 +407,10 @@ class TriteDrops:IdleDummy{
     spawn:
         TNT1 A 0 nodelay{
 			if(random(0,8)){
-            A_SpawnItemEx("HDRel_RawPlastic",frandom(0,8),frandom(0,8),0,frandom(0,8),frandom(0,8),0,frandom(0,180),SXF_NOCHECKPOSITION);
-			A_SpawnItemEx("HDRel_RawBrass",frandom(0,8),frandom(0,8),0,frandom(0,8),frandom(0,8),0,frandom(0,180),SXF_NOCHECKPOSITION);
-			A_SpawnItemEx("HDRel_RawLead",frandom(0,1),frandom(0,1),0,frandom(0,1),frandom(0,1),0,frandom(0,180),SXF_NOCHECKPOSITION);
-			A_SpawnItemEx("HDRel_RawPowder",frandom(0,1),frandom(0,1),0,frandom(0,1),frandom(0,1),0,frandom(0,180),SXF_NOCHECKPOSITION);
+//          A_SpawnItemEx("HDRel_RawPlastic",frandom(0,8),frandom(0,8),0,frandom(0,8),frandom(0,8),0,frandom(0,180),SXF_NOCHECKPOSITION);
+//			A_SpawnItemEx("HDRel_RawBrass",frandom(0,8),frandom(0,8),0,frandom(0,8),frandom(0,8),0,frandom(0,180),SXF_NOCHECKPOSITION);
+//			A_SpawnItemEx("HDRel_RawLead",frandom(0,1),frandom(0,1),0,frandom(0,1),frandom(0,1),0,frandom(0,180),SXF_NOCHECKPOSITION);
+//			A_SpawnItemEx("HDRel_RawPowder",frandom(0,1),frandom(0,1),0,frandom(0,1),frandom(0,1),0,frandom(0,180),SXF_NOCHECKPOSITION);
 			A_SpawnItemEx("HDShellAmmo",frandom(0,1),frandom(0,1),0,frandom(0,1),frandom(0,1),0,frandom(0,180),SXF_NOCHECKPOSITION);
 			A_SpawnItemEx("HD45ACPAmmo",frandom(0,1),frandom(0,1),0,frandom(0,1),frandom(0,1),0,frandom(0,180),SXF_NOCHECKPOSITION);
 			A_SpawnItemEx("HDPistolAmmo",frandom(0,1),frandom(0,1),0,frandom(0,1),frandom(0,1),0,frandom(0,180),SXF_NOCHECKPOSITION);

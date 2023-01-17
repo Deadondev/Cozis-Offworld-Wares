@@ -8,7 +8,7 @@ AddOptionMenu "OptionsMenu"
     Submenu "Offworld Wares Options", "CozisOffworldWares"
 }
 
-AddOptionMenu "HDOptionsMenu" after "HDControlsMenu" {
+AddOptionMenu "HDAddonMenu"{
 	Submenu "Offworld Wares Settings", "CozisOffworldWares"
 }
 
