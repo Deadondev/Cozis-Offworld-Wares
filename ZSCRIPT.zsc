@@ -1,7 +1,7 @@
 version "4.5"
 
 // Event Handlers for spawning.
-#include "zscript/Event-Handlers.zs"
+//#include "zscript/Event-Handlers.zs"
 
 //-------------------------------------------------
 // WEAPONS
