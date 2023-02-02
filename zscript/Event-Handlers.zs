@@ -145,7 +145,7 @@ class OffworldWaresHandler : EventHandler
 		additem('HD_FlintlockPistol', spawns_flint, flint_persistent_spawning, true); // Weapon Replacer
 
 	// Rum
-    Array<WaresSpawnItemEntry> spawns_rum;
+/*    Array<WaresSpawnItemEntry> spawns_rum;
 		spawns_rum.push(additementry('PortableStimpack', rum_pmi_spawn_bias));
 		additem('UaS_Alcohol_OleRum', spawns_rum, rum_persistent_spawning, false); // Weapon Replacer
 
@@ -155,7 +155,7 @@ class OffworldWaresHandler : EventHandler
 		additem('HD_RadsuitPack', spawns_radpack, rum_persistent_spawning, false); // Weapon Replacer
 
 	// Armor Patch Kit
-    Array<WaresSpawnItemEntry> spawns_apk;
+      Array<WaresSpawnItemEntry> spawns_apk;
 		spawns_apk.push(additementry('HDArmour', apk_replacement_spawn_bias));
 		spawns_apk.push(additementry('DeadRifleman', apk_replacement_spawn_bias));
 		spawns_apk.push(additementry('ReallyDeadRifleman', apk_replacement_spawn_bias));
@@ -191,6 +191,7 @@ class OffworldWaresHandler : EventHandler
 		spawns_defib.push(additementry('DeadRifleman', dfb_replacement_spawn_bias));
 		spawns_defib.push(additementry('ReallyDeadRifleman', dfb_replacement_spawn_bias));
 		additem('HDefib', spawns_defib, dfb_persistent_spawning, false); // Weapon Replacer
+		*/
 	}
 	
 	// Fill above with entries for each weapon
