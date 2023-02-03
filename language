@@ -1,3 +1,7 @@
 [enu default]
 
 TAG_TRITEBARREL = "Barrel";
+
+[en enc eng eni ena enz default]
+TAG_CLEANSER="Cleanser Stim";
+PICKUP_CLEANSER="You got a cleanser!";
