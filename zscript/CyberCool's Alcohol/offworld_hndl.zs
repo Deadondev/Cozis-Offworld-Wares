@@ -1,6 +1,6 @@
 // Updated handler (3/26/22) for edge-case desyncs. Thanks Cali, Phantom, & FDA.
 
-class UaS_AlcoholEventHandler : StaticEventHandler {
+class UaS_Offworld_AlcoholEventHandler : StaticEventHandler {
     override void WorldTick()
 	{
         let shouldEnable = false;
@@ -14,7 +14,7 @@ class UaS_AlcoholEventHandler : StaticEventHandler {
                 playerCam = player.camera;
 
             if(playerCam)
-                enableShader = playerCam.countInv("UasAlcohol_IntoxToken") >= UasAlcohol_IntoxToken.min_effect_amt;
+                enableShader = playerCam.countInv("UasAlcohol_Offworld_IntoxToken") >= UasAlcohol_Offworld_IntoxToken.min_effect_amt;
         }
         Shader.SetEnabled(players[consoleplayer], "UASAlcohol_Intoxication", enableShader);
         //PPShader.SetEnabled("UASAlcohol_Intoxication", enableShader);

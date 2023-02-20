@@ -1,6 +1,6 @@
 // Intoxication code from cyb3r_c001's UaS Deus Ex pack.
 
-class UaSAlcohol_IntoxToken : Inventory
+class UasAlcohol_Offworld_IntoxToken : Inventory
 {
 	default
 	{

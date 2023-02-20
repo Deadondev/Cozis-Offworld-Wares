@@ -1,6 +1,6 @@
 /// Base alcohol consumable class.
 
-class UaS_Alcohol : UaS_Consumable
+class UaS_Offworld_Alcohol : UaS_Consumable
 {
 	int intox_per_bulk;
 	property IntoxPerbulk : intox_per_bulk;
@@ -23,7 +23,7 @@ class UaS_Alcohol : UaS_Consumable
 		HDPlayerPawn hdp = HDPlayerPawn(tracker.owner);
 		int bulk = prevbulk - weaponbulk();
 		if(bulk > 0){
-			hdp.GiveInventory("UaSAlcohol_IntoxToken", intox_per_bulk * bulk);
+			hdp.GiveInventory("UasAlcohol_Offworld_IntoxToken", intox_per_bulk * bulk);
 		}
 		prevbulk = weaponbulk();
 	}

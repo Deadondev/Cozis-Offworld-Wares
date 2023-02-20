@@ -43,7 +43,7 @@ class BlueRum_Alcohol : UaS_Consumable
 		HDPlayerPawn hdp = HDPlayerPawn(tracker.owner);
 		int bulk = prevbulk - weaponbulk();
 		if(bulk > 0){
-			hdp.GiveInventory("UaSAlcohol_IntoxToken", intox_per_bulk * bulk);
+			hdp.GiveInventory("UasAlcohol_Offworld_IntoxToken", intox_per_bulk * bulk);
 			hdp.GiveInventory("HealingMagic", 8);
 		}
 		prevbulk = weaponbulk();

@@ -2,10 +2,10 @@ version "4.5"
 
 // Event Handlers for spawning.
 #include "zscript/Event-Handlers.zs"
-//Cyber's Alcohol
-#include "zscript/CyberCool's Alcohol/intox.zs"
-#include "zscript/CyberCool's Alcohol/hndl.zs"
-#include "zscript/CyberCool's Alcohol/baseclass.zs"
+//Cyber's Alcohol THE ONLY REASON IM ADDING OFFWORLD_ IN FRONT IS TO PREVENT OTHER MODS WHO DO RELY ON IT FROM HAVING ISSUES, THE ENTIRE REASON OF THIS PORT IS SO THAT IF THE SERVER OR FILES ARE EVER LOST/ I NEED TO CHANGE SOMETHING THAT THEY ARE HERE. -[Cozi]
+#include "zscript/CyberCool's Alcohol/offworld_intox.zs"
+#include "zscript/CyberCool's Alcohol/offworld_hndl.zs"
+#include "zscript/CyberCool's Alcohol/offworld_baseclass.zs"
 
 //-------------------------------------------------
 // WEAPONS

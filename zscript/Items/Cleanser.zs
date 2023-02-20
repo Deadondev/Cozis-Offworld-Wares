@@ -79,8 +79,8 @@ class CleanserDrug:HDDrug{
 			hdp.bloodloss+=4;
 			vomitamount+=4;
 		}
-		if(hdp.countinv("UaSAlcohol_IntoxToken")){
-			hdp.A_TakeInventory("UaSAlcohol_IntoxToken",104);
+		if(hdp.countinv("UasAlcohol_Offworld_IntoxToken")){
+			hdp.A_TakeInventory("UasAlcohol_Offworld_IntoxToken",104);
 			hdp.bloodloss+=1;
 			vomitamount+=1;
 		}
