@@ -106,7 +106,8 @@ class OffworldWaresHandler : EventHandler
 	// appends an entry to itemSpawnList;
 	void addItem(string name, Array<WaresSpawnItemEntry> replacees, bool persists, bool rep=true)
 	{
-		if (hd_debug) {
+		if (hd_debug)
+		{
 			let msg = "Adding "..(persists ? "Persistent" : "Non-Persistent").." Replacement Entry for "..name..": ["..replacees[0].toString();
 
 			if (replacees.size() > 1) foreach (replacee : replacees) msg = msg..", "..replacee.toString();
@@ -215,7 +216,7 @@ class OffworldWaresHandler : EventHandler
 		addItem('HD_RadsuitPack', spawns_radpack, rum_persistent_spawning, false);
 
 		// Armor Patch Kit
-      	Array<WaresSpawnItemEntry> spawns_apk;
+	  	Array<WaresSpawnItemEntry> spawns_apk;
 		spawns_apk.push(addItemEntry('HDArmour', apk_replacement_spawn_bias));
 		spawns_apk.push(addItemEntry('DeadRifleman', apk_replacement_spawn_bias));
 		spawns_apk.push(addItemEntry('ReallyDeadRifleman', apk_replacement_spawn_bias));
@@ -279,7 +280,7 @@ class OffworldWaresHandler : EventHandler
 			{
 				if (hd_debug) console.printf(thing.getClassName().." -> "..spawnName);
 
-                thing.destroy();
+				thing.destroy();
 
 				return true;
 			}
@@ -293,11 +294,12 @@ class OffworldWaresHandler : EventHandler
 		// Populates the main arrays if they haven't been already. 
 		if (!cvarsAvailable) init();
 
-        foreach (bl : backpackBlacklist) {
+		foreach (bl : backpackBlacklist)
+		{
 			if (hd_debug) console.printf("Removing "..bl.getClassName().." from Backpack Spawn Pool");
-                
+				
 			BPSpawnPool.removeItem(bl);
-        }
+		}
 	}
 
 	override void worldThingSpawned(WorldEvent e)
@@ -320,7 +322,7 @@ class OffworldWaresHandler : EventHandler
 		// Return if range before replacing things.
 		if (level.MapName ~== "RANGE") return;
 
-        handleWeaponReplacements(e.thing, ammo, candidateName);
+		handleWeaponReplacements(e.thing, ammo, candidateName);
 	}
 
 	private void handleAmmoUses(HDAmmo ammo, string candidateName)
@@ -361,16 +363,16 @@ class OffworldWaresHandler : EventHandler
 
 // Trite controller
 class TriteHandler : EventHandler
-{    
-    private int current_trites;
+{	
+	private int current_trites;
 	private int max_trites;
 	private int maxtospawn;
 
-    void init()
-    {
-        current_trites = current_tritescvar;
+	void init()
+	{
+		current_trites = current_tritescvar;
 		max_trites = max_tritescvar;
-    }
+	}
 
 	override void WorldLoaded(WorldEvent e)
 	{
@@ -379,12 +381,12 @@ class TriteHandler : EventHandler
 		super.WorldLoaded(e);
 	}
 
-    override void WorldThingSpawned(WorldEvent e)
-    {
+	override void WorldThingSpawned(WorldEvent e)
+	{
 		if (e.thing && e.thing is "Trite")current_trites++; // this line of code wouldn't propegate properly to all of the spawners. You'd need to give each spawner a maximum number they can spawn. 
-        let sss=TriteBarrel(e.thing);
-        //if (sss)sss.maxtospawn = current_trites;
-    }
+		let sss=TriteBarrel(e.thing);
+		//if (sss)sss.maxtospawn = current_trites;
+	}
 } 
 
 // Trite Barrels
