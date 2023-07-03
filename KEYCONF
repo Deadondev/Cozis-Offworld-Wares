@@ -1,6 +1,6 @@
 alias sbrl_reset_cvars "resetcvar sbrl_regulars_spawn_bias; resetcvar sbrl_persistent_spawning;"
-alias msk_reset_cvars "resetcvar musket_blur_spawn_bias; resetcvar musket_persistent_spawning;"
-alias flint_reset_cvars "resetcvar flint_saw_spawn_bias; resetcvar flint_shotguns_spawn_bias; resetcvar flint_persistent_spawning;"
+alias msk_reset_cvars "resetcvar musket_blur_spawn_bias; resetcvar musket_allowBackpacks; resetcvar musket_persistent_spawning;"
+alias flint_reset_cvars "resetcvar flint_saw_spawn_bias; resetcvar flint_shotguns_spawn_bias; resetcvar flint_allowBackpacks; resetcvar flint_persistent_spawning;"
 alias rum_reset_cvars "resetcvar rum_pmi_spawn_bias; resetcvar suit_replacement_spawn_bias; resetcvar rum_persistent_spawning;"
 alias cleanser_reset_cvars "resetcvar rum_pmi_spawn_bias; resetcvar rum_persistent_spawning;"
 alias suit_reset_cvars "resetcvar suit_replacement_spawn_bias"

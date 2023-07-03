@@ -90,6 +90,9 @@ class OffworldWaresHandler : EventHandler
 		"HDLadderSection"
 	};
 
+	// List of CVARs for Backpack Spawns
+	array<Class <Inventory> > backpackBlacklist;
+
 	// List of weapon-ammo associations.
 	// Used for ammo-use association on ammo spawn (happens very often). 
 	array<WaresSpawnAmmo> ammoSpawnList;
@@ -103,7 +106,6 @@ class OffworldWaresHandler : EventHandler
 	// appends an entry to itemSpawnList;
 	void addItem(string name, Array<WaresSpawnItemEntry> replacees, bool persists, bool rep=true)
 	{
-
 		if (hd_debug) {
 			let msg = "Adding "..(persists ? "Persistent" : "Non-Persistent").." Replacement Entry for "..name..": ["..replacees[0].toString();
 
@@ -125,7 +127,6 @@ class OffworldWaresHandler : EventHandler
 		// Pushes the finished struct to the array. 
 		itemSpawnList.push(spawnee);
 	}
-
 
 	WaresSpawnItemEntry addItemEntry(string name, int chance)
 	{
@@ -157,6 +158,13 @@ class OffworldWaresHandler : EventHandler
 	{	
 		cvarsAvailable = true;
 
+		//-----------------
+		// Backpack Spawns
+		//-----------------
+
+		if (!flint_allowBackpacks)  backpackBlacklist.push((Class<Inventory>)("HD_FlintlockPistol"));
+		if (!musket_allowBackpacks) backpackBlacklist.push((Class<Inventory>)("HD_Musket"));
+
 		//------------
 		// Ammunition
 		//------------
@@ -178,7 +186,7 @@ class OffworldWaresHandler : EventHandler
 
 		// Flintlock
 		Array<WaresSpawnItemEntry> spawns_flint;
-		spawns_flint.push(addItemEntry("WildBackpack", flint_saw_spawn_bias));
+		spawns_flint.push(addItemEntry("HDBackpack", flint_saw_spawn_bias));
 		// This is true yet it acts like false.
 		// I don't know why.
 		// I'll fix it some other time, I've been staring at this for literal hours.
@@ -280,11 +288,20 @@ class OffworldWaresHandler : EventHandler
 		return false;
 	}
 
-	override void worldThingSpawned(WorldEvent e)
+	override void worldLoaded(WorldEvent e)
 	{
 		// Populates the main arrays if they haven't been already. 
 		if (!cvarsAvailable) init();
-		
+
+        foreach (bl : backpackBlacklist) {
+			if (hd_debug) console.printf("Removing "..bl.getClassName().." from Backpack Spawn Pool");
+                
+			BPSpawnPool.removeItem(bl);
+        }
+	}
+
+	override void worldThingSpawned(WorldEvent e)
+	{
 		// If thing spawned doesn't exist, quit
 		if (!e.thing) return;
 
