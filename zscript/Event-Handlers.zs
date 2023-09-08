@@ -16,14 +16,10 @@ class WaresSpawnItem play
 	string toString()
 	{
 		let replacements = "[";
-		if (spawnReplaces.size())
-		{
-			replacements = replacements..spawnReplaces[0].toString();
+		
+		foreach (spawnReplace : spawnReplaces) replacements = replacements..", "..spawnReplace.toString();
 
-			foreach (spawnReplace : spawnReplaces) replacements = replacements..", "..spawnReplace.toString();
-		}
 		replacements = replacements.."]";
-
 
 		return String.format("{ spawnName=%s, spawnReplaces=%s, isPersistent=%b, replaceItem=%b }", spawnName, replacements, isPersistent, replaceItem);
 	}
@@ -51,14 +47,10 @@ class WaresSpawnAmmo play
 	
 	string toString()
 	{
-
 		let weapons = "[";
-		if (weaponNames.size())
-		{
-			weapons = weapons..weaponNames[0];
 
-			foreach (weaponName : weaponNames) weapons = weapons..", "..weaponName;
-		}
+		foreach (weaponName : weaponNames) weapons = weapons..", "..weaponName;
+
 		weapons = weapons.."]";
 
 		return String.format("{ ammoName=%s, weaponNames=%s }", ammoName, weapons);
@@ -74,20 +66,20 @@ class OffworldWaresHandler : EventHandler
 	// This -should- mean this mod has no performance impact. 
 	static const string blacklist[] =
 	{
-		"HDSmoke",
-		"BloodTrail",
-		"CheckPuff",
-		"WallChunk",
-		"HDBulletPuff",
-		"HDFireballTail",
-		"ReverseImpBallTail",
-		"HDSmokeChunk",
-		"ShieldSpark",
-		"HDFlameRed",
-		"HDMasterBlood",
-		"PlantBit",
-		"HDBulletActor",
-		"HDLadderSection"
+		'HDSmoke',
+		'BloodTrail',
+		'CheckPuff',
+		'WallChunk',
+		'HDBulletPuff',
+		'HDFireballTail',
+		'ReverseImpBallTail',
+		'HDSmokeChunk',
+		'ShieldSpark',
+		'HDFlameRed',
+		'HDMasterBlood',
+		'PlantBit',
+		'HDBulletActor',
+		'HDLadderSection'
 	};
 
 	// List of CVARs for Backpack Spawns
@@ -108,9 +100,9 @@ class OffworldWaresHandler : EventHandler
 	{
 		if (hd_debug)
 		{
-			let msg = "Adding "..(persists ? "Persistent" : "Non-Persistent").." Replacement Entry for "..name..": ["..replacees[0].toString();
+			let msg = "Adding "..(persists ? "Persistent" : "Non-Persistent").." Replacement Entry for "..name..": [";
 
-			if (replacees.size() > 1) foreach (replacee : replacees) msg = msg..", "..replacee.toString();
+			foreach (replacee : replacees) msg = msg..", "..replacee.toString();
 
 			console.printf(msg.."]");
 		}
@@ -122,8 +114,7 @@ class OffworldWaresHandler : EventHandler
 		spawnee.spawnName = name;
 		spawnee.isPersistent = persists;
 		spawnee.replaceItem = rep;
-
-		foreach (replacee : replacees) spawnee.spawnReplaces.push(replacee);
+		spawnee.spawnReplaces.copy(replacees);
 		
 		// Pushes the finished struct to the array. 
 		itemSpawnList.push(spawnee);
@@ -133,7 +124,7 @@ class OffworldWaresHandler : EventHandler
 	{
 		// Creates a new struct;
 		WaresSpawnItemEntry spawnee = WaresSpawnItemEntry(new('WaresSpawnItemEntry'));
-		spawnee.name = name.makeLower();
+		spawnee.name = name;
 		spawnee.chance = chance;
 		return spawnee;
 	}
@@ -141,13 +132,18 @@ class OffworldWaresHandler : EventHandler
 	// appends an entry to ammoSpawnList;
 	void addAmmo(string name, Array<string> weapons)
 	{
-	
+        if (hd_debug) {
+            let msg = "Adding Ammo Association Entry for "..name..": [";
+
+            foreach (weapon : weapons) msg = msg..", "..weapon;
+
+            console.printf(msg.."]");
+        }
+
 		// Creates a new struct;
 		WaresSpawnAmmo spawnee = WaresSpawnAmmo(new('WaresSpawnAmmo'));
-		spawnee.ammoName = name.makeLower();
-		
-		// Populates the struct with relevant information,
-		foreach (weapon : weapons) spawnee.weaponNames.push(weapon.makeLower());
+		spawnee.ammoName = name;
+		spawnee.weaponNames.copy(weapons);
 		
 		// Pushes the finished struct to the array. 
 		ammoSpawnList.push(spawnee);
@@ -163,8 +159,8 @@ class OffworldWaresHandler : EventHandler
 		// Backpack Spawns
 		//-----------------
 
-		if (!flint_allowBackpacks)  backpackBlacklist.push((Class<Inventory>)("HD_FlintlockPistol"));
-		if (!musket_allowBackpacks) backpackBlacklist.push((Class<Inventory>)("HD_Musket"));
+		if (!flint_allowBackpacks)  backpackBlacklist.push((Class<Inventory>)('HD_FlintlockPistol'));
+		if (!musket_allowBackpacks) backpackBlacklist.push((Class<Inventory>)('HD_Musket'));
 
 		//------------
 		// Ammunition
@@ -172,13 +168,13 @@ class OffworldWaresHandler : EventHandler
 
 		// Flintlock
 		Array<string> wep_flint;
-		wep_flint.push("HD_FlintlockPistol");
-		addAmmo("HDBallAmmo", wep_flint);
+		wep_flint.push('HD_FlintlockPistol');
+		addAmmo('HDBallAmmo', wep_flint);
 
 		// Musket
 		Array<string> wep_musket;
-		wep_musket.push("HD_Musket");
-		addAmmo("HDBallAmmo", wep_musket);
+		wep_musket.push('HD_Musket');
+		addAmmo('HDBallAmmo', wep_musket);
 
 
 		//------------
@@ -187,17 +183,17 @@ class OffworldWaresHandler : EventHandler
 
 		// Flintlock
 		Array<WaresSpawnItemEntry> spawns_flint;
-		spawns_flint.push(addItemEntry("HDBackpack", flint_saw_spawn_bias));
+		spawns_flint.push(addItemEntry('HDBackpack', flint_saw_spawn_bias));
 		// This is true yet it acts like false.
 		// I don't know why.
 		// I'll fix it some other time, I've been staring at this for literal hours.
 		// If you're reading this and know a fix, please let me know. - [Ted]
-		addItem("HD_FlintlockPistol", spawns_flint, flint_persistent_spawning);
+		addItem('HD_FlintlockPistol', spawns_flint, flint_persistent_spawning);
 
 		// Musket
 		Array<WaresSpawnItemEntry> spawns_musket;
-		spawns_musket.push(addItemEntry("SquadSummoner", musket_blur_spawn_bias));
-		addItem("HD_MusketDropper", spawns_musket, musket_persistent_spawning);
+		spawns_musket.push(addItemEntry('SquadSummoner', musket_blur_spawn_bias));
+		addItem('HD_MusketDropper', spawns_musket, musket_persistent_spawning);
 
 
 		// --------------------
@@ -311,7 +307,6 @@ class OffworldWaresHandler : EventHandler
 		foreach (bl : blacklist) if (e.thing is bl) return;
 
 		string candidateName = e.thing.getClassName();
-		candidateName = candidateName.makeLower();
 
 		// Pointers for specific classes.
 		let ammo = HDAmmo(e.thing);
@@ -320,14 +315,23 @@ class OffworldWaresHandler : EventHandler
 		if (ammo) handleAmmoUses(ammo, candidateName);
 
 		// Return if range before replacing things.
-		if (level.MapName ~== "RANGE") return;
+		if (level.MapName == 'RANGE') return;
 
 		handleWeaponReplacements(e.thing, ammo, candidateName);
 	}
 
 	private void handleAmmoUses(HDAmmo ammo, string candidateName)
 	{
-		foreach (ammoSpawn : ammoSpawnList) if (candidateName == ammoSpawn.ammoName) ammo.itemsThatUseThis.copy(ammoSpawn.weaponNames);
+        foreach (ammoSpawn : ammoSpawnList) if (candidateName ~== ammoSpawn.ammoName)
+		{
+            if (hd_debug)
+			{
+                console.printf("Adding the following to the list of items that use "..ammo.getClassName().."");
+                foreach (weapon : ammoSpawn.weaponNames) console.printf("* "..weapon);
+			}
+
+            ammo.itemsThatUseThis.append(ammoSpawn.weaponNames);
+        }
 	}
 
 	private void handleWeaponReplacements(Actor thing, HDAmmo ammo, string candidateName)
@@ -345,7 +349,7 @@ class OffworldWaresHandler : EventHandler
 			{
 				foreach (spawnReplace : itemSpawn.spawnReplaces)
 				{
-					if (spawnReplace.name == candidateName)
+					if (spawnReplace.name ~== candidateName)
 					{
 						if (hd_debug) console.printf("Attempting to replace "..candidateName.." with "..itemSpawn.spawnName.."...");
 
