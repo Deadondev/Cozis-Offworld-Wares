@@ -110,7 +110,7 @@ OptionMenu Flintlock
 
 OptionMenu rum
 {
-    Title "------ Ration Options ------"
+    Title "------ Item Options ------"
    	StaticText "Notice:", "Orange"
     StaticText  "Setting 'spawn rate' to Replace All will supress", "white"
     StaticText  "medikit spawns of that given type.", "white"
@@ -119,6 +119,10 @@ OptionMenu rum
     StaticText  "Control the spawn rate of Rum on Medikits", "white"
 	Option " Medikit Spawn Rate: ", "rum_pmi_spawn_Bias", "SpawnBias"
 	SafeCommand "Reset Rum options", "resetcvar rum_pmi_spawn_bias"
+	StaticText ""
+    StaticText  "Control the spawn rate of Cigarette Packs", "white"
+	Option "Spawn Rate: ", "cpk_pmi_spawn_bias", "SpawnBias"
+	SafeCommand "Reset Cigarette Pack options", "resetcvar cpk_pmi_spawn_bias"
 	StaticText ""
     StaticText  "Control the spawn rate of Radsuit Packages on Radsuits", "white"
 	Option " Radsuit Spawn Rate: ", "suit_replacement_spawn_bias", "SpawnBias"

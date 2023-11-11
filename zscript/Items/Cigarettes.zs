@@ -81,7 +81,7 @@ class Cigarette:HDWeapon{
 	}
 	states{
 	spawn:
-		CLEN A -1 nodelay{if(invoker.amount>2)invoker.scale=(0.4,0.35);else invoker.scale=(0.3,0.3);}
+		CIGA A -1 nodelay{if(invoker.amount>2)invoker.scale=(0.4,0.35);else invoker.scale=(0.3,0.3);}
 	select:
 		TNT1 A 8{
 			bool helptext=DoHelpText();
