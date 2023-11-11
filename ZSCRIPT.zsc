@@ -23,9 +23,11 @@ version "4.10"
 //-------------------------------------------------
 
 // Rations
-#include "zscript/Items/UaS_Things.zs"
+//#include "zscript/Items/UaS_Things.zs"
 #include "zscript/Items/Blue_Rum.zs"
+// Drugs
 #include "zscript/Items/Cleanser.zs"
+#include "zscript/Items/Cigarettes.zs"
 /*
 // Logistics Bag
 #include "zscript/Items/LogiBag.zsc"

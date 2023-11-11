@@ -4,10 +4,10 @@
 class LeadReloadingThingy:HDWeapon{
 	int shells;
 	bool makinground;
-	bool roundmade;
+	int roundsmade;
 	override void beginplay(){
 		super.beginplay();
-		shells=0;makinground=false;roundmade=false;
+		shells=0;makinground=false;roundsmade=0;
 	}
 
 	override void actualpickup(actor other,bool silent){
@@ -20,10 +20,9 @@ class LeadReloadingThingy:HDWeapon{
 				other.A_SpawnItemEx("HDShellAmmo",0,0,owner.height-16,2,0,1);
 			else HDF.Give(other,"HDShellAmmo",1);
 		}
-		if(roundmade==true){
-			//HDF.Give(self,"HDBallAmmo",1);
+		while(roundsmade>0){
 			owner.A_GiveInventory("HDBallAmmo",1);
-			roundmade=false;
+			roundsmade--;
 			}
 	}
 	void A_Chug(){
@@ -43,7 +42,7 @@ class LeadReloadingThingy:HDWeapon{
 		if(!random(0,63)){
 			A_SpawnItemEx("HDExplosion");
 			A_Explode(32,32);
-		}else {roundmade=true;} //this is bc rounds are a bitch to find, also i dont imagine these ancient fuckers have any concept of springs so
+		}else {roundsmade++;} //this is bc rounds are a bitch to find, also i dont imagine these ancient fuckers have any concept of springs so
 	}
 	action void A_CheckChug(bool anyotherconditions=true){
 		if(
@@ -63,99 +62,6 @@ class LeadReloadingThingy:HDWeapon{
 		---- A 0 A_Jump(256,"spawn");
 	}
 }
-/*class LeadReloader:LeadReloadingThingy{
-	default{
-		//$Category "Weapons/Hideous Destructor"
-		//$Title "7.76mm Auto-Reloader"
-		//$Sprite "RLDRA0"
-
-		+weapon.wimpy_weapon
-		+inventory.invbar
-		+hdweapon.fitsinbackpack
-		inventory.pickupsound "misc/w_pkup";
-		inventory.pickupmessage "You got the lead ball creation machine!";
-		scale 0.5;
-		hdweapon.refid HDLD_776RL;
-		tag "Lead Ball Creation device";
-	}
-	override double gunmass(){return 0;}
-	override double weaponbulk(){
-		return 20*amount;
-	}
-	override string,double getpickupsprite(){return "RLDRA0",1.;}
-	override void DrawHUDStuff(HDStatusBar sb,HDWeapon hdw,HDPlayerPawn hpl){
-		vector2 bob=hpl.hudbob*0.3;
-		int 
-		=hpl.countinv("HDShellAmmo");
-		int fourm=hpl.countinv("FourMilAmmo");
-		double lph=(brass&&fourm>=4)?1.:0.6;
-		sb.drawimage("RLDRA0",(0,-64)+bob,
-			sb.DI_SCREEN_CENTER_BOTTOM|sb.DI_ITEM_CENTER,
-			alpha:lph,scale:(2,2)
-		);
-		sb.drawimage("SHELA0",(-30,-64)+bob,
-			sb.DI_SCREEN_CENTER_BOTTOM|sb.DI_ITEM_CENTER|sb.DI_ITEM_RIGHT,
-			alpha:lph,scale:(2.5,2.5)
-		);
-		sb.drawimage("CLIPA0",(30,-64)+bob,
-			sb.DI_SCREEN_CENTER_BOTTOM|sb.DI_ITEM_CENTER|sb.DI_ITEM_LEFT,
-			alpha:lph,scale:(1.9,4.7)
-		);
-		sb.drawstring(
-			sb.psmallfont,""..brass,(-30,-54)+bob,
-			sb.DI_TEXT_ALIGN_RIGHT|sb.DI_SCREEN_CENTER_BOTTOM,
-			fourm?Font.CR_GOLD:Font.CR_DARKGRAY,alpha:lph
-		);
-		sb.drawstring(
-			sb.psmallfont,""..fourm,(30,-54)+bob,
-			sb.DI_TEXT_ALIGN_LEFT|sb.DI_SCREEN_CENTER_BOTTOM,
-			fourm?Font.CR_LIGHTBLUE:Font.CR_DARKGRAY,alpha:lph
-		);
-	}
-	override string gethelptext(){
-		return
-		WEPHELP_FIRESHOOT
-		..WEPHELP_RELOAD.."+"..WEPHELP_ALTFIRE.."  load powder\n"
-		..WEPHELP_RELOAD.."+"..WEPHELP_FIRE.."  load ball\n"
-		..WEPHELP_ALTRELOAD.."+"..WEPHELP_FIRE.."  Ram rod down barrel\n"
-		..WEPHELP_ALTFIRE.."  Cock hammer\n"
-		..WEPHELP_FIREMODE.."  Bayonet Stab, hold to charge\n"
-		..WEPHELP_UNLOAD.."  Assemble rounds"
-		;
-		//..WEPHELP_USE.."+"..WEPHELP_UNLOAD.."  Assemble rounds" this may return
-	}
-	override bool AddSpareWeapon(actor newowner){return AddSpareWeaponRegular(newowner);}
-	override hdweapon GetSpareWeapon(actor newowner,bool reverse,bool doselect){return GetSpareWeaponRegular(newowner,reverse,doselect);}
-	states{
-	select0:
-		TNT1 A 0 A_Raise(999);
-		wait;
-	deselect0:
-		TNT1 A 0 A_Lower(999);
-		wait;
-	ready:
-		TNT1 A 1 A_WeaponReady(WRF_ALLOWUSER3|WRF_ALLOWUSER4);
-		goto readyend;
-	fire:
-		TNT1 A 0 A_CheckChug();
-		goto ready;
-	hold:
-		TNT1 A 1;
-		TNT1 A 0 A_Refire("hold");
-		goto ready;
-	user4:
-	unload:
-		TNT1 A 1 A_CheckChug(pressinguse());
-		goto ready;
-	spawn:
-		RLDR A -1 nodelay A_JumpIf(
-			invoker.makinground
-			&&invoker.shells>=3,
-		"chug");
-		stop;
-	}
-}
-*/
 const HDLD_MUSKET="mus";
 ////////////////////////////////////
 // LORE GOES HERE
@@ -215,6 +121,7 @@ class HD_Musket:LeadReloadingThingy{
 		..WEPHELP_RELOAD.."+"..WEPHELP_ALTFIRE.."  Load powder\n"
 		..WEPHELP_RELOAD.."+"..WEPHELP_FIRE.."  Load ball\n"
 		..WEPHELP_ALTRELOAD.."+"..WEPHELP_FIRE.."  Ramrod\n"
+		..WEPHELP_ALTRELOAD.."+"..WEPHELP_ALTFIRE.."  Clean Barrel\n"
 		..WEPHELP_ALTFIRE.."  Cock hammer\n"
 		..WEPHELP_UNLOAD.."  Clear Barrel\n"
 		..WEPHELP_FIREMODE.."  Stab with Bayonet"
@@ -431,6 +338,7 @@ if(!punchee.countinv("HDArmourWorn")){
 	//cocked:RVR1 A 1 wait;
 	
 	fire:
+		MSKG A 5 offset(0,34);
 		MSKG A 1 offset(0,34){
 				if(invoker.weaponstatus[MUSKT_COCKED]==1){
 			setweaponstate("nope");
@@ -441,10 +349,12 @@ if(!punchee.countinv("HDArmourWorn")){
 					A_GunFlash();
 					A_StartSound("weapons/musketfire",CHAN_WEAPON);
 					A_AlertMonsters();
-					let tb=HDBulletActor.FireBullet(self,"HDB_Ball",spread:4.,speedfactor:frandom(0.97,1.03));
+					let tb=HDBulletActor.FireBullet(self,"HDB_Ball",spread:invoker.weaponStatus[MUSKT_GUNK]/10+4,speedfactor:frandom(0.97,1.03)); //Spread is 4, gunk should make it start being affected after a lot of rounds, so about 10
 					invoker.weaponstatus[MUSKT_BARREL]=0;
 					invoker.weaponstatus[MUSKT_COCKED]=1;
 					invoker.weaponstatus[MUSKT_HEAT]+=20;
+					invoker.weaponstatus[MUSKT_GUNK]+=random(5,10); //residue left behind, randomized so maintenance is weird and funni.
+					if(hd_debug)A_Log("Musket Gunk: "..invoker.weaponstatus[MUSKT_GUNK]);
 					setweaponstate("nope"); //this makes sure you don't get double heat/smoke
 					break;
 				/////////////////////////////////////////////////////////////////////////////////////
@@ -476,6 +386,8 @@ if(!punchee.countinv("HDArmourWorn")){
 					invoker.weaponstatus[MUSKT_BARREL]=0;
 					invoker.weaponstatus[MUSKT_COCKED]=1;
 					invoker.weaponstatus[MUSKT_HEAT]+=20;
+					invoker.weaponstatus[MUSKT_GUNK]+=random(5,10);//residue left behind, randomized so maintenance is weird and funni.
+					if(hd_debug)A_Log("Musket Gunk: "..invoker.weaponstatus[MUSKT_GUNK]);
 					setweaponstate("nope"); //this makes sure you don't get double heat/smoke
 					break;
 				/////////////////////////////////////////////////////////////////////////////////////
@@ -543,12 +455,17 @@ if(!punchee.countinv("HDArmourWorn")){
 		MSKR D 1 offset(4,34) A_JumpIf(pressingfire(),"reloadball"); //past this point should probably be in a seperate thing
 		MSKR D 0 offset(4,34) A_JumpIf(pressingaltfire(),"reloadpowder");
 		MSKR D 0 offset(4,34) A_JumpIf(pressingreload(),"reloadhold");
+		MSKR B 5;
 		goto reloadend;
 
 	reloadball: //puttin' da ball in.
 		MSKR A 0 {if(!countinv("HDBallAmmo")){setweaponstate("reload");}}// uhhh idk probably add a delay or something
-		MSKR DEFGH 5 offset(4,34);
+		MSKR DEFGH 3 offset(4,34);
 		MSKR H 3 offset(0,34){
+		if(invoker.weaponstatus[MUSKT_GUNK]>=100){
+		A_WeaponMessage("\cgThe barrel is too dirty!",100);
+		setweaponstate("reloadhold");
+		} else {
 		switch (invoker.weaponStatus[MUSKT_BARREL]){
 		case MUSKT_BALLLOADED:
 		case MUSKT_CORRECTLOAD:
@@ -569,7 +486,7 @@ if(!punchee.countinv("HDArmourWorn")){
 		A_StartSound("weapons/muskrodin",8,CHANF_OVERLAP);
 		invoker.WeaponStatus[MUSKT_BARREL]=MUSKT_BALLLOADED;
 		break;
-		}}
+		}}}
 		MSKR FED 5 offset(4,34);
 		goto reloadhold;
 		
@@ -596,7 +513,7 @@ if(!punchee.countinv("HDArmourWorn")){
 		break;//////////////////////////////////////////////////////////////////
 		}}
 		goto reloadhold;
-		
+
 	altreload: //this one's kinda clunky. oh well. - Cozi
 		MSKR A 4 A_MuzzleClimb(
 			-frandom(0.5,0.6),frandom(0.5,0.6),
@@ -608,17 +525,22 @@ if(!punchee.countinv("HDArmourWorn")){
 		MSKR D 3 offset(1,34);
 		MSKR D 1 offset(2,44) A_SetTics(invoker.weaponstatus[MUSKT_HEAT]>>3);
 		MSKR D 1 offset(3,42) A_StartSound("weapons/musketmove",8,CHANF_OVERLAP);
+		MSKR M 5 offset(4,34);
 		goto altreloadhold;
 		
 	altreloadhold:
-		MSKR F 1 offset(4,34) A_JumpIf(pressingfire(),"ramrod");
-		MSKR F 0 offset(4,34) A_JumpIf(pressingaltreload(),"altreloadhold");
+		MSKR K 1 offset(4,34) A_JumpIf(pressingfire(),"ramrod");
+		MSKR K 0 offset(4,34) A_JumpIf(pressingaltfire(),"cleanbarrel");
+		MSKR K 0 offset(4,34) A_JumpIf(pressingaltreload(),"altreloadhold");
+		MSKR MD 5;
 		goto reloadend;
 		
 	ramrod: //Locking in your answer
 		MSKR I 10 offset(4,34);
-		MSKR K 3 offset(-16,34) {
+		MSKR K 3 offset(-16,34) A_JumpIf(!random(0,3),"altreloadhold");
+		MSKR K 0 offset(-16,34) {
 		A_StartSound("weapons/musketrodin",8,CHANF_OVERLAP);
+		
 		switch (invoker.weaponStatus[MUSKT_BARREL]){
 		case MUSKT_CORRECTLOAD:
 		invoker.WeaponStatus[MUSKT_BARREL]=MUSKT_CORRECTRAMMED;
@@ -630,7 +552,35 @@ if(!punchee.countinv("HDArmourWorn")){
 		invoker.WeaponStatus[MUSKT_BARREL]=MUSKT_JUSTBALLRAMMED;
 		break;//////////////////////////////////////////////////////////////////
 		}}
-		MSKR M 3 offset(4,34);
+		MSKR K 3 offset(4,34);
+		goto altreloadhold;
+
+	cleanbarrel: //Cleaning the Barrel!
+		MSKR I 10 offset(4,34);
+		MSKR K 6 offset(-16,34) {
+		A_StartSound("weapons/musketrodin",8,CHANF_OVERLAP);
+		switch (invoker.weaponStatus[MUSKT_BARREL]){ // This is god awful, but honestly it's 11pm & just making it above 0 doesn't work so :) -Cozi
+			case MUSKT_POWDERED:
+			case MUSKT_BALLLOADED:
+			case MUSKT_JUSTBALLRAMMED:
+			case MUSKT_CORRECTLOAD:
+			case MUSKT_CORRECTRAMMED:
+			case MUSKT_OVERPOWDERED:
+			case MUSKT_OVERPOWDEREDBALL:
+			case MUSKT_OVERPOWDEREDRAMMED:
+			A_WeaponMessage("\cgThere's something in the barrel!",10);
+			break;
+			default:
+			if(invoker.weaponstatus[MUSKT_GUNK]<10){
+			A_WeaponMessage("Looks Clean.",10);
+			invoker.weaponstatus[MUSKT_GUNK]=0;
+			} else {
+			invoker.weaponstatus[MUSKT_GUNK]-=random(10,25); //honestly as long as it's more/equal to than the gunk you generate, does it really matter? - Cozi
+			}
+			if(hd_debug)A_Log("Musket Gunk: "..invoker.weaponstatus[MUSKT_GUNK]);
+			break;
+		} }
+		MSKR K 3 offset(4,34);
 		goto altreloadhold;
 
 	unload:
@@ -684,13 +634,14 @@ if(!punchee.countinv("HDArmourWorn")){
 
 	altfire:
 	---- A 0 A_JumpIf(invoker.weaponstatus[MUSKT_COCKED]==2,"uncock");
-	MSKG A 1 A_CockHammer;
-	MSKR A 5 offset(0,34); // A_Refire()
+	MSKG A 5 A_CockHammer; //was 1
+	MSKR A 5 offset(0,34);
+	MSKR A 0 A_JumpIf(pressingaltfire(),"nope");
 	goto ready;
 
 	uncock:
 	MSKR A 1 offset(0,38);
-	MSKR A 1 offset(0,34);
+	MSKR A 2 offset(0,34);
 	MSKR A 2 offset(0,36) A_StartSound("weapons/deinocyl",8,CHANF_OVERLAP);
 	MSKR A 0 A_CockHammer(false);
 	goto nope;
@@ -733,6 +684,7 @@ if(!punchee.countinv("HDArmourWorn")){
 		if(!idfa){
 			weaponstatus[0]=0;
 			weaponstatus[MUSKT_HEAT]=0;
+			weaponstatus[MUSKT_GUNK]=0;
 		}
 	}
 	//override void loadoutconfigure(string input){
@@ -858,6 +810,7 @@ enum musketstatus{
 	MUSKT_JUSTUNLOAD=32,//this one will be 7
 	
 	MUSKT_HEAT=0,
+	MUSKT_GUNK=9, //Measuring tool for how much black powder residue is in the barrel. - Cozi
 };
 
 class HD_MusketDropper:IdleDummy{

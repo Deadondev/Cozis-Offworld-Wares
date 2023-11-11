@@ -5,3 +5,6 @@ TAG_TRITEBARREL = "Barrel";
 [en enc eng eni ena enz default]
 TAG_CLEANSER="Cleanser Stim";
 PICKUP_CLEANSER="You got a cleanser!";
+TAG_CIGARETTE="Cigarette";
+PICKUP_CIGARETTE="You got a cigarette!";
+TAG_BLUERUM="Ole Rum";

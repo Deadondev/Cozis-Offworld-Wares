@@ -200,17 +200,17 @@ class OffworldWaresHandler : EventHandler
 		// Items
 		// --------------------
 
-		/*
+
 		// Rum
 		Array<WaresSpawnItemEntry> spawns_rum;
 		spawns_rum.push(addItemEntry('PortableStimpack', rum_pmi_spawn_bias));
-		addItem('UaS_Alcohol_OleRum', spawns_rum, rum_persistent_spawning, false);
-
+		addItem('BlueRum', spawns_rum, rum_persistent_spawning, false);
+		
 		// Radsuit Packages
 		Array<WaresSpawnItemEntry> spawns_radpack;
 		spawns_radpack.push(addItemEntry('Radsuit', suit_replacement_spawn_bias));
 		addItem('HD_RadsuitPack', spawns_radpack, rum_persistent_spawning, false);
-
+		/*
 		// Armor Patch Kit
 	  	Array<WaresSpawnItemEntry> spawns_apk;
 		spawns_apk.push(addItemEntry('HDArmour', apk_replacement_spawn_bias));
