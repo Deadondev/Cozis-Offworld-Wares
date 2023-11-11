@@ -212,6 +212,12 @@ class OffworldWaresHandler : EventHandler
 		spawns_cpk.push(addItemEntry('PortableMedikit', cpk_pmi_spawn_bias));
 		spawns_cpk.push(addItemEntry('DeadRifleman', cpk_pmi_spawn_bias));
 		spawns_cpk.push(addItemEntry('ReallyDeadRifleman', cpk_pmi_spawn_bias));
+		spawns_cpk.push(addItemEntry('DeadZombieShotgunner', cpk_pmi_spawn_bias));
+		spawns_cpk.push(addItemEntry('DeadZombieStormtrooper', cpk_pmi_spawn_bias));
+		//spawns_cpk.push(addItemEntry('DeadImpSpawner', cpk_pmi_spawn_bias));
+		spawns_cpk.push(addItemEntry('DeadSerpentipede', cpk_pmi_spawn_bias));
+		spawns_cpk.push(addItemEntry('DeadRegentipede', cpk_pmi_spawn_bias));
+		spawns_cpk.push(addItemEntry('DeadArdentipede', cpk_pmi_spawn_bias));
 		addItem('CigarettePack', spawns_cpk, cpk_persistent_spawning, false);
 		
 		// Radsuit Packages

@@ -61,12 +61,11 @@ class BlueRum:HDWeapon{
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	action void A_InjectorInject(actor agent,actor patient){invoker.InjectorInject(agent,patient);}
 	virtual void InjectorInject(actor agent,actor patient){
-		//patient.A_SetBlend("7a 3a 18",0.1,4);
 
 		let hdp=hdplayerpawn(patient);
 		if(hdp){
 			hdp.A_StartSound("potion/chug",CHAN_VOICE);
-			hdp.A_MuzzleClimb((0,2),(0,0),(0,0),(0,0));
+			hdp.A_MuzzleClimb((0,-2),(0,0),(0,0),(0,0));
 		}
 		else patient.A_StartSound("potion/swish",CHAN_VOICE);
 
@@ -77,8 +76,6 @@ class BlueRum:HDWeapon{
 	virtual void InjectorEffect(actor patient){
 		patient.GiveInventory("HealingMagic",BlueRum.BLUERUM_HEALZ);
 		patient.GiveInventory("UasAlcohol_Offworld_IntoxToken",BLUERUM_ALCCONTENT);
-		//actor a=spawn("BlueRumDummy",patient.pos,ALLOW_REPLACE);
-		//a.accuracy=40;a.target=patient;
 	}
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	states(actor){
@@ -86,7 +83,7 @@ class BlueRum:HDWeapon{
 		TNT1 A 1 nodelay A_JumpIf(weaponstatus[INJECTS_AMOUNT]>0,"jiggling");
 		BTTL D 0{
 			actor a=null;
-			a=spawn("SpentBottle",pos,ALLOW_REPLACE);
+			a=spawn("SpentRumBottle",pos,ALLOW_REPLACE);
 			a.A_StartSound("potion/open",CHAN_BODY);
 			a.angle=angle;a.pitch=pitch;a.target=target;a.vel=vel;
 
@@ -102,7 +99,7 @@ class BlueRum:HDWeapon{
 	states{
 	select:
 		TNT1 A 0{
-			if(DoHelpText())A_WeaponMessage(Stringtable.Localize("$POTION_TEXT1"));
+			if(DoHelpText())A_WeaponMessage(Stringtable.Localize("Some REALLY old aged rum. The alcohol amount would probably kill you if it wasn't watered down with a magical tonic. Drink up!"));
 			A_StartSound("potion/swish",8,CHANF_OVERLAP);
 		}
 		goto super::select;
@@ -185,24 +182,11 @@ class BlueRum:HDWeapon{
 				let ccc=HDHumanoid(injectorline.hitactor);
 					invoker.weaponstatus[0]|=INJECTF_SPENT;
 					//ccc.stunned=max(0,ccc.stunned>>1);
-					return resolvestate("injected"); //this was injected
+					return resolvestate("injected");
 				if(helptext)A_WeaponMessage(Stringtable.Localize("$STIMPACK_NOTHINGTOBEDONE"));
 				return resolvestate("nope");
 			}
-			let blockinv=HDWoundFixer.CheckCovered(self,CHECKCOV_ONLYFULL);
-			if(blockinv){
-				if(helptext)A_WeaponMessage(Stringtable.Localize("$STIMPACK_TAKEOFFOTHER")..blockinv.gettag()..Stringtable.Localize("$STIMPACK_ELIPSES"));
-				return resolvestate("nope");
-			}
 			if(IsMoving.Count(c)>4){
-				bool chelptext=DoHelpText(c);
-				if(c.countinv("HDStim")){
-					if(chelptext)HDWeapon.ForceWeaponMessage(c,string.format(Stringtable.Localize("$STIMPACK_OVERDOSEPLAYER"),player.getusername()));
-					if(helptext)A_WeaponMessage(Stringtable.Localize("$STIMPACK_FIDGETY"));
-				}else{
-					if(chelptext)HDWeapon.ForceWeaponMessage(c,string.format(Stringtable.Localize("$STIMPACK_STOPSQUIRMING"),player.getusername()));
-					if(helptext)A_WeaponMessage(Stringtable.Localize("$STIMPACK_STAYSTILLOTHER"));
-				}
 				return resolvestate("nope");
 			}
 
@@ -270,7 +254,7 @@ class BlueRum_Alcohol : UaS_Consumable
 
 
 
-/*class SpentBottle:SpentStim{
+class SpentRumBottle:SpentStim{
 	default{
 		alpha 0.6;renderstyle "translucent";
 		bouncesound "potion/bounce";bouncefactor 0.4;scale 0.3;
@@ -282,7 +266,7 @@ class BlueRum_Alcohol : UaS_Consumable
 	}
 	states{
 	spawn:
-		BTTL A 0 nodelay{
+		BTTL D 0 nodelay{
 			if(Wads.CheckNumForName("freedoom",0)!=-1){
 				A_SetTranslation("SquadGhost");
 				A_SetRenderStyle(1.,STYLE_Add);
@@ -290,11 +274,11 @@ class BlueRum_Alcohol : UaS_Consumable
 		}
 		goto spawn2;
 	death:
-		---- A 100{
+		---- D 100{
 			if(random(0,7))roll=randompick(90,270);else roll=0;
 			if(roll==270)scale.x*=-1;
 		}
-		---- A random(2,4){
+		---- D random(2,4){
 			if(frandom(0.1,0.9)<alpha){
 				angle+=random(-12,12);pitch=random(45,90);
 				actor a=spawn("HDGunSmoke",pos,ALLOW_REPLACE);
@@ -304,7 +288,7 @@ class BlueRum_Alcohol : UaS_Consumable
 		}wait;
 	}
 }
-class SpentCork:SpentBottle{
+/*class SpentRumCork:SpentBottle{
 	default{
 		bouncesound "misc/casing3";scale 0.6;
 		translation "224:231=64:71";
