@@ -28,6 +28,7 @@ class BlueRum:HDWeapon{
 		inventory.pickupsound "potion/swish";
 		tag "$TAG_BLUERUM";
 		inventory.icon "BTTLD0";
+		hdweapon.refid HDLD_OLERUM;
 		scale 0.3;
 	}
 	override string,double getpickupsprite(){return "BTTLD0",1.;}

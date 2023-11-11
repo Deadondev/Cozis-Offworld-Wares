@@ -209,6 +209,7 @@ class OffworldWaresHandler : EventHandler
 		// Cigarettes
 		Array<WaresSpawnItemEntry> spawns_cpk;
 		spawns_cpk.push(addItemEntry('PortableStimpack', cpk_pmi_spawn_bias));
+		spawns_cpk.push(addItemEntry('PortableMedikit', cpk_pmi_spawn_bias));
 		spawns_cpk.push(addItemEntry('DeadRifleman', cpk_pmi_spawn_bias));
 		spawns_cpk.push(addItemEntry('ReallyDeadRifleman', cpk_pmi_spawn_bias));
 		addItem('CigarettePack', spawns_cpk, cpk_persistent_spawning, false);
