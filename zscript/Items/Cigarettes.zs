@@ -152,10 +152,11 @@ class CigaretteDummy:IdleDummy{
 }
 class CigaretteDrug:HDDrug{
 	enum CigAmounts{
-		HDCIG_DOSE=TICRATE*60*6, //It's long because it's a cigarette - Cozi
+		HDCIG_DOSE=TICRATE*60*5, //It's long because it's a cigarette - Cozi
 		HDCIG_NOCIG=10, //This is how much you get set to if you lose your cig, or at what point you spit it out
 	}
-	int cigtiming;
+	int aggrotiming;
+	int cigfxtiming;
 	override void doeffect(){
 		let hdp=hdplayerpawn(owner);
 		double ret=min(0.1,amount*0.006);
@@ -167,8 +168,14 @@ class CigaretteDrug:HDDrug{
 		if(hdp.beatcap>30)hdp.beatcap--; //what stims do, but if you got em too, its 2x
 		if(hd_debug>=4)console.printf("Smoking "..amount);
 		//////////////////////////////////////////////////////////////////////////////////
+		// AGGRO
+		if(aggrotiming==TICRATE*60){ //calculation to give u 4 aggro over time
+		hdp.aggravateddamage++;
+		aggrotiming = 0;
+		} else{aggrotiming++;}
+		//////////////////////////////////////////////////////////////////////////////////
 		// EFFECTS
-		if(cigtiming==1){
+		if(cigfxtiming==3){
 		vector3 smkpos=hdp.pos;
 		vector3 smkvel=vel*=0.4;
 		vector3 smkdir=(0,0,0);
@@ -188,8 +195,8 @@ class CigaretteDrug:HDDrug{
 		smkdir*=smkspeed;
 		smkvel+=smkdir;
 		a.angle=smkang;a.pitch=smkpitch+15;a.vel=smkvel;a.scale*=smkscale;a.alpha=smkstartalpha;
-		cigtiming--;
-		} else{cigtiming++;}
+		cigfxtiming = 0;
+		} else{cigfxtiming++;}
 		//////////////////////////////////////////////////////////////////////////////////
 		if(hdp.incapacitated>0||hdp.stunned>0){
 			amount=0;
