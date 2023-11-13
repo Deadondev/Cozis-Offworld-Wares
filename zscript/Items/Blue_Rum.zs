@@ -308,4 +308,13 @@ class SpentRumBottle:SpentStim{
 		PBRS A 2 A_SetRoll(roll+90,SPF_INTERPOLATE);
 		wait;
 	}
+}*/
+
+class HD_RumDropper:IdleDummy{
+    states{
+    spawn:
+        TNT1 A 0 nodelay{
+			A_SpawnItemEx("BlueRum",frandom(-12,12),frandom(-12,12),frandom(-12,12),0,0,0,frandom(0,270),SXF_NOCHECKPOSITION);
+        }stop;
+    }
 }

@@ -204,7 +204,7 @@ class OffworldWaresHandler : EventHandler
 		// Rum
 		Array<WaresSpawnItemEntry> spawns_rum;
 		spawns_rum.push(addItemEntry('PortableStimpack', rum_pmi_spawn_bias));
-		addItem('BlueRum', spawns_rum, rum_persistent_spawning, false);
+		addItem('HD_RumDropper', spawns_rum, rum_persistent_spawning, false);
 
 		// Cigarettes
 		Array<WaresSpawnItemEntry> spawns_cpk;
