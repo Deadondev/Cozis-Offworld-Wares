@@ -30,7 +30,8 @@ class CigarettePack:HDPickup{
 	use:
 		TNT1 A 0{
 			if(invoker.cigarettesleft>=1){
-				A_GiveInventory("Cigarette");
+				let mdk=HDWeapon(spawn("Cigarette",pos));
+				mdk.actualpickup(self,true);
 				invoker.cigarettesleft--;
 				A_StartSound("weapons/pocket",9);
 				A_Log("There are " ..invoker.cigarettesleft.. " left in the box");
@@ -39,7 +40,7 @@ class CigarettePack:HDPickup{
 				A_StartSound("weapons/pocket",9);
 				A_Log("You discard the box as there are no more cigarettes left");
 				A_TakeInventory("CigarettePack",1);
-				actor a=spawn("SpentStim",pos,ALLOW_REPLACE);
+				actor a=spawn("EmptyCigarettePack",pos,ALLOW_REPLACE);
 				a.target=invoker;
 				a.angle=invoker.angle;a.vel=invoker.vel;a.A_ChangeVelocity(-2,1,4,CVF_RELATIVE);
 				a.A_StartSound("weapons/grenopen",CHAN_VOICE);
@@ -72,6 +73,11 @@ class Cigarette:HDWeapon{
 	override string PickupMessage() {String pickupmessage = Stringtable.Localize("$PICKUP_CIGARETTE"); return pickupmessage;}
 	override double weaponbulk(){
 		return ENC_CIGARETTE;
+	}
+	override bool AddSpareWeapon(actor newowner){return AddSpareWeaponRegular(newowner);}
+	override hdweapon GetSpareWeapon(actor newowner,bool reverse,bool doselect){
+		if(weaponstatus[0]&INJECTF_SPENT)doselect=false;
+		return GetSpareWeaponRegular(newowner,reverse,doselect);
 	}
 	override void DrawHUDStuff(HDStatusBar sb,HDWeapon hdw,HDPlayerPawn hpl){
 		sb.drawimage(
@@ -230,4 +236,24 @@ class HD_CigaretteDropper:IdleDummy{
 			A_SpawnItemEx("CigarettePack",frandom(-12,12),frandom(-12,12),frandom(-12,12),0,0,0,0,SXF_NOCHECKPOSITION);
         }stop;
     }
+}
+
+class EmptyCigarettePack:HDDebris{
+	default{
+		xscale 0.32;yscale 0.28;
+		radius 3;height 3;
+		bouncefactor 0.1;
+		bouncesound "misc/zerkdrop";
+	}
+	states{
+	spawn:
+		CIGP B 0;
+	spawn2:
+		---- B 1{
+			A_SetPitch(pitch+60,SPF_INTERPOLATE);
+		}wait;
+	death:
+		CIGP B -1;
+		stop;
+	}
 }
