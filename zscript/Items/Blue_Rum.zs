@@ -29,7 +29,7 @@ class BlueRum:HDWeapon{
 		tag "$TAG_BLUERUM";
 		inventory.icon "BTTLD0";
 		hdweapon.refid HDLD_OLERUM;
-		scale 0.8;
+		scale 0.38;
 	}
 	override string,double getpickupsprite(){return "BTTLD0",1.;}
 	override double weaponbulk(){
@@ -257,7 +257,7 @@ class BlueRum_Alcohol : UaS_Consumable
 class SpentRumBottle:SpentStim{
 	default{
 		alpha 0.6;renderstyle "translucent";
-		bouncesound "potion/bounce";bouncefactor 0.4;scale 0.8;
+		bouncesound "potion/bounce";bouncefactor 0.4;scale 0.38;
 		translation "10:15=241:243","150:151=206:207";
 	}
 	override void ondestroy(){

@@ -233,7 +233,7 @@ class HD_CigaretteDropper:IdleDummy{
     states{
     spawn:
         TNT1 A 0 nodelay{
-			A_SpawnItemEx("CigarettePack",frandom(-12,12),frandom(-12,12),frandom(-12,12),0,0,0,0,SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("CigarettePack",frandom(-12,12),frandom(-12,12),frandom(-12,12),0,0,0,frandom(0,270),SXF_NOCHECKPOSITION);
         }stop;
     }
 }
@@ -250,7 +250,7 @@ class EmptyCigarettePack:HDDebris{
 		CIGP B 0;
 	spawn2:
 		---- B 1{
-			A_SetPitch(pitch+60,SPF_INTERPOLATE);
+			A_SetPitch(pitch+frandom(60,270),SPF_INTERPOLATE);
 		}wait;
 	death:
 		CIGP B -1;
