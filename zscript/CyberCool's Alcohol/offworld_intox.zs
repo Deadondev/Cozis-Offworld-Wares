@@ -74,6 +74,10 @@ class UasAlcohol_Offworld_IntoxToken : Inventory
 		Shader.SetUniform1i(pl, "UASAlcohol_Intoxication", "radius", r);
 	}
 
+	override void Travelled()
+	{
+		self.amount==0;
+	}
 
 	override void Tick()
 	{

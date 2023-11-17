@@ -266,12 +266,7 @@ class SpentRumBottle:SpentStim{
 	}
 	states{
 	spawn:
-		BTTL D 0 nodelay{
-			if(Wads.CheckNumForName("freedoom",0)!=-1){
-				A_SetTranslation("SquadGhost");
-				A_SetRenderStyle(1.,STYLE_Add);
-			}
-		}
+		BTTL D 0;
 		goto spawn2;
 	death:
 		---- D 100{

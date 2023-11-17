@@ -109,6 +109,10 @@ class Cigarette:HDWeapon{
 	hold:
 		TNT1 A 1;
 		TNT1 A 0{
+			if(invoker.countinv("CigaretteDrug")){
+				A_WeaponMessage("\cgYou're already smoking!",100);
+				return resolvestate(null);
+			}
 			if(hdplayerpawn(self))hdplayerpawn(self).gunbraced=false;
 			let blockinv=HDWoundFixer.CheckCovered(self,CHECKCOV_ONLYFULL);
 			if(blockinv){
@@ -181,6 +185,23 @@ class CigaretteDrug:HDDrug{
 		} else{aggrotiming++;}
 		//////////////////////////////////////////////////////////////////////////////////
 		// EFFECTS
+		vector3 smkpos=hdp.pos;
+		vector3 smkvel=vel; //vel
+		vector3 smkdir=(0,0,0);
+		double smkscale=0.25;
+		double smkang=hdp.angle;
+		double smkpitch=hdp.pitch;
+		double smkspeed=hdp.speed; //hdp.speed
+		double smkstartalpha=5.;
+		//smkvel=0.01;
+		smkdir*=smkspeed;
+		smkvel+=smkdir;
+		smkang=owner.angle-30;
+		smkpos.z+=owner.height*0.75;
+		smkpos.xy+=10*(cos(smkang),sin(smkang));
+		actor a=spawn("HDCigaretteSmoke",smkpos,ALLOW_REPLACE);
+		a.angle=smkang;a.pitch=smkpitch-90;a.vel=smkvel;a.scale*=smkscale;a.alpha=smkstartalpha;
+		//////////////////////////////////////////////////////////////////////////////////
 		if(cigfxtiming==3){
 		vector3 smkpos=hdp.pos;
 		vector3 smkvel=vel*=0.4;
@@ -196,7 +217,7 @@ class CigaretteDrug:HDDrug{
 		smkang=owner.angle;
 		smkpos.z+=owner.height*0.75;
 		smkpos.xy-=10*(cos(smkang),sin(smkang));
-		actor a=spawn("HDCigaretteSmoke",smkpos,ALLOW_REPLACE);
+		actor a=spawn("HDCigarettePuffSmoke",smkpos,ALLOW_REPLACE);
 		smkvel*=0.4;
 		smkdir*=smkspeed;
 		smkvel+=smkdir;
@@ -214,6 +235,22 @@ class CigaretteDrug:HDDrug{
 }
 
 class HDCigaretteSmoke:HDSmoke{
+	default{
+		scale 0.3;renderstyle "add";alpha 0.4;
+		hdpuff.decel 0.97;
+		hdpuff.fade 0.8;
+		hdpuff.grow 0.06;
+		hdpuff.minalpha 0.01;
+		hdpuff.startvelz 0;
+	}
+	override void postbeginplay(){
+		super.postbeginplay();
+		a_changevelocity(cos(pitch),0,-sin(pitch),CVF_RELATIVE);
+		vel+=(frandom(-0.1,0.1),frandom(-0.1,0.1),frandom(0.4,0.9));
+	}
+}
+
+class HDCigarettePuffSmoke:HDSmoke{
 	default{
 		scale 0.3;renderstyle "add";alpha 0.4;
 		hdpuff.decel 0.97;
