@@ -18,6 +18,10 @@ weapons/defibuse      Sounds/Defibrillator/defibrillator_use.wav
 
 // Rum
 mre/cork		CORKPLL1
+$random rum/break { rum/glass1 rum/glass2 rum/glass3}
+rum/glass1     dsglass1
+rum/glass2     dsglass2
+rum/glass3     dsglass3
 
 // Cigarettes
 cig/open		zipopen

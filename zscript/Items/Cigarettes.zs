@@ -139,7 +139,7 @@ class Cigarette:HDWeapon{
 		TNT1 AAAA 1 A_MuzzleClimb(0,-0.5);
 		TNT1 A 6;
 		goto nope;
-	altfire: //maybe later i'll make it that you can help someone light up a cig, i see no reason to do this otherwise though -Cozi
+	altfire: //Change of plans, we're going to make this actually put a cig **back** -Cozi
 	althold:
 		TNT1 A 10;
 		TNT1 A 0 A_Refire();
@@ -162,7 +162,7 @@ class CigaretteDummy:IdleDummy{
 }
 class CigaretteDrug:HDDrug{
 	enum CigAmounts{
-		HDCIG_DOSE=TICRATE*60*5, //It's long because it's a cigarette - Cozi
+		HDCIG_DOSE=600, //It's long because it's a cigarette, 6 minutes - Cozi
 		HDCIG_NOCIG=10, //This is how much you get set to if you lose your cig, or at what point you spit it out
 	}
 	int aggrotiming;

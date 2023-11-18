@@ -30,6 +30,14 @@ class BlueRum:HDWeapon{
 		inventory.icon "BTTLD0";
 		hdweapon.refid HDLD_OLERUM;
 		scale 0.38;
+		+SHOOTABLE; +NOBLOOD;
+		health 1;
+		damagefactor "melee",0;
+		damagefactor "Balefire",0;
+		damagefactor "electrical",0;
+		damagefactor "hot",0;
+		damagefactor "cold",0;
+		damagefactor "bashing",0;
 	}
 	override string,double getpickupsprite(){return "BTTLD0",1.;}
 	override double weaponbulk(){
@@ -51,9 +59,6 @@ class BlueRum:HDWeapon{
 		return weaponstatus[BLUERUM_AMOUNT];
 	}
 	override void InitializeWepStats(bool idfa){
-		/*If (self.Owner){
-			weaponstatus[BLUERUM_AMOUNT]=BLUERUM_SPAWN;
-		} else*/
 		weaponstatus[BLUERUM_AMOUNT]=14;
 	}
 	override bool AddSpareWeapon(actor newowner){return AddSpareWeaponRegular(newowner);}
@@ -98,6 +103,22 @@ class BlueRum:HDWeapon{
 	jiggling:
 		BTTL D 2 light("HEALTHPOTION") A_SetTics(random(1,3)); //I guess it would have a light similar to a healthpotion? Debating on this. -Cozi
 		loop;
+	death:
+	BTTL D 0 nodelay {A_StartSound("rum/break",CHAN_BODY,CHANF_OVERLAP);
+	A_FaceTarget();
+	//A_SpawnItemEx("WallChunker",0,0,0,frandom(-1,-15),frandom(-1,1),frandom(-1,1));
+	//A_SpawnItemEx("HugeWallChunk",0,0,4,frandom(6,12),0,frandom(-1.5,6)*1,frandom(0,180),SXF_NOCHECKPOSITION);
+	//A_SpawnItemEx("BigWallChunk",0,0,4,frandom(7,18),0,frandom(-1.5,7)*1,frandom(0,180),SXF_NOCHECKPOSITION);
+	A_SpawnItemEx("HugeWallChunk",0,0,4,frandom(0,-18),0,frandom(-1.5,6)*1,frandom(6,12),SXF_NOCHECKPOSITION);
+	A_SpawnItemEx("BigWallChunk",0,0,4,frandom(0,-18),0,frandom(-1.5,7)*1,frandom(7,18),SXF_NOCHECKPOSITION);
+	A_SpawnItemEx("HugeWallChunk",0,0,4,frandom(0,-18),0,frandom(-1.5,6)*1,frandom(6,12),SXF_NOCHECKPOSITION);
+	A_SpawnItemEx("BigWallChunk",0,0,4,frandom(0,-18),0,frandom(-1.5,7)*1,frandom(7,18),SXF_NOCHECKPOSITION);
+	A_SpawnItemEx("HugeWallChunk",0,0,4,frandom(0,-18),0,frandom(-1.5,6)*1,frandom(6,12),SXF_NOCHECKPOSITION);
+	A_SpawnItemEx("BigWallChunk",0,0,4,frandom(0,-18),0,frandom(-1.5,7)*1,frandom(7,18),SXF_NOCHECKPOSITION);
+	A_SpawnItemEx("HugeWallChunk",0,0,4,frandom(0,-18),0,frandom(-1.5,6)*1,frandom(6,12),SXF_NOCHECKPOSITION);
+	A_SpawnItemEx("BigWallChunk",0,0,4,frandom(0,-18),0,frandom(-1.5,7)*1,frandom(7,18),SXF_NOCHECKPOSITION);
+	}
+	stop;
 	}
 	states{
 	select:
@@ -312,9 +333,8 @@ class HD_RumDropper:IdleDummy{
     states{
     spawn:
         TNT1 A 0 nodelay{
-			let booze=BlueRum(spawn("BlueRum",pos,ALLOW_REPLACE)); //(frandom(-12,12),frandom(-12,12),frandom(-12,12))
+			let booze=BlueRum(spawn("BlueRum",(frandom(-12,12),frandom(-12,12),frandom(-12,12)),ALLOW_REPLACE));
 			booze.weaponstatus[BLUERUM_AMOUNT]=random(1,14);
-			//A_SpawnItemEx("BlueRum",frandom(-12,12),frandom(-12,12),frandom(-12,12),0,0,0,frandom(0,270),SXF_NOCHECKPOSITION);
         }stop;
     }
 }
