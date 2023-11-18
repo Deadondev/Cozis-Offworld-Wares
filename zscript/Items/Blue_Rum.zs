@@ -3,16 +3,16 @@
 //-------------------------------------------------
 const HDLD_OLERUM="rum";
 const ENC_BLUERUM=12;
-const BOTTLE_MAX=14;
+//const BOTTLE_MAX=14;
 
-
-class BlueRum:HDWeapon{
 	enum HDBlueRumNums{
 	BLUERUM_AMOUNT=1,
 	BLUERUM_ALCCONTENT=256,
 	BLUERUM_HEALZ=8,
+	BLUERUM_SPAWN=14,
 }
 
+class BlueRum:HDWeapon{
 	default{
 		//$Category "Items/Hideous Destructor/Magic"
 		//$Title "Blue Rum"
@@ -45,13 +45,16 @@ class BlueRum:HDWeapon{
 			"BTTLD0",(-23,-7),
 			sb.DI_SCREEN_CENTER_BOTTOM|sb.DI_ITEM_RIGHT
 		);
-		sb.drawwepnum(hdw.weaponstatus[BLUERUM_AMOUNT],BOTTLE_MAX);
+		sb.drawwepnum(hdw.weaponstatus[BLUERUM_AMOUNT],BLUERUM_SPAWN);
 	}
 	override int getsbarnum(int flags){
 		return weaponstatus[BLUERUM_AMOUNT];
 	}
 	override void InitializeWepStats(bool idfa){
-		weaponstatus[BLUERUM_AMOUNT]=BOTTLE_MAX;
+		/*If (self.Owner){
+			weaponstatus[BLUERUM_AMOUNT]=BLUERUM_SPAWN;
+		} else*/
+		weaponstatus[BLUERUM_AMOUNT]=14;
 	}
 	override bool AddSpareWeapon(actor newowner){return AddSpareWeaponRegular(newowner);}
 	override hdweapon GetSpareWeapon(actor newowner,bool reverse,bool doselect){
@@ -74,7 +77,7 @@ class BlueRum:HDWeapon{
 	}
 	action void A_InjectorEffect(actor patient){invoker.InjectorEffect(patient);}
 	virtual void InjectorEffect(actor patient){
-		patient.GiveInventory("HealingMagic",BlueRum.BLUERUM_HEALZ);
+		patient.GiveInventory("HealingMagic",BLUERUM_HEALZ); //BlueRum.BLUERUM_HEALZ
 		patient.GiveInventory("UasAlcohol_Offworld_IntoxToken",BLUERUM_ALCCONTENT);
 	}
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -151,7 +154,7 @@ class BlueRum:HDWeapon{
 			if(invoker.weaponstatus[BLUERUM_AMOUNT]>0){
 				invoker.weaponstatus[BLUERUM_AMOUNT]--;
 				A_StartSound("potion/chug",CHAN_VOICE);
-				HDF.Give(self,"HealingMagic",BlueRum.BLUERUM_HEALZ);
+				HDF.Give(self,"HealingMagic",BLUERUM_HEALZ); //BlueRum.BLUERUM_HEALZ
 				HDF.Give(self,"UasAlcohol_Offworld_IntoxToken", BLUERUM_ALCCONTENT);
 			}
 		}
@@ -309,7 +312,9 @@ class HD_RumDropper:IdleDummy{
     states{
     spawn:
         TNT1 A 0 nodelay{
-			A_SpawnItemEx("BlueRum",frandom(-12,12),frandom(-12,12),frandom(-12,12),0,0,0,frandom(0,270),SXF_NOCHECKPOSITION);
+			let booze=BlueRum(spawn("BlueRum",pos,ALLOW_REPLACE)); //(frandom(-12,12),frandom(-12,12),frandom(-12,12))
+			booze.weaponstatus[BLUERUM_AMOUNT]=random(1,14);
+			//A_SpawnItemEx("BlueRum",frandom(-12,12),frandom(-12,12),frandom(-12,12),0,0,0,frandom(0,270),SXF_NOCHECKPOSITION);
         }stop;
     }
 }
