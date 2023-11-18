@@ -4,7 +4,7 @@
 
 // Musket
 weapons/musketfire       muskfire
-weapons/musketrodin      muskrodin
+weapons/musketrodin      muskrodi
 weapons/musketdust      muskdust
 weapons/musketcock      muskcock
 weapons/musketmove      muskmove
