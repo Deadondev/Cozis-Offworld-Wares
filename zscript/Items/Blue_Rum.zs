@@ -333,7 +333,7 @@ class HD_RumDropper:IdleDummy{
     states{
     spawn:
         TNT1 A 0 nodelay{
-			let booze=BlueRum(spawn("BlueRum",(frandom(-12,12),frandom(-12,12),frandom(-12,12)),ALLOW_REPLACE));
+			let booze=BlueRum(spawn("BlueRum",pos,ALLOW_REPLACE));
 			booze.weaponstatus[BLUERUM_AMOUNT]=random(1,14);
         }stop;
     }
