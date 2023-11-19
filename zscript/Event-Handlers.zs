@@ -221,6 +221,11 @@ class OffworldWaresHandler : EventHandler
 		spawns_cpk.push(addItemEntry('DeadRegentipede', cpk_pmi_spawn_bias));
 		spawns_cpk.push(addItemEntry('DeadArdentipede', cpk_pmi_spawn_bias));
 		addItem('HD_CigaretteDropper', spawns_cpk, cpk_persistent_spawning, false);
+
+		// Cleanser
+		Array<WaresSpawnItemEntry> spawns_cln;
+		spawns_cln.push(addItemEntry('PortableMedikit', cleanser_pmi_spawn_bias));
+		addItem('HD_CleanserDropper', spawns_cln, cleanser_persistent_spawning, false);
 		
 		// Radsuit Packages
 		Array<WaresSpawnItemEntry> spawns_radpack;

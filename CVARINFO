@@ -34,11 +34,11 @@ server int rum_pmi_spawn_bias = 9;
 server bool rum_persistent_spawning = false;
 
 // Cigarettes
-server int cpk_pmi_spawn_bias = 9;
+server int cpk_pmi_spawn_bias = 19;
 server bool cpk_persistent_spawning = false;
 
 // Cleanser
-server int cleanser_pmi_spawn_bias = 9;
+server int cleanser_pmi_spawn_bias = 19;
 server bool cleanser_persistent_spawning = false;
 
 // Radsuit Packages
