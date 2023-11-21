@@ -23,6 +23,13 @@ class CigarettePack:HDPickup{
 	override void PostBeginPlay(){
 		cigarettesleft=random(1,20);
 	}
+	/*void DrawHUDStuff(HDStatusBar sb,HDWeapon hdw,HDPlayerPawn hpl){
+		sb.drawimage(
+			"CIGPA0",(-23,-7),
+			sb.DI_SCREEN_CENTER_BOTTOM|sb.DI_ITEM_RIGHT
+		);
+		sb.drawwepnum(cigarettesleft);
+	}*/
 	states{
 	spawn:
 		CIGP A -1;
@@ -179,7 +186,7 @@ class CigaretteDrug:HDDrug{
 		if(hd_debug>=4)console.printf("Smoking "..amount);
 		//////////////////////////////////////////////////////////////////////////////////
 		// AGGRO
-		if(aggrotiming==TICRATE*60){ //calculation to give u 4 aggro over time
+		if(aggrotiming==150){ //calculation to give u 4 aggro over time
 		hdp.aggravateddamage++;
 		aggrotiming = 0;
 		} else{aggrotiming++;}

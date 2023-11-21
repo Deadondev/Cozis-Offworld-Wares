@@ -281,30 +281,35 @@ class BlueRum_Alcohol : UaS_Consumable
 class SpentRumBottle:SpentStim{
 	default{
 		alpha 0.6;renderstyle "translucent";
-		bouncesound "potion/bounce";bouncefactor 0.4;scale 0.38;
+		bouncesound "rum/break";bouncefactor 0;scale 0.38;
 		translation "10:15=241:243","150:151=206:207";
+		+shootable; -noteleport; +missile; +solid; -bounceonactors;
+		damagetype "slashing"; damage 2;
 	}
 	override void ondestroy(){
-		plantbit.spawnplants(self,7,33);
 		actor.ondestroy();
 	}
 	states{
 	spawn:
 		BTTL D 0;
 		goto spawn2;
+	xdeath:
 	death:
-		---- D 100{
-			if(random(0,7))roll=randompick(90,270);else roll=0;
-			if(roll==270)scale.x*=-1;
-		}
-		---- D random(2,4){
+		---- D 0{
 			if(frandom(0.1,0.9)<alpha){
 				angle+=random(-12,12);pitch=random(45,90);
 				actor a=spawn("HDGunSmoke",pos,ALLOW_REPLACE);
 				a.scale=(0.4,0.4);a.angle=angle;
 			}
-			A_FadeOut(frandom(-0.03,0.032));
-		}wait;
+			A_SpawnItemEx("HugeWallChunk",0,0,0,frandom(0,-18),frandom(0,-18),0,frandom(6,12),SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("BigWallChunk",0,0,0,frandom(0,-18),frandom(0,-18),0,frandom(7,18),SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HugeWallChunk",0,0,0,frandom(0,-18),frandom(0,-18),0,frandom(6,12),SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("BigWallChunk",0,0,0,frandom(0,-18),frandom(0,-18),0,frandom(7,18),SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HugeWallChunk",0,0,0,frandom(0,-18),frandom(0,-18),0,frandom(6,12),SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("BigWallChunk",0,0,0,frandom(0,-18),frandom(0,-18),0,frandom(7,18),SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("HugeWallChunk",0,0,0,frandom(0,-18),frandom(0,-18),0,frandom(6,12),SXF_NOCHECKPOSITION);
+			A_SpawnItemEx("BigWallChunk",0,0,0,frandom(0,-18),frandom(0,-18),0,frandom(7,18),SXF_NOCHECKPOSITION);
+		}stop;
 	}
 }
 /*class SpentRumCork:SpentBottle{
