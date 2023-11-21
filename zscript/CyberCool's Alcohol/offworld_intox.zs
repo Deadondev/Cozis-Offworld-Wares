@@ -129,7 +129,7 @@ class UasAlcohol_Offworld_IntoxToken : Inventory
 
 		// Stuttering and moving
 
-		if(self.amount < min_effect_amt)
+		if(self.amount < min_effect_amt || hdp.Incapacitated>0 || hdp.player.crouchfactor<1) //Crouching and being incapped no longer jitters you around, bc this is simulating difficulty holding balance, if you crouch or lay down, that's mitigated - [Cozi]
 			return;
 
 		double sttr_chance = min_sttr_chance + (max_sttr_chance - min_sttr_chance) * intox_perc;
