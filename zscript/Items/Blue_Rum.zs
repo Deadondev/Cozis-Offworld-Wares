@@ -24,7 +24,7 @@ class BlueRum:HDWeapon{
 		+inventory.invbar
 		+hdweapon.fitsinbackpack
 		weapon.selectionorder 1000;
-		inventory.pickupmessage "$PICKUP_POTION";
+		inventory.pickupmessage "You got some old rum!";
 		inventory.pickupsound "potion/swish";
 		tag "$TAG_BLUERUM";
 		inventory.icon "BTTLD0";
