@@ -104,7 +104,7 @@ class BlueRum:HDWeapon{
 		BTTL D 2 light("HEALTHPOTION") A_SetTics(random(1,3)); //I guess it would have a light similar to a healthpotion? Debating on this. -Cozi
 		loop;
 	death:
-	BTTL D 0 nodelay {A_StartSound("rum/break",CHAN_BODY,CHANF_OVERLAP);
+	BTTL D 0 {A_StartSound("rum/break",CHAN_BODY,CHANF_OVERLAP);
 	A_FaceTarget();
 	//A_SpawnItemEx("WallChunker",0,0,0,frandom(-1,-15),frandom(-1,1),frandom(-1,1));
 	//A_SpawnItemEx("HugeWallChunk",0,0,4,frandom(6,12),0,frandom(-1.5,6)*1,frandom(0,180),SXF_NOCHECKPOSITION);
