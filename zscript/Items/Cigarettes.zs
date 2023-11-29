@@ -29,9 +29,6 @@ class CigarettePack:HDWeapon{
 	override double weaponbulk(){
 		return (ENC_CIGARETTEPACK);
 	}
-	override void PostBeginPlay(){
-		weaponstatus[HDCIGPACK_AMOUNT]=random(1,20);
-	}
 	override void InitializeWepStats(bool idfa){
 		weaponstatus[HDCIGPACK_AMOUNT]=20;
 	}
