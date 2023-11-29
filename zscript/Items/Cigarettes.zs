@@ -94,7 +94,7 @@ class CigarettePack:HDWeapon{
 				A_StartSound("weapons/pocket",9);
 				A_Log("The box is full!");
 				resolvestate("nope");
-			}
+			} else{
 			if(countinv("Cigarette")<1){
 				A_Log("No cigarettes to put away!");
 				resolvestate("nope");
@@ -105,6 +105,7 @@ class CigarettePack:HDWeapon{
 				DropInventory(iii,1);
 				invoker.weaponstatus[HDCIGPACK_AMOUNT]++;
 				A_StartSound("weapons/pocket",9);
+			}
 			}
 			}
 		}
