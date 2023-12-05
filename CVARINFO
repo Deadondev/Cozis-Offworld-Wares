@@ -16,13 +16,12 @@ server bool  sbrl_persistent_spawning = false;
 
 // Musket
 server bool musket_allowBackpacks = true;
-server int musket_blur_spawn_bias = 14;
+server int musket_clipbox_spawn_bias = 14;
 server bool musket_persistent_spawning = false;
 
 // Flintlock
 server bool flint_allowBackpacks = true;
-server int flint_saw_spawn_bias = 14;
-server int flint_shotguns_spawn_bias = 14;
+server int flint_clipbox_spawn_bias = 14;
 server bool flint_persistent_spawning = false;
 
 //-------------------------------------------------
