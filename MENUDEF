@@ -167,7 +167,7 @@ OptionMenu warebags
 	SafeCommand "Reset all options", "bag_reset_cvars"
 }
 
-OptionMenu url
+/* OptionMenu url
 {
     Title "------ Universal Reloader Options ------"
     StaticText ""
@@ -201,7 +201,7 @@ OptionMenu apk
    	StaticText ""
 	StaticText "Reset Options", "Orange"
 	SafeCommand "Reset all options", "apk_reset_cvars"
-}
+} */
 
 OptionMenu dfb
 {
@@ -253,7 +253,7 @@ OptionValue "SpawnBiasNoReplace"
 	 199,  "1 in 200"
 }
 
-OptionMenu "witems"
+/* OptionMenu "witems"
 {
 	Title "------ Offworld Items ------"
 	StaticText "Only the original items in Wares!", "gold"
@@ -273,7 +273,7 @@ OptionMenu "aceitems"
 	Submenu "Universal Reloader", "url"
 	StaticText ""
 	Submenu "Armor Patch Kit", "apk"
-}
+} */
 
 AddOptionMenu "CozisOffworldWares"
 {
@@ -290,10 +290,16 @@ AddOptionMenu "CozisOffworldWares"
 	StaticText ""
 	StaticText "Item Options", "Orange"
 	StaticText ""
-	Submenu "Offworld Items", "witems"
+	Submenu "Ration Options", "rum"
 	StaticText ""
-	Submenu "AceCorp Items", "aceitems"
+	Submenu "Backpacks", "warebags"
 	StaticText ""
+	Submenu "Defibrillator", "dfb"
+	StaticText ""
+	/* Submenu "Offworld Items", "witems"
+	StaticText "" */
+	/* Submenu "AceCorp Items", "aceitems"
+	StaticText "" */
 	StaticText "-------------------", "gold"
 	StaticText "Below will reset every options for Offworld Wares!", "red"
 	StaticText " Be warned.", "red"
