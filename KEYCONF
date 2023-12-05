@@ -4,8 +4,8 @@ alias flint_reset_cvars "resetcvar flint_saw_spawn_bias; resetcvar flint_shotgun
 alias rum_reset_cvars "resetcvar rum_pmi_spawn_bias; resetcvar suit_replacement_spawn_bias; resetcvar rum_persistent_spawning; resetcvar cpk_pmi_spawn_bias;"
 alias cleanser_reset_cvars "resetcvar rum_pmi_spawn_bias; resetcvar rum_persistent_spawning;"
 alias suit_reset_cvars "resetcvar suit_replacement_spawn_bias"
-alias apk_reset_cvars "resetcvar apk_replacement_spawn_bias; resetcvar apk_persistent_spawning;"
-alias url_reset_cvars "resetcvar url_replacement_spawn_bias; resetcvar url_persistent_spawning;"
+/* alias apk_reset_cvars "resetcvar apk_replacement_spawn_bias; resetcvar apk_persistent_spawning;"
+alias url_reset_cvars "resetcvar url_replacement_spawn_bias; resetcvar url_persistent_spawning;" */
 alias bag_reset_cvars "resetcvar lgb_replacement_spawn_bias; resetcvar lgb_persistent_spawning; resetcvar mdb_replacement_spawn_bias;"
 alias dfb_reset_cvars "resetcvar dfb_replacement_spawn_bias; resetcvar dfb_persistent_spawning;"
 
