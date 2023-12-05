@@ -5,11 +5,12 @@ OptionMenu CozisOffworldWares
 
 AddOptionMenu "OptionsMenu"
 {
-    Submenu "Offworld Wares Options", "CozisOffworldWares"
+    Submenu "$COZI_MENU", "CozisOffworldWares"
 }
 
-AddOptionMenu "HDAddonMenu"{
-	Submenu "Offworld Wares Settings", "CozisOffworldWares"
+AddOptionMenu "HDAddonMenu"
+{
+	Submenu "$COZI_MENU", "CozisOffworldWares"
 }
 
 OptionMenu Trites
