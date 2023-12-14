@@ -26,8 +26,7 @@ class LeadReloadingThingy:HDWeapon{
 			}
 	}
 	void A_Chug(){
-		A_StartSound("roundmaker/chug1",8);
-		A_StartSound("roundmaker/chug2",9);
+		A_StartSound("herp/repair",8);
 		vel.xy+=(frandom(-0.1,0.1),frandom(-0.1,0.1));
 		if(floorz>=pos.z)vel.z+=frandom(0,1);
 	}
