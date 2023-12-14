@@ -574,7 +574,7 @@ if(!punchee.countinv("HDArmourWorn")){
 			A_WeaponMessage("Looks Clean.",10);
 			invoker.weaponstatus[MUSKT_GUNK]=0;
 			} else {
-			invoker.weaponstatus[MUSKT_GUNK]-=random(10,25); //honestly as long as it's more/equal to than the gunk you generate, does it really matter? - Cozi
+			invoker.weaponstatus[MUSKT_GUNK]-=random(5,10); //honestly as long as it's more/equal to than the gunk you generate, does it really matter? - Cozi
 			}
 			if(hd_debug)A_Log("Musket Gunk: "..invoker.weaponstatus[MUSKT_GUNK]);
 			break;
@@ -598,6 +598,7 @@ if(!punchee.countinv("HDArmourWorn")){
 			switch (invoker.weaponStatus[MUSKT_BARREL]){
 				case MUSKT_POWDERED:
 				A_StartSound("weapons/muskrodin",8,CHANF_OVERLAP);
+				A_StartSound("misc/wallchunks", volume: frandom(0.5, 0.75));
 				//when powder is added it will go here
 				invoker.weaponstatus[MUSKT_BARREL]=0;
 				break;//////////////////////////////////////////////////////////////////
@@ -611,11 +612,13 @@ if(!punchee.countinv("HDArmourWorn")){
 				case MUSKT_CORRECTRAMMED:
 				A_StartSound("weapons/muskrodin",8,CHANF_OVERLAP);
 				A_SpawnItemEx("HDBallAmmo",0,0,invoker.owner.height * 0.80, 5,0,-5,0,SXF_NOCHECKPOSITION);
+				A_StartSound("misc/wallchunks", volume: frandom(0.5, 0.75));
 				//when powder is added it will go here
 				invoker.weaponstatus[MUSKT_BARREL]=0;
 				break;//////////////////////////////////////////////////////////////////
 				case MUSKT_OVERPOWDERED:
 				A_StartSound("weapons/muskrodin",8,CHANF_OVERLAP);
+				A_StartSound("misc/wallchunks", volume: frandom(0.5, 0.75));
 				//when powder is added it will go here, will need a counting measure
 				invoker.weaponstatus[MUSKT_BARREL]=0;
 				break;//////////////////////////////////////////////////////////////////
@@ -623,6 +626,7 @@ if(!punchee.countinv("HDArmourWorn")){
 				case MUSKT_OVERPOWDEREDRAMMED:
 				A_StartSound("weapons/muskrodin",8,CHANF_OVERLAP);
 				A_SpawnItemEx("HDBallAmmo",0,0,invoker.owner.height * 0.80, 5,0,-5,0,SXF_NOCHECKPOSITION);
+				A_StartSound("misc/wallchunks", volume: frandom(0.5, 0.75));
 				//when powder is added it will go here
 				invoker.weaponstatus[MUSKT_BARREL]=0;
 				break;//////////////////////////////////////////////////////////////////
