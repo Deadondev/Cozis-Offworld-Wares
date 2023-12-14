@@ -4,7 +4,7 @@ class BallAutoReloader:LeadReloadingThingy{
 	default{
 		//$Category "Weapons/Hideous Destructor"
 		//$Title ".56 Ball Auto-Reloader"
-		//$Sprite "RLDRA0"
+		//$Sprite "BLDRA0"
 
 		+weapon.wimpy_weapon
 		+inventory.invbar
@@ -13,23 +13,27 @@ class BallAutoReloader:LeadReloadingThingy{
 		inventory.pickupmessage "You got the ball creating machine!";
 		scale 0.5;
 		hdweapon.refid HDLD_BALLRL;
-		tag "Ball creating device";
+		tag "Ball Creating Device";
 	}
 	override double gunmass(){return 0;}
 	override double weaponbulk(){
 		return 20*amount;
 	}
-	override string,double getpickupsprite(){return "RLDRA0",1.;}
+	override string,double getpickupsprite(){return "BLDRA0",1.;}
 	override void DrawHUDStuff(HDStatusBar sb,HDWeapon hdw,HDPlayerPawn hpl){
 		vector2 bob=hpl.wepbob*0.3;
 		int shells=hpl.countinv("HDShellAmmo");
 		double lph=(shells>=4)?1.:0.6;
+		sb.drawimage("BLDRA0",(0,-64)+bob,
+			sb.DI_SCREEN_CENTER_BOTTOM|sb.DI_ITEM_CENTER,
+			alpha:lph,scale:(2,2)
+		);
 		sb.drawimage("ESHLE0",(30,-64)+bob,
 			sb.DI_SCREEN_CENTER_BOTTOM|sb.DI_ITEM_CENTER|sb.DI_ITEM_LEFT,
 			alpha:lph,scale:(1.9,4.7)
 		);
 		sb.drawstring(
-			sb.psmallfont,""..shells,(0,-54)+bob,
+			sb.psmallfont,""..shells/4,(-1,-95)+bob,
 			sb.DI_TEXT_ALIGN_CENTER|sb.DI_SCREEN_CENTER_BOTTOM,
 			shells?Font.CR_GOLD:Font.CR_DARKGRAY,alpha:lph
 		);
@@ -83,7 +87,7 @@ class BallAutoReloader:LeadReloadingThingy{
 		TNT1 A 1 A_CheckChug(pressinguse());
 		goto ready;
 	spawn:
-		RLDR A -1 nodelay A_JumpIf(
+		BLDR A -1 nodelay A_JumpIf(
 			invoker.makinground
 			&&invoker.shells>3
 		,"chug");
@@ -103,7 +107,7 @@ class HD_FlintlockPistol:HDHandgun{
 	default{
 		//$Category "Weapons/Hideous Destructor"
 		//$Title "Flintlock Pistol"
-		//$Sprite "FLNRA0"
+		//$Sprite "FLNLA0"
 		+hdweapon.fitsinbackpack
 		weapon.selectionorder 300;
 		weapon.slotnumber 2;
@@ -159,7 +163,7 @@ class HD_FlintlockPistol:HDHandgun{
 	override double weaponbulk(){
 		return 25;//+(weaponstatus[FLINT_BALLLOADED]=2?ENC_BALL_LOADED:0);
 	}
-	override string,double getpickupsprite(){return "FLNRA0",1.;}
+	override string,double getpickupsprite(){return "FLNTT0",1.;}
 	override void DrawHUDStuff(HDStatusBar sb,HDWeapon hdw,HDPlayerPawn hpl){
 		int plf=hpl.player.getpsprite(PSP_WEAPON).frame;
 		if(sb.hudlevel==1){

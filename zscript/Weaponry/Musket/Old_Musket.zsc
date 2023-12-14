@@ -380,7 +380,7 @@ if(!punchee.countinv("HDArmourWorn")){
 					A_GunFlash();
 					A_StartSound("weapons/musketfire",CHAN_WEAPON);
 					A_AlertMonsters();
-					//A_MuzzleClimb(-frandom(4.,5.4),-frandom(3.4,5.2)); //doubled bc its too much lul
+					A_MuzzleClimb(-frandom(4.,5.4),-frandom(3.4,5.2)); //doubled bc its too much lul
 					A_StartSound("weapons/fgnclk",CHAN_WEAPON,CHANF_OVERLAP);
 					invoker.weaponstatus[MUSKT_BARREL]=0;
 					invoker.weaponstatus[MUSKT_COCKED]=1;
@@ -490,11 +490,8 @@ if(!punchee.countinv("HDArmourWorn")){
 		goto reloadhold;
 		
 	reloadpowder: //powderin' da toob.
-		MSKR D 3 offset(4,34); //A_MuzzleClimb(-frandom(0.5,3),-frandom(0.5,1),-frandom(0.5,3),-frandom(0.5,1));
-		MSKR D 10 offset(4,34) A_StartSound("bandage/rip",CHAN_WEAPON,CHANF_OVERLAP,0.4);
-		MSKR E 3 offset(4,34); //A_MuzzleClimb(0,1,0,1); //A_MuzzleClimb(-frandom(0.5,0.6),frandom(0.5,0.6),-frandom(0.5,0.6),frandom(0.5,0.6));
-		MSKR FG 3 offset(4,34);
-		MSKR G 10 offset(0,34) { switch (invoker.weaponStatus[MUSKT_BARREL]){
+		MSKR D 10 offset(4,34);
+		MSKR D 3 offset(4,34) { switch (invoker.weaponStatus[MUSKT_BARREL]){
 		case MUSKT_POWDERED:
 		A_StartSound("weapons/musketdust",8,CHANF_OVERLAP);
 		invoker.WeaponStatus[MUSKT_BARREL]=MUSKT_OVERPOWDERED;
@@ -514,7 +511,6 @@ if(!punchee.countinv("HDArmourWorn")){
 		invoker.WeaponStatus[MUSKT_BARREL]=MUSKT_POWDERED;
 		break;//////////////////////////////////////////////////////////////////
 		}}
-		MSKR HFED 5 offset(4,34);
 		goto reloadhold;
 
 	altreload: //this one's kinda clunky. oh well. - Cozi
