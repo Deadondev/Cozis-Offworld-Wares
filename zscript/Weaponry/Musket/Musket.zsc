@@ -26,9 +26,9 @@ class LeadReloadingThingy:HDWeapon{
 			}
 	}
 	void A_Chug(){
-		A_StartSound("herp/repair",8);
-		vel.xy+=(frandom(-0.1,0.1),frandom(-0.1,0.1));
-		if(floorz>=pos.z)vel.z+=frandom(0,1);
+		A_StartSound("weapons/musketmake",8, CHANF_DEFAULT, 0.3);
+		vel.xy+=(frandom(-0.05,0.05),frandom(-0.05,0.05));
+		if(floorz>=pos.z)vel.z+=frandom(0,0.5);
 	}
 	void A_MakeRound(){
 		if(shells<4){
@@ -38,10 +38,7 @@ class LeadReloadingThingy:HDWeapon{
 		}
 		shells-=4;
 		A_StartSound("roundmaker/pop",4);
-		if(!random(0,63)){
-			A_SpawnItemEx("HDExplosion");
-			A_Explode(32,32);
-		}else {roundsmade++;} //this is bc rounds are a bitch to find, also i dont imagine these ancient fuckers have any concept of springs so
+		roundsmade++; //this is bc rounds are a bitch to find, also i dont imagine these ancient fuckers have any concept of springs so
 	}
 	action void A_CheckChug(bool anyotherconditions=true){
 		if(
@@ -56,7 +53,7 @@ class LeadReloadingThingy:HDWeapon{
 	}
 	states{
 	chug:
-		---- AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 3{invoker.A_Chug();}
+		---- A 75{invoker.A_Chug();} //was 3
 		---- A 10{invoker.A_MakeRound();}
 		---- A 0 A_Jump(256,"spawn");
 	}

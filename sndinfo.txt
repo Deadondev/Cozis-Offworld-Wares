@@ -7,7 +7,12 @@ weapons/musketfire       muskfire
 weapons/musketrodin      muskrodi
 weapons/musketdust      muskdust
 weapons/musketcock      muskcock
-weapons/musketmove      muskmove
+weapons/musketmake      musketmake
+
+$Random weapons/musketmake { gear1 gear2 gear3 }
+gear1		gear1
+gear2		gear2
+gear3		gear3
 
 // Defibrillator
 weapons/defibuse      Sounds/Defibrillator/defibrillator_use.wav
