@@ -34,6 +34,10 @@ server int rum_pmi_spawn_bias = 19;
 server bool rum_persistent_spawning = false;
 
 // Cigarettes
+server int cig_pmi_spawn_bias = 9;
+server bool cig_persistent_spawning = false;
+
+// Cigarette Boxes
 server int cpk_pmi_spawn_bias = 19;
 server bool cpk_persistent_spawning = false;
 

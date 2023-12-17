@@ -249,62 +249,59 @@ class RumDrug:HDDrug{ //This is designed to work in tandem with the Alcohol hand
 		HDRUM_BLACKOUT=2000,
 		HDRUM_BLACKOUTTIME=50,
 	}
-	override void DoEffect(){
-		let hdp=hdplayerpawn(owner);
-		}
-	override void OnHeartbeat(hdplayerpawn hdp){
-		if(amount<1)return;
-
-		//Instead of the usual amount loss, we're gonna tie this bitch to the alcohol handler, makes it easier to keep them even. - Cozi
-		amount = hdp.countinv("UasAlcohol_Offworld_IntoxToken");
-
-		if(hdp.countinv("RumDrug")>RumDrug.HDRUM_BLACKOUT){
-		}
-		//Positive Things!
-		double ret=min(0.15,amount*0.003);
-		if(hdp.strength<1.+ret)hdp.strength+=(hdp.countinv("UasAlcohol_Offworld_IntoxToken")*0.0001); //You're gonna be stronger the drunker you are.
-			if(
-                hdp.burncount>80
-                ||hdp.aggravateddamage>50
-            ){
-                hdp.burncount-=0.001;
-                hdp.aggravateddamage-=0.001;
-            }
-			hdp.bloodloss--;
-
-		//if(hd_debug>=4)console.printf("Drug: Drunk at about "..amount);
-		}
-}
-
-class BlackoutDrug:HDDrug{
+	int blackout_amount;
 	override void DoEffect(){
 		let hdp=hdplayerpawn(owner);
 		double ret=min(0.1,amount*0.006);
-		//if(hdp.incaptimer<hdp.maxincaptimerstand)hdp.incaptimer++;
-		
-		//if(amount<250){
-		hdp.beatcap==10;
+	
+		if(hdp.countinv("RumDrug")>RumDrug.HDRUM_BLACKOUT){//Passing out drunk? In my Hideous? More likely than you think...
 		hdp.Disarm(hdp);
-		hdp.A_SelectWeapon("HDIncapWeapon");
-		hdp.incapacitated++;
-		hdp.incaptimer=10; //This is my hacky "stay down" fix, please don't mess with it - Cozi
+		hdp.A_SelectWeapon("HDFist");
 		hdp.muzzleclimb1+=(0,frandom(8,4));
-		hdp.stunned++;
-		hdp.AddBlackout(256,2,4,24);
+		hdp.incaptimer+=(3);
+		if(hdp.stunned<40)hdp.stunned+=3;
+		//if(hdp.fatigue<HDCONST_SPRINTFATIGUE)hdp.fatigue++;
+		hdp.beatcap==10; //Slow your heartrate to allow healing.
 		// DREAM STUFF
-		/*if(!random[rumbs](0,70)){
+		if(!random[rumbs](0,70)){
 				string rumbs[]={"$RUM_BLACKOUT1","$RUM_BLACKOUT2","$RUM_BLACKOUT3","$RUM_BLACKOUT4","$RUM_BLACKOUT5","$RUM_BLACKOUT6","$RUM_BLACKOUT7","$RUM_BLACKOUT8","$RUM_BLACKOUT9","$RUM_BLACKOUT10","$RUM_BLACKOUT11","$RUM_BLACKOUT12","$RUM_BLACKOUT13","$RUM_BLACKOUT14","$RUM_BLACKOUT15"};
 				string rumcolor[]={"\cn","\ch","\cq","\ct","\cq","\cp","\cw","\cx"};
 				A_Log(Stringtable.Localize(rumcolor[random(0,rumcolor.size()-1)]) ..Stringtable.Localize(rumbs[random(0,rumbs.size()-1)]));
-			}*/
+			}
+		hdp.AddBlackout(256,2,4,24);
+		if(hd_debug>=4)console.printf("Passed out for "..amount);
+		
 		}
+	}
 	override void OnHeartbeat(hdplayerpawn hdp){
 		if(amount<1)return;
+
+		if(hdp.countinv("RumDrug")>RumDrug.HDRUM_BLACKOUT){
+		}
+		double ret=min(0.15,amount*0.003);
+		//this is to help make sure you can actually get up, also a little bit of the potion!
+			if(
+				hdp.burncount>100
+				||hdp.oldwoundcount>65
+				||hdp.aggravateddamage>50
+			){
+				hdp.burncount--;
+				hdp.oldwoundcount--;
+				hdp.aggravateddamage--;
+				amount--;
+			}
+		if(hdp.strength<1.+ret)hdp.strength+=0.003; //Now, this one allows you to slightly carry more, BUT there's literally nothing else the stim provides in this, nor does being drunk really help you carry anything.
+
+		if(hdp.countinv("HDStim")){
+			hdp.A_TakeInventory("HDStim",2); //half the taking bc its dilluted
+			amount--;
+		}
+		
+		blackout_amount--;
 		amount--;
-		if(hd_debug>=4)console.printf("Passed out for "..amount); //DEBUG STUFF
-		if(hd_debug>=4)console.printf("Intox Token: "..hdp.countinv("UasAlcohol_Offworld_IntoxToken"));
 		}
 }
+
 
 // Alcohol consumable class.
 
@@ -402,10 +399,6 @@ class HD_RumDropper:IdleDummy{
         TNT1 A 0 nodelay{
 			let booze=BlueRum(spawn("BlueRum",pos,ALLOW_REPLACE));
 			booze.weaponstatus[BLUERUM_AMOUNT]=random(1,14);
-			booze.vel.x += frandom(-2,2);
-			booze.vel.y += frandom[spawnstuff](-2,2);
-			booze.vel.z += frandom[spawnstuff](1,2);
-			booze.angle += frandom(0,360);
         }stop;
     }
 }

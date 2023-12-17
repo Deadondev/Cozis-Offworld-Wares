@@ -49,6 +49,10 @@ class UasAlcohol_Offworld_IntoxToken : Inventory
 	const tox_heal_rate_max = 7; // intoxication heal rate, per second
 	const tox_heal_rate_min = 3;
 
+	//////////////////////////////////////////////////////////////////
+
+	// Rum Stuff
+	const rum_blackout_threshold = 2000;
 
 	// Shader stuff
 
@@ -162,6 +166,14 @@ class UasAlcohol_Offworld_IntoxToken : Inventory
 				owner.A_StartSound(hdp.tauntsound);
 		}
 
+		// ----------------
+		// Rum Effects
+		// ----------------
+		if(hd_debug>=4)console.printf("Handler: Drunk at about "..amount);
+
+		if(self.amount>rum_blackout_threshold && !hdp.incapacitated){//Passing out drunk? In my Hideous? More likely than you think...
+		hdp.giveInventory("BlackoutDrug", 30);
+		}
 		// ----------------
 		// Positive effects
 		// ----------------

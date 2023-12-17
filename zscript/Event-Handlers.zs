@@ -208,7 +208,7 @@ class OffworldWaresHandler : EventHandler
 		spawns_rum.push(addItemEntry('DeadRifleman', rum_pmi_spawn_bias));
 		addItem('HD_RumDropper', spawns_rum, rum_persistent_spawning, false);
 
-		// Cigarettes
+		// Cigarette Boxes
 		Array<WaresSpawnItemEntry> spawns_cpk;
 		spawns_cpk.push(addItemEntry('PortableStimpack', cpk_pmi_spawn_bias));
 		spawns_cpk.push(addItemEntry('PortableMedikit', cpk_pmi_spawn_bias));
@@ -220,7 +220,21 @@ class OffworldWaresHandler : EventHandler
 		spawns_cpk.push(addItemEntry('DeadSerpentipede', cpk_pmi_spawn_bias));
 		spawns_cpk.push(addItemEntry('DeadRegentipede', cpk_pmi_spawn_bias));
 		spawns_cpk.push(addItemEntry('DeadArdentipede', cpk_pmi_spawn_bias));
-		addItem('HD_CigaretteDropper', spawns_cpk, cpk_persistent_spawning, false);
+		addItem('HD_CigaretteBoxDropper', spawns_cpk, cpk_persistent_spawning, false);
+
+		// Cigarette
+		Array<WaresSpawnItemEntry> spawns_cigarette;
+		spawns_cigarette.push(addItemEntry('PortableStimpack', cig_pmi_spawn_bias));
+		spawns_cigarette.push(addItemEntry('PortableMedikit', cig_pmi_spawn_bias));
+		spawns_cigarette.push(addItemEntry('DeadRifleman', cig_pmi_spawn_bias));
+		spawns_cigarette.push(addItemEntry('ReallyDeadRifleman', cig_pmi_spawn_bias));
+		spawns_cigarette.push(addItemEntry('DeadZombieShotgunner', cig_pmi_spawn_bias));
+		spawns_cigarette.push(addItemEntry('DeadZombieStormtrooper', cig_pmi_spawn_bias));
+		//spawns_cpk.push(addItemEntry('DeadImpSpawner', cpk_pmi_spawn_bias));
+		spawns_cigarette.push(addItemEntry('DeadSerpentipede', cig_pmi_spawn_bias));
+		spawns_cigarette.push(addItemEntry('DeadRegentipede', cig_pmi_spawn_bias));
+		spawns_cigarette.push(addItemEntry('DeadArdentipede', cig_pmi_spawn_bias));
+		addItem('HD_CigaretteDropper', spawns_cigarette, cig_persistent_spawning, false);
 
 		// Cleanser
 		Array<WaresSpawnItemEntry> spawns_cln;

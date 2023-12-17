@@ -160,13 +160,13 @@ class Cigarette:HDWeapon{
 	spawn:
 		TNT1 A 1; //DO NOT REMOVE DELAY
 		TNT1 A 0{
-			if(weaponstatus[0]&INJECTF_SPENT){
-				resolvestate("death");
-			}else setstatelabel("spawn2");
+			if(!weaponstatus[0]&INJECTF_SPENT){
+			setstatelabel("spawn2");
+			}
 		}
 		stop;
 	spawn2:
-		CIGA A 0;
+		CIGA A -1;
 		stop;
 	death:
 	TNT1 A 0;
@@ -396,8 +396,25 @@ class HD_CigaretteDropper:IdleDummy{
     states{
     spawn:
         TNT1 A 0 nodelay{
-			let a=CigarettePack(spawn("CigarettePack",pos,ALLOW_REPLACE));
-			a.weaponstatus[HDCIGPACK_AMOUNT]=random(0,20);
+			let cig=Cigarette(spawn("Cigarette",pos,ALLOW_REPLACE));
+			cig.vel.x += frandom(-2,2);
+			cig.vel.y += frandom[spawnstuff](-2,2);
+			cig.vel.z += frandom[spawnstuff](1,2);
+			cig.angle += frandom(0,360);
+        }stop;
+    }
+}
+
+class HD_CigaretteBoxDropper:IdleDummy{
+    states{
+    spawn:
+        TNT1 A 0 nodelay{
+			let cigpak=CigarettePack(spawn("CigarettePack",pos,ALLOW_REPLACE));
+			cigpak.weaponstatus[HDCIGPACK_AMOUNT]=random(0,20);
+			cigpak.vel.x += frandom(-2,2);
+			cigpak.vel.y += frandom[spawnstuff](-2,2);
+			cigpak.vel.z += frandom[spawnstuff](1,2);
+			cigpak.angle += frandom(0,360);
         }stop;
     }
 }

@@ -97,7 +97,7 @@ class HD_Musket:LeadReloadingThingy{
 		return 6+amt*amt;
 	}
 	override double weaponbulk(){
-		return 125;//+(weaponstatus[MUSKT_BALLLOADED]=2?ENC_BALL_LOADED:0);
+		return 125;
 	}
 	override string,double getpickupsprite(){return "MSKTA0",1.;}
 	override void DrawHUDStuff(HDStatusBar sb,HDWeapon hdw,HDPlayerPawn hpl){
@@ -105,11 +105,6 @@ class HD_Musket:LeadReloadingThingy{
 			sb.drawimage("BALLA0",(-48,-10),sb.DI_SCREEN_CENTER_BOTTOM,scale:(0.7,0.7));
 			sb.drawnum(hpl.countinv("HDBallAmmo"),-45,-8,sb.DI_SCREEN_CENTER_BOTTOM);
 		}
-		if(hdw.weaponstatus[MUSKT_BARREL]>=MUSKT_BALLLOADED)sb.drawrect(-21,-13,5,3);
-		sb.drawwepnum(
-			hpl.countinv("HDBallAmmo"),
-			(HDCONST_MAXPOCKETSPACE/ENC_BALL)
-		);
 	}
 	override string gethelptext(){
 		return
@@ -129,10 +124,10 @@ class HD_Musket:LeadReloadingThingy{
 	){
 		int cx,cy,cw,ch;
 		[cx,cy,cw,ch]=screen.GetClipRect();
-		sb.SetClipRect(
+		/*sb.SetClipRect(
 			-16+bob.x,-32+bob.y,32,38,
 			sb.DI_SCREEN_CENTER
-		);
+		);*/
 		vector2 bobb=bob*2;
 		sb.SetClipRect(cx,cy,cw,ch);
 		sb.drawimage(
