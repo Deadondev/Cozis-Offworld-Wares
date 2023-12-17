@@ -11,6 +11,9 @@ alcohol bottles - xatrix entertainment
 ---Musket---
 Round-Making SFX: Thief Gold
 
+--Cigarettes--
+SFX: Blood
+
 --Trite--
 Sprites: Monolith, Id Software
 Sprite Edit: Captain Toenail
