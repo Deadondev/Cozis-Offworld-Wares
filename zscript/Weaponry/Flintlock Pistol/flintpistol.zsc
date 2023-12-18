@@ -259,6 +259,12 @@ class HD_FlintlockPistol:HDHandgun{
 				}
 			}
 		}
+		---- A 1 A_Raise();
+		---- A 1 A_Raise(30);
+		---- A 1 A_Raise(30);
+		---- A 1 A_Raise(24);
+		---- A 1 A_Raise(18);
+		wait;
 		goto ready;
 	deselect0:
 		FLNR A 0 A_CheckFlintlockHand();
