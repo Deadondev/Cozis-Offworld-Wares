@@ -32,6 +32,9 @@ class CigarettePack:HDWeapon{
 	override void InitializeWepStats(bool idfa){
 		weaponstatus[HDCIGPACK_AMOUNT]=20;
 	}
+	override void loadoutconfigure(string input){
+		weaponstatus[HDCIGPACK_AMOUNT]=20;
+	}
 	override int getsbarnum(int flags){
 		return weaponstatus[HDCIGPACK_AMOUNT];
 	}
@@ -264,6 +267,7 @@ class CigaretteDrug:HDDrug{
 	}
 	int aggrotiming;
 	int cigfxtiming;
+	int cigtwofxtiming;
 	override void doeffect(){
 		let hdp=hdplayerpawn(owner);
 		double ret=min(0.1,amount*0.006);
@@ -276,12 +280,13 @@ class CigaretteDrug:HDDrug{
 		if(hd_debug>=4)console.printf("Smoking "..amount);
 		//////////////////////////////////////////////////////////////////////////////////
 		// AGGRO
-		if(aggrotiming==150){ //calculation to give u 4 aggro over time
+		if(aggrotiming==60){ //calculation to give u 4 aggro over time
 		hdp.aggravateddamage++;
 		aggrotiming = 0;
 		} else{aggrotiming++;}
 		//////////////////////////////////////////////////////////////////////////////////
 		// EFFECTS
+		if(cigtwofxtiming==3){
 		vector3 smkpos=hdp.pos;
 		vector3 smkvel=vel; //vel
 		vector3 smkdir=(0,0,0);
@@ -298,8 +303,10 @@ class CigaretteDrug:HDDrug{
 		smkpos.xy+=10*(cos(smkang),sin(smkang));
 		actor a=spawn("HDCigaretteSmoke",smkpos,ALLOW_REPLACE);
 		a.angle=smkang;a.pitch=smkpitch-90;a.vel=smkvel;a.scale*=smkscale;a.alpha=smkstartalpha;
+		cigtwofxtiming = 0;
+		} else{cigtwofxtiming++;}
 		//////////////////////////////////////////////////////////////////////////////////
-		if(cigfxtiming==3){
+		if(cigfxtiming==9){
 		vector3 smkpos=hdp.pos;
 		vector3 smkvel=vel*=0.4;
 		vector3 smkdir=(0,0,0);

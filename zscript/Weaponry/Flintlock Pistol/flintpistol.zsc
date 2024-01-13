@@ -182,6 +182,7 @@ class HD_FlintlockPistol:HDHandgun{
 		..WEPHELP_RELOAD.."+"..WEPHELP_ALTFIRE.."  load powder\n"
 		..WEPHELP_RELOAD.."+"..WEPHELP_FIRE.."  load ball\n"
 		..WEPHELP_ALTRELOAD.."+"..WEPHELP_FIRE.."  Thumbrod\n"
+		..WEPHELP_ALTRELOAD.."+"..WEPHELP_ALTFIRE.."  Clean Barrel\n"
 		..WEPHELP_ALTFIRE.."  Cock hammer\n"
 		..WEPHELP_UNLOAD.."  Clear Barrel"
 		;
