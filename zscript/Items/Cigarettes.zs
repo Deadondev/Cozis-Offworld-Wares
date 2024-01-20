@@ -5,11 +5,38 @@ const ENC_CIGARETTEPACK=5; //this is so theres a good reason to keep the pack as
 //-------------------------------------------------
 // Pack of Cigarettes
 //-------------------------------------------------
-enum CigPack{
+enum cigarettestatus{
 		HDCIGPACK_AMOUNT=0,
+		HDCIG_DOSE=600, //It's long because it's a cigarette, 6 minutes - Cozi
+		HDCIG_AMOUNT=600,
 	}
 class CigarettePack:HDWeapon{
 	class<inventory> inventorytype;
+	int slot1;
+	int slot2;
+	int slot3;
+	int slot4;
+	int slot5;
+	int slot6;
+	int slot7;
+	int slot8;
+	int slot9;
+	int slot10;
+	int slot11;
+	int slot12;
+	int slot13;
+	int slot14;
+	int slot15;
+	int slot16;
+	int slot17;
+	int slot18;
+	int slot19;
+	int slot20;
+	int cigarettesleft;
+	override void beginplay(){
+		super.beginplay();
+		slot1=0;slot2=0;slot3=0;slot4=0;slot5=0;slot6=0;slot7=0;slot8=0;slot9=0;slot10=0;slot11=0;slot12=0;slot13=0;slot14=0;slot15=0;slot16=0;slot17=0;slot18=0;slot19=0;slot20=0;
+	}
 	default{
 		//$Category "Items/Hideous Destructor/Supplies"
 		//$Title "Pack of Cigarettes"
@@ -19,28 +46,31 @@ class CigarettePack:HDWeapon{
 		+inventory.invbar
 		+hdweapon.fitsinbackpack
 		inventory.pickupsound "misc/w_pkup";
-		inventory.pickupmessage "Picked up a pack of cigs.";
+		inventory.pickupmessage "$PICKUP_CIGARETTEPACK";
 		inventory.icon "CIGPA0";
 		scale 0.4;
 		hdweapon.refid HDLD_CIGARETTEPACK;
-		tag "Heartstopper Cigarette Pack";
+		tag "$TAG_CIGARETTEPACK";
 	}
 	override double gunmass(){return 0;}
 	override double weaponbulk(){
 		return (ENC_CIGARETTEPACK);
 	}
 	override void InitializeWepStats(bool idfa){
-		weaponstatus[HDCIGPACK_AMOUNT]=20;
+		//weaponstatus[HDCIGPACK_AMOUNT]=20;
+		cigarettesleft=20;
 	}
 	override void loadoutconfigure(string input){
-		weaponstatus[HDCIGPACK_AMOUNT]=20;
+		//weaponstatus[HDCIGPACK_AMOUNT]=20;
+		cigarettesleft=20;
+		slot1=600;slot2=600;slot3=600;slot4=600;slot5=600;slot6=600;slot7=600;slot8=600;slot9=600;slot10=600;slot11=600;slot12=600;slot13=600;slot14=600;slot15=600;slot16=600;slot17=600;slot18=600;slot19=600;slot20=600;
 	}
 	override int getsbarnum(int flags){
 		return weaponstatus[HDCIGPACK_AMOUNT];
 	}
 		override void DrawHUDStuff(HDStatusBar sb,HDWeapon hdw,HDPlayerPawn hpl){
 		vector2 bob=hpl.wepbob*0.3;
-		int cigarettesleft=weaponstatus[HDCIGPACK_AMOUNT];
+		//int cigarettesleft=weaponstatus[HDCIGPACK_AMOUNT];
 		sb.drawimage("CIGPA0",(0,-64)+bob,
 			sb.DI_SCREEN_CENTER_BOTTOM|sb.DI_ITEM_CENTER,
 			alpha:255,scale:(2.5,2.5)
@@ -58,6 +88,56 @@ class CigarettePack:HDWeapon{
 	}
 	override bool AddSpareWeapon(actor newowner){return AddSpareWeaponRegular(newowner);}
 	override hdweapon GetSpareWeapon(actor newowner,bool reverse,bool doselect){return GetSpareWeaponRegular(newowner,reverse,doselect);}
+
+	action void A_PullCigarettePack(){
+		invoker.slot1=invoker.slot2;
+		invoker.slot2=invoker.slot3;
+		invoker.slot3=invoker.slot4;
+		invoker.slot4=invoker.slot5;
+		invoker.slot5=invoker.slot6;
+		invoker.slot6=invoker.slot7;
+		invoker.slot7=invoker.slot8;
+		invoker.slot8=invoker.slot9;
+		invoker.slot9=invoker.slot10;
+		invoker.slot10=invoker.slot11;
+		invoker.slot11=invoker.slot12;
+		invoker.slot12=invoker.slot13;
+		invoker.slot13=invoker.slot14;
+		invoker.slot14=invoker.slot15;
+		invoker.slot15=invoker.slot16;
+		invoker.slot16=invoker.slot17;
+		invoker.slot17=invoker.slot18;
+		invoker.slot18=invoker.slot19;
+		invoker.slot19=invoker.slot20;
+		invoker.slot20=0;
+		if(hd_debug){
+			A_Log("Slot 1 is now " ..invoker.slot1.. "");
+		}
+		}
+	
+	action void A_PushCigarettePack(){
+		invoker.slot20=invoker.slot19;
+		invoker.slot19=invoker.slot18;
+		invoker.slot18=invoker.slot17;
+		invoker.slot17=invoker.slot16;
+		invoker.slot16=invoker.slot15;
+		invoker.slot15=invoker.slot14;
+		invoker.slot14=invoker.slot13;
+		invoker.slot13=invoker.slot12;
+		invoker.slot12=invoker.slot11;
+		invoker.slot11=invoker.slot10;
+		invoker.slot10=invoker.slot9;
+		invoker.slot9=invoker.slot8;
+		invoker.slot8=invoker.slot7;
+		invoker.slot7=invoker.slot6;
+		invoker.slot6=invoker.slot5;
+		invoker.slot5=invoker.slot4;
+		invoker.slot4=invoker.slot3;
+		invoker.slot3=invoker.slot2;
+		invoker.slot2=invoker.slot1;
+		invoker.slot1=0;
+		}
+
 	states{
 	spawn:
 		CIGP A -1;
@@ -73,27 +153,26 @@ class CigarettePack:HDWeapon{
 		wait;
 	fire:
 		TNT1 A 0{
-			if(invoker.weaponstatus[HDCIGPACK_AMOUNT]==0){
+			if(invoker.slot1==0){
 				A_StartSound("weapons/pocket",9);
 				A_Log("No cigarettes are in the box!");
-				/*actor a=spawn("EmptyCigarettePack",pos,ALLOW_REPLACE);
-				a.target=invoker;
-				a.angle=invoker.angle;a.vel=invoker.vel;a.A_ChangeVelocity(-2,1,4,CVF_RELATIVE);
-				a.A_StartSound("weapons/grenopen",CHAN_VOICE);*/
 			}
-			if(invoker.weaponstatus[HDCIGPACK_AMOUNT]>=1){
+			if(invoker.slot1>=1){
 				let mdk=HDWeapon(spawn("Cigarette",pos));
+				mdk.health=invoker.slot1;
 				mdk.actualpickup(self,true);
-				invoker.weaponstatus[HDCIGPACK_AMOUNT]--;
+				invoker.cigarettesleft--;
 				A_StartSound("weapons/pocket",9);
-				A_Log("There are " ..invoker.weaponstatus[HDCIGPACK_AMOUNT].. " left in the box");
+				invoker.slot1=invoker.slot2;
+				A_PullCigarettePack();
+				A_Log("There are " ..invoker.cigarettesleft.. " left in the box");
 			}
 		}
 		TNT1 A 10;
 		goto ready;
 	altfire:
 		TNT1 A 0{
-			if(invoker.weaponstatus[HDCIGPACK_AMOUNT]==20){
+			if(invoker.slot20>=1){
 				A_StartSound("weapons/pocket",9);
 				A_Log("The box is full!");
 				resolvestate("nope");
@@ -102,12 +181,17 @@ class CigarettePack:HDWeapon{
 				A_Log("No cigarettes to put away!");
 				resolvestate("nope");
 			} else {
+				A_PushCigarettePack();
 				let iii=HDWeapon(findinventory("Cigarette"));
 			if(!!iii){
+				invoker.slot1=iii.health;
 				iii.weaponstatus[0]|=INJECTF_SPENT;
 				DropInventory(iii,1);
-				invoker.weaponstatus[HDCIGPACK_AMOUNT]++;
+				invoker.cigarettesleft++;
 				A_StartSound("weapons/pocket",9);
+				if(hd_debug){
+				A_Log("Slot 1 is now " ..invoker.slot1.. "");
+				}
 			}
 			}
 			}
@@ -118,6 +202,11 @@ class CigarettePack:HDWeapon{
 }
 
 class Cigarette:HDWeapon{
+	enum CigAmounts{
+		HDCIG_DOSE=600, //How much said cigarette has left.
+		//HDCIG_AMOUNT=600,
+
+	}
 	string mainhelptext;property mainhelptext:mainhelptext;
 	class<actor> spentinjecttype;property spentinjecttype:spentinjecttype;
 	class<actor> injecttype;property injecttype:injecttype;
@@ -158,6 +247,8 @@ class Cigarette:HDWeapon{
 		cigarette.mainhelptext "\cr*** \caHEARTSTOPPER CIGARETTES \cr***\c-\n\n\nCigarettes help lower your heart rate, \crwatch out for aggro!.\n\n\Please don't smoke IRL.";
 		cigarette.spentinjecttype "BurntCig";
 		cigarette.injecttype "CigaretteDrug";
+
+		health 600;
 	}
 	states(actor){
 	spawn:
@@ -165,6 +256,7 @@ class Cigarette:HDWeapon{
 		TNT1 A 0{
 			if(!weaponstatus[0]&INJECTF_SPENT){
 			setstatelabel("spawn2");
+			if(hd_debug>=4)console.printf("dropped cigarette at "..health);
 			}
 		}
 		stop;
@@ -209,7 +301,7 @@ class Cigarette:HDWeapon{
 				A_WeaponMessage("\cgYou're already smoking!",100);
 				return resolvestate(null);
 			}
-			if(invoker.countinv("Heat")){
+			if(invoker.countinv("PowerIronFeet")){
 			A_WeaponMessage("\cgYou can't smoke in a radsuit!",100);
 				return resolvestate(null);
 			}
@@ -233,7 +325,7 @@ class Cigarette:HDWeapon{
 		TNT1 A 1{
 			A_MuzzleClimb(0,2);
 			invoker.weaponstatus[0]|=INJECTF_SPENT;
-			A_GiveInventory("CigaretteDrug",CigaretteDrug.HDCIG_DOSE);
+			A_GiveInventory("CigaretteDrug",invoker.health);
 			A_SelectWeapon("HDFist");
 		}
 		TNT1 AAAA 1 A_MuzzleClimb(0,-0.5);
@@ -246,24 +338,12 @@ class Cigarette:HDWeapon{
 		goto nope;
 }
 	}
-class CigaretteDummy:IdleDummy{
-	hdplayerpawn tg;
-	states{
-	spawn:
-		TNT1 A 6 nodelay{
-			tg=HDPlayerPawn(target);
-			if(!tg||tg.bkilled){destroy();return;}
-		}
-		TNT1 A 1{
-			if(!target||target.bkilled){destroy();return;}
-			HDF.Give(target,"CigaretteDrug",CigaretteDrug.HDCIG_DOSE);
-		}stop;
-	}
-}
+
 class CigaretteDrug:HDDrug{
 	enum CigAmounts{
 		HDCIG_DOSE=600, //It's long because it's a cigarette, 6 minutes - Cozi
 		HDCIG_NOCIG=10, //This is how much you get set to if you lose your cig, or at what point you spit it out
+		 //How much said cigarette has left.
 	}
 	int aggrotiming;
 	int cigfxtiming;
@@ -271,17 +351,32 @@ class CigaretteDrug:HDDrug{
 	override void doeffect(){
 		let hdp=hdplayerpawn(owner);
 		double ret=min(0.1,amount*0.006);
+		// LOSING OR DROP CONDITIONS
+		if(hdp.countinv("Heat")||hdp.health<12||hdp.incapacitated>0){
+			let dropcig=Cigarette(spawn("Cigarette",hdp.pos,ALLOW_REPLACE));
+			//dropcig.weaponstatus[HDCIG_AMOUNT]=1;
+			dropcig.health=amount;
+			dropcig.vel.x += frandom(-2,2);
+			dropcig.vel.y += frandom[spawnstuff](-2,2);
+			dropcig.vel.z += frandom[spawnstuff](1,2);
+			dropcig.angle += frandom(0,360);
+			A_Log("Cigarette dropped!");
+			amount=0;
+		}
+		if(hdp.countinv("WornRadsuit")){
+			A_Log("You put your cigarette out and slip the radsuit on.");
+			amount=0;
+			}
 	}
 	override void OnHeartbeat(hdplayerpawn hdp){
 		if(amount<1)return;
-		//if(!random(0,10)||hdp.countinv("CigAggro"))hdp.aggravateddamage++;
 		if(hdp.stunned>0)hdp.stunned=-3; //These are great if you hate being stunned, too cool to be stunned!
 		if(hdp.beatcap>30)hdp.beatcap--; //what stims do, but if you got em too, its 2x
 		if(hd_debug>=4)console.printf("Smoking "..amount);
 		//////////////////////////////////////////////////////////////////////////////////
 		// AGGRO
-		if(aggrotiming==60){ //calculation to give u 4 aggro over time
-		hdp.aggravateddamage++;
+		if(aggrotiming==60){ //calculation to give u 10 aggro over time
+		hdp.aggravateddamage+=0.1;
 		aggrotiming = 0;
 		} else{aggrotiming++;}
 		//////////////////////////////////////////////////////////////////////////////////
@@ -313,8 +408,8 @@ class CigaretteDrug:HDDrug{
 		double smkscale=0.75;
 		double smkang=hdp.angle;
 		double smkpitch=hdp.pitch;
-		double smkspeed=hdp.speed*3.;
-		double smkstartalpha=5.;
+		double smkspeed=hdp.speed*3;
+		double smkstartalpha=5;
 		smkvel*=0.4;
 		smkdir*=smkspeed;
 		smkvel+=smkdir;
@@ -329,17 +424,7 @@ class CigaretteDrug:HDDrug{
 		cigfxtiming = 0;
 		} else{cigfxtiming++;}
 		//////////////////////////////////////////////////////////////////////////////////
-		// LOSING OR DROP CONDITIONS 
-		if(hdp.countinv("Heat")){
-			amount=0;
-			vector3 cigpos=hdp.pos;
-			actor b=spawn("BurntCig",cigpos,ALLOW_REPLACE);
-		}
-		if(hdp.incapacitated>0||hdp.stunned>0){
-			amount=0;
-			vector3 cigpos=hdp.pos;
-			actor b=spawn("BurntCig",cigpos,ALLOW_REPLACE);
-		}
+		
 		amount--;
 		}
 }
@@ -404,6 +489,7 @@ class HD_CigaretteDropper:IdleDummy{
     spawn:
         TNT1 A 0 nodelay{
 			let cig=Cigarette(spawn("Cigarette",pos,ALLOW_REPLACE));
+			cig.health=random(50,600);
 			cig.vel.x += frandom(-2,2);
 			cig.vel.y += frandom[spawnstuff](-2,2);
 			cig.vel.z += frandom[spawnstuff](1,2);
@@ -416,12 +502,14 @@ class HD_CigaretteBoxDropper:IdleDummy{
     states{
     spawn:
         TNT1 A 0 nodelay{
+			//int cigpackamount=random(0,20);
 			let cigpak=CigarettePack(spawn("CigarettePack",pos,ALLOW_REPLACE));
-			cigpak.weaponstatus[HDCIGPACK_AMOUNT]=random(0,20);
 			cigpak.vel.x += frandom(-2,2);
 			cigpak.vel.y += frandom[spawnstuff](-2,2);
 			cigpak.vel.z += frandom[spawnstuff](1,2);
 			cigpak.angle += frandom(0,360);
+			cigpak.slot1=0;cigpak.slot2=0;cigpak.slot3=0;cigpak.slot4=0;cigpak.slot5=0;cigpak.slot6=0;cigpak.slot7=0;cigpak.slot8=0;cigpak.slot9=0;cigpak.slot10=0;cigpak.slot11=0;cigpak.slot12=0;cigpak.slot13=0;cigpak.slot14=0;cigpak.slot15=0;cigpak.slot16=0;cigpak.slot17=0;cigpak.slot18=0;cigpak.slot19=0;cigpak.slot20=0;
+			cigpak.cigarettesleft=0;
         }stop;
     }
 }
