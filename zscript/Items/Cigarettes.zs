@@ -502,14 +502,33 @@ class HD_CigaretteBoxDropper:IdleDummy{
     states{
     spawn:
         TNT1 A 0 nodelay{
-			//int cigpackamount=random(0,20);
+			int cigpackamount=random(0,20);
 			let cigpak=CigarettePack(spawn("CigarettePack",pos,ALLOW_REPLACE));
 			cigpak.vel.x += frandom(-2,2);
 			cigpak.vel.y += frandom[spawnstuff](-2,2);
 			cigpak.vel.z += frandom[spawnstuff](1,2);
 			cigpak.angle += frandom(0,360);
-			cigpak.slot1=0;cigpak.slot2=0;cigpak.slot3=0;cigpak.slot4=0;cigpak.slot5=0;cigpak.slot6=0;cigpak.slot7=0;cigpak.slot8=0;cigpak.slot9=0;cigpak.slot10=0;cigpak.slot11=0;cigpak.slot12=0;cigpak.slot13=0;cigpak.slot14=0;cigpak.slot15=0;cigpak.slot16=0;cigpak.slot17=0;cigpak.slot18=0;cigpak.slot19=0;cigpak.slot20=0;
-			cigpak.cigarettesleft=0;
+			cigpak.cigarettesleft=cigpackamount;
+			if(cigpackamount>=1){cigpak.slot1=600;}
+			if(cigpackamount>=2){cigpak.slot2=600;}
+			if(cigpackamount>=3){cigpak.slot3=600;}
+			if(cigpackamount>=4){cigpak.slot4=600;}
+			if(cigpackamount>=5){cigpak.slot5=600;}
+			if(cigpackamount>=6){cigpak.slot6=600;}
+			if(cigpackamount>=7){cigpak.slot7=600;}
+			if(cigpackamount>=8){cigpak.slot8=600;}
+			if(cigpackamount>=9){cigpak.slot9=600;}
+			if(cigpackamount>=10){cigpak.slot10=600;}
+			if(cigpackamount>=11){cigpak.slot11=600;}
+			if(cigpackamount>=12){cigpak.slot12=600;}
+			if(cigpackamount>=13){cigpak.slot13=600;}
+			if(cigpackamount>=14){cigpak.slot14=600;}
+			if(cigpackamount>=15){cigpak.slot15=600;}
+			if(cigpackamount>=16){cigpak.slot16=600;}
+			if(cigpackamount>=17){cigpak.slot17=600;}
+			if(cigpackamount>=18){cigpak.slot18=600;}
+			if(cigpackamount>=19){cigpak.slot19=600;}
+			if(cigpackamount>=20){cigpak.slot20=600;}
         }stop;
     }
 }
