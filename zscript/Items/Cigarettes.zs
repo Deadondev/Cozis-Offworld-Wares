@@ -250,25 +250,25 @@ class Cigarette:HDWeapon{
 
 		health 600;
 	}
-	states(actor){
+	states{
 	spawn:
 		TNT1 A 1; //DO NOT REMOVE DELAY
 		TNT1 A 0{
-			if(!weaponstatus[0]&INJECTF_SPENT){
+			//if(!weaponstatus[0]&INJECTF_SPENT){
 			setstatelabel("spawn2");
 			if(hd_debug>=4)console.printf("dropped cigarette at "..health);
-			}
 		}
 		stop;
 	spawn2:
-		CIGA A -1;
-		stop;
+		CIGA A 1 {if(HDMath.CheckLiquidTexture(invoker)&&floorz==pos.z){
+			//A_StartSound("potion/swish",8,CHANF_OVERLAP,volume:0.5);
+			setstatelabel("death");}}
+		loop;
 	death:
 	TNT1 A 0;
 	stop;
-	}
-
-	states{
+	//}
+	//states{
 	select:
 		TNT1 A 8{
 			if(DoHelpText())A_WeaponMessage(Stringtable.Localize(invoker.mainhelptext));
