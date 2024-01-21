@@ -254,9 +254,10 @@ class Cigarette:HDWeapon{
 	spawn:
 		TNT1 A 1; //DO NOT REMOVE DELAY
 		TNT1 A 0{
-			//if(!weaponstatus[0]&INJECTF_SPENT){
+			if(!invoker.weaponstatus[0]&INJECTF_SPENT){
 			setstatelabel("spawn2");
 			if(hd_debug>=4)console.printf("dropped cigarette at "..health);
+		}
 		}
 		stop;
 	spawn2:
