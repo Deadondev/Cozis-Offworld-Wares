@@ -7,35 +7,36 @@ const ENC_CIGARETTEPACK=5; //this is so theres a good reason to keep the pack as
 //-------------------------------------------------
 enum cigarettestatus{
 		HDCIGPACK_AMOUNT=0,
+		HDCIGPACK_SLOT1=1,
+		HDCIGPACK_SLOT2=2,
+		HDCIGPACK_SLOT3=3,
+		HDCIGPACK_SLOT4=4,
+		HDCIGPACK_SLOT5=5,
+		HDCIGPACK_SLOT6=6,
+		HDCIGPACK_SLOT7=7,
+		HDCIGPACK_SLOT8=8,
+		HDCIGPACK_SLOT9=9,
+		HDCIGPACK_SLOT10=10,
+		HDCIGPACK_SLOT11=11,
+		HDCIGPACK_SLOT12=12,
+		HDCIGPACK_SLOT13=13,
+		HDCIGPACK_SLOT14=14,
+		HDCIGPACK_SLOT15=15,
+		HDCIGPACK_SLOT16=16,
+		HDCIGPACK_SLOT17=17,
+		HDCIGPACK_SLOT18=18,
+		HDCIGPACK_SLOT19=19,
+		HDCIGPACK_SLOT20=20,
+
 		HDCIG_DOSE=600, //It's long because it's a cigarette, 6 minutes - Cozi
 		HDCIG_AMOUNT=600,
 	}
 class CigarettePack:HDWeapon{
 	class<inventory> inventorytype;
-	int slot1;
-	int slot2;
-	int slot3;
-	int slot4;
-	int slot5;
-	int slot6;
-	int slot7;
-	int slot8;
-	int slot9;
-	int slot10;
-	int slot11;
-	int slot12;
-	int slot13;
-	int slot14;
-	int slot15;
-	int slot16;
-	int slot17;
-	int slot18;
-	int slot19;
-	int slot20;
-	int cigarettesleft;
+	
 	override void beginplay(){
 		super.beginplay();
-		slot1=0;slot2=0;slot3=0;slot4=0;slot5=0;slot6=0;slot7=0;slot8=0;slot9=0;slot10=0;slot11=0;slot12=0;slot13=0;slot14=0;slot15=0;slot16=0;slot17=0;slot18=0;slot19=0;slot20=0;
+		weaponstatus[HDCIGPACK_SLOT1]=0;weaponstatus[HDCIGPACK_SLOT2]=0;weaponstatus[HDCIGPACK_SLOT3]=0;weaponstatus[HDCIGPACK_SLOT4]=0;weaponstatus[HDCIGPACK_SLOT5]=0;weaponstatus[HDCIGPACK_SLOT6]=0;weaponstatus[HDCIGPACK_SLOT7]=0;weaponstatus[HDCIGPACK_SLOT8]=0;weaponstatus[HDCIGPACK_SLOT9]=0;weaponstatus[HDCIGPACK_SLOT10]=0;weaponstatus[HDCIGPACK_SLOT11]=0;weaponstatus[HDCIGPACK_SLOT12]=0;weaponstatus[HDCIGPACK_SLOT13]=0;weaponstatus[HDCIGPACK_SLOT14]=0;weaponstatus[HDCIGPACK_SLOT15]=0;weaponstatus[HDCIGPACK_SLOT16]=0;weaponstatus[HDCIGPACK_SLOT17]=0;weaponstatus[HDCIGPACK_SLOT18]=0;weaponstatus[HDCIGPACK_SLOT19]=0;weaponstatus[HDCIGPACK_SLOT20]=0;
 	}
 	default{
 		//$Category "Items/Hideous Destructor/Supplies"
@@ -56,14 +57,9 @@ class CigarettePack:HDWeapon{
 	override double weaponbulk(){
 		return (ENC_CIGARETTEPACK);
 	}
-	override void InitializeWepStats(bool idfa){
-		//weaponstatus[HDCIGPACK_AMOUNT]=20;
-		cigarettesleft=20;
-	}
 	override void loadoutconfigure(string input){
-		//weaponstatus[HDCIGPACK_AMOUNT]=20;
-		cigarettesleft=20;
-		slot1=600;slot2=600;slot3=600;slot4=600;slot5=600;slot6=600;slot7=600;slot8=600;slot9=600;slot10=600;slot11=600;slot12=600;slot13=600;slot14=600;slot15=600;slot16=600;slot17=600;slot18=600;slot19=600;slot20=600;
+		weaponstatus[HDCIGPACK_AMOUNT]=20;
+		weaponstatus[HDCIGPACK_SLOT1]=600;weaponstatus[HDCIGPACK_SLOT2]=600;weaponstatus[HDCIGPACK_SLOT3]=600;weaponstatus[HDCIGPACK_SLOT4]=600;weaponstatus[HDCIGPACK_SLOT5]=600;weaponstatus[HDCIGPACK_SLOT6]=600;weaponstatus[HDCIGPACK_SLOT7]=600;weaponstatus[HDCIGPACK_SLOT8]=600;weaponstatus[HDCIGPACK_SLOT9]=600;weaponstatus[HDCIGPACK_SLOT10]=600;weaponstatus[HDCIGPACK_SLOT11]=600;weaponstatus[HDCIGPACK_SLOT12]=600;weaponstatus[HDCIGPACK_SLOT13]=600;weaponstatus[HDCIGPACK_SLOT14]=600;weaponstatus[HDCIGPACK_SLOT15]=600;weaponstatus[HDCIGPACK_SLOT16]=600;weaponstatus[HDCIGPACK_SLOT17]=600;weaponstatus[HDCIGPACK_SLOT18]=600;weaponstatus[HDCIGPACK_SLOT19]=600;weaponstatus[HDCIGPACK_SLOT20]=600;
 	}
 	override int getsbarnum(int flags){
 		return weaponstatus[HDCIGPACK_AMOUNT];
@@ -76,9 +72,9 @@ class CigarettePack:HDWeapon{
 			alpha:255,scale:(2.5,2.5)
 		);
 		sb.drawstring(
-			sb.psmallfont,""..cigarettesleft,(0,-108)+bob,
+			sb.psmallfont,""..weaponstatus[HDCIGPACK_AMOUNT],(0,-108)+bob,
 			sb.DI_TEXT_ALIGN_CENTER|sb.DI_SCREEN_CENTER_BOTTOM,
-			cigarettesleft?Font.CR_GRAY:Font.CR_DARKGRAY,alpha:255
+			weaponstatus[HDCIGPACK_AMOUNT]?Font.CR_GRAY:Font.CR_DARKGRAY,alpha:255
 		);
 	}
 	override string gethelptext(){
@@ -90,52 +86,52 @@ class CigarettePack:HDWeapon{
 	override hdweapon GetSpareWeapon(actor newowner,bool reverse,bool doselect){return GetSpareWeaponRegular(newowner,reverse,doselect);}
 
 	action void A_PullCigarettePack(){
-		invoker.slot1=invoker.slot2;
-		invoker.slot2=invoker.slot3;
-		invoker.slot3=invoker.slot4;
-		invoker.slot4=invoker.slot5;
-		invoker.slot5=invoker.slot6;
-		invoker.slot6=invoker.slot7;
-		invoker.slot7=invoker.slot8;
-		invoker.slot8=invoker.slot9;
-		invoker.slot9=invoker.slot10;
-		invoker.slot10=invoker.slot11;
-		invoker.slot11=invoker.slot12;
-		invoker.slot12=invoker.slot13;
-		invoker.slot13=invoker.slot14;
-		invoker.slot14=invoker.slot15;
-		invoker.slot15=invoker.slot16;
-		invoker.slot16=invoker.slot17;
-		invoker.slot17=invoker.slot18;
-		invoker.slot18=invoker.slot19;
-		invoker.slot19=invoker.slot20;
-		invoker.slot20=0;
+		invoker.weaponstatus[HDCIGPACK_SLOT1]=invoker.weaponstatus[HDCIGPACK_SLOT2];
+		invoker.weaponstatus[HDCIGPACK_SLOT2]=invoker.weaponstatus[HDCIGPACK_SLOT3];
+		invoker.weaponstatus[HDCIGPACK_SLOT3]=invoker.weaponstatus[HDCIGPACK_SLOT4];
+		invoker.weaponstatus[HDCIGPACK_SLOT4]=invoker.weaponstatus[HDCIGPACK_SLOT5];
+		invoker.weaponstatus[HDCIGPACK_SLOT5]=invoker.weaponstatus[HDCIGPACK_SLOT6];
+		invoker.weaponstatus[HDCIGPACK_SLOT6]=invoker.weaponstatus[HDCIGPACK_SLOT7];
+		invoker.weaponstatus[HDCIGPACK_SLOT7]=invoker.weaponstatus[HDCIGPACK_SLOT8];
+		invoker.weaponstatus[HDCIGPACK_SLOT8]=invoker.weaponstatus[HDCIGPACK_SLOT9];
+		invoker.weaponstatus[HDCIGPACK_SLOT9]=invoker.weaponstatus[HDCIGPACK_SLOT10];
+		invoker.weaponstatus[HDCIGPACK_SLOT10]=invoker.weaponstatus[HDCIGPACK_SLOT11];
+		invoker.weaponstatus[HDCIGPACK_SLOT11]=invoker.weaponstatus[HDCIGPACK_SLOT12];
+		invoker.weaponstatus[HDCIGPACK_SLOT12]=invoker.weaponstatus[HDCIGPACK_SLOT13];
+		invoker.weaponstatus[HDCIGPACK_SLOT13]=invoker.weaponstatus[HDCIGPACK_SLOT14];
+		invoker.weaponstatus[HDCIGPACK_SLOT14]=invoker.weaponstatus[HDCIGPACK_SLOT15];
+		invoker.weaponstatus[HDCIGPACK_SLOT15]=invoker.weaponstatus[HDCIGPACK_SLOT16];
+		invoker.weaponstatus[HDCIGPACK_SLOT16]=invoker.weaponstatus[HDCIGPACK_SLOT17];
+		invoker.weaponstatus[HDCIGPACK_SLOT17]=invoker.weaponstatus[HDCIGPACK_SLOT18];
+		invoker.weaponstatus[HDCIGPACK_SLOT18]=invoker.weaponstatus[HDCIGPACK_SLOT19];
+		invoker.weaponstatus[HDCIGPACK_SLOT19]=invoker.weaponstatus[HDCIGPACK_SLOT20];
+		invoker.weaponstatus[HDCIGPACK_SLOT20]=0;
 		if(hd_debug){
-			A_Log("Slot 1 is now " ..invoker.slot1.. "");
+			A_Log("Slot 1 is now " ..invoker.weaponstatus[HDCIGPACK_SLOT1].. "");
 		}
 		}
 	
 	action void A_PushCigarettePack(){
-		invoker.slot20=invoker.slot19;
-		invoker.slot19=invoker.slot18;
-		invoker.slot18=invoker.slot17;
-		invoker.slot17=invoker.slot16;
-		invoker.slot16=invoker.slot15;
-		invoker.slot15=invoker.slot14;
-		invoker.slot14=invoker.slot13;
-		invoker.slot13=invoker.slot12;
-		invoker.slot12=invoker.slot11;
-		invoker.slot11=invoker.slot10;
-		invoker.slot10=invoker.slot9;
-		invoker.slot9=invoker.slot8;
-		invoker.slot8=invoker.slot7;
-		invoker.slot7=invoker.slot6;
-		invoker.slot6=invoker.slot5;
-		invoker.slot5=invoker.slot4;
-		invoker.slot4=invoker.slot3;
-		invoker.slot3=invoker.slot2;
-		invoker.slot2=invoker.slot1;
-		invoker.slot1=0;
+		invoker.weaponstatus[HDCIGPACK_SLOT20]=invoker.weaponstatus[HDCIGPACK_SLOT19];
+		invoker.weaponstatus[HDCIGPACK_SLOT19]=invoker.weaponstatus[HDCIGPACK_SLOT18];
+		invoker.weaponstatus[HDCIGPACK_SLOT18]=invoker.weaponstatus[HDCIGPACK_SLOT17];
+		invoker.weaponstatus[HDCIGPACK_SLOT17]=invoker.weaponstatus[HDCIGPACK_SLOT16];
+		invoker.weaponstatus[HDCIGPACK_SLOT16]=invoker.weaponstatus[HDCIGPACK_SLOT15];
+		invoker.weaponstatus[HDCIGPACK_SLOT15]=invoker.weaponstatus[HDCIGPACK_SLOT14];
+		invoker.weaponstatus[HDCIGPACK_SLOT14]=invoker.weaponstatus[HDCIGPACK_SLOT13];
+		invoker.weaponstatus[HDCIGPACK_SLOT13]=invoker.weaponstatus[HDCIGPACK_SLOT12];
+		invoker.weaponstatus[HDCIGPACK_SLOT12]=invoker.weaponstatus[HDCIGPACK_SLOT11];
+		invoker.weaponstatus[HDCIGPACK_SLOT11]=invoker.weaponstatus[HDCIGPACK_SLOT10];
+		invoker.weaponstatus[HDCIGPACK_SLOT10]=invoker.weaponstatus[HDCIGPACK_SLOT9];
+		invoker.weaponstatus[HDCIGPACK_SLOT9]=invoker.weaponstatus[HDCIGPACK_SLOT8];
+		invoker.weaponstatus[HDCIGPACK_SLOT8]=invoker.weaponstatus[HDCIGPACK_SLOT7];
+		invoker.weaponstatus[HDCIGPACK_SLOT7]=invoker.weaponstatus[HDCIGPACK_SLOT6];
+		invoker.weaponstatus[HDCIGPACK_SLOT6]=invoker.weaponstatus[HDCIGPACK_SLOT5];
+		invoker.weaponstatus[HDCIGPACK_SLOT5]=invoker.weaponstatus[HDCIGPACK_SLOT4];
+		invoker.weaponstatus[HDCIGPACK_SLOT4]=invoker.weaponstatus[HDCIGPACK_SLOT3];
+		invoker.weaponstatus[HDCIGPACK_SLOT3]=invoker.weaponstatus[HDCIGPACK_SLOT2];
+		invoker.weaponstatus[HDCIGPACK_SLOT2]=invoker.weaponstatus[HDCIGPACK_SLOT1];
+		invoker.weaponstatus[HDCIGPACK_SLOT1]=0;
 		}
 
 	states{
@@ -153,26 +149,28 @@ class CigarettePack:HDWeapon{
 		wait;
 	fire:
 		TNT1 A 0{
-			if(invoker.slot1==0){
+			if(invoker.weaponstatus[HDCIGPACK_SLOT1]>=1){
+				let mdk=HDWeapon(spawn("Cigarette",pos));
+				mdk.health=invoker.weaponstatus[HDCIGPACK_SLOT1];
+				mdk.actualpickup(self,true);
+				invoker.weaponstatus[HDCIGPACK_AMOUNT]--;
+				A_StartSound("weapons/pocket",9);
+				A_PullCigarettePack();
+				A_Log("There are " ..invoker.weaponstatus[HDCIGPACK_AMOUNT].. " left in the box");
+			}
+			if(invoker.weaponstatus[HDCIGPACK_SLOT1]==0){
 				A_StartSound("weapons/pocket",9);
 				A_Log("No cigarettes are in the box!");
+				if(hd_debug){
+				A_Log("Slot 1 is now " ..invoker.weaponstatus[HDCIGPACK_SLOT1].. "");
 			}
-			if(invoker.slot1>=1){
-				let mdk=HDWeapon(spawn("Cigarette",pos));
-				mdk.health=invoker.slot1;
-				mdk.actualpickup(self,true);
-				invoker.cigarettesleft--;
-				A_StartSound("weapons/pocket",9);
-				invoker.slot1=invoker.slot2;
-				A_PullCigarettePack();
-				A_Log("There are " ..invoker.cigarettesleft.. " left in the box");
 			}
 		}
 		TNT1 A 10;
 		goto ready;
 	altfire:
 		TNT1 A 0{
-			if(invoker.slot20>=1){
+			if(invoker.weaponstatus[HDCIGPACK_SLOT20]>=1){
 				A_StartSound("weapons/pocket",9);
 				A_Log("The box is full!");
 				resolvestate("nope");
@@ -184,13 +182,13 @@ class CigarettePack:HDWeapon{
 				A_PushCigarettePack();
 				let iii=HDWeapon(findinventory("Cigarette"));
 			if(!!iii){
-				invoker.slot1=iii.health;
+				invoker.weaponstatus[HDCIGPACK_SLOT1]=iii.health;
 				iii.weaponstatus[0]|=INJECTF_SPENT;
 				DropInventory(iii,1);
-				invoker.cigarettesleft++;
+				invoker.weaponstatus[HDCIGPACK_AMOUNT]++;
 				A_StartSound("weapons/pocket",9);
 				if(hd_debug){
-				A_Log("Slot 1 is now " ..invoker.slot1.. "");
+				A_Log("Slot 1 is now " ..invoker.weaponstatus[HDCIGPACK_SLOT1].. "");
 				}
 			}
 			}
@@ -268,8 +266,6 @@ class Cigarette:HDWeapon{
 	death:
 	TNT1 A 0;
 	stop;
-	//}
-	//states{
 	select:
 		TNT1 A 8{
 			if(DoHelpText())A_WeaponMessage(Stringtable.Localize(invoker.mainhelptext));
@@ -509,27 +505,27 @@ class HD_CigaretteBoxDropper:IdleDummy{
 			cigpak.vel.y += frandom[spawnstuff](-2,2);
 			cigpak.vel.z += frandom[spawnstuff](1,2);
 			cigpak.angle += frandom(0,360);
-			cigpak.cigarettesleft=cigpackamount;
-			if(cigpackamount>=1){cigpak.slot1=600;}
-			if(cigpackamount>=2){cigpak.slot2=600;}
-			if(cigpackamount>=3){cigpak.slot3=600;}
-			if(cigpackamount>=4){cigpak.slot4=600;}
-			if(cigpackamount>=5){cigpak.slot5=600;}
-			if(cigpackamount>=6){cigpak.slot6=600;}
-			if(cigpackamount>=7){cigpak.slot7=600;}
-			if(cigpackamount>=8){cigpak.slot8=600;}
-			if(cigpackamount>=9){cigpak.slot9=600;}
-			if(cigpackamount>=10){cigpak.slot10=600;}
-			if(cigpackamount>=11){cigpak.slot11=600;}
-			if(cigpackamount>=12){cigpak.slot12=600;}
-			if(cigpackamount>=13){cigpak.slot13=600;}
-			if(cigpackamount>=14){cigpak.slot14=600;}
-			if(cigpackamount>=15){cigpak.slot15=600;}
-			if(cigpackamount>=16){cigpak.slot16=600;}
-			if(cigpackamount>=17){cigpak.slot17=600;}
-			if(cigpackamount>=18){cigpak.slot18=600;}
-			if(cigpackamount>=19){cigpak.slot19=600;}
-			if(cigpackamount>=20){cigpak.slot20=600;}
+			cigpak.weaponstatus[HDCIGPACK_AMOUNT]=cigpackamount;
+			if(cigpackamount>=1){cigpak.weaponstatus[HDCIGPACK_SLOT1]=600;}
+			if(cigpackamount>=2){cigpak.weaponstatus[HDCIGPACK_SLOT2]=600;}
+			if(cigpackamount>=3){cigpak.weaponstatus[HDCIGPACK_SLOT3]=600;}
+			if(cigpackamount>=4){cigpak.weaponstatus[HDCIGPACK_SLOT4]=600;}
+			if(cigpackamount>=5){cigpak.weaponstatus[HDCIGPACK_SLOT5]=600;}
+			if(cigpackamount>=6){cigpak.weaponstatus[HDCIGPACK_SLOT6]=600;}
+			if(cigpackamount>=7){cigpak.weaponstatus[HDCIGPACK_SLOT7]=600;}
+			if(cigpackamount>=8){cigpak.weaponstatus[HDCIGPACK_SLOT8]=600;}
+			if(cigpackamount>=9){cigpak.weaponstatus[HDCIGPACK_SLOT9]=600;}
+			if(cigpackamount>=10){cigpak.weaponstatus[HDCIGPACK_SLOT10]=600;}
+			if(cigpackamount>=11){cigpak.weaponstatus[HDCIGPACK_SLOT11]=600;}
+			if(cigpackamount>=12){cigpak.weaponstatus[HDCIGPACK_SLOT12]=600;}
+			if(cigpackamount>=13){cigpak.weaponstatus[HDCIGPACK_SLOT13]=600;}
+			if(cigpackamount>=14){cigpak.weaponstatus[HDCIGPACK_SLOT14]=600;}
+			if(cigpackamount>=15){cigpak.weaponstatus[HDCIGPACK_SLOT15]=600;}
+			if(cigpackamount>=16){cigpak.weaponstatus[HDCIGPACK_SLOT16]=600;}
+			if(cigpackamount>=17){cigpak.weaponstatus[HDCIGPACK_SLOT17]=600;}
+			if(cigpackamount>=18){cigpak.weaponstatus[HDCIGPACK_SLOT18]=600;}
+			if(cigpackamount>=19){cigpak.weaponstatus[HDCIGPACK_SLOT19]=600;}
+			if(cigpackamount>=20){cigpak.weaponstatus[HDCIGPACK_SLOT20]=600;}
         }stop;
     }
 }
