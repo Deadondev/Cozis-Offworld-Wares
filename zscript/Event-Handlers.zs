@@ -210,9 +210,7 @@ class OffworldWaresHandler : EventHandler {
         spawns_cpk.push(addItemEntry('DeadZombieShotgunner', cpk_pmi_spawn_bias));
         spawns_cpk.push(addItemEntry('DeadZombieStormtrooper', cpk_pmi_spawn_bias));
         //spawns_cpk.push(addItemEntry('DeadImpSpawner', cpk_pmi_spawn_bias));
-        spawns_cpk.push(addItemEntry('DeadSerpentipede', cpk_pmi_spawn_bias));
-        spawns_cpk.push(addItemEntry('DeadRegentipede', cpk_pmi_spawn_bias));
-        spawns_cpk.push(addItemEntry('DeadArdentipede', cpk_pmi_spawn_bias));
+        spawns_cpk.push(addItemEntry('DeadDoomImp', cpk_pmi_spawn_bias));
         addItem('HD_CigaretteBoxDropper', spawns_cpk, cpk_persistent_spawning, false);
 
         // Cigarette
@@ -224,9 +222,7 @@ class OffworldWaresHandler : EventHandler {
         spawns_cigarette.push(addItemEntry('DeadZombieShotgunner', cig_pmi_spawn_bias));
         spawns_cigarette.push(addItemEntry('DeadZombieStormtrooper', cig_pmi_spawn_bias));
         //spawns_cpk.push(addItemEntry('DeadImpSpawner', cpk_pmi_spawn_bias));
-        spawns_cigarette.push(addItemEntry('DeadSerpentipede', cig_pmi_spawn_bias));
-        spawns_cigarette.push(addItemEntry('DeadRegentipede', cig_pmi_spawn_bias));
-        spawns_cigarette.push(addItemEntry('DeadArdentipede', cig_pmi_spawn_bias));
+        spawns_cigarette.push(addItemEntry('DeadDoomImp', cig_pmi_spawn_bias));
         addItem('HD_CigaretteDropper', spawns_cigarette, cig_persistent_spawning, false);
 
         // Cleanser
