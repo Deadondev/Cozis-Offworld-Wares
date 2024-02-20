@@ -1,5 +1,7 @@
 [enu default]
 
+COZI_MENU = "\c[Brown]ⓒ\c- Offworld Wares Options";
+
 TAG_TRITEBARREL = "Barrel";
 
 [en enc eng eni ena enz default]
