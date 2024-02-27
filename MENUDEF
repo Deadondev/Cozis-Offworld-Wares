@@ -5,11 +5,12 @@ OptionMenu CozisOffworldWares
 
 AddOptionMenu "OptionsMenu"
 {
-    Submenu "Offworld Wares Options", "CozisOffworldWares"
+    Submenu "$COZI_MENU", "CozisOffworldWares"
 }
 
-AddOptionMenu "HDAddonMenu"{
-	Submenu "Offworld Wares Settings", "CozisOffworldWares"
+AddOptionMenu "HDAddonMenu"
+{
+	Submenu "$COZI_MENU", "CozisOffworldWares"
 }
 
 OptionMenu Trites
@@ -41,9 +42,9 @@ OptionMenu musket
     StaticText  "spawns of that given type.", "white"
     StaticText ""
 	StaticText "Spawn Options", "Red"
-    StaticText  "Control the spawn rate of the Musket on Blurspheres", "white"
-	Option " Musket Spawn Rate: ", "musket_blur_spawn_bias", "SpawnBias"
-	SafeCommand "Reset Musket options", "resetcvar musket_blur_spawn_bias"
+    StaticText  "Control the spawn rate of the Musket on Clip Boxes", "white"
+	Option " Musket Spawn Rate: ", "musket_clipbox_spawn_bias", "SpawnBias"
+	SafeCommand "Reset Musket options", "resetcvar musket_clipbox_spawn_bias"
  	StaticText ""
 	StaticText "Enable/Disable the Musket from spawning in Backpacks.", "Red"
 	Option "Musket: ", "musket_allowBackpacks", "OnOff"
@@ -57,33 +58,6 @@ OptionMenu musket
 	SafeCommand "Reset all options", "msk_reset_cvars"
 }
 
-// We'll call the fact that the Flintlock doesn't properly replace an... "Unintended Feature" :)
-// Aka I'll fix it later idk what happened to cause this.
-/*OptionMenu Flintlock
-{
-    Title "------ Flintlock Options ------"
-   	StaticText "Notice:", "Red"
-    StaticText  "Setting 'spawn rate' to Replace All will supress", "white"
-    StaticText  "spawns of that given type.", "white"
-    StaticText ""
-	StaticText "Spawn Options", "Red"
-    StaticText  "Control the spawn rate of the Flintlock on Chainsaws", "white"
-	Option " Flintlock Spawn Rate: ", "flint_saw_spawn_bias", "SpawnBias"
-	SafeCommand "Reset Flintlock options", "resetcvar flint_saw_spawn_bias"
- 	StaticText ""
-    StaticText  "Control the spawn rate of the Flintlock on Hunters and Slayers", "white"
-	Option " Flintlock Spawn Rate: ", "flint_shotguns_spawn_bias", "SpawnBias"
-	SafeCommand "Reset Flintlock options", "resetcvar flint_shotguns_spawn_bias"
- 	StaticText ""
-    StaticText  "Control whether replacements happen after a mapload.", "white"
-	Option "Persistent Spawns: ", "flint_persistent_spawning", "OnOff"
-	SafeCommand "Reset persistence  options", "resetcvar flint_persistent_spawning"
- 	StaticText ""
-   	StaticText ""
-	StaticText "Reset Options", "Red"
-	SafeCommand "Reset all options", "flint_reset_cvars"
-}*/
-
 OptionMenu Flintlock
 {
     Title "------ Flintlock Options ------"
@@ -92,9 +66,9 @@ OptionMenu Flintlock
     StaticText  "spawns of that given type.", "white"
     StaticText ""
 	StaticText "Spawn Options", "Red"
-    StaticText  "Control the spawn rate of the Flintlock on Backpacks", "white"
-	Option " Flintlock Spawn Rate: ", "flint_saw_spawn_bias", "SpawnBias"
-	SafeCommand "Reset Flintlock options", "resetcvar flint_saw_spawn_bias"
+    StaticText  "Control the spawn rate of the Flintlock on Clip Boxes", "white"
+	Option " Flintlock Spawn Rate: ", "flint_clipbox_spawn_bias", "SpawnBias"
+	SafeCommand "Reset Flintlock options", "resetcvar flint_clipbox_spawn_bias"
  	StaticText ""
 	StaticText "Enable/Disable the Flintlock from spawning in Backpacks.", "Red"
 	Option "Flintlock: ", "flint_allowBackpacks", "OnOff"
@@ -166,7 +140,7 @@ OptionMenu warebags
 	SafeCommand "Reset all options", "bag_reset_cvars"
 }
 
-OptionMenu url
+/* OptionMenu url
 {
     Title "------ Universal Reloader Options ------"
     StaticText ""
@@ -200,7 +174,7 @@ OptionMenu apk
    	StaticText ""
 	StaticText "Reset Options", "Orange"
 	SafeCommand "Reset all options", "apk_reset_cvars"
-}
+} */
 
 OptionMenu dfb
 {
@@ -252,7 +226,7 @@ OptionValue "SpawnBiasNoReplace"
 	 199,  "1 in 200"
 }
 
-OptionMenu "witems"
+/* OptionMenu "witems"
 {
 	Title "------ Offworld Items ------"
 	StaticText "Only the original items in Wares!", "gold"
@@ -272,7 +246,7 @@ OptionMenu "aceitems"
 	Submenu "Universal Reloader", "url"
 	StaticText ""
 	Submenu "Armor Patch Kit", "apk"
-}
+} */
 
 AddOptionMenu "CozisOffworldWares"
 {
@@ -289,10 +263,16 @@ AddOptionMenu "CozisOffworldWares"
 	StaticText ""
 	StaticText "Item Options", "Orange"
 	StaticText ""
-	Submenu "Offworld Items", "witems"
+	Submenu "Ration Options", "rum"
 	StaticText ""
-	Submenu "AceCorp Items", "aceitems"
+	Submenu "Backpacks", "warebags"
 	StaticText ""
+	Submenu "Defibrillator", "dfb"
+	StaticText ""
+	/* Submenu "Offworld Items", "witems"
+	StaticText "" */
+	/* Submenu "AceCorp Items", "aceitems"
+	StaticText "" */
 	StaticText "-------------------", "gold"
 	StaticText "Below will reset every options for Offworld Wares!", "red"
 	StaticText " Be warned.", "red"
