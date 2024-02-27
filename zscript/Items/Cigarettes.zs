@@ -156,14 +156,9 @@ class CigarettePack:HDWeapon{
 				invoker.weaponstatus[HDCIGPACK_AMOUNT]--;
 				A_StartSound("weapons/pocket",9);
 				A_PullCigarettePack();
-				A_Log("There are " ..invoker.weaponstatus[HDCIGPACK_AMOUNT].. " left in the box");
 			}
 			if(invoker.weaponstatus[HDCIGPACK_SLOT1]==0){
 				A_StartSound("weapons/pocket",9);
-				A_Log("No cigarettes are in the box!");
-				if(hd_debug){
-				A_Log("Slot 1 is now " ..invoker.weaponstatus[HDCIGPACK_SLOT1].. "");
-			}
 			}
 		}
 		TNT1 A 10;

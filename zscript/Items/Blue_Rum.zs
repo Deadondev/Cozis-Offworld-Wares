@@ -39,14 +39,12 @@ class BlueRum:HDWeapon{
 		damagefactor "cold",0;
 		damagefactor "bashing",0;
 	}
-	override string,double getpickupsprite(){return "BTTLD0",1.;}
+	override string,double getpickupsprite(){return "BTTLD0",1;}
 	override double weaponbulk(){
 		return (ENC_BLUERUM*0.7)+(ENC_BLUERUM*0.04)*weaponstatus[BLUERUM_AMOUNT];
 	}
 	override string gethelptext(){LocalizeHelp();
-		return LWPHELP_FIRE..StringTable.Localize("$HEALWH_FIRE")
-		..LWPHELP_USE.." + "..LWPHELP_USE..StringTable.Localize("$HEALWH_USE")
-		;
+		return LWPHELP_FIRE..StringTable.Localize("$HEALWH_FIRE");
 	}
 	override void DrawHUDStuff(HDStatusBar sb,HDWeapon hdw,HDPlayerPawn hpl){
 		sb.drawimage(
@@ -82,7 +80,7 @@ class BlueRum:HDWeapon{
 	}
 	action void A_InjectorEffect(actor patient){invoker.InjectorEffect(patient);}
 	virtual void InjectorEffect(actor patient){
-		patient.GiveInventory("RumDrug",BLUERUM_ALCCONTENT); //BlueRum.BLUERUM_HEALZ
+		//patient.GiveInventory("RumDrug",BLUERUM_ALCTENT); //BlueRum.BLUERUM_HEALZ
 		patient.GiveInventory("UasAlcohol_Offworld_IntoxToken",BLUERUM_ALCCONTENT);
 	}
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -249,31 +247,48 @@ class RumDrug:HDDrug{ //This is designed to work in tandem with the Alcohol hand
 		HDRUM_BLACKOUT=2000,
 		HDRUM_BLACKOUTTIME=50,
 	}
+	int healtiming;
 	override void DoEffect(){
 		let hdp=hdplayerpawn(owner);
 		}
 	override void OnHeartbeat(hdplayerpawn hdp){
 		if(amount<1)return;
-
+		
 		//Instead of the usual amount loss, we're gonna tie this bitch to the alcohol handler, makes it easier to keep them even. - Cozi
 		amount = hdp.countinv("UasAlcohol_Offworld_IntoxToken");
+		if(hd_debug>=4)console.printf("Handler: Drunk at about "..amount);
 
-		if(hdp.countinv("RumDrug")>RumDrug.HDRUM_BLACKOUT){
+		if(hdp.countinv("HDStim")>HDStim.HDSTIM_MAX){
+			hdp.A_TakeInventory("UasAlcohol_Offworld_IntoxToken",10);
 		}
-		//Positive Things!
+		//else{
+		//Stumble Code!
 		double ret=min(0.15,amount*0.003);
-		if(hdp.strength<1.+ret)hdp.strength+=(hdp.countinv("UasAlcohol_Offworld_IntoxToken")*0.0001); //You're gonna be stronger the drunker you are.
-			if(
-                hdp.burncount>80
-                ||hdp.aggravateddamage>50
-            ){
-                hdp.burncount-=0.001;
-                hdp.aggravateddamage-=0.001;
-            }
-			hdp.bloodloss--;
-
-		//if(hd_debug>=4)console.printf("Drug: Drunk at about "..amount);
+		if(hdp.fatigue>=(20-(amount*0.01))){
+			hdp.strength-=(random(1,2));
+			if(hd_debug>=1)console.printf("\cfStumbled!");
+		} else {
+			if(hdp.strength<1.+ret)hdp.strength+=(hdp.countinv("UasAlcohol_Offworld_IntoxToken")*0.0001); //You're gonna be stronger the drunker you are.
 		}
+		if(hdp.stunned>0){
+				hdp.stunned-=(hdp.countinv("UasAlcohol_Offworld_IntoxToken")*0.00001);
+				hdp.fatigue+=0.1;
+				} //And less stunned!
+		
+		//Positive Things!
+			if(healtiming==8){ //super delay of healing
+			hdp.burncount--;
+			hdp.aggravateddamage--;
+			healtiming = 0;
+			} else{healtiming++;}
+			hdp.bloodloss--;
+		}
+
+	void Travelled(hdplayerpawn hdp)
+	{
+		hdp.TakeInventory("UasAlcohol_Offworld_IntoxToken",9999);
+		amount=0;
+	}
 }
 
 class BlackoutDrug:HDDrug{
@@ -304,6 +319,10 @@ class BlackoutDrug:HDDrug{
 		if(hd_debug>=4)console.printf("Passed out for "..amount); //DEBUG STUFF
 		if(hd_debug>=4)console.printf("Intox Token: "..hdp.countinv("UasAlcohol_Offworld_IntoxToken"));
 		}
+	void Travelled(hdplayerpawn hdp)
+	{
+		amount=0;
+	}
 }
 
 // Alcohol consumable class.

@@ -7,6 +7,7 @@ class UasAlcohol_Offworld_IntoxToken : Inventory
 		Inventory.Amount 1;
 		Inventory.MaxAmount 2500; // lasts 3 minutes at max
 	}
+	override void PreTravelled(){amount=0;}
 
 	const min_effect_amt = 300;
 	const max_effect_amt = 2500; // don't raise this or any shader effects higher than they are already
@@ -78,10 +79,10 @@ class UasAlcohol_Offworld_IntoxToken : Inventory
 		Shader.SetUniform1i(pl, "UASAlcohol_Intoxication", "radius", r);
 	}
 
-	override void Travelled()
+	/*void Travelled()
 	{
 		self.amount==0;
-	}
+	}*/
 
 	override void Tick()
 	{
@@ -169,7 +170,6 @@ class UasAlcohol_Offworld_IntoxToken : Inventory
 		// ----------------
 		// Rum Effects
 		// ----------------
-		if(hd_debug>=4)console.printf("Handler: Drunk at about "..amount);
 
 		if(self.amount>rum_blackout_threshold && !hdp.incapacitated){//Passing out drunk? In my Hideous? More likely than you think...
 		hdp.giveInventory("BlackoutDrug", 30);
