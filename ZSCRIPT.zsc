@@ -5,7 +5,6 @@ version "4.10"
 //Cyber's Alcohol THE ONLY REASON IM ADDING OFFWORLD_ IN FRONT IS TO PREVENT OTHER MODS WHO DO RELY ON IT FROM HAVING ISSUES, THE ENTIRE REASON OF THIS PORT IS SO THAT IF THE SERVER OR FILES ARE EVER LOST/ I NEED TO CHANGE SOMETHING THAT THEY ARE HERE. -[Cozi]
 #include "zscript/CyberCool's Alcohol/offworld_intox.zs"
 #include "zscript/CyberCool's Alcohol/offworld_hndl.zs"
-#include "zscript/CyberCool's Alcohol/offworld_baseclass.zs"
 
 //-------------------------------------------------
 // WEAPONS
@@ -28,6 +27,8 @@ version "4.10"
 // Drugs
 #include "zscript/Items/Cleanser.zs"
 #include "zscript/Items/Cigarettes.zs"
+// VISR
+//#include "zscript/Items/visr.zs"
 /*
 // Logistics Bag
 #include "zscript/Items/LogiBag.zsc"
@@ -42,3 +43,5 @@ version "4.10"
 //Trites
 #include "zscript/Monsters/Trite.zsc"
 #include "zscript/Monsters/TriteBarrel.zsc"
+
+//#include "zscript/Monsters/RadsuitZombie.zsc"

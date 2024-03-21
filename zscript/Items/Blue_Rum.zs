@@ -325,39 +325,27 @@ class BlackoutDrug:HDDrug{
 	}
 }
 
-// Alcohol consumable class.
-
-class BlueRum_Alcohol : UaS_Consumable
-{
-	int intox_per_bulk;
-	property IntoxPerbulk : intox_per_bulk;
-
-
-	int prevbulk;
-
-	override void PostBeginPlay()
-	{
-		super.PostBeginPlay();
-		prevbulk = weaponbulk();
-	}
-	override void Tick()
-	{
-		super.tick();
-		//weaponstatus[UGCS_SPOILAGE] = 0; // no spoiling
-
-		if(!tracker || !tracker.owner)
-			return;
-		HDPlayerPawn hdp = HDPlayerPawn(tracker.owner);
-		int bulk = prevbulk - weaponbulk();
-		if(bulk > 0){
-			hdp.GiveInventory("UasAlcohol_Offworld_IntoxToken", intox_per_bulk * bulk);
-			hdp.GiveInventory("HealingMagic", 8);
+// Addiction consumable class.
+class RumAddictDrug:HDDrug{
+	override void DoEffect(){
+		let hdp=hdplayerpawn(owner);
+		double ret=min(0.1,amount*0.006);
 		}
-		prevbulk = weaponbulk();
+	override void OnHeartbeat(hdplayerpawn hdp){
+		if(amount<1)return;
+		if(!hdp.countinv("RumDrug")){
+		amount--;
+		hdp.fatigue+=1;
+		hdp.stunned+=2;
+		if(hdp.beatcap<30)hdp.beatcap++;
+		}
+		if(hd_debug>=4)console.printf("Going through withdrawals for "..amount);
+		}
+	void Travelled(hdplayerpawn hdp)
+	{
+		amount=0;
 	}
 }
-
-
 
 class SpentRumBottle:SpentStim{
 	default{
