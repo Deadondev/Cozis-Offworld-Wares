@@ -1,0 +1,9 @@
+name: Build PK3
+description: Builds the PK3
+runs:
+  using: "composite"
+  steps:
+  - uses: actions/checkout@v4
+  - uses: montudor/action-zip@v1
+    with:
+      args: zip -r "Cozis-Offworld-Wares-${{ env.SUFFIX }}.pk3" . -i graphics/* patches/* shaders/* sounds/* sprites/* voxels/* zscript/* Credits.txt CVARINFO GLDEFS KEYCONF LICENSE MAPINFO MENUDEF README.md sndinfo.txt TEXTURES ZSCRIPT.zsc
