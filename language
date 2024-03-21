@@ -13,6 +13,8 @@ TAG_CIGARETTEPACK="Heartstopper Cigarette Pack";
 PICKUP_CIGARETTEPACK="Picked up a pack of cigs.";
 TAG_BLUERUM="Ole Rum";
 
+CIGARETTE_DROP="Cigarette dropped!";
+
 RUM_BLACKOUT1="I must not wander.";
 RUM_BLACKOUT2="A hallway before you...";
 RUM_BLACKOUT3="A long journey ahead.";

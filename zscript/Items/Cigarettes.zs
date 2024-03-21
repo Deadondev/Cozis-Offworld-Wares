@@ -352,11 +352,11 @@ class CigaretteDrug:HDDrug{
 			dropcig.vel.y += frandom[spawnstuff](-2,2);
 			dropcig.vel.z += frandom[spawnstuff](1,2);
 			dropcig.angle += frandom(0,360);
-			A_Log("Cigarette dropped!");
+			A_Print(Stringtable.Localize("$CIGARETTE_DROP"), 100); //"Cigarette dropped!"
 			amount=0;
 		}
 		if(hdp.countinv("WornRadsuit")){
-			A_Log("You put your cigarette out and slip the radsuit on.");
+			A_Print("You put your cigarette out and slip the radsuit on.");
 			amount=0;
 			}
 	}
@@ -365,6 +365,7 @@ class CigaretteDrug:HDDrug{
 		if(hdp.stunned>0)hdp.stunned=-3; //These are great if you hate being stunned, too cool to be stunned!
 		if(hdp.beatcap>30)hdp.beatcap--; //what stims do, but if you got em too, its 2x
 		if(hd_debug>=4)console.printf("Smoking "..amount);
+		hdp.A_GiveInventory("CigAddictDrug",1);
 		//////////////////////////////////////////////////////////////////////////////////
 		// AGGRO
 		if(aggrotiming==60){ //calculation to give u 10 aggro over time
@@ -419,6 +420,30 @@ class CigaretteDrug:HDDrug{
 		
 		amount--;
 		}
+}
+
+// Addiction consumable class.
+class CigAddictDrug:HDDrug{
+	override void DoEffect(){
+		let hdp=hdplayerpawn(owner);
+		double ret=min(0.1,amount*0.006);
+		}
+	override void OnHeartbeat(hdplayerpawn hdp){
+		if(amount<1)return;
+		if(!hdp.countinv("CigaretteDrug")){
+		amount-=10; //amount to reduce it by
+		if(hdp.fatigue<HDCONST_SPRINTFATIGUE){
+		hdp.fatigue+=2;
+		hdp.stunned+=2;
+		}
+		if(hdp.beatcap<30)hdp.beatcap++;
+		if(hd_debug>=4)console.printf("Going through withdrawals for "..amount);
+		}
+		}
+	void Travelled(hdplayerpawn hdp)
+	{
+		amount=0;
+	}
 }
 
 class BurntCig:HDDebris{
