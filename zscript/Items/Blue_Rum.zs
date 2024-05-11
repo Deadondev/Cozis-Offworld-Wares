@@ -99,14 +99,11 @@ class BlueRum:HDWeapon{
 		}
 		stop;
 	jiggling:
-		BTTL D 2 light("HEALTHPOTION") A_SetTics(random(1,3)); //I guess it would have a light similar to a healthpotion? Debating on this. -Cozi
+		BTTL D 2 light("BLUERUM") A_SetTics(random(1,3)); //I guess it would have a light similar to a healthpotion? Debating on this. -Cozi
 		loop;
 	death:
 	BTTL D 0 {A_StartSound("rum/break",CHAN_BODY,CHANF_OVERLAP);
 	A_FaceTarget();
-	//A_SpawnItemEx("WallChunker",0,0,0,frandom(-1,-15),frandom(-1,1),frandom(-1,1));
-	//A_SpawnItemEx("HugeWallChunk",0,0,4,frandom(6,12),0,frandom(-1.5,6)*1,frandom(0,180),SXF_NOCHECKPOSITION);
-	//A_SpawnItemEx("BigWallChunk",0,0,4,frandom(7,18),0,frandom(-1.5,7)*1,frandom(0,180),SXF_NOCHECKPOSITION);
 	A_SpawnItemEx("HugeWallChunk",0,0,4,frandom(0,-18),0,frandom(-1.5,6)*1,frandom(6,12),SXF_NOCHECKPOSITION);
 	A_SpawnItemEx("BigWallChunk",0,0,4,frandom(0,-18),0,frandom(-1.5,7)*1,frandom(7,18),SXF_NOCHECKPOSITION);
 	A_SpawnItemEx("HugeWallChunk",0,0,4,frandom(0,-18),0,frandom(-1.5,6)*1,frandom(6,12),SXF_NOCHECKPOSITION);
@@ -195,7 +192,7 @@ class BlueRum:HDWeapon{
 			bool helptext=DoHelpText();
 			flinetracedata injectorline;
 			linetrace(
-				angle,42,pitch,
+				angle,64,pitch, //was 42 but we need some more
 				offsetz:gunheight()-2,
 				data:injectorline
 			);

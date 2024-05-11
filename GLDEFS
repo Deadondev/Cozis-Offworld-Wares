@@ -7,3 +7,9 @@ HardwareShader postprocess scene
 	Uniform int res_w
 	Uniform int res_h
 }
+
+pointlight BLUERUM
+{
+    color 0.15 0.03 0.05
+    size 4
+}

@@ -528,10 +528,55 @@ class HD_FlintlockPistol:HDHandgun{
 		goto altreloadhold;
 
 	unload:
-		---- A 0 {if(!invoker.weaponstatus[FLINT_BARREL]==0){
-		A_WeaponMessage("\cgBarrel Unloaded! This won't be as much of a pain later ;)",100);
-		HDF.Give(self,"HDBallAmmo",1);
-		invoker.weaponstatus[FLINT_BARREL]=0;}}
+		---- A 0 {A_MuzzleClimb(0,2);
+		A_MuzzleClimb(
+			frandom(-1.,1.),frandom(-1.,1.),
+			frandom(-1.,1.),frandom(-1.,1.),
+			frandom(-1.,1.),frandom(-1.,1.),
+			frandom(-1.,1.),frandom(0.,1.));
+			let failchance=40;
+			let spareindex=-1;
+			//if(spareindex==-1)spareindex=i;
+			failchance=min(10,failchance-5);
+			if(!random(0,failchance)){
+			switch (invoker.weaponStatus[FLINT_BARREL]){
+				case FLINT_POWDERED:
+				A_StartSound("weapons/muskrodin",8,CHANF_OVERLAP);
+				A_StartSound("misc/wallchunks", volume: frandom(0.5, 0.75));
+				//when powder is added it will go here
+				invoker.weaponstatus[FLINT_BARREL]=0;
+				break;//////////////////////////////////////////////////////////////////
+				case FLINT_BALLLOADED:
+				case FLINT_JUSTBALLRAMMED:
+				A_StartSound("weapons/muskrodin",8,CHANF_OVERLAP);
+				A_SpawnItemEx("HDBallAmmo",0,0,invoker.owner.height * 0.80, 5,0,-5,0,SXF_NOCHECKPOSITION);
+				invoker.weaponstatus[FLINT_BARREL]=0;
+				break;//////////////////////////////////////////////////////////////////
+				case FLINT_CORRECTLOAD:
+				case FLINT_CORRECTRAMMED:
+				A_StartSound("weapons/muskrodin",8,CHANF_OVERLAP);
+				A_SpawnItemEx("HDBallAmmo",0,0,invoker.owner.height * 0.80, 5,0,-5,0,SXF_NOCHECKPOSITION);
+				A_StartSound("misc/wallchunks", volume: frandom(0.5, 0.75));
+				//when powder is added it will go here
+				invoker.weaponstatus[FLINT_BARREL]=0;
+				break;//////////////////////////////////////////////////////////////////
+				case FLINT_OVERPOWDERED:
+				A_StartSound("weapons/muskrodin",8,CHANF_OVERLAP);
+				A_StartSound("misc/wallchunks", volume: frandom(0.5, 0.75));
+				//when powder is added it will go here, will need a counting measure
+				invoker.weaponstatus[FLINT_BARREL]=0;
+				break;//////////////////////////////////////////////////////////////////
+				case FLINT_OVERPOWDEREDBALL:
+				case FLINT_OVERPOWDEREDRAMMED:
+				A_StartSound("weapons/muskrodin",8,CHANF_OVERLAP);
+				A_SpawnItemEx("HDBallAmmo",0,0,invoker.owner.height * 0.80, 5,0,-5,0,SXF_NOCHECKPOSITION);
+				A_StartSound("misc/wallchunks", volume: frandom(0.5, 0.75));
+				//when powder is added it will go here
+				invoker.weaponstatus[FLINT_BARREL]=0;
+				break;//////////////////////////////////////////////////////////////////
+				default:
+				break;//////////////////////////////////////////////////////////////////
+			}}}
 		goto ready;
 
 	altfire:
