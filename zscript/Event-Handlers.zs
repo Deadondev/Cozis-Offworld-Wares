@@ -471,13 +471,6 @@ class TriteHandler : EventHandler
         init();
         super.WorldLoaded(e);
     }
-
-    override void WorldThingSpawned(WorldEvent e)
-    {
-        if (e.thing && e.thing is "Trite")current_trites++; // this line of code wouldn't propegate properly to all of the spawners. You'd need to give each spawner a maximum number they can spawn.
-        let sss=TriteBarrel(e.thing);
-        //if (sss)sss.maxtospawn = current_trites;
-    }
 }
 
 // Trite Barrels
@@ -485,8 +478,9 @@ class SpiderBarrelEventHandler : EventHandler
 {
     private bool cvarsAvailable;
 
-    private int spawnBiasActual;
+    private int spawnBias;
     private bool isPersistent;
+    private double ceilingnumber;
 
     // Shoves cvar values into their non-cvar shaped holes.
     // I have no idea why names for cvars become reserved here.
@@ -494,7 +488,7 @@ class SpiderBarrelEventHandler : EventHandler
     void init()
     {
         cvarsAvailable = true;
-        spawnBiasActual = sbrl_regulars_spawn_bias;
+        spawnBias = sbrl_regulars_spawn_bias;
         isPersistent = sbrl_persistent_spawning;
     }
 
@@ -512,7 +506,25 @@ class SpiderBarrelEventHandler : EventHandler
         return false;
     }
 
-    bool tryCreateBarrel(worldevent e, int chance)
+    bool tryCreateCeilingBarrel(worldevent e, int chance)
+    {
+        if (giveRandom(chance))
+        {
+            let ceilingHeight = e.thing.CurSector.NextHighestCeilingAt (e.thing.Pos.X, e.thing.Pos.Y, e.thing.Pos.Z, e.thing.Pos.Z + e.thing.Height, FFCF_3DRESTRICT);
+            if (Actor.Spawn("CeilingTriteBarrel", e.thing.Vec3Offset (0, 0, ceilingHeight, SXF_TRANSFERSPECIAL)))
+            {
+                if (hd_debug) console.printf(e.thing.GetClassName().." -> CeilingTriteBarrel");
+
+                e.thing.destroy();
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    bool tryCreateFloorBarrel(worldevent e, int chance)
     {
         if (giveRandom(chance))
         {
@@ -548,9 +560,12 @@ class SpiderBarrelEventHandler : EventHandler
             switch(e.Thing.GetClassName())
             {
                 case 'HDBarrel':
+                if(random(0,1)){
+                    if (hd_debug) console.printf("Attempting to replace "..e.Thing.GetClassName().." with CeilingTriteBarrel...");
+                    tryCreateCeilingBarrel(e, spawnBias);
+                    break;}
                     if (hd_debug) console.printf("Attempting to replace "..e.Thing.GetClassName().." with TriteBarrel...");
-                    tryCreateBarrel(e, spawnBiasActual);
-                    break;
+                    tryCreateFloorBarrel(e, spawnBias);
             }
         }
     }

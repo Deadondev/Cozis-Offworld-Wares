@@ -12,6 +12,8 @@ PICKUP_CIGARETTE="You got a cigarette!";
 TAG_CIGARETTEPACK="Heartstopper Cigarette Pack";
 PICKUP_CIGARETTEPACK="Picked up a pack of cigs.";
 TAG_BLUERUM="Ole Rum";
+HEALWH_ALTFIRE=" Give someone else a drink\n";
+RUM_MAKERUM=" Dunk (Do this in Fire Barrels to make Molotovs!)";
 
 CIGARETTE_DROP="Cigarette dropped!";
 
