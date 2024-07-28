@@ -4,6 +4,7 @@
 const HDLD_OLERUM="rum";
 const HDLD_MOLOTOV="mol";
 const ENC_BLUERUM=12;
+const ENC_MOLOTOV=16; //This is basically the math done for HD to keep a molotov equal to a full bottle
 //const BOTTLE_MAX=14;
 
 	enum HDBlueRumNums{
@@ -91,7 +92,7 @@ class BlueRum:HDWeapon{
 	spawn:
 		TNT1 A 1 nodelay A_JumpIf(weaponstatus[INJECTS_AMOUNT]>0 && !weaponstatus[0]&INJECTF_SPENT,"jiggling");
 		BTTL D 0{
-			if(!weaponstatus[0]&INJECTF_SPENT){//return resolvestate("stop");
+			if(!weaponstatus[0]&INJECTF_SPENT){
 			actor a=null;
 			a=spawn("SpentRumBottle",pos,ALLOW_REPLACE);
 			a.A_StartSound("potion/open",CHAN_BODY);
@@ -123,16 +124,12 @@ class BlueRum:HDWeapon{
 	select:
 		TNT1 A 0{
 			if(DoHelpText())A_WeaponMessage(Stringtable.Localize("Some REALLY old aged rum. The alcohol amount would probably kill you if it wasn't watered down with a magical tonic. Drink up!"));
-			A_StartSound("potion/swish",8,CHANF_OVERLAP);
+			if(invoker.weaponstatus[BLUERUM_AMOUNT]>0)A_StartSound("potion/swish",8,CHANF_OVERLAP);
 		}
 		goto super::select;
 	deselect:
 		TNT1 A 10{
-			if(invoker.weaponstatus[BLUERUM_AMOUNT]<1){
-				DropInventory(invoker);
-				return;
-			}
-			A_StartSound("potion/swish",8,CHANF_OVERLAP);
+			if(invoker.weaponstatus[BLUERUM_AMOUNT]>0)A_StartSound("potion/swish",8,CHANF_OVERLAP);	
 		}
 		TNT1 A 0 A_Lower(999);
 		wait;
@@ -870,7 +867,7 @@ class MolotovGrenadeAmmo:HDAmmo{
 		inventory.pickupmessage "Picked up a Molotov.";
 		inventory.pickupsound "weapons/pocket";
 		tag "Molotov";
-		hdpickup.bulk ENC_BLUERUM;
+		hdpickup.bulk ENC_MOLOTOV;
 		hdpickup.refid HDLD_MOLOTOV;
 		+INVENTORY.KEEPDEPLETED
 	}
@@ -944,7 +941,7 @@ class MolotovFlame:HDActor{
 		FIRE AB random(1,2) light("HELL"); //ABABCDCDEDEF
 		FIRE GHGHGHGH 3 light("HELL") {
 			if(burntiming<120){
-				A_HDBlast(128,blastdamage:66,16,"hot",immolateradius:64,immolateamount:random(20,90),immolatechance:42,true);
+				A_HDBlast(128,blastdamage:66,16,"hot",immolateradius:64,immolateamount:random(6,12),immolatechance:42,true);
 				//A_RadiusGive("Heat",64,RGF_KILLED,20);
 				HDMobAI.Frighten(self,512);
 				A_SpawnItemEx("HDFlameRed",frandom(-0.1,0.1),frandom(-0.1,0.1),8,frandom(-5,5),frandom(-5,5),0,frandom(0,360));

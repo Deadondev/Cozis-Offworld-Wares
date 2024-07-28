@@ -9,6 +9,8 @@ server int  max_tritescvar = 30;
 // Trite Barrels
 server int  sbrl_regulars_spawn_bias = 49;
 server bool  sbrl_persistent_spawning = false;
+//no need for a second persistent, i have no idea why anyone would actually want to only have one or the other persistently spawn
+
 
 //-------------------------------------------------
 // Weapons

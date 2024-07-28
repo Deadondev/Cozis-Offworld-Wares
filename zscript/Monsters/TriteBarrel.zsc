@@ -5,8 +5,6 @@ class TriteBarrel:HDBarrel{
 	int musthavegremlin;
 	int spawnedtrites;
 	property musthavegremlin:musthavegremlin;
-	class<actor> lighttype;
-	property lighttype:lighttype;
 	default{
 		//$Category "Monsters/Hideous Destructor"
 		//$Title "Spider Barrel"
@@ -21,8 +19,6 @@ class TriteBarrel:HDBarrel{
 			painsound="barrel/pain";
 			A_SpawnItemEx("TriteBarrelGremlin",flags:SXF_NOCHECKPOSITION|SXF_SETMASTER);
 		}
-		//let lll=spawn(lighttype,pos,ALLOW_REPLACE);
-		//lll.target=self;
 	}
 	void A_BarrelMove(){
 		if(spawnedtrites<5){
@@ -39,14 +35,14 @@ class TriteBarrel:HDBarrel{
 		if(spawnedtrites<5){
 		A_FaceTarget(0,0);
 			//A_StartSound(attacksound,CHAN_WEAPON);
-			A_SpawnItemEx("Trite",frandom(0,8),frandom(0,8),frandom(0,8),frandom(0,8),frandom(0,8),frandom(0,8),frandom(0,180),SXF_NOCHECKPOSITION);spawnedtrites++;
+			A_SpawnItemEx("Trite",frandom(0,8),frandom(0,8),frandom(24,24),frandom(8,16),frandom(0,8),frandom(0,8),frandom(0,180),SXF_NOCHECKPOSITION);spawnedtrites++;
 		setstatelabel("inertjiggle");
 		}
 		else{setstatelabel("inertjiggle");}
 	}
 }
 
-class TriteBarrelGremlin:HDActor{ //Hope this fixes all the friggin' bugs -[Cozi]
+class TriteBarrelGremlin:HDActor{
 	default{
 		+ismonster +countkill -solid +noblockmap
 		radius 0;height 0;
@@ -73,31 +69,29 @@ class TriteBarrelGremlin:HDActor{ //Hope this fixes all the friggin' bugs -[Cozi
 			hasmoved=false;
 			A_LookEx(
 				LOF_NOSOUNDCHECK|LOF_DONTCHASEGOAL|LOF_NOJUMP,
-				maxseedist:512,
+				maxseedist:1024, //was 512
 				fov:360
 			);
+			if(random(0,31))return;
+			bbb.A_BarrelAttack();
 			return;
 		}
 		setorigin(bbb.pos,false);
 		bbb.target=target;
 
-		if(
-			random(0,31)
-			||A_JumpIfInTargetLOS("null",100)
-		)return;
-
-		double dist=distance3d(target);
+		double dist=distance3d(target);// If the player gets too close, attack!
 		if(
 			hasmoved
-			&&dist<random(64,1024)
+			&&dist<random(0,64)
 		){
 			bbb.A_BarrelAttack();
 			return;
 		}
 		if(
-			dist<random(512,2048)
+			dist>random(768,2048) //Player's far away!
 		){
-			bbb.A_BarrelMove();
+		
+			bbb.A_BarrelAttack();
 			hasmoved=true;
 		}
 	}
@@ -109,5 +103,100 @@ class TriteBarrelGremlin:HDActor{ //Hope this fixes all the friggin' bugs -[Cozi
 	death:
 		TNT1 A 1;
 		stop;
+	}
+}
+// ------------------------------------------------------------
+// "Ceiling Barrels?!"
+// ------------------------------------------------------------
+class CeilingTriteBarrel:TriteBarrel{
+	default{
+		+rollsprite; +spawnceiling; //+float;
+		gravity -2; height 48;
+	}
+	override void A_BarrelAttack(){
+		if(spawnedtrites<5){
+		A_FaceTarget(0,0);
+			//A_StartSound(attacksound,CHAN_WEAPON);
+			A_SpawnItemEx("CeilingTrite",frandom(8,16),frandom(8,16),frandom(24,24),frandom(0,16),frandom(0,16),frandom(0,8),frandom(0,180),SXF_NOCHECKPOSITION);spawnedtrites++;
+		setstatelabel("inertjiggle");
+		}
+		else{setstatelabel("inertjiggle");}
+	}
+		states{
+	spawn:
+		BAR2 A 10;
+		loop;
+	}
+}
+
+class CeilingTriteBarrelGremlin:TriteBarrelGremlin{
+	default{
+		+rollsprite; +spawnceiling;
+		gravity -2;
+	}
+	void A_TritePeek(){
+		let bbb=HDBarrel(master);
+		//A_Changevelocity(0,0,frandom(2,4),CVF_RELATIVE);
+
+		if(
+			!bbb
+			||bbb.health<1
+		){
+			bshootable=true;
+			A_Die();
+			return;
+		}
+		if(
+			!target
+			||target.health<1
+		){
+			target=null;
+			hasmoved=false;
+			A_LookEx(
+				LOF_NOSOUNDCHECK|LOF_DONTCHASEGOAL|LOF_NOJUMP,
+				maxseedist:1024, //was 512
+				fov:360
+			);
+			if(random(0,31))return;
+			bbb.A_BarrelAttack();
+			return;
+		}
+		setorigin(bbb.pos,false);
+		bbb.target=target;
+
+		double dist=distance3d(target);// If the player gets too close, attack!
+		if(
+			hasmoved
+			&&dist<random(0,64)
+		){
+			bbb.A_BarrelAttack();
+			return;
+		}
+		if(
+			dist>random(768,2048) //Player's far away!
+		){
+		
+			bbb.A_BarrelAttack();
+			hasmoved=true;
+		}
+	}
+
+	states{
+	spawn:
+		TNT1 A 10 A_TritePeek();
+		TNT1 A 0 givebody(3);
+		
+		wait;
+	death:
+		TNT1 A 1;
+		stop;
+	}
+}
+/*
+class CeilingTriteBarrelSpawner: actor{
+	states{
+	spawn:
+		TNT1 A 0 {A_SpawnItemEx("CeilingTriteBarrel",0,0,ceilingz,0,0,0,0,SXF_NOCHECKPOSITION);destroy;}
+		wait;
 	}
 }

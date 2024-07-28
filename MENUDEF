@@ -23,7 +23,7 @@ OptionMenu Trites
 	StaticText "Spawn Options", "Green"
     StaticText  "Control the spawn rate of Trite Barrels", "white"
 	Option " Trite Barrel Spawn Rate: ", "sbrl_regulars_spawn_bias", "SpawnBias"
-	SafeCommand "Reset trite barrel options", "resetcvar sbrl_regulars_spawn_bias"
+	SafeCommand "Reset trite barrel options", "sbrl_reset_cvars"
  	StaticText ""
     StaticText  "Control whether replacements happen after a mapload.", "white"
 	Option "Persistent Spawns: ", "sbrl_persistent_spawning", "OnOff"
