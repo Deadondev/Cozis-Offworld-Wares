@@ -11,8 +11,8 @@ default{
 		weapon.bobspeed 2.6;
 		weapon.bobrangex 0.1;
 		weapon.bobrangey 0.5;
-		weapon.slotnumber 8;
-		weapon.slotpriority 0;
+		weapon.slotnumber 9;
+		weapon.slotpriority 3700;
 		tag "Defib";
 		hdweapon.refid HDLD_DEFIB;
 	}
