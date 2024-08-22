@@ -87,10 +87,19 @@ class BlueRum:HDWeapon{
 		//patient.GiveInventory("RumDrug",BLUERUM_ALCTENT); //BlueRum.BLUERUM_HEALZ
 		patient.GiveInventory("UasAlcohol_Offworld_IntoxToken",BLUERUM_ALCCONTENT);
 	}
+	/*override inventory createtossable(){
+		let ctt=BlueRum(super.createtossable());
+		if(!ctt)return null;
+		if(ctt.bmissile){
+			spawn("SpentRumBottle",pos,ALLOW_REPLACE);
+			//A_StartSound("potion/open",CHAN_BODY);
+		}
+		return ctt;
+	}*/
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	states(actor){
-	spawn:
-		TNT1 A 1 nodelay A_JumpIf(weaponstatus[INJECTS_AMOUNT]>0 && !weaponstatus[0]&INJECTF_SPENT,"jiggling");
+	/*spawn:
+		TNT1 A 1 nodelay A_JumpIf(weaponstatus[INJECTS_AMOUNT]>0 && owner.player.crouchfactor>0,"jiggling");
 		BTTL D 0{
 			if(!weaponstatus[0]&INJECTF_SPENT){
 			actor a=null;
@@ -102,9 +111,10 @@ class BlueRum:HDWeapon{
 			aa.angle=angle+3;
 			aa.vel=vel+(frandom(-1,1),frandom(-1,1),frandom(0,1));
 		}}
-		stop;
-	jiggling:
-		BTTL D 2 light("BLUERUM") A_SetTics(random(1,3)); //I guess it would have a light similar to a healthpotion? Debating on this. -Cozi
+		stop;*/
+	spawn://jiggling:
+		BTTL D 2 light("BLUERUM") A_SetTics(random(1,3));
+		BTTL D 0 nodelay {if(self.bmissile){let aa=spawn("SpentRumBottle",pos,ALLOW_REPLACE);aa.vel=vel;aa.angle=angle;self.destroy();}}
 		loop;
 	death:
 	BTTL D 0 {A_StartSound("rum/break",CHAN_BODY,CHANF_OVERLAP);
@@ -394,7 +404,7 @@ class RumAddictDrug:HDDrug{
 
 class SpentRumBottle:SpentStim{
 	default{
-		alpha 0.6;renderstyle "translucent";
+		//alpha 0.6;renderstyle "translucent";
 		bouncesound "rum/break";bouncefactor 0;scale 0.38;
 		translation "10:15=241:243","150:151=206:207";
 		+shootable; -noteleport; +missile; +solid; -bounceonactors;
