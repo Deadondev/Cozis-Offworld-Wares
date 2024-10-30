@@ -9,7 +9,7 @@ const ENC_MOLOTOV=16; //This is basically the math done for HD to keep a molotov
 
 	enum HDBlueRumNums{
 	BLUERUM_AMOUNT=1,
-	BLUERUM_ALCCONTENT=256,
+	BLUERUM_ALCCONTENT=512, //512
 	BLUERUM_HEALZ=8,
 	BLUERUM_SPAWN=14,
 }
@@ -85,7 +85,7 @@ class BlueRum:HDWeapon{
 	action void A_InjectorEffect(actor patient){invoker.InjectorEffect(patient);}
 	virtual void InjectorEffect(actor patient){
 		//patient.GiveInventory("RumDrug",BLUERUM_ALCTENT); //BlueRum.BLUERUM_HEALZ
-		patient.GiveInventory("UasAlcohol_Offworld_IntoxToken",BLUERUM_ALCCONTENT);
+		patient.GiveInventory("UasAlcohol_Offworld_IntoxToken",BLUERUM_ALCCONTENT-owner.height); //BLUERUM_ALCCONTENT HDCONST_PLAYERHEIGHT
 	}
 	/*override inventory createtossable(){
 		let ctt=BlueRum(super.createtossable());
@@ -183,7 +183,8 @@ class BlueRum:HDWeapon{
 				invoker.weaponstatus[BLUERUM_AMOUNT]--;
 				A_StartSound("potion/chug",CHAN_VOICE);
 				HDF.Give(self,"RumDrug",BLUERUM_ALCCONTENT); //BlueRum.BLUERUM_HEALZ or HealingMagic
-				HDF.Give(self,"UasAlcohol_Offworld_IntoxToken", BLUERUM_ALCCONTENT);
+				HDF.Give(self,"UasAlcohol_Offworld_IntoxToken", BLUERUM_ALCCONTENT-((self.height-43.2)*21));// 426 BLUERUM_ALCCONTENT self.height *14
+				if(hd_debug>=4)console.printf("Handler: You're about "..self.height);
 			}
 		}
 		TNT1 AAAAA 1 A_MuzzleClimb(0,0.5);
