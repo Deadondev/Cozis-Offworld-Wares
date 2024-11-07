@@ -10,7 +10,6 @@ const ENC_MOLOTOV=16; //This is basically the math done for HD to keep a molotov
 	enum HDBlueRumNums{
 	BLUERUM_AMOUNT=1,
 	BLUERUM_ALCCONTENT=512, //512
-	BLUERUM_HEALZ=8,
 	BLUERUM_SPAWN=14,
 }
 
@@ -84,35 +83,11 @@ class BlueRum:HDWeapon{
 	}
 	action void A_InjectorEffect(actor patient){invoker.InjectorEffect(patient);}
 	virtual void InjectorEffect(actor patient){
-		//patient.GiveInventory("RumDrug",BLUERUM_ALCTENT); //BlueRum.BLUERUM_HEALZ
-		patient.GiveInventory("UasAlcohol_Offworld_IntoxToken",BLUERUM_ALCCONTENT-owner.height); //BLUERUM_ALCCONTENT HDCONST_PLAYERHEIGHT
+		patient.GiveInventory("UasAlcohol_Offworld_IntoxToken",BLUERUM_ALCCONTENT-((patient.height-43.2)*21)); //I think this is for other players -[Cozi]
 	}
-	/*override inventory createtossable(){
-		let ctt=BlueRum(super.createtossable());
-		if(!ctt)return null;
-		if(ctt.bmissile){
-			spawn("SpentRumBottle",pos,ALLOW_REPLACE);
-			//A_StartSound("potion/open",CHAN_BODY);
-		}
-		return ctt;
-	}*/
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	states(actor){
-	/*spawn:
-		TNT1 A 1 nodelay A_JumpIf(weaponstatus[INJECTS_AMOUNT]>0 && owner.player.crouchfactor>0,"jiggling");
-		BTTL D 0{
-			if(!weaponstatus[0]&INJECTF_SPENT){
-			actor a=null;
-			a=spawn("SpentRumBottle",pos,ALLOW_REPLACE);
-			a.A_StartSound("potion/open",CHAN_BODY);
-			a.angle=angle;a.pitch=pitch;a.target=target;a.vel=vel;
-
-			let aa=spawn("SpentCork",pos,ALLOW_REPLACE);
-			aa.angle=angle+3;
-			aa.vel=vel+(frandom(-1,1),frandom(-1,1),frandom(0,1));
-		}}
-		stop;*/
-	spawn://jiggling:
+	spawn:
 		BTTL D 2 light("BLUERUM") A_SetTics(random(1,3));
 		BTTL D 0 nodelay {if(self.bmissile){let aa=spawn("SpentRumBottle",pos,ALLOW_REPLACE);aa.vel=vel;aa.angle=angle;self.destroy();}}
 		loop;
@@ -183,7 +158,7 @@ class BlueRum:HDWeapon{
 				invoker.weaponstatus[BLUERUM_AMOUNT]--;
 				A_StartSound("potion/chug",CHAN_VOICE);
 				HDF.Give(self,"RumDrug",BLUERUM_ALCCONTENT); //BlueRum.BLUERUM_HEALZ or HealingMagic
-				HDF.Give(self,"UasAlcohol_Offworld_IntoxToken", BLUERUM_ALCCONTENT-((self.height-43.2)*21));// 426 BLUERUM_ALCCONTENT self.height *14
+				HDF.Give(self,"UasAlcohol_Offworld_IntoxToken", BLUERUM_ALCCONTENT-((self.height-43.2)*21));// Rum Calculation of your height.
 				if(hd_debug>=4)console.printf("Handler: You're about "..self.height);
 			}
 		}
@@ -205,7 +180,7 @@ class BlueRum:HDWeapon{
 			bool helptext=DoHelpText();
 			flinetracedata injectorline;
 			linetrace(
-				angle,64,pitch, //was 42 but we need some more
+				angle,64,pitch, //The range was 42, but we need more - Cozi
 				offsetz:gunheight()-2,
 				data:injectorline
 			);
@@ -213,7 +188,6 @@ class BlueRum:HDWeapon{
 			if(!c){
 				let ccc=HDHumanoid(injectorline.hitactor);
 					invoker.weaponstatus[0]|=INJECTF_SPENT;
-					//ccc.stunned=max(0,ccc.stunned>>1);
 					return resolvestate("injected");
 				if(helptext)A_WeaponMessage(Stringtable.Localize("$STIMPACK_NOTHINGTOBEDONE"));
 				return resolvestate("nope");
@@ -243,9 +217,6 @@ class BlueRum:HDWeapon{
 		goto nope;
 		makemolotov:
 		TNT1 A 7{
-		//A_StartSound("cig/try",CHAN_WEAPON,CHANF_OVERLAP);
-		//if(random(0,3))return resolvestate("reloadhold"); //Random chance for your lighter to not light - Cozi
-		////////////////////////////////////////////////////
 		flinetracedata injectorline;
 			linetrace(
 				angle,42,pitch,
@@ -258,7 +229,6 @@ class BlueRum:HDWeapon{
 				return resolvestate("nope");
 			}
 		////////////////////////////////////////////////////
-		//if(!invoker.countinv("PowerIronFeet")){
 		if(!invoker.findinventory("WornRadsuit")){
 				A_GiveInventory("Heat",200);
 				//damagemobj(invoker,self,100,"hot");
