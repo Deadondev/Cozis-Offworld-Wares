@@ -89,6 +89,7 @@ class BlueRum:HDWeapon{
 	states(actor){
 	spawn:
 		BTTL D 2 light("BLUERUM") A_SetTics(random(1,3));
+		BTTL D 0 nodelay {if(self.bnofear){self.destroy();}}
 		BTTL D 0 nodelay {if(self.bmissile){let aa=spawn("SpentRumBottle",pos,ALLOW_REPLACE);aa.vel=vel;aa.angle=angle;self.destroy();}}
 		loop;
 	death:
@@ -237,6 +238,7 @@ class BlueRum:HDWeapon{
 		////////////////////////////////////////////////////
 		A_StartSound("potion/swish",CHAN_VOICE);
 		invoker.weaponstatus[0]|=INJECTF_SPENT;
+		invoker.bnofear = true; //This is a flag nothing uses, so I'm using it to mark this bottle to disappear. - Cozi
 		DropInventory(invoker);
 		HDF.Give(self,"MolotovAmount", invoker.weaponstatus[BLUERUM_AMOUNT]);
 		HDF.Give(self,"MolotovGrenadeAmmo", 1);
