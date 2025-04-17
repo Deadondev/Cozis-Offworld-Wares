@@ -16,6 +16,12 @@ default{
 		tag "Defib";
 		hdweapon.refid HDLD_DEFIB;
 	}
+	
+	
+	override void ownerdied(){
+		owner.dropinventory(self);
+	}
+	
 	override bool AddSpareWeapon(actor newowner){return AddSpareWeaponRegular(newowner);}
 	override hdweapon GetSpareWeapon(actor newowner,bool reverse,bool doselect){return GetSpareWeaponRegular(newowner,reverse,doselect);}
 	override void tick(){
