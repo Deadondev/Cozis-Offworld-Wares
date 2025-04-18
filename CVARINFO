@@ -67,3 +67,4 @@ server int mdb_replacement_spawn_bias = 19;
 // Defib
 server int dfb_replacement_spawn_bias = 19;
 server bool dfb_persistent_spawning = false;
+server bool dfb_drop_on_death = true;
