@@ -190,8 +190,16 @@ OptionMenu dfb
 	SafeCommand "Reset persistence  options", "resetcvar dfb_persistent_spawning"
  	StaticText ""
  	StaticText ""
+ 	StaticText ""
+	StaticText "Controls if the Defibrillator drops on death", "white"
+	Option "Defibrillator Drops On Death: ", "dfb_drop_on_death", "OnOff"
+	SafeCommand "Reset defib drop on death  options", "resetcvar dfb_drop_on_death"
+	
+	StaticText ""
+ 	StaticText ""
 	StaticText "Reset Options", "Orange"
 	SafeCommand "Reset all options", "dfb_reset_cvars"
+	
 }
 
 OptionValue "SpawnBias"

@@ -7,6 +7,6 @@ alias suit_reset_cvars "resetcvar suit_replacement_spawn_bias"
 /* alias apk_reset_cvars "resetcvar apk_replacement_spawn_bias; resetcvar apk_persistent_spawning;"
 alias url_reset_cvars "resetcvar url_replacement_spawn_bias; resetcvar url_persistent_spawning;" */
 alias bag_reset_cvars "resetcvar lgb_replacement_spawn_bias; resetcvar lgb_persistent_spawning; resetcvar mdb_replacement_spawn_bias;"
-alias dfb_reset_cvars "resetcvar dfb_replacement_spawn_bias; resetcvar dfb_persistent_spawning;"
+alias dfb_reset_cvars "resetcvar dfb_replacement_spawn_bias; resetcvar dfb_persistent_spawning;resetcvar dfb_drop_on_death;"
 
 alias wares_reset_cvars "sbrl_reset_cvars; msk_reset_cvars; flint_reset_cvars; suit_reset_cvars; rum_reset_cvars; bag_reset_cvars; dfb_reset_cvars;"
