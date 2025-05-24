@@ -8,6 +8,9 @@ updated intoxication handler - cali, phantom, fda.
 
 alcohol bottles - xatrix entertainment
 
+---Defibrillator---
+Sprites: Defibrillator from Left 4 Dead 2 with major edits by Cannibal Hunter
+
 ---Musket---
 Round-Making SFX: Thief Gold
 
