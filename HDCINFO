@@ -1,6 +1,6 @@
 // Weapon Backpack Spawn Pool Filters
-addBPSpawnPoolFilter => { "name": "HD_FlintlockPistol", "allowed": "#flint_allowBackpacks" }
-addBPSpawnPoolFilter => { "name": "HD_Musket", "allowed": "#musket_allowBackpacks" }
+addStorageItemListFilter => { "name": "HD_FlintlockPistol", "allowed": "#flint_allowBackpacks" }
+addStorageItemListFilter => { "name": "HD_Musket", "allowed": "#musket_allowBackpacks" }
 
 // Weapon Spawn Pools
 addSpawnTableSingleEntry => { "tableName": "ClipBoxReplaces", "name": "HD_FlintlockPistol", "weight": "#flint_clipbox_spawn_bias", "persists": "#flint_persistent_spawning" }
