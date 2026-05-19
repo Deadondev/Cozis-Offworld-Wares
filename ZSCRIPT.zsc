@@ -1,7 +1,5 @@
 version "4.10"
 
-// Event Handlers for spawning.
-#include "zscript/Event-Handlers.zs"
 //Cyber's Alcohol THE ONLY REASON IM ADDING OFFWORLD_ IN FRONT IS TO PREVENT OTHER MODS WHO DO RELY ON IT FROM HAVING ISSUES, THE ENTIRE REASON OF THIS PORT IS SO THAT IF THE SERVER OR FILES ARE EVER LOST/ I NEED TO CHANGE SOMETHING THAT THEY ARE HERE. -[Cozi]
 #include "zscript/CyberCool's Alcohol/offworld_intox.zs"
 #include "zscript/CyberCool's Alcohol/offworld_hndl.zs"
@@ -29,13 +27,7 @@ version "4.10"
 #include "zscript/Items/Cigarettes.zs"
 // VISR
 //#include "zscript/Items/visr.zs"
-/*
-// Logistics Bag
-#include "zscript/Items/LogiBag.zsc"
 
-// Medical Bag
-#include "zscript/Items/MediBag.zsc"
-*/
 //-------------------------------------------------
 // MONSTERS
 //-------------------------------------------------

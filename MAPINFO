@@ -1,4 +1,1 @@
-GameInfo
-{
-	AddEventHandlers = "OffworldWaresHandler", "UaS_Offworld_AlcoholEventHandler", "SpiderBarrelEventHandler", "TriteHandler"//, "VISRHandler"
-}
+GameInfo { AddEventHandlers = "UaS_Offworld_AlcoholEventHandler" }

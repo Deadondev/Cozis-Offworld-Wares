@@ -22,7 +22,7 @@ OptionMenu Trites
     StaticText ""
 	StaticText "Spawn Options", "Green"
     StaticText  "Control the spawn rate of Trite Barrels", "white"
-	Option " Trite Barrel Spawn Rate: ", "sbrl_regulars_spawn_bias", "SpawnBias"
+	Slider " Trite Barrel Spawn Rate: ", "sbrl_regulars_spawn_bias", 0.0, 100, .01, 2
 	SafeCommand "Reset trite barrel options", "sbrl_reset_cvars"
  	StaticText ""
     StaticText  "Control whether replacements happen after a mapload.", "white"
@@ -43,7 +43,7 @@ OptionMenu musket
     StaticText ""
 	StaticText "Spawn Options", "Red"
     StaticText  "Control the spawn rate of the Musket on Clip Boxes", "white"
-	Option " Musket Spawn Rate: ", "musket_clipbox_spawn_bias", "SpawnBias"
+	Slider " Musket Spawn Rate: ", "musket_clipbox_spawn_bias", 0.0, 100, .01, 2
 	SafeCommand "Reset Musket options", "resetcvar musket_clipbox_spawn_bias"
  	StaticText ""
 	StaticText "Enable/Disable the Musket from spawning in Backpacks.", "Red"
@@ -67,7 +67,7 @@ OptionMenu Flintlock
     StaticText ""
 	StaticText "Spawn Options", "Red"
     StaticText  "Control the spawn rate of the Flintlock on Clip Boxes", "white"
-	Option " Flintlock Spawn Rate: ", "flint_clipbox_spawn_bias", "SpawnBias"
+	Slider " Flintlock Spawn Rate: ", "flint_clipbox_spawn_bias", 0.0, 100, .01, 2
 	SafeCommand "Reset Flintlock options", "resetcvar flint_clipbox_spawn_bias"
  	StaticText ""
 	StaticText "Enable/Disable the Flintlock from spawning in Backpacks.", "Red"
@@ -91,23 +91,23 @@ OptionMenu rum
     StaticText ""
 	StaticText "Spawn Options", "Orange"
     StaticText  "Control the spawn rate of Rum on Medikits", "white"
-	Option " Medikit Spawn Rate: ", "rum_pmi_spawn_Bias", "SpawnBias"
+	Slider " Medikit Spawn Rate: ", "rum_pmi_spawn_Bias", 0.0, 100, .01, 2
 	SafeCommand "Reset Rum options", "resetcvar rum_pmi_spawn_bias"
 	StaticText ""
     StaticText  "Control the spawn rate of Cigarette Packs", "white"
-	Option "Spawn Rate: ", "cpk_pmi_spawn_bias", "SpawnBias"
+	Slider "Spawn Rate: ", "cpk_pmi_spawn_bias", 0.0, 100, .01, 2
 	SafeCommand "Reset Cigarette Pack options", "resetcvar cpk_pmi_spawn_bias"
 	StaticText ""
 	StaticText  "Control the spawn rate of Cigarettes", "white"
-	Option "Spawn Rate: ", "cig_pmi_spawn_bias", "SpawnBias"
+	Slider "Spawn Rate: ", "cig_pmi_spawn_bias", 0.0, 100, .01, 2
 	SafeCommand "Reset Cigarette Pack options", "resetcvar cig_pmi_spawn_bias"
 	StaticText ""
 	StaticText  "Control the spawn rate of Cleanser Stims", "white"
-	Option "Spawn Rate: ", "cleanser_pmi_spawn_bias", "SpawnBias"
+	Slider "Spawn Rate: ", "cleanser_pmi_spawn_bias", 0.0, 100, .01, 2
 	SafeCommand "Reset Cleanser Stim options", "resetcvar cleanser_pmi_spawn_bias"
 	StaticText ""
     StaticText  "Control the spawn rate of Radsuit Packages on Radsuits", "white"
-	Option " Radsuit Spawn Rate: ", "suit_replacement_spawn_bias", "SpawnBias"
+	Slider " Radsuit Spawn Rate: ", "suit_replacement_spawn_bias", 0.0, 100, .01, 2
 	SafeCommand "Reset Radsuit options", "resetcvar suit_replacement_spawn_bias"
  	StaticText ""
     StaticText  "Control whether replacements happen after a mapload.", "white"
@@ -119,70 +119,13 @@ OptionMenu rum
 	SafeCommand "Reset all options", "rum_reset_cvars"
 }
 
-OptionMenu warebags
-{
-    Title "------ Backpack Options ------"
-	StaticText "Spawn Options", "Orange"
-    StaticText  "Control the spawn rate of the Logistics Bag.", "white"
-	Option " Logistics Bag Spawn Rate: ", "lgb_replacement_spawn_bias", "SpawnBiasNoReplace"
-	SafeCommand "Reset Logistics Bag options", "resetcvar lgb_replacement_spawn_bias"
- 	StaticText ""
-    StaticText  "Control the spawn rate of Medical Backpacks", "white"
-	Option " Medical Bag Spawn Rate: ", "mdb_replacement_spawn_bias", "SpawnBiasNoReplace"
-	SafeCommand "Reset Medical Bag options", "resetcvar mdb_replacement_spawn_bias"
- 	StaticText ""
-    StaticText  "Control whether replacements happen after a mapload.", "white"
-	Option "Persistent Spawns: ", "lgb_persistent_spawning", "OnOff"
-	SafeCommand "Reset persistence  options", "resetcvar lgb_persistent_spawning"
- 	StaticText ""
-   	StaticText ""
-	StaticText "Reset Options", "Orange"
-	SafeCommand "Reset all options", "bag_reset_cvars"
-}
-
-/* OptionMenu url
-{
-    Title "------ Universal Reloader Options ------"
-    StaticText ""
-	StaticText "Spawn Options", "Orange"
-    StaticText  "Control the spawn rate of the Universal Reloader", "white"
-	Option " Universal Reloader Spawn Rate: ", "url_replacement_spawn_bias", "SpawnBiasNoReplace"
-	SafeCommand "Reset Universal Reloader options", "resetcvar url_replacement_spawn_bias"
- 	StaticText ""
-    StaticText  "Control whether replacements happen after a mapload.", "white"
-	Option "Persistent Spawns: ", "url_persistent_spawning", "OnOff"
-	SafeCommand "Reset persistence  options", "resetcvar url_persistent_spawning"
- 	StaticText ""
-   	StaticText ""
-	StaticText "Reset Options", "Orange"
-	SafeCommand "Reset all options", "url_reset_cvars"
-}
-
-OptionMenu apk
-{
-    Title "------ Armor Patch Kit Options ------"
-    StaticText ""
-	StaticText "Spawn Options", "Orange"
-    StaticText  "Control the spawn rate of the Armor Patch Kit", "white"
-	Option " Armor Patch Kit Spawn Rate: ", "apk_replacement_spawn_bias", "SpawnBiasNoReplace"
-	SafeCommand "Reset Armor Patch Kit options", "resetcvar apk_replacement_spawn_bias"
- 	StaticText ""
-    StaticText  "Control whether replacements happen after a mapload.", "white"
-	Option "Persistent Spawns: ", "apk_persistent_spawning", "OnOff"
-	SafeCommand "Reset persistence  options", "resetcvar apk_persistent_spawning"
- 	StaticText ""
-   	StaticText ""
-	StaticText "Reset Options", "Orange"
-	SafeCommand "Reset all options", "apk_reset_cvars"
-} */
-
 OptionMenu dfb
 {
     Title "------ Defibrillator Options ------"
     StaticText ""
 	StaticText "Spawn Options", 1
     StaticText  "Control the spawn rate of the Defibrillator", "white"
-	Option " Defibrillator Spawn Rate: ", "dfb_replacement_spawn_bias", "SpawnBiasNoReplace"
+	Slider " Defibrillator Spawn Rate: ", "dfb_replacement_spawn_bias", 0.0, 100, .01, 2
 	SafeCommand "Reset Defibrillator options", "resetcvar dfb_replacement_spawn_bias"
  	StaticText ""
     StaticText  "Control whether replacements happen after a mapload.", "white"
@@ -202,60 +145,6 @@ OptionMenu dfb
 	
 }
 
-OptionValue "SpawnBias"
-{
-	-1,    "Disabled"
-	 0,    "Replace All"
-	 2,    "1 in 3"
-	 4,    "1 in 5"
-	 9,    "1 in 10"
-	 14,   "1 in 15"
-	 19,   "1 in 20"
-	 24,   "1 in 25"
-	 49,   "1 in 50"
-	 99,   "1 in 100"
-	 149,  "1 in 150"
-	 199,  "1 in 200"
-}
-
-OptionValue "SpawnBiasNoReplace"
-{
-	-1,    "Disabled"
-	 0,    "Add to All"
-	 2,    "1 in 3"
-	 4,    "1 in 5"
-	 9,    "1 in 10"
-	 14,   "1 in 15"
-	 19,   "1 in 20"
-	 24,   "1 in 25"
-	 49,   "1 in 50"
-	 99,   "1 in 100"
-	 149,  "1 in 150"
-	 199,  "1 in 200"
-}
-
-/* OptionMenu "witems"
-{
-	Title "------ Offworld Items ------"
-	StaticText "Only the original items in Wares!", "gold"
-	StaticText ""
-	Submenu "Ration Options", "rum"
-	StaticText ""
-	Submenu "Backpacks", "warebags"
-	StaticText ""
-	Submenu "Defibrillator", "dfb"
-}
-
-OptionMenu "aceitems"
-{
-	Title "------ AceCorp Forks ------"
-	StaticText "All of our AceCorp item forks!", "gold"
-	StaticText ""
-	Submenu "Universal Reloader", "url"
-	StaticText ""
-	Submenu "Armor Patch Kit", "apk"
-} */
-
 AddOptionMenu "CozisOffworldWares"
 {
 	StaticText "-------------------", "gold"
@@ -273,14 +162,8 @@ AddOptionMenu "CozisOffworldWares"
 	StaticText ""
 	Submenu "Ration Options", "rum"
 	StaticText ""
-	Submenu "Backpacks", "warebags"
-	StaticText ""
 	Submenu "Defibrillator", "dfb"
 	StaticText ""
-	/* Submenu "Offworld Items", "witems"
-	StaticText "" */
-	/* Submenu "AceCorp Items", "aceitems"
-	StaticText "" */
 	StaticText "-------------------", "gold"
 	StaticText "Below will reset every options for Offworld Wares!", "red"
 	StaticText " Be warned.", "red"

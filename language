@@ -2,6 +2,12 @@
 
 COZI_MENU = "\c[Brown]ⓒ\c- Offworld Wares Options";
 
+// Menu Option Values
+MENU_ENABLED="Enabled";
+MENU_DISABLED="Disabled";
+MENU_REPLACEALL="Replace All";
+MENU_WITHALL="With All";
+
 TAG_TRITEBARREL = "Barrel";
 
 [en enc eng eni ena enz default]
@@ -32,3 +38,35 @@ RUM_BLACKOUT12="A frozen tundra.";
 RUM_BLACKOUT13="An empty base.";
 RUM_BLACKOUT14="Skulls and bone.";
 RUM_BLACKOUT15="Pools of blood.";
+
+// Merchant Store Entries
+
+// Flintlock Pistol
+MERCH_CAT_FLINTLOCK               = "Cozi's Offworld Wares";
+MERCH_TAG_FLINTLOCK               = "Flintlock Pistol";
+MERCH_FLAVOR_FLINTLOCK            = "Gunslingin' like it's 1749!";
+
+// Musket
+MERCH_CAT_MUSKET                  = "Cozi's Offworld Wares";
+MERCH_TAG_MUSKET                  = "Musket";
+MERCH_FLAVOR_MUSKET               = "Do demons even have whites in their eyes?";
+
+// Logistics Bag
+MERCH_CAT_LOGIBAG                 = "Cozi's Offworld Wares";
+MERCH_TAG_LOGIBAG                 = "Logistics bag";
+MERCH_FLAVOR_LOGIBAG              = "Gunsmith pouch's bigger brother.";
+
+// Medical Bag
+MERCH_CAT_MEDIBAG                 = "Cozi's Offworld Wares";
+MERCH_TAG_MEDIBAG                 = "Medical bag";
+MERCH_FLAVOR_MEDIBAG              = "We had 2 first aid kits, 75 suture cartridges, 5 super stimpacks, a bottle half-full of blues...";
+
+// Ole Rum
+MERCH_CAT_BLUERUM                 = "Cozi's Offworld Wares";
+MERCH_TAG_BLUERUM                 = "Ole rum";
+MERCH_FLAVOR_BLUERUM              = "The alcohol amount would probably kill you if it wasn't watered down with a magical tonic. Drink up!";
+
+// Portable Cleanser
+MERCH_CAT_PORTABLECLEANSER        = "Cozi's Offworld Wares";
+MERCH_TAG_PORTABLECLEANSER        = "Portable cleanser";
+MERCH_FLAVOR_PORTABLECLEANSER     = "Cleanser packs help clear ALL drugs out of your system.";

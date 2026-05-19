@@ -3,11 +3,11 @@
 //-------------------------------------------------
 
 // Trites
-server int  current_tritescvar= 0;
-server int  max_tritescvar = 30;
+server int   current_tritescvar = 0;
+server int   max_tritescvar = 30;
 
 // Trite Barrels
-server int  sbrl_regulars_spawn_bias = 49;
+server float sbrl_regulars_spawn_bias = 0.02;
 server bool  sbrl_persistent_spawning = false;
 //no need for a second persistent, i have no idea why anyone would actually want to only have one or the other persistently spawn
 
@@ -18,12 +18,13 @@ server bool  sbrl_persistent_spawning = false;
 
 // Musket
 server bool musket_allowBackpacks = true;
-server int musket_clipbox_spawn_bias = 14;
+server float musket_clipbox_spawn_bias = 1.8666;
 server bool musket_persistent_spawning = false;
 
 // Flintlock
 server bool flint_allowBackpacks = true;
-server int flint_clipbox_spawn_bias = 14;
+server float flint_pistol_spawn_bias = 0.24;
+server float flint_clipbox_spawn_bias = 1.8666;
 server bool flint_persistent_spawning = false;
 
 //-------------------------------------------------
@@ -31,40 +32,35 @@ server bool flint_persistent_spawning = false;
 //-------------------------------------------------
 
 // Rum
-server int rum_pmi_spawn_bias = 19;
+server float rum_pmi_spawn_bias = 20;
 server bool rum_persistent_spawning = false;
 
 // Cigarettes
-server int cig_pmi_spawn_bias = 9;
+server float cig_pmi_spawn_bias = 10;
 server bool cig_persistent_spawning = false;
 
 // Cigarette Boxes
-server int cpk_pmi_spawn_bias = 19;
+server float cpk_pmi_spawn_bias = 20;
 server bool cpk_persistent_spawning = false;
 
 // Cleanser
-server int cleanser_pmi_spawn_bias = 19;
+server float cleanser_pmi_spawn_bias = 20;
 server bool cleanser_persistent_spawning = false;
 
 // Radsuit Packages
-server int suit_replacement_spawn_bias = 2;
-
-// Armor Patch Kit
-server int apk_replacement_spawn_bias = 19;
-server bool apk_persistent_spawning = false;
-
-// Universal Reloader
-server int url_replacement_spawn_bias = 19;
-server bool url_persistent_spawning = false;
-
-// Logistics Bag
-server int lgb_replacement_spawn_bias = 19;
-server bool lgb_persistent_spawning = false;
-
-// Medic Bag
-server int mdb_replacement_spawn_bias = 19;
+server float suit_replacement_spawn_bias = 128;
+server bool suit_persistent_spawning = false;
 
 // Defib
-server int dfb_replacement_spawn_bias = 19;
+server float dfb_replacement_spawn_bias = 20;
 server bool dfb_persistent_spawning = false;
 server bool dfb_drop_on_death = true;
+
+//-------------------------------------------------
+// Merchant Store Filters
+//-------------------------------------------------
+
+server bool hdm_enable_flintlock            = true;
+server bool hdm_enable_musket               = true;
+server bool hdm_enable_olerum               = true;
+server bool hdm_enable_portablecleanser     = true;
